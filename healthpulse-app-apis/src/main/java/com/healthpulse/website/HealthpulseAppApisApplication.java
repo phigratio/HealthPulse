@@ -23,7 +23,8 @@ public class HealthpulseAppApisApplication implements CommandLineRunner  {
 	private RoleRepo roleRepo;
 
 	public static void main(String[] args) {
-		SpringApplication.run(BlogAppApisApplication.class, args);
+		SpringApplication app = new SpringApplication(HealthpulseAppApisApplication.class);
+		app.run(args);
 	}
 
 	@Bean
