@@ -22,6 +22,8 @@ public class HealthpulseAppApisApplication implements CommandLineRunner  {
 	@Autowired
 	private RoleRepo roleRepo;
 
+	// Main method
+	
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(HealthpulseAppApisApplication.class);
 		app.run(args);
