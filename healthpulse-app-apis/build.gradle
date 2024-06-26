@@ -29,6 +29,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     
     // Uncomment the following lines if you need them later
     // implementation 'org.springframework.ai:spring-ai-azure-openai-spring-boot-starter'
@@ -39,6 +40,22 @@ dependencies {
     
     // Ensure MySQL connector is included
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+    
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation:3.3.1'
+	
+	// https://mvnrepository.com/artifact/javax.validation/validation-api
+	implementation 'javax.validation:validation-api:1.0.0.GA'
+	
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
+	implementation 'io.jsonwebtoken:jjwt:0.12.6'
+	
+	
+	
+    
     
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
