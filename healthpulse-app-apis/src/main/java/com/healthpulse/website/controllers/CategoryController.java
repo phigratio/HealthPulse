@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.healthpulse.website.payloads.ApiResponse;
+import com.healthpulse.website.payloads.CategoryDto;
+import com.healthpulse.website.services.CategoryService;
+
 
 @RestController
 @RequestMapping("/api/v1/categories")

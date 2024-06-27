@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import io.jsonwebtoken.io.IOException;
+import java.io.IOException;
 
 public interface FileService {
 	String uploadImage(String path, MultipartFile file) throws IOException;
