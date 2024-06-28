@@ -1,9 +1,12 @@
+import CustomNavbar from "./CustomNavbar";
+import Footer from "./Footer";
+
 const Base = ({ title = "Welcome to our website", children }) => {
   return (
-    <div className="container-fluid">
-      <h1>This is a header</h1>
+    <div className="container-fluid p-0 m-0">
+      <CustomNavbar></CustomNavbar>
       {children}
-      <h1>This is a footer</h1>
+      <Footer />
     </div>
   );
 };
