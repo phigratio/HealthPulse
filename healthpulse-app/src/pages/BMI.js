@@ -11,7 +11,7 @@ import {
   Alert,
 } from "reactstrap";
 import Base from "../components/Base";
-import "./BMI.css";
+import "../style/BMI.css";
 
 const BMI = () => {
   const [weight, setWeight] = useState("");

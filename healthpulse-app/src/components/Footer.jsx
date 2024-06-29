@@ -6,7 +6,7 @@ import {
   AiFillYoutube,
 } from "react-icons/ai";
 import { Container, Row, Col } from "reactstrap";
-import "./Footer.css"; // Custom CSS file
+import "../style/Footer.css"; // Custom CSS file
 
 const FooterList = ({ children }) => (
   <div className="footer-list">{children}</div>

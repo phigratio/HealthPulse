@@ -1,0 +1,39 @@
+.navbar-logo {
+  height: 40px; /* Adjust as needed */
+  margin-right: 10px;
+}
+
+.nav-link-medium {
+  font-weight: 500;
+}
+
+.nav-link-light {
+  font-weight: 300;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: auto;
+  margin-right: 15px;
+}
+
+.nav-link-medium {
+  font-size: 1.25rem;
+}
+
+.navbar-collapse {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .navbar-collapse {
+    display: flex !important;
+    align-items: center;
+  }
+}

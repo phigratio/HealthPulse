@@ -14,8 +14,8 @@ import {
   DropdownItem,
   NavbarText,
 } from "reactstrap";
-import logo from "../logo.jpeg";
-import "./CustomNavbar.css";
+import logo from "../images/logo/HealthPulseLogo3-removebg.png";
+import "../style/CustomNavbar.css";
 
 const CustomNavbar = () => {
   const [isOpen, setIsOpen] = useState(true);
