@@ -1,0 +1,27 @@
+.slick-dots {
+  position: absolute;
+  bottom: -50px !important;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+
+
+
+.slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius:100% ;
+    width: 2rem;
+    height: 1rem;
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+

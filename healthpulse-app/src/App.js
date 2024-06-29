@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Signup from "./pages/Signup";
 import BMI from "./pages/BMI";
+import Person from "./components/Person";
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/bmi" element={<BMI />}></Route>
+        <Route path="/person" element={<Person />}></Route>
       </Routes>
     </BrowserRouter>
   );

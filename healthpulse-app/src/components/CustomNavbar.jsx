@@ -23,7 +23,7 @@ const CustomNavbar = () => {
   const toggle = () => setIsOpen(!isOpen);
   return (
     <div>
-      <Navbar className="custom-navbar" expand="md">
+      <Navbar className="custom-navbar" expand="md" >
         <NavbarBrand className="nav-link-medium" tag={ReactLink} to="/">
           <img src={logo} alt="Logo" className="navbar-logo" />
           HealthPulse{" "}
