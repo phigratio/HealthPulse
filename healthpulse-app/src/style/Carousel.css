@@ -1,0 +1,16 @@
+/* Target the carousel control icons directly and apply custom styles */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  border-radius: 50%; /* Make it circular */
+  width: 3rem; /* Adjust size */
+  height: 3rem; /* Adjust size */
+}
+.carousel-indicators [data-bs-target]{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius:100% ;
+    width: 1rem;
+    height: 1rem;
+
+
+}
