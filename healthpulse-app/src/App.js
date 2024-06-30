@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Signup from "./pages/Signup";
 import BMI from "./pages/BMI";
 import Person from "./components/Person";
+import ServicesBlock from "./components/ServicesBlock";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
         <Route path="/about" element={<About />}></Route>
         <Route path="/bmi" element={<BMI />}></Route>
         <Route path="/person" element={<Person />}></Route>
+        <Route path="/servicesblock" element={<ServicesBlock />}></Route>
       </Routes>
     </BrowserRouter>
   );

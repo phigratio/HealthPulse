@@ -1,0 +1,28 @@
+/* Button styles */
+.button {
+  background-color: #11a2d7; /* Initial background color matching the theme */
+  color: white; /* Text color */
+  font-size: 1.125rem; /* Text size (18px) */
+  padding: 0.75rem 1.5rem; /* Padding for top/bottom and left/right */
+  border: none; /* Remove default border */
+  border-radius: 0.75rem; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 3D effect with shadow */
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+  display: inline-block; /* Ensure the button is displayed as an inline-block element */
+  text-align: center; /* Center the text inside the button */
+}
+
+/* Hover effect */
+.button:hover {
+  background-color: #0d8ab8; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight upward movement for 3D effect */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
+}
+
+/* Active effect */
+.button:active {
+  background-color: #0a7396; /* Even darker blue on active */
+  transform: translateY(0); /* Reset transform */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Reset shadow */
+}
