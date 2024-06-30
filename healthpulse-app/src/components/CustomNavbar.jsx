@@ -24,7 +24,7 @@ const CustomNavbar = () => {
 
   return (
     <div>
-      <Navbar className="custom-navbar" expand="md">
+      <Navbar className="custom-navbar fixed-top " expand="md">
         <NavbarBrand
           tag={ReactLink}
           to="/"
@@ -51,18 +51,21 @@ const CustomNavbar = () => {
                 Sign Up
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink className="nav-link-light" tag={ReactLink} to="/bmi">
-                BMI Calculator
-              </NavLink>
-            </NavItem>
+            <NavItem></NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret className="nav-link-light">
-                Options
+                Services
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
+                <DropdownItem tag={ReactLink} to="/service/doctor-chat-bot">
+                  Doctor Chat Bot
+                </DropdownItem>
+                <DropdownItem tag={ReactLink} to="/service/health-calculator">
+                  Health Calculator
+                </DropdownItem>
+                <DropdownItem tag={ReactLink} to="/service/kids-corner">
+                  Kids Corner
+                </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>Reset</DropdownItem>
               </DropdownMenu>

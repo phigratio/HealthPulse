@@ -6,10 +6,12 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Signup from "./pages/Signup";
-import BMI from "./pages/BMI";
 import Person from "./components/Person";
 import ServicesBlock from "./components/ServicesBlock";
 import Background from "./components/Background";
+import DoctorChatBot from "./servicePage/DoctorChatBot";
+import KidsCorner from "./servicePage/KidsCorner";
+import HealthCalculator from "./servicePage/HealthCalculator";
 function App() {
   return (
     <BrowserRouter>
@@ -18,10 +20,19 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route path="/bmi" element={<BMI />}></Route>
+
         <Route path="/person" element={<Person />}></Route>
         <Route path="/servicesblock" element={<ServicesBlock />}></Route>
         <Route path="/background" element={<Background />}></Route>
+        <Route
+          path="/service/doctor-chat-bot"
+          element={<DoctorChatBot />}
+        ></Route>
+        <Route
+          path="/service/health-calculator"
+          element={<HealthCalculator />}
+        ></Route>
+        <Route path="/service/kids-corner" element={<KidsCorner />}></Route>
       </Routes>
     </BrowserRouter>
   );
