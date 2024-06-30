@@ -1,39 +1,34 @@
-.navbar-logo {
-  height: 40px; /* Adjust as needed */
-  margin-right: 10px;
-}
-
-.nav-link-medium {
-  font-weight: 500;
-}
-
-.nav-link-light {
-  font-weight: 300;
+.custom-navbar {
+  background-color: #e5f3fa;
+  padding: 0.5rem 1rem;
 }
 
 .navbar-logo {
   height: 40px;
-  width: auto;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
-.nav-link-medium {
+.brand-text {
   font-size: 1.25rem;
+  font-weight: 500;
+  color: #000000;
 }
 
-.navbar-collapse {
-  display: flex;
-  align-items: center;
+.nav-link-light {
+  font-weight: 300;
+  color: #000000 !important;
 }
 
-.nav-links {
-  display: flex;
-  align-items: center;
+.nav-link-light:hover {
+  color: #5f61f0 !important;
+}
+
+.navbar-text {
+  color: #000000;
 }
 
 @media (min-width: 768px) {
-  .navbar-collapse {
-    display: flex !important;
-    align-items: center;
+  .custom-navbar {
+    justify-content: space-between;
   }
 }
