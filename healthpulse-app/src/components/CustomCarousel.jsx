@@ -96,7 +96,7 @@ const CustomCarousel = () => {
   });
 
   return (
-    <div>
+    <div className="customCar">
       <Carousel activeIndex={activeIndex} next={next} previous={previous}>
         <CarouselIndicators
           items={items}

@@ -18,15 +18,20 @@ import logo from "../images/logo/HealthPulseLogo3-removebg.png";
 import "../style/CustomNavbar.css";
 
 const CustomNavbar = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+
   return (
     <div>
-      <Navbar className="custom-navbar" expand="md" >
-        <NavbarBrand className="nav-link-medium" tag={ReactLink} to="/">
-          <img src={logo} alt="Logo" className="navbar-logo" />
-          HealthPulse{" "}
+      <Navbar className="custom-navbar" expand="md">
+        <NavbarBrand
+          tag={ReactLink}
+          to="/"
+          className="d-flex align-items-center"
+        >
+          <img src={logo} alt="Health Pulse Logo" className="navbar-logo" />
+          <span className="brand-text">HealthPulse</span>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -37,37 +42,22 @@ const CustomNavbar = () => {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink
-                className="nav-link-light
-              "
-                tag={ReactLink}
-                to="/login"
-              >
+              <NavLink className="nav-link-light" tag={ReactLink} to="/login">
                 Login
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink
-                className="nav-link-light
-              "
-                tag={ReactLink}
-                to="/signup"
-              >
+              <NavLink className="nav-link-light" tag={ReactLink} to="/signup">
                 Sign Up
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink
-                className="nav-link-light
-              "
-                tag={ReactLink}
-                to="/bmi"
-              >
+              <NavLink className="nav-link-light" tag={ReactLink} to="/bmi">
                 BMI Calculator
               </NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
+              <DropdownToggle nav caret className="nav-link-light">
                 Options
               </DropdownToggle>
               <DropdownMenu right>
@@ -79,7 +69,7 @@ const CustomNavbar = () => {
             </UncontrolledDropdown>
           </Nav>
         </Collapse>
-        <NavbarText>Simple Text</NavbarText>
+        <NavbarText className="navbar-text">Simple Text</NavbarText>
       </Navbar>
     </div>
   );

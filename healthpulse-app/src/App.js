@@ -1,6 +1,5 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Base from "./components/Base";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
@@ -10,6 +9,7 @@ import Signup from "./pages/Signup";
 import BMI from "./pages/BMI";
 import Person from "./components/Person";
 import ServicesBlock from "./components/ServicesBlock";
+import Background from "./components/Background";
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +21,7 @@ function App() {
         <Route path="/bmi" element={<BMI />}></Route>
         <Route path="/person" element={<Person />}></Route>
         <Route path="/servicesblock" element={<ServicesBlock />}></Route>
+        <Route path="/background" element={<Background />}></Route>
       </Routes>
     </BrowserRouter>
   );

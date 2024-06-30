@@ -14,6 +14,8 @@ const Person = () => {
     centerPadding: "60px",
     slidesToShow: 3,
     speed: 500,
+    autoplay: true,
+    autoplaySpeed: 2000,
   };
 
   return (

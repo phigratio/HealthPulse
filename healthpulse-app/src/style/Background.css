@@ -1,0 +1,57 @@
+/* Body styles (if needed) */
+body {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
+/* Color box styles */
+.colorBox {
+  z-index: 2;
+  filter: brightness(1.1);
+  transition: 2s ease;
+  position: relative;
+  margin: 2px;
+  background: #e1f5fb; /* Default background color */
+}
+
+.colorBox:hover {
+  background: #146077; /* Hover background color */
+  transition-duration: 0.05s;
+} 
+
+/* Background animation container styles */
+.bgAnimation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Full viewport height */
+  display: grid;
+  grid-template-columns: repeat(20, 1fr); /* Grid columns for animation */
+  grid-template-rows: repeat(20, 1fr); /* Grid rows for animation */
+  background: #ddf2f8; /* Background color */
+  filter: saturate(2); /* Saturation effect */
+  overflow: hidden; /* Hide overflow */
+}
+
+/* Animated background element styles */
+.backgroundAmim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Height of the animated element */
+  background: #0cbeff; /* Background color */
+  filter: blur(60px); /* Blur effect */
+  animation: animBack 6s linear infinite; /* Animation definition */
+}
+
+/* Keyframes for background animation */
+@keyframes animBack {
+  0% {
+    top: -60%; /* Initial position */
+  }
+  100% {
+    top: 120%; /* Final position */
+  }
+}
