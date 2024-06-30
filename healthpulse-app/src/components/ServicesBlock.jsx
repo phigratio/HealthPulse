@@ -63,23 +63,23 @@ const data = [
     img: require("../images/services/service1.png"),
     review:
       "Our AI-powered chatbot provides quick medical advice based on your symptoms.",
-    link: "/chatbot",
+    link: "/service/doctor-chat-bot",
   },
   {
     name: "Health Calculator",
-    overview: "Calculate your BMI, BMR, and more.",
+    overview: "Calculate your BMI, BMR, and other health metrics.",
     img: require("../images/services/service2.png"),
     review:
       "Use our health calculator to determine your BMI, BMR, and other health metrics.",
-    link: "/calculator",
+    link: "/service/health-calculator",
   },
   {
-    name: "Online Consultations",
-    overview: "Consult with a doctor online.",
+    name: "Kids Corner",
+    overview: "Explore Health with KidsCorner AI Stories!",
     img: require("../images/services/service3.png"),
     review:
-      "Schedule online consultations with our certified doctors from the comfort of your home.",
-    link: "/consultations",
+      "KidsCorner is a fantastic way for children to learn about health in a fun and engaging manner. The AI-generated stories are both educational and entertaining, making healthcare concepts easy to understand for young minds.",
+    link: "/service/kids-corner",
   },
   {
     name: "Prescription Refills",
