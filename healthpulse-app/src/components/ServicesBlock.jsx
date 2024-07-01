@@ -82,11 +82,11 @@ const data = [
     link: "/service/kids-corner",
   },
   {
-    name: "Prescription Refills",
+    name: "Book Doctor Appointment",
     overview: "Get your prescriptions refilled online.",
     img: require("../images/services/service4.png"),
     review: "Easily request prescription refills through our online platform.",
-    link: "/refills",
+    link: "/service/book-doctor",
   },
   {
     name: "Health Articles",

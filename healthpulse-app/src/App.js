@@ -12,6 +12,7 @@ import Background from "./components/Background";
 import DoctorChatBot from "./servicePage/DoctorChatBot";
 import KidsCorner from "./servicePage/KidsCorner";
 import HealthCalculator from "./servicePage/HealthCalculator";
+import BookDoctor from "./servicePage/BookDoctor";
 function App() {
   return (
     <BrowserRouter>
@@ -33,6 +34,7 @@ function App() {
           element={<HealthCalculator />}
         ></Route>
         <Route path="/service/kids-corner" element={<KidsCorner />}></Route>
+        <Route path="/service/book-doctor" element={<BookDoctor />}></Route>
       </Routes>
     </BrowserRouter>
   );

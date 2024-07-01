@@ -66,6 +66,9 @@ const CustomNavbar = () => {
                 <DropdownItem tag={ReactLink} to="/service/kids-corner">
                   Kids Corner
                 </DropdownItem>
+                <DropdownItem tag={ReactLink} to="/service/book-doctor">
+                  Book Doctor
+                </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>Reset</DropdownItem>
               </DropdownMenu>
