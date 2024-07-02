@@ -24,11 +24,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-
 import com.healthpulse.website.security.CustomUserDetailService;
 import com.healthpulse.website.security.JwtAuthenticationEntryPoint;
 import com.healthpulse.website.security.JwtAuthenticationFilter;
-
 
 @Configuration
 @EnableWebSecurity
@@ -36,9 +34,13 @@ import com.healthpulse.website.security.JwtAuthenticationFilter;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    public static final String[] PUBLIC_URLS = {"/api/v1/auth/**", "/v3/api-docs", "/v2/api-docs",
-            "/swagger-resources/**", "/swagger-ui/**", "/webjars/**"
-
+    public static final String[] PUBLIC_URLS = {
+            "/api/v1/auth/**", 
+            "/v3/api-docs", 
+            "/v2/api-docs",
+            "/swagger-resources/**", 
+            "/swagger-ui/**", 
+            "/webjars/**",
     };
 
     @Autowired
@@ -50,21 +52,19 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.
-                csrf()
+        http
+                .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers(PUBLIC_URLS)
-                .permitAll()
-                .requestMatchers(HttpMethod.GET)
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and().exceptionHandling()
+                .requestMatchers(PUBLIC_URLS).permitAll()
+                .requestMatchers(HttpMethod.GET).permitAll()
+                .requestMatchers(HttpMethod.POST).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling()
                 .authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
                 .and()
                 .sessionManagement()
@@ -73,85 +73,31 @@ public class SecurityConfig {
         http.addFilterBefore(this.jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.authenticationProvider(daoAuthenticationProvider());
-        DefaultSecurityFilterChain defaultSecurityFilterChain = http.build();
 
-        return defaultSecurityFilterChain;
-
-
+        return http.build();
     }
-
-	/*
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-
-		http.
-				csrf()
-				.disable()
-				.authorizeHttpRequests()
-				.antMatchers(PUBLIC_URLS)
-				.permitAll()
-				.antMatchers(HttpMethod.GET)
-				.permitAll()
-				.anyRequest()
-				.authenticated()
-				.and().exceptionHandling()
-				.authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
-				.and()
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-		http.addFilterBefore(this.jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
-	}
-
-	 */
-
-    /*
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.userDetailsService(this.customUserDetailService).passwordEncoder(passwordEncoder());
-
-    }
-
-    */
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-	/*
-	@Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
-
-	 */
-
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(this.customUserDetailService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
-
     }
-
 
     @Bean
     public AuthenticationManager authenticationManagerBean(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
 
-
     @Bean
-    public FilterRegistrationBean coresFilter() {
+    public FilterRegistrationBean<CorsFilter> coresFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.addAllowedOriginPattern("*");
@@ -167,11 +113,8 @@ public class SecurityConfig {
 
         source.registerCorsConfiguration("/**", corsConfiguration);
 
-        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
         bean.setOrder(-110);
-
         return bean;
     }
-
 }

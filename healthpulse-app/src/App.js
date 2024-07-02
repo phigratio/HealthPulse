@@ -13,6 +13,7 @@ import DoctorChatBot from "./servicePage/DoctorChatBot";
 import KidsCorner from "./servicePage/KidsCorner";
 import HealthCalculator from "./servicePage/HealthCalculator";
 import BookDoctor from "./servicePage/BookDoctor";
+import AddPost from "./components/AddPost";
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +36,7 @@ function App() {
         ></Route>
         <Route path="/service/kids-corner" element={<KidsCorner />}></Route>
         <Route path="/service/book-doctor" element={<BookDoctor />}></Route>
+        <Route path="/addpost" element={<AddPost />}></Route>
       </Routes>
     </BrowserRouter>
   );
