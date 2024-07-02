@@ -50,8 +50,8 @@ public class PostController {
 //	create
 
 	@PostMapping("/user/{userId}/category/{categoryId}/posts")
-	public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto, @PathVariable Integer userId,
-			@PathVariable Integer categoryId) {
+	public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto, @PathVariable ("userId") Integer userId,
+			@PathVariable  ("categoryId") Integer categoryId) {
 		PostDto createPost = this.postService.createPost(postDto, userId, categoryId);
 		return new ResponseEntity<PostDto>(createPost, HttpStatus.CREATED);
 	}
@@ -59,7 +59,7 @@ public class PostController {
 	// get by user
 
 	@GetMapping("/user/{userId}/posts")
-	public ResponseEntity<List<PostDto>> getPostsByUser(@PathVariable Integer userId) {
+	public ResponseEntity<List<PostDto>> getPostsByUser(@PathVariable ("userId") Integer userId) {
 
 		List<PostDto> posts = this.postService.getPostsByUser(userId);
 		return new ResponseEntity<List<PostDto>>(posts, HttpStatus.OK);
@@ -69,7 +69,7 @@ public class PostController {
 	// get by category
 
 	@GetMapping("/category/{categoryId}/posts")
-	public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable Integer categoryId) {
+	public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable ("categoryId") Integer categoryId) {
 
 		List<PostDto> posts = this.postService.getPostsByCategory(categoryId);
 		return new ResponseEntity<List<PostDto>>(posts, HttpStatus.OK);
@@ -92,7 +92,7 @@ public class PostController {
 	// get post details by id
 
 	@GetMapping("/posts/{postId}")
-	public ResponseEntity<PostDto> getPostById(@PathVariable Integer postId) {
+	public ResponseEntity<PostDto> getPostById(@PathVariable ("postId") Integer postId) {
 
 		PostDto postDto = this.postService.getPostById(postId);
 		return new ResponseEntity<PostDto>(postDto, HttpStatus.OK);
@@ -101,7 +101,7 @@ public class PostController {
 
 	// delete post
 	@DeleteMapping("/posts/{postId}")
-	public ApiResponse deletePost(@PathVariable Integer postId) {
+	public ApiResponse deletePost(@PathVariable ("postId") Integer postId) {
 		this.postService.deletePost(postId);
 		return new ApiResponse("Post is successfully deleted !!", true);
 	}
@@ -109,7 +109,7 @@ public class PostController {
 	// update post
 
 	@PutMapping("/posts/{postId}")
-	public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable Integer postId) {
+	public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable ("postId") Integer postId) {
 
 		PostDto updatePost = this.postService.updatePost(postDto, postId);
 		return new ResponseEntity<PostDto>(updatePost, HttpStatus.OK);
