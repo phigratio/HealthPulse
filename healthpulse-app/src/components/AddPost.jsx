@@ -3,10 +3,10 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Card, CardBody, Form, Input, Label, Button } from "reactstrap";
-import { loadAllCategories } from "../services/category-service";
+import { loadAllCategories } from "../service/category-service";
 import JoditEditor from "jodit-react";
 import { useRef } from "react";
-import { createPost as doCreatePost } from "../services/post-service";
+import { createPost as doCreatePost } from "../service/post-service";
 
 const AddPost = () => {
   const editor = useRef(null);
