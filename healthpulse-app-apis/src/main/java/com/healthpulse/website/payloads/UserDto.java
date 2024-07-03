@@ -26,20 +26,18 @@ public class UserDto {
 	private int id;
 
 	@NotEmpty
-	@Size(min = 4, message = "Username must be min of 4 characters !!")
+	@Size(min = 4, message = "Username must be min of 4 characters !!!")
 	private String name;
 
 	@Email(message = "Email address is not valid !!")
-	@NotEmpty(message = "Email is required !!")
+	@NotEmpty(message = "Email is required !!!")
 	private String email;
 
 	@NotEmpty
-	@Size(min = 3, message = "Password must be min of 3 chars  !!")
-
-
+	@Size(min = 8, message = "Password must be min of 8 chars  !!!")
 	private String password;
 
-	@NotEmpty
+	@NotEmpty(message = "About is required !!!")
 	private String about;
 	
 	private Set<RoleDto> roles = new HashSet<>();
