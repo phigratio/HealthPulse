@@ -17,8 +17,12 @@ import { toast } from "react-toastify";
 import { login } from "../service/user-service";
 import { doLogin } from "../auth";
 import Background from "../components/Background"
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const navigate = useNavigate();
+
   const [loginDetail, setLoginDetail] = useState({
     username: "",
     password: "",
@@ -60,6 +64,10 @@ const Login = () => {
       //save the token to the local storage
       doLogin(data, () => {
         console.log("Token saved to local storage");
+
+        //redirect to the user home page
+        navigate("/user/dashboard");
+
       });
       
       toast.success("Token received successfully  !!!"); 
@@ -90,7 +98,7 @@ const Login = () => {
             <Col sm={{ size: 6, offset: 3 }}>
               <Card>
                 <CardHeader style={{ textAlign: "center" }}>
-                  <h3>Fill Information to Register</h3>
+                  <h3>Fill Information to Log In</h3>
                 </CardHeader>
                 <CardBody>
                   <Form onSubmit={handleFormSubmit}>
@@ -118,7 +126,7 @@ const Login = () => {
 
                     <Container className="text-center">
                       <Button className=" button small-button me-2">
-                        Register
+                        Log In
                       </Button>
                       <Button
                         onClick={handleReset}

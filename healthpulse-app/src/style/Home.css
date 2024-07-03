@@ -1,0 +1,31 @@
+.home-container {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.intro-text {
+  margin-top: 20px;
+}
+
+.intro-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.intro-text p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #34495e;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.custom-button {
+  font-size: 1.2rem;
+  padding: 10px 30px;
+}
