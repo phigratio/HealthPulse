@@ -24,14 +24,14 @@ public class CommentController {
 	private CommentService commentService;
 
 	@PostMapping("/post/{postId}/comments")
-	public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto comment, @PathVariable Integer postId) {
+	public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto comment, @PathVariable ("postId") Integer postId) {
 
 		CommentDto createComment = this.commentService.createComment(comment, postId);
 		return new ResponseEntity<CommentDto>(createComment, HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/comments/{commentId}")
-	public ResponseEntity<ApiResponse> deleteComment(@PathVariable Integer commentId) {
+	public ResponseEntity<ApiResponse> deleteComment(@PathVariable ("commentId") Integer commentId) {
 
 		this.commentService.deleteComment(commentId);
 

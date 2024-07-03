@@ -5,6 +5,7 @@ import { loadAllCategories } from "../service/category-service";
 import JoditEditor from "jodit-react";
 import { useRef } from "react";
 import { createPost as doCreatePost } from "../service/post-service";
+import { uploadPostImage } from "../service/post-service";
 import { toast } from "react-toastify";
 import { getCurrentUserDetail } from "../auth";
 
@@ -39,6 +40,10 @@ const AddPost = () => {
     setContent("");
   };
 
+  //image upload
+
+  const [image, setImage] = useState(null);
+
   // Create post function
   const createPost = (e) => {
     e.preventDefault();
@@ -67,6 +72,17 @@ const AddPost = () => {
     // Submit the form to the server
     doCreatePost(post)
       .then((data) => {
+          // Upload image
+          uploadPostImage(image, data.postId)
+            .then((data) => {
+              toast.success("Image Uploaded !!");
+            })
+            .catch((error) => {
+              toast.error("Error in uploading image");
+              console.log(error);
+            });
+
+
         console.log(data);
         toast.success("Post created successfully");
         resetForm(); // Reset the form after successful post creation
@@ -89,6 +105,14 @@ const AddPost = () => {
         console.log(error);
       });
   }, []);
+
+    // File change handler 
+
+    const handleFileChange = (e) => {
+      setImage(e.target.files[0]);
+      
+    } 
+
 
   return (
     <div
@@ -123,6 +147,21 @@ const AddPost = () => {
                 onBlur={(newContent) => setContent(newContent)}
               />
             </div>
+
+
+            {/* File field */}
+
+
+              <div className="mt-3">
+                <Label for="image">Select post banner</Label>
+                <Input id="image" type="file" onChange={handleFileChange} > 
+                </Input>
+              </div>
+
+
+
+
+
             <div className="my-3">
               <Label for="category">Add Category</Label>
               <Input

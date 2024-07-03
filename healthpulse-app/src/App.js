@@ -19,6 +19,9 @@ import HealthCalculator from "./servicePage/HealthCalculator";
 import BookDoctor from "./servicePage/BookDoctor";
 import AddPost from "./components/AddPost";
 import User from "./components/User";
+import NewFeed from "./components/NewFeedInfinite";
+import NewFeedPagination from "./components/NewFeedPagination";
+import PostPage from "./pages/PostPage";
 
 function App() {
   return (
@@ -32,11 +35,14 @@ function App() {
         <Route path="/person" element={<Person />} />
         <Route path="/servicesblock" element={<ServicesBlock />} />
         <Route path="/background" element={<Background />} />
+        <Route path="/newfeed" element={<NewFeed />} /> 
+        <Route path="/newfeedpagination" element={<NewFeedPagination />} />
         <Route path="/service/doctor-chat-bot" element={<DoctorChatBot />} />
         <Route
           path="/service/health-calculator"
           element={<HealthCalculator />}
         />
+        <Route path="/posts/:postId" element={<PostPage />} />
         <Route path="/service/kids-corner" element={<KidsCorner />} />
         <Route path="/service/book-doctor" element={<BookDoctor />} />
         <Route path="/addpost" element={<AddPost />} />
