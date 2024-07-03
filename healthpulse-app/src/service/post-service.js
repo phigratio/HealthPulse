@@ -1,9 +1,16 @@
 //post_service.js
 
-import { myAxios } from "./helper";
+import { privateAxios } from "./helper";
 
 //create post function
 export const createPost = (postData) => {
-    return myAxios.post('/user/${postData.userID}/category/${postData.categoryId}/posts', postData).then((response) => response.data);
-  
+  console.log(postData);
+  console.log("This is postData.userId: ", postData.userId);
+  return privateAxios
+    .post(
+      `/user/${postData.userId}/category/${postData.categoryId}/posts`,
+      postData
+    )
+
+    .then((response) => response.data);
 };

@@ -1,5 +1,3 @@
-//AddPost.jsx
-
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Card, CardBody, Form, Input, Label, Button } from "reactstrap";
@@ -7,12 +5,14 @@ import { loadAllCategories } from "../service/category-service";
 import JoditEditor from "jodit-react";
 import { useRef } from "react";
 import { createPost as doCreatePost } from "../service/post-service";
+import { toast } from "react-toastify";
+import { getCurrentUserDetail } from "../auth";
 
 const AddPost = () => {
   const editor = useRef(null);
   const [content, setContent] = useState("");
-
   const [categories, setCategories] = useState([]);
+  const [user, setUser] = useState(undefined);
 
   const [post, setPost] = useState({
     title: "",
@@ -20,8 +20,7 @@ const AddPost = () => {
     categoryId: "",
   });
 
-  //field changed function
-
+  // Field changed function
   const fieldChanged = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
@@ -30,39 +29,57 @@ const AddPost = () => {
     setPost({ ...post, content: newContent });
   };
 
-  //create post function
+  // Reset form function
+  const resetForm = () => {
+    setPost({
+      title: "",
+      content: "",
+      categoryId: "",
+    });
+    setContent("");
+  };
 
+  // Create post function
   const createPost = (e) => {
     e.preventDefault();
     console.log("form submitted", post);
 
+    if (user && user.id) {
+      post["userId"] = user.id;
+    } else {
+      toast.error("User not logged in");
+      return;
+    }
+
     if (post.title.trim() === "") {
-      alert("Please enter title");
+      toast.error("Please enter title");
       return;
     }
     if (post.content.trim() === "") {
-      alert("Please enter content");
+      toast.error("Please enter content");
       return;
     }
     if (post.categoryId === "") {
-      alert("Please select category");
+      toast.error("Please select category");
       return;
     }
 
-    // submit the form on server  (video no: 18)
-
+    // Submit the form to the server
     doCreatePost(post)
       .then((data) => {
         console.log(data);
-        alert("Post created successfully");
+        toast.success("Post created successfully");
+        resetForm(); // Reset the form after successful post creation
       })
       .catch((error) => {
         console.log(error);
-        alert("Something went wrong");
+        toast.error("Something went wrong");
       });
   };
 
   useEffect(() => {
+    setUser(getCurrentUserDetail());
+
     loadAllCategories()
       .then((data) => {
         console.log(data);
@@ -83,7 +100,6 @@ const AddPost = () => {
         style={{ boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)" }}
       >
         <CardBody>
-          {JSON.stringify(post)}
           <h3 className="text-center">What's going on in your mind?</h3>
           <Form onSubmit={createPost}>
             <div className="my-3">
@@ -93,27 +109,16 @@ const AddPost = () => {
                 id="title"
                 placeholder="Enter here"
                 name="title"
+                value={post.title}
                 onChange={fieldChanged}
               />
             </div>
             <div className="my-3">
               <Label for="content">Post Content</Label>
-              {/* <Input
-                type="textarea"
-                id="content"
-                placeholder="Enter here"
-                style={{ height: "300px" }}
-              /> */}
               <JoditEditor
                 ref={editor}
                 value={content}
                 onChange={contentFieldChanged}
-                // config={{
-                //   readonly: false,
-                //   uploader: {
-                //     insertImageAsBase64URI: true,
-                //   },
-                // }}
                 tabIndex={1}
                 onBlur={(newContent) => setContent(newContent)}
               />
@@ -124,10 +129,13 @@ const AddPost = () => {
                 type="select"
                 id="category"
                 name="categoryId"
+                value={post.categoryId}
                 onChange={fieldChanged}
                 defaultValue={0}
               >
-                <option value="0">--Select Category--</option>
+                <option disabled value="0">
+                  --Select Category--
+                </option>
 
                 {categories.map((category) => (
                   <option value={category.categoryId} key={category.categoryId}>
@@ -145,8 +153,10 @@ const AddPost = () => {
                 Create Post
               </Button>
               <Button
+                type="button"
                 className="small-button button reset-button"
                 color="danger"
+                onClick={resetForm}
               >
                 Reset
               </Button>
