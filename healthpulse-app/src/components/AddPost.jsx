@@ -72,16 +72,15 @@ const AddPost = () => {
     // Submit the form to the server
     doCreatePost(post)
       .then((data) => {
-          // Upload image
-          uploadPostImage(image, data.postId)
-            .then((data) => {
-              toast.success("Image Uploaded !!");
-            })
-            .catch((error) => {
-              toast.error("Error in uploading image");
-              console.log(error);
-            });
-
+        // Upload image
+        uploadPostImage(image, data.postId)
+          .then((data) => {
+            toast.success("Image Uploaded !!");
+          })
+          .catch((error) => {
+            toast.error("Error in uploading image");
+            console.log(error);
+          });
 
         console.log(data);
         toast.success("Post created successfully");
@@ -106,13 +105,11 @@ const AddPost = () => {
       });
   }, []);
 
-    // File change handler 
+  // File change handler
 
-    const handleFileChange = (e) => {
-      setImage(e.target.files[0]);
-      
-    } 
-
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0]);
+  };
 
   return (
     <div
@@ -148,19 +145,12 @@ const AddPost = () => {
               />
             </div>
 
-
             {/* File field */}
 
-
-              <div className="mt-3">
-                <Label for="image">Select post banner</Label>
-                <Input id="image" type="file" onChange={handleFileChange} > 
-                </Input>
-              </div>
-
-
-
-
+            <div className="mt-3">
+              <Label for="image">Select post banner</Label>
+              <Input id="image" type="file" onChange={handleFileChange}></Input>
+            </div>
 
             <div className="my-3">
               <Label for="category">Add Category</Label>
@@ -170,12 +160,10 @@ const AddPost = () => {
                 name="categoryId"
                 value={post.categoryId}
                 onChange={fieldChanged}
-                defaultValue={0}
               >
-                <option disabled value="0">
+                <option disabled value="">
                   --Select Category--
                 </option>
-
                 {categories.map((category) => (
                   <option value={category.categoryId} key={category.categoryId}>
                     {category.categoryTitle}

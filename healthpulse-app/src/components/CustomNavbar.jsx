@@ -18,8 +18,11 @@ import logo from "../images/logo/HealthPulseLogo3-removebg.png";
 import "../style/CustomNavbar.css";
 import { getCurrentUserDetail, isLoggedIn, doLogout } from "../auth";
 import { useNavigate } from "react-router-dom";
+import userContext from "../context/userContext";
+import { useContext } from "react";
 
 const CustomNavbar = () => {
+  const userContextData = useContext(userContext);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [login, setLogin] = useState(false);
@@ -34,7 +37,12 @@ const CustomNavbar = () => {
   const logout = () => {
     doLogout(() => {
       setLogin(false);
-      navigate("/login");
+       userContextData.setUser({
+         data: null,
+         login: false,
+       });
+      navigate("/");
+
     });
   };
 
@@ -66,6 +74,12 @@ const CustomNavbar = () => {
             <NavItem>
               <NavLink className="nav-link-light" tag={ReactLink} to="/about">
                 About
+              </NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink className="nav-link-light" tag={ReactLink} to="/blogs">
+                Blogs
               </NavLink>
             </NavItem>
 

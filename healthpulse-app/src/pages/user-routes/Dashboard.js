@@ -4,6 +4,8 @@ import Background from "../../components/Background"; // Import the Background c
 import Carousel from "../../components/CustomCarousel";
 import ServicesBlock from "../../components/ServicesBlock";
 import Person from "../../components/Person";
+import NewFeedPagination from "../../components/NewFeedPagination";
+
 
 const Dashboard = () => {
   return (
@@ -13,6 +15,7 @@ const Dashboard = () => {
         <Carousel />
         <ServicesBlock />
         <Person />
+        <NewFeedPagination />
       </Base>
     </div>
   );

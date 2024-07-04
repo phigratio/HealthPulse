@@ -22,6 +22,10 @@ import User from "./components/User";
 import NewFeed from "./components/NewFeedInfinite";
 import NewFeedPagination from "./components/NewFeedPagination";
 import PostPage from "./pages/PostPage";
+import Blogs from "./pages/Blogs";
+import Categories from "./components/Categories";
+import MyPosts from "./pages/user-routes/MyPosts";
+import UpdateBlog from "./pages/UpdateBlog";
 
 function App() {
   return (
@@ -32,10 +36,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
+        <Route path="/blogs" element={<Blogs />} />
         <Route path="/person" element={<Person />} />
         <Route path="/servicesblock" element={<ServicesBlock />} />
         <Route path="/background" element={<Background />} />
-        <Route path="/newfeed" element={<NewFeed />} /> 
+        <Route path="/newfeed" element={<NewFeed />} />
         <Route path="/newfeedpagination" element={<NewFeedPagination />} />
         <Route path="/service/doctor-chat-bot" element={<DoctorChatBot />} />
         <Route
@@ -43,12 +48,15 @@ function App() {
           element={<HealthCalculator />}
         />
         <Route path="/posts/:postId" element={<PostPage />} />
+        <Route path="/categories/:categoryId" element={<Categories />} />
         <Route path="/service/kids-corner" element={<KidsCorner />} />
         <Route path="/service/book-doctor" element={<BookDoctor />} />
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/user" element={<User />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="my-profile" element={<ProfileInfo />} />
+          <Route path="my-posts" element={<MyPosts />} />
+          <Route path="update-blog/:blogId" element={<UpdateBlog />} />
         </Route>
       </Routes>
     </BrowserRouter>

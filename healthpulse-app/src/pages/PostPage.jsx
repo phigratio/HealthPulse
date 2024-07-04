@@ -1,3 +1,6 @@
+//this page is used to show the post and comments of the post
+
+
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";

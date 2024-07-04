@@ -48,7 +48,7 @@ function Post({
                 <Button
                   onClick={(event) => deletePost(post)}
                   color="danger"
-                  className="ms-2"
+                  className="ms-2 mt-1 "
                 >
                   Delete
                 </Button>
@@ -56,7 +56,7 @@ function Post({
                   tag={Link}
                   to={`/user/update-blog/${post.postId}`}
                   color="warning"
-                  className="ms-2"
+                  className="ms-2 "
                 >
                   Update
                 </Button>
