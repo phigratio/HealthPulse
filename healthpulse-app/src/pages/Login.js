@@ -16,10 +16,13 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { login } from "../service/user-service";
 import { doLogin } from "../auth";
-import Background from "../components/Background"
+import Background from "../components/Background";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import userContext from "../context/userContext";
 
 const Login = () => {
+  const userContxtData = useContext(userContext);
 
   const navigate = useNavigate();
 
@@ -57,41 +60,37 @@ const Login = () => {
 
     //submit the form to the server using axios locatedd in src/service/user-service.js
 
+    login(loginDetail)
+      .then((data) => {
+        //save the token to the local storage
+        doLogin(data, () => {
+          console.log("Token saved to local storage");
 
-    login(loginDetail).then((data) => {
+          //redirect to the user home page
+          navigate("/user/dashboard");
 
+          userContxtData.setUser({
+            data: data.user,
+            login: true,
+          });
+        });
 
-      //save the token to the local storage
-      doLogin(data, () => {
-        console.log("Token saved to local storage");
-
-        //redirect to the user home page
-        navigate("/user/dashboard");
-
+        toast.success("Token received successfully  !!!");
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status === 400 || error.response.status === 404) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("Something went wrong !!!");
+        }
       });
-      
-      toast.success("Token received successfully  !!!"); 
-      console.log(data);
-      
-    }
-    ).catch((error) => {
-      console.log(error);
-      if(error.response.status === 400  || error.response.status === 404){
-        toast.error(error.response.data.message);
-      }else{
-        toast.error("Something went wrong !!!");
-      }
-
-    });
-
-
-
-
   };
 
   return (
     <div>
-      <Background /> 
+      <Background />
       <Base>
         <Container style={{ marginTop: "10vh" }}>
           <Row>
@@ -125,12 +124,16 @@ const Login = () => {
                     </FormGroup>
 
                     <Container className="text-center">
-                      <Button className=" button small-button me-2">
+                      <Button
+                        className=" button small-button me-2"
+                        type="submit"
+                      >
                         Log In
                       </Button>
                       <Button
                         onClick={handleReset}
                         className=" button small-button reset-button ms-2"
+                        type="button"
                       >
                         Reset
                       </Button>

@@ -4,6 +4,8 @@ import Background from "../components/Background";
 import { Button } from "reactstrap";
 import '../style/Home.css'; 
 import Carousel from "../components/CustomCarousel";
+import NewFeedPagination from "../components/NewFeedPagination";
+
 
 const Home = () => {
   return (
@@ -43,6 +45,9 @@ const Home = () => {
             </Button>
           </div>
         </div>
+
+        <NewFeedPagination />
+
       </Base>
     </div>
   );

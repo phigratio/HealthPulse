@@ -79,19 +79,15 @@ const NewFeed = () => {
       });
   }
 
-   const changePageInfinite = () => {
-     console.log("page chagned");
-     setCurrentPage(currentPage + 1);
-   };
+  const changePageInfinite = () => {
+    console.log("page chagned");
+    setCurrentPage(currentPage + 1);
+  };
 
   return (
     <div className="container-fluid">
-      <Row>
-        <Col
-          md={{
-            size: 12,
-          }}
-        >
+      <Row className="justify-content-center">
+        <Col md={{size: 12}} className="mx-auto">
           <h1>Blogs Count ( {postContent?.totalElements} )</h1>
           <InfiniteScroll
             dataLength={postContent.content.length}
@@ -145,5 +141,5 @@ const NewFeed = () => {
     </div>
   );
 };
- 
+
 export default NewFeed;
