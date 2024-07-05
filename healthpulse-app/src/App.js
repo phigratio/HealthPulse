@@ -54,7 +54,7 @@ function App() {
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/user" element={<User />}>
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="my-profile" element={<ProfileInfo />} />
+          <Route path="my-profile/:userId" element={<ProfileInfo />} />
           <Route path="my-posts" element={<MyPosts />} />
           <Route path="update-blog/:blogId" element={<UpdateBlog />} />
         </Route>

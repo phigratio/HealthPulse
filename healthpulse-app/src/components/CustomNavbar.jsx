@@ -100,7 +100,7 @@ const CustomNavbar = () => {
                   <NavLink
                     className="nav-link-light"
                     tag={ReactLink}
-                    to="/user/my-profile"
+                    to={`/user/my-profile/${user.id}`}
                   >
                     {user.email}
                   </NavLink>
