@@ -20,9 +20,12 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
     setLogin(isLoggedIn());
   }, []);
   return (
-    <Card className="mt-2 border-0 rounded-0 shadow-sm">
+    <Card
+      className="mt-32 border-0 rounded-4"
+      style={{ boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)" }}
+    >
       <CardBody>
-        <h3 className="text-uppercase">user Information</h3>
+        <h3 className="text-uppercase text-center">user Information</h3>
 
         <Container className="text-center">
           <img
@@ -33,7 +36,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                 : "https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=400x300&vertical=top"
             }
             alt="user profile picture"
-            className="img-fluid  rounded-circle"
+            className="img-fluid  rounded-circle d-block mx-auto"
           />
         </Container>
         <Table
@@ -68,13 +71,17 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                 })}
               </td>
             </tr>
+            <tr>
+              <td>Age</td>
+              <td>{user.age === 0 ? "N/A" : user.age}</td>
+            </tr>
           </tbody>
         </Table>
 
         {currentUser ? (
           currentUser.id == user.id ? (
             <CardFooter className="text-center">
-              <Button onClick={updateProfileClick} color="warning">
+              <Button onClick={updateProfileClick} color="warning" className="button">
                 Update Profile
               </Button>
             </CardFooter>

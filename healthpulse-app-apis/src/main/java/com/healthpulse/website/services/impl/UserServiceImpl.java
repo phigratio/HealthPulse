@@ -49,10 +49,38 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(userDto.getEmail());
 		user.setPassword(userDto.getPassword());
 		user.setAbout(userDto.getAbout());
+		user.setAge(userDto.getAge());
+
+		// Set the new fields
+		user.setHeight(userDto.getHeight());
+		user.setWeight(userDto.getWeight());
+		user.setGender(userDto.getGender());
+		user.setBloodGroup(userDto.getBloodGroup());
+		user.setWaist(userDto.getWaist());
+		user.setHip(userDto.getHip());
+		user.setBmi(userDto.getBmi());
+		user.setBodyFatPercentage(userDto.getBodyFatPercentage());
+		user.setWaistToHipRatio(userDto.getWaistToHipRatio());
+		user.setCalorieNeeds(userDto.getCalorieNeeds());
+		user.setIdealWeight(userDto.getIdealWeight());
+		user.setWaterIntake(userDto.getWaterIntake());
+		user.setBsa(userDto.getBsa());
+		user.setProteinNeeds(userDto.getProteinNeeds());
+		user.setCarbNeeds(userDto.getCarbNeeds());
+		user.setFatNeeds(userDto.getFatNeeds());
+		user.setMuscleMassNeeds(userDto.getMuscleMassNeeds());
+		user.setBoneDensityNeeds(userDto.getBoneDensityNeeds());
+		user.setMetabolicAgeNeeds(userDto.getMetabolicAgeNeeds());
+		user.setVisceralFatNeeds(userDto.getVisceralFatNeeds());
+		user.setBodyWaterNeeds(userDto.getBodyWaterNeeds());
+		user.setMuscleMass(userDto.getMuscleMass());
+		user.setBoneDensity(userDto.getBoneDensity());
+		user.setMetabolicAge(userDto.getMetabolicAge());
+		user.setVisceralFat(userDto.getVisceralFat());
+		user.setBodyWater(userDto.getBodyWater());
 
 		User updatedUser = this.userRepo.save(user);
-		UserDto userDto1 = this.userToDto(updatedUser);
-		return userDto1;
+		return this.userToDto(updatedUser);
 	}
 
 	@Override
