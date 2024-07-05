@@ -3,8 +3,6 @@ package com.healthpulse.website.payloads;
 import java.util.HashSet;
 import java.util.Set;
 
-
-
 import com.healthpulse.website.entities.Role;
 
 import jakarta.validation.constraints.Email;
@@ -39,18 +37,44 @@ public class UserDto {
 
 	@NotEmpty(message = "About is required !!!")
 	private String about;
-	
+
+	private int age;
 	private Set<RoleDto> roles = new HashSet<>();
-	
-	
+
+	private float height;
+	private float weight;
+	private String gender;
+	private String bloodGroup;
+	private float waist;
+	private float hip;
+	private float bmi;
+	private float bodyFatPercentage;
+	private float waistToHipRatio;
+	private float calorieNeeds;
+	private float idealWeight;
+	private float waterIntake;
+	private float bsa; // Body Surface Area
+	private float proteinNeeds;
+	private float carbNeeds;
+	private float fatNeeds;
+	private float muscleMassNeeds;
+	private float boneDensityNeeds;
+	private float metabolicAgeNeeds;
+	private float visceralFatNeeds;
+	private float bodyWaterNeeds;
+	private float muscleMass;
+	private float boneDensity;
+	private float metabolicAge;
+	private float visceralFat;
+	private float bodyWater;
+
 	@JsonIgnore
 	public String getPassword() {
 		return this.password;
 	}
-	
+
 	@JsonProperty
 	public void setPassword(String password) {
-		this.password=password;
+		this.password = password;
 	}
-
 }

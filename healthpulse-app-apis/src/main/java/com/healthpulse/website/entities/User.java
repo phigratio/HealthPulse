@@ -49,7 +49,63 @@ public class User implements UserDetails {
 
 	private String password;
 
-	private String about;
+	private String about; 
+	
+	private int age;
+	
+	private float height;
+	
+	private float weight;
+	
+	private String gender;
+	
+	private String bloodGroup;
+	
+	private float Waist;
+	
+	private float Hip;
+	
+	private float bmi;
+	
+	private float bodyFatPercentage;
+	
+	private float waistToHipRatio;
+	
+	private float calorieNeeds;
+	
+	private float idealWeight;
+	
+	private float waterIntake;
+	
+	private float bsa;
+	
+	private float proteinNeeds;
+	
+	private float carbNeeds;
+	
+	private float fatNeeds;
+	
+	private float muscleMassNeeds;
+	
+	private float boneDensityNeeds;
+	
+	private float metabolicAgeNeeds;
+	
+	private float visceralFatNeeds;
+	
+	private float bodyWaterNeeds;
+	
+	private float muscleMass;
+	
+	private float boneDensity;
+	
+	private float metabolicAge;
+	
+	private float visceralFat;
+	
+	private float bodyWater;
+	
+	
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Post> posts = new ArrayList<>();

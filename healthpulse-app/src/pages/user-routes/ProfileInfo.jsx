@@ -64,7 +64,10 @@ const ProfileInfo = () => {
   const updateUserProfile = () => {
     return (
       <div>
-        <Card className="mt-2 border-0 rounded-0 shadow-sm">
+        <Card
+          className="mt-2 border-0 rounded-0"
+          style={{ boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)" }} 
+        >
           <CardBody>
             <h3 className="text-uppercase">user Information</h3>
 
@@ -133,7 +136,7 @@ const ProfileInfo = () => {
       <Base>
         <Row>
           <Col md={{ size: 6, offset: 3 }}>
-            <Container>
+            <Container >
               {updateFlag ? updateUserProfile() : viewUserProfile()}
             </Container>
           </Col>

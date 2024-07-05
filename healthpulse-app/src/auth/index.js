@@ -36,3 +36,18 @@ export const getToken = () => {
     return null;
   }
 };
+
+
+//get current user role
+export const getCurrentUserRole = () => {
+  if (isLoggedIn()) {
+    return JSON.parse(localStorage.getItem("data")).user.role;
+  } else {
+    return undefined;
+  }
+};
+
+//update user data
+export const updateUserData = (data) => {
+  localStorage.setItem("data", JSON.stringify(data));
+};
