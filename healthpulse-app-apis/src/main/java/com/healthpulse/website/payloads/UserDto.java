@@ -37,9 +37,11 @@ public class UserDto {
 
 	@NotEmpty(message = "About is required !!!")
 	private String about;
+	
+	private Set<RoleDto> roles = new HashSet<>();
 
 	private int age;
-	private Set<RoleDto> roles = new HashSet<>();
+	
 
 	private float height;
 	private float weight;

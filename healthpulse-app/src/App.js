@@ -10,17 +10,12 @@ import Dashboard from "./pages/user-routes/Dashboard";
 import ProfileInfo from "./pages/user-routes/ProfileInfo";
 import About from "./pages/About";
 import Signup from "./pages/Signup";
-import Person from "./components/Person";
-import ServicesBlock from "./components/ServicesBlock";
-import Background from "./components/Background";
 import DoctorChatBot from "./servicePage/DoctorChatBot";
 import KidsCorner from "./servicePage/KidsCorner";
 import HealthCalculator from "./servicePage/HealthCalculator";
 import BookDoctor from "./servicePage/BookDoctor";
 import AddPost from "./components/AddPost";
 import User from "./components/User";
-import NewFeed from "./components/NewFeedInfinite";
-import NewFeedPagination from "./components/NewFeedPagination";
 import PostPage from "./pages/PostPage";
 import Blogs from "./pages/Blogs";
 import Categories from "./components/Categories";
@@ -37,11 +32,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route path="/person" element={<Person />} />
-        <Route path="/servicesblock" element={<ServicesBlock />} />
-        <Route path="/background" element={<Background />} />
-        <Route path="/newfeed" element={<NewFeed />} />
-        <Route path="/newfeedpagination" element={<NewFeedPagination />} />
+
         <Route path="/service/doctor-chat-bot" element={<DoctorChatBot />} />
         <Route
           path="/service/health-calculator"

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { NavLink as ReactLink } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { NavLink as ReactLink, useNavigate } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -17,9 +17,7 @@ import {
 import logo from "../images/logo/HealthPulseLogo3-removebg.png";
 import "../style/CustomNavbar.css";
 import { getCurrentUserDetail, isLoggedIn, doLogout } from "../auth";
-import { useNavigate } from "react-router-dom";
 import userContext from "../context/userContext";
-import { useContext } from "react";
 
 const CustomNavbar = () => {
   const userContextData = useContext(userContext);
@@ -37,14 +35,15 @@ const CustomNavbar = () => {
   const logout = () => {
     doLogout(() => {
       setLogin(false);
-       userContextData.setUser({
-         data: null,
-         login: false,
-       });
+      userContextData.setUser({
+        data: null,
+        login: false,
+      });
       navigate("/");
-
     });
   };
+
+  const isDoctor = user?.roles?.some((role) => role.id === 503);
 
   return (
     <div>
@@ -82,6 +81,18 @@ const CustomNavbar = () => {
                 Blogs
               </NavLink>
             </NavItem>
+
+            {login && isDoctor && (
+              <NavItem>
+                <NavLink
+                  className="nav-link-light"
+                  tag={ReactLink}
+                  to="/user/my-posts"
+                >
+                  My Blogs
+                </NavLink>
+              </NavItem>
+            )}
 
             {login ? (
               <>
