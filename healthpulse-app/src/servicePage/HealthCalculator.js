@@ -13,6 +13,7 @@ import {
 import Base from "../components/Base";
 import Background from "../components/Background";
 import { getCurrentUserDetail } from "../auth";
+import banner from "../images/banner/healthCalculator.mp4";
 
 const HealthCalculator = () => {
   const [weight, setWeight] = useState("");
@@ -246,6 +247,9 @@ const HealthCalculator = () => {
     <div>
       <Background />
       <Base>
+        <div className="video-container">
+          <video src={banner} autoPlay loop muted></video>
+        </div>
         <Container className="mt-32">
           <Row>
             <Col md={{ size: 6, offset: 3 }}>
