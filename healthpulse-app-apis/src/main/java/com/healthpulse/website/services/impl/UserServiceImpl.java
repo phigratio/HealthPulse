@@ -126,21 +126,22 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto registerNewUser(UserDto userDto) {
+    public UserDto registerNewUser(UserDto userDto, Integer roleId) {
 
-		User user = this.modelMapper.map(userDto, User.class);
+        User user = this.modelMapper.map(userDto, User.class);
 
-		// encoded the password
-		user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+        // encoded the password
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 
-		// roles
-		Role role = this.roleRepo.findById(AppConstants.NORMAL_USER).get();
+        // roles
+        Role role = this.roleRepo.findById(roleId)
+                .orElseThrow(() -> new ResourceNotFoundException("Role", "Id", roleId));
 
-		user.getRoles().add(role);
+        user.getRoles().add(role);
 
-		User newUser = this.userRepo.save(user);
+        User newUser = this.userRepo.save(user);
 
-		return this.modelMapper.map(newUser, UserDto.class);
-	}
+        return this.modelMapper.map(newUser, UserDto.class);
+    }
 
 }

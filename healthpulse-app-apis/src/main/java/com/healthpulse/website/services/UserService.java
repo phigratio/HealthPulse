@@ -6,7 +6,7 @@ import com.healthpulse.website.payloads.UserDto;
 
 public interface UserService {
 
-	UserDto registerNewUser(UserDto user);
+	UserDto  registerNewUser(UserDto userDto, Integer roleId);
 	
 	
 	UserDto createUser(UserDto user);

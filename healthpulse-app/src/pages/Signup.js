@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardBody,
@@ -13,33 +14,27 @@ import {
   FormFeedback,
 } from "reactstrap";
 import Base from "../components/Base";
-import { useEffect, useState } from "react";
 import { signUp } from "../service/user-service";
 import { toast } from "react-toastify";
 import Background from "../components/Background";
 
 const Signup = () => {
-  const [data, setData] = useState(() => {
-    return {
-      name: "",
-      email: "",
-      password: "",
-      about: "",
-    };
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    about: "",
+    role: "502", // Default role set to User
   });
 
-  const [error, setError] = useState(() => {
-    return {
-      error: {},
-      isError: false,
-    };
+  const [error, setError] = useState({
+    error: {},
+    isError: false,
   });
 
   useEffect(() => {
     document.title = "Signup";
   }, [data]);
-
-  //hancleChange function
 
   const handleChange = (e, property) => {
     setData({
@@ -47,7 +42,6 @@ const Signup = () => {
       [property]: e.target.value,
     });
   };
-  //resetData function
 
   const resetData = () => {
     setData({
@@ -55,15 +49,14 @@ const Signup = () => {
       email: "",
       password: "",
       about: "",
+      role: "502", // Reset role to default User
     });
   };
-
-  //submitForm function
 
   const submitForm = (e) => {
     e.preventDefault();
 
-    if(error.isError){
+    if (error.isError) {
       toast.error("Please fill the form correctly !!!");
       setError({
         error: {},
@@ -73,19 +66,14 @@ const Signup = () => {
 
     console.log(data);
 
-    signUp(data)
+    signUp(data, data.role) // Pass role as a separate parameter
       .then((resp) => {
         console.log(resp);
         console.log("User Registered Successfully");
         toast.success(
           "User Registered Successfully with user id: " + resp.id + " !!!"
         );
-        setData({
-          name: "",
-          email: "",
-          password: "",
-          about: "",
-        });
+        resetData();
       })
       .catch((err) => {
         console.log(err);
@@ -139,7 +127,7 @@ const Signup = () => {
                         invalid={
                           error.error?.response?.data?.email ? true : false
                         }
-                      /> 
+                      />
                       <FormFeedback>
                         {error.error?.response?.data?.email}
                       </FormFeedback>
@@ -179,11 +167,27 @@ const Signup = () => {
                         {error.error?.response?.data?.about}
                       </FormFeedback>
                     </FormGroup>
+
+                    <FormGroup>
+                      <Label for="role">Role:</Label>
+                      <Input
+                        type="select"
+                        id="role"
+                        onChange={(e) => handleChange(e, "role")}
+                        value={data.role}
+                      >
+                        <option value="501">Admin</option>
+                        <option value="502">User</option>
+                        <option value="503">Doctor</option>
+                      </Input>
+                    </FormGroup>
+
                     <Container className="text-center">
                       <Button className=" button small-button me-2">
                         Register
                       </Button>
                       <Button
+                        type="button"
                         className=" button small-button reset-button ms-2"
                         onClick={resetData}
                       >
