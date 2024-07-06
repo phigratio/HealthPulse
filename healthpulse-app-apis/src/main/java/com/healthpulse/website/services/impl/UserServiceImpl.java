@@ -9,13 +9,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.healthpulse.website.config.AppConstants;
+import com.healthpulse.website.entities.DoctorInfo;
 import com.healthpulse.website.entities.Role;
 import com.healthpulse.website.entities.User;
 import com.healthpulse.website.exceptions.ResourceNotFoundException;
+import com.healthpulse.website.payloads.DoctorInfoDto;
 import com.healthpulse.website.payloads.UserDto;
+import com.healthpulse.website.repositories.DoctorInfoRepo;
 import com.healthpulse.website.repositories.RoleRepo;
 import com.healthpulse.website.repositories.UserRepo;
 import com.healthpulse.website.services.UserService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,6 +36,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private RoleRepo roleRepo;
+	
+	@Autowired
+	private DoctorInfoRepo doctorInfoRepo;
+
 
 	@Override
 	public UserDto createUser(UserDto userDto) {
@@ -124,16 +133,16 @@ public class UserServiceImpl implements UserService {
 		UserDto userDto = this.modelMapper.map(user, UserDto.class);
 		return userDto;
 	}
-
-	@Override
+	
+	@Transactional
+    @Override
     public UserDto registerNewUser(UserDto userDto, Integer roleId) {
-
         User user = this.modelMapper.map(userDto, User.class);
 
-        // encoded the password
+        // Encode the password
         user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 
-        // roles
+        // Get the role
         Role role = this.roleRepo.findById(roleId)
                 .orElseThrow(() -> new ResourceNotFoundException("Role", "Id", roleId));
 
@@ -141,7 +150,36 @@ public class UserServiceImpl implements UserService {
 
         User newUser = this.userRepo.save(user);
 
+        // If the role is doctor (role ID 503), create a DoctorInfo entry
+        if (roleId == 503) {
+            DoctorInfoDto doctorInfoDto = userDto.getDoctorInfo();
+            if (doctorInfoDto == null) {
+                // Handle case where DoctorInfoDto is null
+                DoctorInfo doctorInfo = new DoctorInfo();
+                doctorInfo.setUser(newUser);
+                doctorInfo.setDegrees("");
+                doctorInfo.setCertificates("");
+                doctorInfo.setExperience("");
+                doctorInfo.setSpecialization("General"); // Example default value
+                doctorInfo.setApprovedByAdmin("Pending");
+                
+
+                this.doctorInfoRepo.save(doctorInfo);
+            } else {
+                DoctorInfo doctorInfo = new DoctorInfo();
+                doctorInfo.setUser(newUser);
+                doctorInfo.setSpecialization(doctorInfoDto.getSpecialization());
+                doctorInfo.setDegrees(doctorInfoDto.getDegrees());
+                doctorInfo.setCertificates(doctorInfoDto.getCertificates());
+                doctorInfo.setExperience(doctorInfoDto.getExperience());
+                doctorInfo.setApprovedByAdmin("Pending");
+
+                this.doctorInfoRepo.save(doctorInfo);
+            }
+        }
+
         return this.modelMapper.map(newUser, UserDto.class);
     }
+
 
 }
