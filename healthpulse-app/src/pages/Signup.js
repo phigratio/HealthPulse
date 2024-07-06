@@ -74,6 +74,12 @@ const Signup = () => {
           "User Registered Successfully with user id: " + resp.id + " !!!"
         );
         resetData();
+
+        // Redirect to login page after successful registration
+
+        window.location.href = "/login";
+
+
       })
       .catch((err) => {
         console.log(err);
