@@ -21,6 +21,7 @@ import Blogs from "./pages/Blogs";
 import Categories from "./components/Categories";
 import MyPosts from "./pages/user-routes/MyPosts";
 import UpdateBlog from "./pages/UpdateBlog";
+import UpdateUser from "./pages/UpdateUser";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           path="/service/health-calculator"
           element={<HealthCalculator />}
         />
+        <Route path="/user/update-user" element={<UpdateUser />} />
         <Route path="/posts/:postId" element={<PostPage />} />
         <Route path="/categories/:categoryId" element={<Categories />} />
         <Route path="/service/kids-corner" element={<KidsCorner />} />

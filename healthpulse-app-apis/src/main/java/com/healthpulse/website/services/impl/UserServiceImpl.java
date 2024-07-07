@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService {
 //		user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 		user.setAbout(userDto.getAbout());
 		user.setAge(userDto.getAge());
+		user.setImageName(userDto.getImageName());
 
 		// Set the new fields
 		user.setHeight(userDto.getHeight());
@@ -87,6 +88,18 @@ public class UserServiceImpl implements UserService {
 		user.setMetabolicAge(userDto.getMetabolicAge());
 		user.setVisceralFat(userDto.getVisceralFat());
 		user.setBodyWater(userDto.getBodyWater());
+		
+		//Set the doctor info
+		
+		DoctorInfo doctorInfo = user.getDoctorInfo();
+		if (doctorInfo != null) {
+			DoctorInfoDto doctorInfoDto = userDto.getDoctorInfo();
+			doctorInfo.setSpecialization(doctorInfoDto.getSpecialization());
+			doctorInfo.setDegrees(doctorInfoDto.getDegrees());
+			doctorInfo.setCertificates(doctorInfoDto.getCertificates());
+			doctorInfo.setExperience(doctorInfoDto.getExperience());
+			doctorInfo.setApprovedByAdmin(doctorInfoDto.getApprovedByAdmin());
+		}
 
 		User updatedUser = this.userRepo.save(user);
 		return this.userToDto(updatedUser);
@@ -142,6 +155,7 @@ public class UserServiceImpl implements UserService {
         // Encode the password
         user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 
+
         // Get the role
         Role role = this.roleRepo.findById(roleId)
                 .orElseThrow(() -> new ResourceNotFoundException("Role", "Id", roleId));
@@ -149,6 +163,16 @@ public class UserServiceImpl implements UserService {
         user.getRoles().add(role);
 
         User newUser = this.userRepo.save(user);
+        
+        if(roleId==502) {
+            user.setImageName("user.png");
+        }
+		if (roleId == 503) {
+			user.setImageName("doctor.png");
+		}
+		if (roleId == 501) {
+			user.setImageName("admin.png");
+		}
 
         // If the role is doctor (role ID 503), create a DoctorInfo entry
         if (roleId == 503) {
