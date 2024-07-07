@@ -87,6 +87,18 @@ public class UserServiceImpl implements UserService {
 		user.setMetabolicAge(userDto.getMetabolicAge());
 		user.setVisceralFat(userDto.getVisceralFat());
 		user.setBodyWater(userDto.getBodyWater());
+		
+		//Set the doctor info
+		
+		DoctorInfo doctorInfo = user.getDoctorInfo();
+		if (doctorInfo != null) {
+			DoctorInfoDto doctorInfoDto = userDto.getDoctorInfo();
+			doctorInfo.setSpecialization(doctorInfoDto.getSpecialization());
+			doctorInfo.setDegrees(doctorInfoDto.getDegrees());
+			doctorInfo.setCertificates(doctorInfoDto.getCertificates());
+			doctorInfo.setExperience(doctorInfoDto.getExperience());
+			doctorInfo.setApprovedByAdmin(doctorInfoDto.getApprovedByAdmin());
+		}
 
 		User updatedUser = this.userRepo.save(user);
 		return this.userToDto(updatedUser);
