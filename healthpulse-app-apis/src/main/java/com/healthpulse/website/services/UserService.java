@@ -11,8 +11,7 @@ public interface UserService {
 	
 	@Transactional
 	UserDto  registerNewUser(UserDto userDto, Integer roleId);
-	
-	
+		
 	UserDto createUser(UserDto user);
 
 	UserDto updateUser(UserDto user, Integer userId);

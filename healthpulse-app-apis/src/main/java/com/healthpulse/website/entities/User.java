@@ -52,6 +52,8 @@ public class User implements UserDetails {
 
 	private String about; 
 	
+	private String imageName;
+	
 	private int age;
 	
 	private float height;

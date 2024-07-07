@@ -38,6 +38,8 @@ public class UserDto {
 	@NotEmpty(message = "About is required !!!")
 	private String about;
 	
+	private String imageName; 
+	
 	private Set<RoleDto> roles = new HashSet<>();
 	
 	// doctor info if role id is 503
