@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.healthpulse.website.payloads.ApiResponse;
+import com.healthpulse.website.payloads.PostDto;
 import com.healthpulse.website.payloads.UserDto;
 import com.healthpulse.website.services.FileService;
 import com.healthpulse.website.services.UserService;
@@ -92,5 +95,26 @@ public class UserController {
         StreamUtils.copy(resource,response.getOutputStream())   ;
 
     }
+    
+    
+    @PostMapping("/user/image/upload/{userId}")
+    public ResponseEntity<UserDto> uploadUserImage(
+            @RequestParam("image") MultipartFile image,
+            @PathVariable("userId") Integer userId) throws IOException {
+
+        if (image.isEmpty()) {
+            throw new IllegalArgumentException("Image file is missing");
+        }
+
+        System.out.println("Received file: " + image.getOriginalFilename());
+        UserDto userDto = this.userService.getUserById(userId);
+
+        String fileName = this.fileService.uploadImage(path, image);
+        userDto.setImageName(fileName);
+        UserDto updatedUser = this.userService.updateUser(userDto, userId);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+	
 
 }

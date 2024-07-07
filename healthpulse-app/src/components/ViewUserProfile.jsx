@@ -8,7 +8,8 @@ import {
   Table,
 } from "reactstrap";
 import { getCurrentUserDetail, isLoggedIn } from "../auth";
-import { BASE_URL } from "../service/helper"; 
+import { BASE_URL } from "../service/helper";
+import { Link as ReactLink } from "react-router-dom";
 
 const ViewUserProfile = ({ user, updateProfileClick }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -268,7 +269,8 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
         {currentUser && currentUser.id === user.id && (
           <CardFooter className="text-center">
             <Button
-              onClick={updateProfileClick}
+              tag={ReactLink}
+              to="/user/update-user"
               color="warning"
               className="button"
             >
