@@ -124,7 +124,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
           </>
         )}
 
-        {canViewPersonalInfo() && (
+        {canViewPersonalInfo() && currentUser.id === user.id && (
           <>
             <h3 className="text-center">Person Info</h3>
             <Table
