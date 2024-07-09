@@ -3,8 +3,6 @@ import { loadAllMedicines, deleteMedicine } from "../service/medicine_service";
 import { toast } from "react-toastify";
 import Medicine from "./Medicine";
 import { Row, Col, Container } from "reactstrap";
-import Base from "./Base";
-import Background from "./Background";
 
 const MedicineFeed = () => {
   const [medicineContent, setMedicineContent] = useState([]);
@@ -47,25 +45,21 @@ const MedicineFeed = () => {
   };
 
   return (
-    <div>
-      <Background />
-      <Base>
-        <Container style={containerStyle} className="mt-32">
-          <Row style={rowStyle}>
-            {medicineContent.map((medicine, index) => (
-              <Col key={index} sm="6" md="4" lg="3">
-                <Medicine
-                  medicine={medicine}
-                  deleteMedicine={() => doDeleteMedicine(medicine.medicineId)}
-                />
-              </Col>
-            ))}
-          </Row>
-        </Container>
-      </Base>
+    <div >
+      <Container style={containerStyle} >
+        <Row style={rowStyle}>
+          {medicineContent.map((medicine, index) => (
+            <Col key={index} sm="6" md="4" lg="3">
+              <Medicine
+                medicine={medicine}
+                deleteMedicine={() => doDeleteMedicine(medicine.medicineId)}
+              />
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </div>
   );
 };
 
 export default MedicineFeed;
- 

@@ -9,6 +9,7 @@ import {
 } from "reactstrap";
 import { getCurrentUserDetail, isLoggedIn } from "../auth";
 import { useState, useEffect } from "react";
+import { BASE_URL } from "../service/helper";
 
 const Medicine = ({ medicine, deleteMedicine }) => {
   const cardStyle = {
@@ -22,7 +23,7 @@ const Medicine = ({ medicine, deleteMedicine }) => {
   };
 
   const truncateDescription = (description) => {
-    if (description.length > 40) {
+    if (description?.length > 40) {
       return description.substring(0, 40) + "...";
     }
     return description;
@@ -39,28 +40,30 @@ const Medicine = ({ medicine, deleteMedicine }) => {
       <CardImg
         top
         width="100%"
-        src={medicine.imageUrl || "https://via.placeholder.com/150"}
-        alt={medicine.name}
+        src={medicine?.imageName ? BASE_URL + "/users/user/image/" + medicine.imageName : "https://via.placeholder.com/150"}
+        alt={medicine?.name}
         style={imgStyle}
       />
-      <CardBody>
-        <CardTitle tag="h5">{medicine.name}</CardTitle>
-        <CardText>{truncateDescription(medicine.description)}</CardText>
-        <CardText>Price: ${medicine.price}</CardText>
-        <CardText>Quantity: {medicine.quantity}</CardText>
-        <Button className="button small-button">View Details</Button>
-        <Button color="primary" className="ml-2 button small-button">
-          Add to cart
-        </Button>
+      <CardBody className="text-center">
+        <CardTitle tag="h5">{medicine?.name}</CardTitle>
+        <CardText>{truncateDescription(medicine?.description)}</CardText>
+        <CardText>Price: ${medicine?.price}</CardText>
+        <CardText>Quantity: {medicine?.quantity}</CardText>
+        <div className="text-center">
+          <Button className="button small-button mt-1">View Details</Button>
+          <Button color="primary" className="ml-2 button small-button mt-1 mr-2">
+            Add to cart
+          </Button>
 
-        {user &&
-          (user.roles[0].id === 501 ? (
-            <>
-              <Button color="danger" onClick={deleteMedicine}>
-                Delete
-              </Button>
-            </>
-          ) : null)}
+          {user &&
+            (user.roles[0].id === 501 ? (
+              <>
+                <Button color="danger" onClick={deleteMedicine}>
+                  Delete
+                </Button>
+              </>
+            ) : null)}
+        </div>
       </CardBody>
     </Card>
   );
