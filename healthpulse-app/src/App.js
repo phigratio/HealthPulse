@@ -22,6 +22,7 @@ import Categories from "./components/Categories";
 import MyPosts from "./pages/user-routes/MyPosts";
 import UpdateBlog from "./pages/UpdateBlog";
 import UpdateUser from "./pages/UpdateUser";
+import MedicineFeed from "./components/MedicineFeed";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
         <Route path="/service/kids-corner" element={<KidsCorner />} />
         <Route path="/service/book-doctor" element={<BookDoctor />} />
         <Route path="/addpost" element={<AddPost />} />
+        <Route path="/medicine" element={<MedicineFeed />} />
         <Route path="/user" element={<User />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="my-profile/:userId" element={<ProfileInfo />} />
