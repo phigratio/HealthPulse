@@ -15,9 +15,11 @@ import {
   NavbarText,
 } from "reactstrap";
 import logo from "../images/logo/HealthPulseLogo3-removebg.png";
+import defaultUserImage from "../images/default/user.png"; // Add a default user image
 import "../style/CustomNavbar.css";
 import { getCurrentUserDetail, isLoggedIn, doLogout } from "../auth";
 import userContext from "../context/userContext";
+import { BASE_URL } from "../service/helper";
 
 const CustomNavbar = () => {
   const userContextData = useContext(userContext);
@@ -44,6 +46,14 @@ const CustomNavbar = () => {
   };
 
   const isDoctor = user?.roles?.some((role) => role.id === 503);
+
+  const handleUserImageClick = () => {
+    if (login) {
+      navigate(`/user/my-profile/${user.id}`);
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <div>
@@ -77,6 +87,12 @@ const CustomNavbar = () => {
             </NavItem>
 
             <NavItem>
+              <NavLink className="nav-link-light" tag={ReactLink} to="/medicine">
+                Medicine Shop
+              </NavLink>
+            </NavItem>
+
+            <NavItem>
               <NavLink className="nav-link-light" tag={ReactLink} to="/blogs">
                 Blogs
               </NavLink>
@@ -104,16 +120,6 @@ const CustomNavbar = () => {
                     to="/"
                   >
                     Log Out
-                  </NavLink>
-                </NavItem>
-
-                <NavItem>
-                  <NavLink
-                    className="nav-link-light"
-                    tag={ReactLink}
-                    to={`/user/my-profile/${user.id}`}
-                  >
-                    {user.email}
                   </NavLink>
                 </NavItem>
 
@@ -167,7 +173,18 @@ const CustomNavbar = () => {
             )}
           </Nav>
         </Collapse>
-        <NavbarText className="navbar-text">Simple Text</NavbarText>
+        <div className="navbar-user-image-container">
+          <img
+            src={
+              login && user?.imageName
+                ? BASE_URL + "/users/user/image/" + user.imageName
+                : defaultUserImage
+            }
+            alt="User"
+            className="navbar-user-image"
+            onClick={handleUserImageClick}
+          />
+        </div>
       </Navbar>
     </div>
   );
