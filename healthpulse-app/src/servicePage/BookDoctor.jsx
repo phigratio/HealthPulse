@@ -1,7 +1,7 @@
 import React from "react";
 import banner from "../images/banner/bookDoctor.mp4";
 import "../style/servicePage/BookDoctor.css";
-import Background from "../components/Background";
+import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 
 const BookDoctor = () => {

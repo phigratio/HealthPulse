@@ -14,12 +14,12 @@ import {
   DropdownItem,
   NavbarText,
 } from "reactstrap";
-import logo from "../images/logo/HealthPulseLogo3-removebg.png";
-import defaultUserImage from "../images/default/user.png"; // Add a default user image
-import "../style/CustomNavbar.css";
-import { getCurrentUserDetail, isLoggedIn, doLogout } from "../auth";
-import userContext from "../context/userContext";
-import { BASE_URL } from "../service/helper";
+import logo from "../../images/logo/HealthPulseLogo3-removebg.png";
+import defaultUserImage from "../../images/default/user.png"; // Add a default user image
+import "../../style/CustomNavbar.css";
+import { getCurrentUserDetail, isLoggedIn, doLogout } from "../../auth";
+import userContext from "../../context/userContext";
+import { BASE_URL } from "../../service/helper";
 
 const CustomNavbar = () => {
   const userContextData = useContext(userContext);
@@ -87,7 +87,11 @@ const CustomNavbar = () => {
             </NavItem>
 
             <NavItem>
-              <NavLink className="nav-link-light" tag={ReactLink} to="/medicine">
+              <NavLink
+                className="nav-link-light"
+                tag={ReactLink}
+                to="/medicine"
+              >
                 Medicine Shop
               </NavLink>
             </NavItem>

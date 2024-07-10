@@ -1,12 +1,12 @@
-import "../style/Carousel.css";
+import "../../style/Carousel.css";
 
 import React, { useState } from "react";
-import img1 from "../images/carousel/banner1.png";
-import img2 from "../images/carousel/banner2.png";
-import img3 from "../images/carousel/banner3.png";
-import img4 from "../images/carousel/banner4.png";
-import img5 from "../images/carousel/banner5.png";
-import img6 from "../images/carousel/banner6.png";
+import img1 from "../../images/carousel/banner1.png";
+import img2 from "../../images/carousel/banner2.png";
+import img3 from "../../images/carousel/banner3.png";
+import img4 from "../../images/carousel/banner4.png";
+import img5 from "../../images/carousel/banner5.png";
+import img6 from "../../images/carousel/banner6.png";
 import {
   Carousel,
   CarouselItem,

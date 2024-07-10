@@ -1,5 +1,5 @@
-import "../style/Person.css"; // Import the correct CSS file
-import "../style/Button.css"; // Import the button CSS file
+import "../../style/Person.css"; // Import the correct CSS file
+import "../../style/Button.css"; // Import the button CSS file
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -61,56 +61,56 @@ const data = [
   {
     name: "John Doe",
     department: "Cardiology",
-    img: require("../images/doctor/doctor1.jpg"),
+    img: require("../../images/doctor/doctor1.jpg"),
     review:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ut purus rhoncus.",
   },
   {
     name: "Jane Doe",
     department: "Cardiology",
-    img: require("../images/doctor/doctor2.jpg"),
+    img: require("../../images/doctor/doctor2.jpg"),
     review:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ut purus rhoncus.",
   },
   {
     name: "John Smith",
     department: "Cardiology",
-    img: require("../images/doctor/doctor3.jpg"),
+    img: require("../../images/doctor/doctor3.jpg"),
     review:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ut purus rhoncus.",
   },
   {
     name: "Jane Smith",
     department: "Cardiology",
-    img: require("../images/doctor/doctor4.jpg"),
+    img: require("../../images/doctor/doctor4.jpg"),
     review:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ut purus rhoncus.",
   },
   {
     name: "John Doe",
     department: "Cardiology",
-    img: require("../images/doctor/doctor5.jpg"),
+    img: require("../../images/doctor/doctor5.jpg"),
     review:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ut purus rhoncus.",
   },
   {
     name: "Jane Doe",
     department: "Cardiology",
-    img: require("../images/doctor/doctor6.jpg"),
+    img: require("../../images/doctor/doctor6.jpg"),
     review:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ut purus rhoncus.",
   },
   {
     name: "John Smith",
     department: "Cardiology",
-    img: require("../images/doctor/doctor7.jpg"),
+    img: require("../../images/doctor/doctor7.jpg"),
     review:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ut purus rhoncus.",
   },
   {
     name: "Jane Smith",
     department: "Cardiology",
-    img: require("../images/doctor/doctor8.jpg"),
+    img: require("../../images/doctor/doctor8.jpg"),
     review:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ut purus rhoncus.",
   },

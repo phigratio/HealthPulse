@@ -1,7 +1,7 @@
 import React from "react";
 import banner from "../images/banner/doctorChatBot.mp4";
 import "../style/servicePage/DoctorChatBot.css";
-import Background from "../components/Background";
+import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";

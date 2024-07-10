@@ -1,11 +1,10 @@
 import React from "react";
 import Base from "../components/Base";
-import Background from "../components/Background";
+import Background from "../components/basicComponents/Background";
 import { Button } from "reactstrap";
-import '../style/Home.css'; 
-import Carousel from "../components/CustomCarousel";
-import NewFeedPagination from "../components/NewFeedPagination";
-
+import "../style/Home.css";
+import Carousel from "../components/basicComponents/CustomCarousel";
+import NewFeedPagination from "../components/postComponents/NewFeedPagination";
 
 const Home = () => {
   return (
@@ -47,7 +46,6 @@ const Home = () => {
         </div>
 
         <NewFeedPagination />
-
       </Base>
     </div>
   );

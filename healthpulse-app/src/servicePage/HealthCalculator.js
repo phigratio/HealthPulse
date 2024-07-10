@@ -11,7 +11,7 @@ import {
   Alert,
 } from "reactstrap";
 import Base from "../components/Base";
-import Background from "../components/Background";
+import Background from "../components/basicComponents/Background";
 import { getCurrentUserDetail } from "../auth";
 import banner from "../images/banner/healthCalculator.mp4";
 

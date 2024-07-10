@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Base from "./Base";
+import Base from "../Base";
 import { Container, Row, Col } from "reactstrap";
 import MedicineCategorySideMenu from "./MedicineCategorySideMenu";
 import {
   loadMedicinesCategoryWise,
   deleteMedicine,
-} from "../service/medicine_service";
+} from "../../service/medicine_service";
 import { toast } from "react-toastify";
 import Medicine from "./Medicine";
-import Background from "./Background";
+import Background from "../basicComponents/Background";
 
 const containerStyle = { marginTop: "40px" };
 const rowStyle = { display: "flex", flexWrap: "wrap" };

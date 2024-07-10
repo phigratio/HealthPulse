@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { loadAllPosts } from "../service/post-service";
+import { loadAllPosts } from "../../service/post-service";
 import { toast } from "react-toastify";
 import Post from "./Post";
-import { deletePostService } from "../service/post-service";
+import { deletePostService } from "../../service/post-service";
 import {
   Row,
   Col,
@@ -87,7 +87,7 @@ const NewFeed = () => {
   return (
     <div className="container-fluid">
       <Row className="justify-content-center">
-        <Col md={{size: 12}} className="mx-auto">
+        <Col md={{ size: 12 }} className="mx-auto">
           <h1>Blogs Count ( {postContent?.totalElements} )</h1>
           <InfiniteScroll
             dataLength={postContent.content.length}

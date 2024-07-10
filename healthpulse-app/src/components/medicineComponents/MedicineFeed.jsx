@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { loadAllMedicines, deleteMedicine } from "../service/medicine_service";
+import {
+  loadAllMedicines,
+  deleteMedicine,
+} from "../../service/medicine_service";
 import { toast } from "react-toastify";
 import Medicine from "./Medicine";
 import { Row, Col, Container } from "reactstrap";
@@ -45,8 +48,8 @@ const MedicineFeed = () => {
   };
 
   return (
-    <div >
-      <Container style={containerStyle} >
+    <div>
+      <Container style={containerStyle}>
         <Row style={rowStyle}>
           {medicineContent.map((medicine, index) => (
             <Col key={index} sm="6" md="4" lg="3">
