@@ -14,6 +14,8 @@ import Base from "../components/Base";
 import Background from "../components/basicComponents/Background";
 import { getCurrentUserDetail } from "../auth";
 import banner from "../images/banner/healthCalculator.mp4";
+import axios from "axios";
+import TextToSpeechButton from "./TextToSpeechButton";
 
 const HealthCalculator = () => {
   const [weight, setWeight] = useState("");
@@ -32,6 +34,8 @@ const HealthCalculator = () => {
   const [results, setResults] = useState([]);
   const [error, setError] = useState("");
 
+  const [generatingAnswer, setGeneratingAnswer] = useState(false);
+  const [answer, setAnswer] = useState("");
   useEffect(() => {
     const user = getCurrentUserDetail();
     console.log("Fetched user details:", user); // Debugging line to check user details
@@ -243,6 +247,30 @@ const HealthCalculator = () => {
     }
   };
 
+  const generateHealthUpdate = async () => {
+    setGeneratingAnswer(true);
+    setAnswer("Loading your health update...");
+
+    const question = `Give me health updates according to my bmi=27 and weight = 90`;
+
+    try {
+      const response = await axios({
+        url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyBtbcmMGUk34mU0LGJ83pLAfKVWTUKXGIE`,
+        method: "post",
+        data: {
+          contents: [{ parts: [{ text: question }] }],
+        },
+      });
+
+      setAnswer(response.data.candidates[0].content.parts[0].text);
+    } catch (error) {
+      console.log(error);
+      setAnswer("Sorry - Something went wrong. Please try again!");
+    }
+
+    setGeneratingAnswer(false);
+  };
+
   return (
     <div>
       <Background />
@@ -427,6 +455,40 @@ const HealthCalculator = () => {
             </Col>
           </Row>
         </Container>
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <Button
+            color="primary"
+            onClick={generateHealthUpdate}
+            disabled={generatingAnswer}
+            className="mt-3"
+            style={{
+              backgroundColor: "#003366", // Navy blue color
+              borderColor: "#003366",
+              fontSize: "18px", // Make the button a bit bigger
+              padding: "12px 24px", // Adjust padding to make it bigger
+            }}
+          >
+            Give Me Suggestion
+          </Button>
+          {generatingAnswer && <p>Loading...</p>}
+          {answer && (
+            <div
+              className="answer-card"
+              style={{
+                display: "inline-block",
+                marginTop: "20px",
+                padding: "20px",
+                borderRadius: "10px",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                backgroundColor: "#f8f9fa",
+              }}
+            >
+              <p>{answer}</p>
+              <TextToSpeechButton text={answer} />{" "}
+              {/* Add TextToSpeechButton */}
+            </div>
+          )}
+        </div>
       </Base>
     </div>
   );
