@@ -30,6 +30,7 @@ import MedicineFeed from "./components/medicineComponents/MedicineFeed";
 import MedicineShop from "./pages/MedicineShop";
 import MedicineCategories from "./components/medicineComponents/MedicineCategories";
 import NewsList from "./servicePage/NewsList";
+import Weather from "./servicePage/Weather";
 
 library.add(fas);
 function App() {
@@ -51,6 +52,7 @@ function App() {
         <Route path="/service/kids-corner" element={<KidsCorner />} />
         <Route path="/service/newsapp" element={<NewsList />} />
         <Route path="/service/book-doctor" element={<BookDoctor />} />
+        <Route path="/service/weatherapp" element={<Weather />} />
 
         <Route path="/user/update-user" element={<UpdateUser />} />
         <Route path="/posts/:postId" element={<PostPage />} />
