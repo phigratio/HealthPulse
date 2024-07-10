@@ -28,6 +28,12 @@ import UpdateBlog from "./pages/UpdateBlog";
 import UpdateUser from "./pages/UpdateUser";
 import MedicineFeed from "./components/medicineComponents/MedicineFeed";
 import MedicineShop from "./pages/MedicineShop";
+import FoodPage from "./pages/FoodPage";
+
+import FoodFeed from "./components/foodComponents/FoodFeed";
+import FoodShop from "./pages/FoodShop";
+import FoodCategories from "./components/foodComponents/FoodCategories";
+
 import MedicineCategories from "./components/medicineComponents/MedicineCategories";
 import NewsList from "./servicePage/NewsList";
 
@@ -55,15 +61,20 @@ function App() {
         <Route path="/user/update-user" element={<UpdateUser />} />
         <Route path="/posts/:postId" element={<PostPage />} />
         <Route path="/medicine/:medicineId" element={<MedicinePage />} />
+        <Route path="/food/:foodId" element={<FoodPage />} />
         <Route path="/categories/:categoryId" element={<Categories />} />
         <Route
           path="/medicineCategories/:categoryId"
           element={<MedicineCategories />}
         />
 
+        <Route path="/foodCategories/:categoryId" element={<FoodCategories />} />
+
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/medicine-feed" element={<MedicineFeed />} />
+        <Route path="/food-feed" element={<FoodFeed />} />
         <Route path="/medicine" element={<MedicineShop />} />
+        <Route path="/food" element={<FoodShop />} />
         <Route path="/user" element={<User />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="my-profile/:userId" element={<ProfileInfo />} />
