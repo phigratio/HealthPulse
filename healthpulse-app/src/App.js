@@ -29,6 +29,7 @@ import UpdateUser from "./pages/UpdateUser";
 import MedicineFeed from "./components/medicineComponents/MedicineFeed";
 import MedicineShop from "./pages/MedicineShop";
 import MedicineCategories from "./components/medicineComponents/MedicineCategories";
+import NewsList from "./servicePage/NewsList";
 
 library.add(fas);
 function App() {
@@ -48,6 +49,7 @@ function App() {
           element={<HealthCalculator />}
         />
         <Route path="/service/kids-corner" element={<KidsCorner />} />
+        <Route path="/service/newsapp" element={<NewsList />} />
         <Route path="/service/book-doctor" element={<BookDoctor />} />
 
         <Route path="/user/update-user" element={<UpdateUser />} />
