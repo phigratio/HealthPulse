@@ -1,5 +1,8 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -27,6 +30,7 @@ import MedicineFeed from "./components/medicineComponents/MedicineFeed";
 import MedicineShop from "./pages/MedicineShop";
 import MedicineCategories from "./components/medicineComponents/MedicineCategories";
 
+library.add(fas);
 function App() {
   return (
     <BrowserRouter>

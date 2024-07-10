@@ -1,0 +1,59 @@
+/* RecordingButtons.css */
+
+.recording-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recording-button {
+  background-color: #4a90e2; /* Blue background color */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px; /* Size of the button */
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+.recording-button:hover {
+  background-color: #3a7bd5; /* Darker blue on hover */
+}
+
+.recording-button:active {
+  background-color: #2a6ac5; /* Even darker blue on click */
+  transform: scale(0.95); /* Slightly shrink on click */
+}
+
+.recording-button.start {
+  background-color: #4a90e2; /* Blue color for start */
+}
+
+.recording-button.start:hover {
+  background-color: #3a7bd5; /* Darker blue on hover */
+}
+
+.recording-button.start:active {
+  background-color: #2a6ac5; /* Even darker blue on click */
+}
+
+.recording-button.stop {
+  background-color: #e94e77; /* Red color for stop */
+}
+
+.recording-button.stop:hover {
+  background-color: #c6286c; /* Darker red on hover */
+}
+
+.recording-button.stop:active {
+  background-color: #a62a53; /* Even darker red on click */
+}
+
+.recording-button i {
+  font-size: 28px; /* Size of the icon */
+}
