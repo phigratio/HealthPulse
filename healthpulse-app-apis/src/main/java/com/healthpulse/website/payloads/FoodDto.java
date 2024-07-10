@@ -18,7 +18,9 @@ public class FoodDto {
     private String description;
 
     private String ingredients;
-
+    
+    private String imageName;
+    
     private Float proteinPercentage;
 
     private Float fatPercentage;
