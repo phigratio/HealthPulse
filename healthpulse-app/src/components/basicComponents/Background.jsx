@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../style/Background.css"; // Import the correct CSS file
+import "../../style/Background.css"; // Import the correct CSS file
 
 const Background = () => {
   const [numberOfColorBoxes, setNumberOfColorBoxes] = useState(400);

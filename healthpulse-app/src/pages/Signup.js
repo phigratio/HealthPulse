@@ -16,7 +16,7 @@ import {
 import Base from "../components/Base";
 import { signUp } from "../service/user-service";
 import { toast } from "react-toastify";
-import Background from "../components/Background";
+import Background from "../components/basicComponents/Background";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -78,8 +78,6 @@ const Signup = () => {
         // Redirect to login page after successful registration
 
         window.location.href = "/login";
-
-
       })
       .catch((err) => {
         console.log(err);

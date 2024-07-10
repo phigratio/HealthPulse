@@ -1,5 +1,5 @@
-import "../style/ServicesBlock.css"; // Import the correct CSS file
-import "../style/Button.css"; // Import the button CSS file
+import "../../style/ServicesBlock.css"; // Import the correct CSS file
+import "../../style/Button.css"; // Import the button CSS file
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import the hook for navigation
 
@@ -60,7 +60,7 @@ const data = [
   {
     name: "Doctor Chat Bot",
     overview: "Chat with our AI-powered doctor bot for quick advice.",
-    img: require("../images/services/service1.png"),
+    img: require("../../images/services/service1.png"),
     review:
       "Our AI-powered chatbot provides quick medical advice based on your symptoms.",
     link: "/service/doctor-chat-bot",
@@ -68,7 +68,7 @@ const data = [
   {
     name: "Health Calculator",
     overview: "Calculate your BMI, BMR, and other health metrics.",
-    img: require("../images/services/service2.png"),
+    img: require("../../images/services/service2.png"),
     review:
       "Use our health calculator to determine your BMI, BMR, and other health metrics.",
     link: "/service/health-calculator",
@@ -76,7 +76,7 @@ const data = [
   {
     name: "Kids Corner",
     overview: "Explore Health with KidsCorner AI Stories!",
-    img: require("../images/services/service3.png"),
+    img: require("../../images/services/service3.png"),
     review:
       "KidsCorner is a fantastic way for children to learn about health in a fun and engaging manner. The AI-generated stories are both educational and entertaining, making healthcare concepts easy to understand for young minds.",
     link: "/service/kids-corner",
@@ -84,14 +84,14 @@ const data = [
   {
     name: "Book Doctor Appointment",
     overview: "Get your prescriptions refilled online.",
-    img: require("../images/services/service4.png"),
+    img: require("../../images/services/service4.png"),
     review: "Easily request prescription refills through our online platform.",
     link: "/service/book-doctor",
   },
   {
     name: "Health Articles",
     overview: "Read articles written by our doctors.",
-    img: require("../images/services/service5.png"),
+    img: require("../../images/services/service5.png"),
     review:
       "Stay informed with articles on various health topics written by our expert doctors.",
     link: "/articles",
@@ -99,7 +99,7 @@ const data = [
   {
     name: "Symptom Checker",
     overview: "Check your symptoms online.",
-    img: require("../images/services/service6.png"),
+    img: require("../../images/services/service6.png"),
     review:
       "Use our symptom checker tool to get an idea of what might be ailing you.",
     link: "/symptom-checker",
@@ -107,7 +107,7 @@ const data = [
   {
     name: "Mental Health Support",
     overview: "Access mental health resources.",
-    img: require("../images/services/service7.png"),
+    img: require("../../images/services/service7.png"),
     review:
       "Find mental health resources and support to help you manage your well-being.",
     link: "/mental-health",
@@ -115,7 +115,7 @@ const data = [
   {
     name: "Nutrition Advice",
     overview: "Get personalized nutrition advice.",
-    img: require("../images/services/service8.png"),
+    img: require("../../images/services/service8.png"),
     review:
       "Receive personalized nutrition advice to help you maintain a healthy diet.",
     link: "/nutrition",
@@ -123,7 +123,7 @@ const data = [
   {
     name: "Fitness Plans",
     overview: "Access customized fitness plans.",
-    img: require("../images/services/service9.png"),
+    img: require("../../images/services/service9.png"),
     review:
       "Get customized fitness plans tailored to your health goals and needs.",
     link: "/fitness-plans",
@@ -131,7 +131,7 @@ const data = [
   {
     name: "Vaccination Schedules",
     overview: "Check recommended vaccination schedules.",
-    img: require("../images/services/service10.png"),
+    img: require("../../images/services/service10.png"),
     review:
       "Keep track of recommended vaccinations and schedules for you and your family.",
     link: "/vaccinations",
@@ -139,14 +139,14 @@ const data = [
   {
     name: "Health Monitoring",
     overview: "Monitor your health metrics.",
-    img: require("../images/services/service11.png"),
+    img: require("../../images/services/service11.png"),
     review: "Use our tools to monitor and track your health metrics over time.",
     link: "/health-monitoring",
   },
   {
     name: "Emergency Services",
     overview: "Get quick access to emergency services.",
-    img: require("../images/services/service12.png"),
+    img: require("../../images/services/service12.png"),
     review:
       "Find quick access to emergency services and support in case of urgent health issues.",
     link: "/emergency-services",

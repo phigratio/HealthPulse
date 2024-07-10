@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import { loadAllCategories } from "../service/category-service";
+import { loadAllCategories } from "../../service/category-service";
 function CategorySideMenu() {
   const [categories, setCategories] = useState([]);
 
@@ -24,7 +24,12 @@ function CategorySideMenu() {
   return (
     <div>
       <ListGroup>
-        <ListGroupItem tag={Link} to="/blogs" action={true} className="border-0">
+        <ListGroupItem
+          tag={Link}
+          to="/blogs"
+          action={true}
+          className="border-0"
+        >
           All Blogs
         </ListGroupItem>
         {categories &&

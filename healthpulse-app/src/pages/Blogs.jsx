@@ -1,12 +1,12 @@
 import React from "react";
 import Base from "../components/Base";
-import Background from "../components/Background"; // Import the Background component
-import { Container} from "react-bootstrap"; 
+import Background from "../components/basicComponents/Background"; // Import the Background component
+import { Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 
-import NewFeedPagination from "../components/NewFeedPagination";
-import NewFeed from "../components/NewFeedInfinite";
-import CategorySideMenu from "../components/CategorySideMenu";
+import NewFeedPagination from "../components/postComponents/NewFeedPagination";
+import NewFeed from "../components/postComponents/NewFeedInfinite";
+import CategorySideMenu from "../components/postComponents/CategorySideMenu";
 
 const Blogs = () => {
   return (

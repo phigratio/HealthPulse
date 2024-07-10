@@ -1,17 +1,17 @@
 import React from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Base from "./Base";
+import Base from "../Base";
 import { Container, Row, Col } from "reactstrap";
 import CategorySideMenu from "./CategorySideMenu";
 import {
   loadPostCategoryWise,
   deletePostService,
-} from "../service/post-service";
+} from "../../service/post-service";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Post from "./Post";
-import Background from "./Background";
+import Background from "../basicComponents/Background";
 function Categories() {
   const [posts, setPosts] = useState([]);
 

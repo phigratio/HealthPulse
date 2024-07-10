@@ -7,9 +7,10 @@ import {
   CardImg,
   Button,
 } from "reactstrap";
-import { getCurrentUserDetail, isLoggedIn } from "../auth";
+import { getCurrentUserDetail, isLoggedIn } from "../../auth";
 import { useState, useEffect } from "react";
-import { BASE_URL } from "../service/helper";
+import { BASE_URL } from "../../service/helper";
+import { Link } from "react-router-dom";
 
 const Medicine = ({ medicine, deleteMedicine }) => {
   const cardStyle = {
@@ -40,7 +41,11 @@ const Medicine = ({ medicine, deleteMedicine }) => {
       <CardImg
         top
         width="100%"
-        src={medicine?.imageName ? BASE_URL + "/users/user/image/" + medicine.imageName : "https://via.placeholder.com/150"}
+        src={
+          medicine?.imageName
+            ? BASE_URL + "/users/user/image/" + medicine.imageName
+            : "https://via.placeholder.com/150"
+        }
         alt={medicine?.name}
         style={imgStyle}
       />
@@ -50,8 +55,16 @@ const Medicine = ({ medicine, deleteMedicine }) => {
         <CardText>Price: ${medicine?.price}</CardText>
         <CardText>Quantity: {medicine?.quantity}</CardText>
         <div className="text-center">
-          <Button className="button small-button mt-1">View Details</Button>
-          <Button color="primary" className="ml-2 button small-button mt-1 mr-2">
+          <Link
+            className="btn btn-secondary border-0 button small-button"
+            to={"/medicine/" + medicine.medicineId}
+          >
+            View Details
+          </Link>
+          <Button
+            color="primary"
+            className="ml-2 button small-button mt-1 mr-2"
+          >
             Add to cart
           </Button>
 

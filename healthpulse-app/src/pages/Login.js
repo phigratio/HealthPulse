@@ -16,7 +16,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { login } from "../service/user-service";
 import { doLogin } from "../auth";
-import Background from "../components/Background";
+import Background from "../components/basicComponents/Background";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import userContext from "../context/userContext";

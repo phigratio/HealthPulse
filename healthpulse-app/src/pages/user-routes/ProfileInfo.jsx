@@ -1,6 +1,6 @@
 import React from "react";
 import Base from "../../components/Base";
-import Background from "../../components/Background";
+import Background from "../../components/basicComponents/Background";
 import { useContext } from "react";
 import userContext from "../../context/userContext";
 import { useParams } from "react-router-dom";
@@ -19,7 +19,6 @@ import {
   Row,
   Table,
 } from "reactstrap";
-
 
 const ProfileInfo = () => {
   const object = useContext(userContext);
@@ -66,7 +65,7 @@ const ProfileInfo = () => {
       <div>
         <Card
           className="mt-2 border-0 rounded-0"
-          style={{ boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)" }} 
+          style={{ boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)" }}
         >
           <CardBody>
             <h3 className="text-uppercase">user Information</h3>
@@ -136,7 +135,7 @@ const ProfileInfo = () => {
       <Base>
         <Row>
           <Col md={{ size: 6, offset: 3 }}>
-            <Container >
+            <Container>
               {updateFlag ? updateUserProfile() : viewUserProfile()}
             </Container>
           </Col>

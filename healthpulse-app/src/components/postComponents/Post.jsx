@@ -1,8 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, CardBody, CardText } from "reactstrap";
-import { getCurrentUserDetail, isLoggedIn } from "../auth";
-import userContext from "../context/userContext";
+import { getCurrentUserDetail, isLoggedIn } from "../../auth";
+import userContext from "../../context/userContext";
 
 function Post({
   post = {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { loadAllPosts, deletePostService } from "../service/post-service";
+import { loadAllPosts, deletePostService } from "../../service/post-service";
 import { toast } from "react-toastify";
 import Post from "./Post";
 import {

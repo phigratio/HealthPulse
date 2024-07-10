@@ -1,11 +1,10 @@
 import React from "react";
 import Base from "../../components/Base";
-import Background from "../../components/Background"; // Import the Background component
-import Carousel from "../../components/CustomCarousel";
-import ServicesBlock from "../../components/ServicesBlock";
-import Person from "../../components/Person";
-import NewFeedPagination from "../../components/NewFeedPagination";
-
+import Background from "../../components/basicComponents/Background"; // Import the Background component
+import Carousel from "../../components/basicComponents/CustomCarousel";
+import ServicesBlock from "../../components/basicComponents/ServicesBlock";
+import Person from "../../components/basicComponents/Person";
+import NewFeedPagination from "../../components/postComponents/NewFeedPagination";
 
 const Dashboard = () => {
   return (

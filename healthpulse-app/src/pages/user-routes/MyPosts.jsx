@@ -1,9 +1,9 @@
 import React from "react";
 import Base from "../../components/Base";
-import Background from "../../components/Background";
-import AddPost from "../../components/AddPost";
+import Background from "../../components/basicComponents/Background";
+import AddPost from "../../components/postComponents/AddPost";
 import { Container } from "reactstrap";
-import NewFeed from "../../components/NewFeedInfinite";
+import NewFeed from "../../components/postComponents/NewFeedInfinite";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getCurrentUserDetail } from "../../auth";
@@ -12,7 +12,7 @@ import {
   loadPostUserWise,
 } from "../../service/post-service";
 import { toast } from "react-toastify";
-import Post from "../../components/Post";
+import Post from "../../components/postComponents/Post";
 
 const MyPosts = () => {
   const [user, setUser] = useState({});

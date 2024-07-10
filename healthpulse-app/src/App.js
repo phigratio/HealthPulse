@@ -14,18 +14,18 @@ import DoctorChatBot from "./servicePage/DoctorChatBot";
 import KidsCorner from "./servicePage/KidsCorner";
 import HealthCalculator from "./servicePage/HealthCalculator";
 import BookDoctor from "./servicePage/BookDoctor";
-import AddPost from "./components/AddPost";
+import AddPost from "./components/postComponents/AddPost";
 import User from "./components/User";
 import PostPage from "./pages/PostPage";
 import MedicinePage from "./pages/MedicinePage";
 import Blogs from "./pages/Blogs";
-import Categories from "./components/Categories";
+import Categories from "./components/postComponents/Categories";
 import MyPosts from "./pages/user-routes/MyPosts";
 import UpdateBlog from "./pages/UpdateBlog";
 import UpdateUser from "./pages/UpdateUser";
-import MedicineFeed from "./components/MedicineFeed";
+import MedicineFeed from "./components/medicineComponents/MedicineFeed";
 import MedicineShop from "./pages/MedicineShop";
-import MedicineCategories from "./components/MedicineCategories";
+import MedicineCategories from "./components/medicineComponents/MedicineCategories";
 
 function App() {
   return (
@@ -46,12 +46,14 @@ function App() {
         <Route path="/service/kids-corner" element={<KidsCorner />} />
         <Route path="/service/book-doctor" element={<BookDoctor />} />
 
-
         <Route path="/user/update-user" element={<UpdateUser />} />
         <Route path="/posts/:postId" element={<PostPage />} />
         <Route path="/medicine/:medicineId" element={<MedicinePage />} />
         <Route path="/categories/:categoryId" element={<Categories />} />
-        <Route path="/medicineCategories/:categoryId" element={<MedicineCategories />} />
+        <Route
+          path="/medicineCategories/:categoryId"
+          element={<MedicineCategories />}
+        />
 
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/medicine-feed" element={<MedicineFeed />} />

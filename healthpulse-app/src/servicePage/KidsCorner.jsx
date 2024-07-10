@@ -1,7 +1,7 @@
 import React from "react";
 import banner from "../images/banner/kidsCorner.mp4";
 import "../style/servicePage/KidsCorner.css";
-import Background from "../components/Background";
+import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 
 const KidsCorner = () => {

@@ -1,5 +1,5 @@
-import CustomNavbar from "./CustomNavbar";
-import Footer from "./Footer";
+import CustomNavbar from "./basicComponents/CustomNavbar";
+import Footer from "./basicComponents/Footer";
 import "../style/Base.css";
 
 const Base = ({ title = "Welcome to our website", children }) => {

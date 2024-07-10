@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import { loadAllMedicineCategories } from "../service/medicine-category-service";
+import { loadAllMedicineCategories } from "../../service/medicine-category-service";
 
 const MedicineCategorySideMenu = () => {
   const [categories, setCategories] = useState([]);
