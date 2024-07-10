@@ -39,6 +39,8 @@ public class Food {
     private String ingredients;
     
     private String imageName;
+    
+    private Float price;
 
     private Float proteinPercentage;
 
