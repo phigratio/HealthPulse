@@ -29,6 +29,7 @@ import UpdateUser from "./pages/UpdateUser";
 import MedicineFeed from "./components/medicineComponents/MedicineFeed";
 import MedicineShop from "./pages/MedicineShop";
 import FoodPage from "./pages/FoodPage";
+import Cart from "./pages/Cart";
 
 import FoodFeed from "./components/foodComponents/FoodFeed";
 import FoodShop from "./pages/FoodShop";
@@ -50,6 +51,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
         <Route path="/blogs" element={<Blogs />} />
+        <Route path="/cart" element={<Cart />} />
 
         <Route path="/service/doctor-chat-bot" element={<DoctorChatBot />} />
         <Route

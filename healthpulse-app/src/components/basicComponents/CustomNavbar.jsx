@@ -97,6 +97,12 @@ const CustomNavbar = () => {
             </NavItem>
 
             <NavItem>
+              <NavLink className="nav-link-light" tag={ReactLink} to="/food">
+                Food Shop
+              </NavLink>
+            </NavItem>
+
+            <NavItem>
               <NavLink className="nav-link-light" tag={ReactLink} to="/blogs">
                 Blogs
               </NavLink>
@@ -116,6 +122,16 @@ const CustomNavbar = () => {
 
             {login ? (
               <>
+                <NavItem>
+                  <NavLink
+                    className="nav-link-light"
+                    tag={ReactLink}
+                    to="/cart"
+                  >
+                    Cart
+                  </NavLink>
+                </NavItem>
+
                 <NavItem>
                   <NavLink
                     onClick={logout}
