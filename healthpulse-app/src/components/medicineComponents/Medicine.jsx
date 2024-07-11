@@ -11,6 +11,7 @@ import { getCurrentUserDetail, isLoggedIn } from "../../auth";
 import { useState, useEffect } from "react";
 import { BASE_URL } from "../../service/helper";
 import { Link } from "react-router-dom";
+import { useCartContext } from "../../context/cartContext";
 
 const Medicine = ({ medicine, deleteMedicine }) => {
   const cardStyle = {
@@ -22,6 +23,8 @@ const Medicine = ({ medicine, deleteMedicine }) => {
     height: "150px",
     objectFit: "cover",
   };
+
+  const { addToCart } = useCartContext();
 
   const truncateDescription = (description) => {
     if (description?.length > 40) {
@@ -61,12 +64,13 @@ const Medicine = ({ medicine, deleteMedicine }) => {
           >
             View Details
           </Link>
-          <Button
-            color="primary"
+          <Link
             className="ml-2 button small-button mt-1 mr-2"
+            onClick={() => addToCart({ medicine })}
+            to="/cart"
           >
             Add to cart
-          </Button>
+          </Link>
 
           {user &&
             (user.roles[0].id === 501 ? (
