@@ -37,6 +37,7 @@ import FoodCategories from "./components/foodComponents/FoodCategories";
 import MedicineCategories from "./components/medicineComponents/MedicineCategories";
 import NewsList from "./servicePage/NewsList";
 import Weather from "./servicePage/Weather";
+import PrescriptionAnalyzer from "./servicePage/PrescriptionAnalyzer";
 
 library.add(fas);
 function App() {
@@ -59,6 +60,10 @@ function App() {
         <Route path="/service/newsapp" element={<NewsList />} />
         <Route path="/service/book-doctor" element={<BookDoctor />} />
         <Route path="/service/weatherapp" element={<Weather />} />
+        <Route
+          path="/service/vaccine-corner"
+          element={<PrescriptionAnalyzer />}
+        />
 
         <Route path="/user/update-user" element={<UpdateUser />} />
         <Route path="/posts/:postId" element={<PostPage />} />
