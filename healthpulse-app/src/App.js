@@ -55,7 +55,7 @@ function App() {
         <Route path="/service/book-doctor" element={<BookDoctor />} />
         <Route path="/service/weatherapp" element={<Weather />} />
         <Route
-          path="/service/vaccine-corner"
+          path="/service/prescription-analyzer"
           element={<PrescriptionAnalyzer />}
         />
 
