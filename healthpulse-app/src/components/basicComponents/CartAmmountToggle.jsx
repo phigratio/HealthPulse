@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import "../../style/CartAmountToggle.css";
+import { useCartContext } from "../../context/cartContext";
 
-function CartAmountToggle() {
-  const [amount, setAmount] = useState(1);
+function CartAmountToggle({ id, amount }) {
+  const { increaseQuantity, decreaseQuantity } = useCartContext();
 
   const setDecrease = () => {
-    if (amount > 1) {
-      setAmount(amount - 1);
-    }
+    decreaseQuantity(id);
   };
 
   const setIncrease = () => {
-    setAmount(amount + 1);
+    increaseQuantity(id);
   };
 
   return (
