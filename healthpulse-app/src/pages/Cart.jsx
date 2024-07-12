@@ -3,6 +3,7 @@ import "../style/Cart.css";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 import { useCartContext } from "../context/cartContext";
+import CartAmmountToggle from "../components/basicComponents/CartAmmountToggle";
 
 const Cart = () => {
   const { cart } = useCartContext();
@@ -33,7 +34,7 @@ const Cart = () => {
                   <p>{item.name}</p>
                 </div>
                 <p className="cart-hide">BDT {item.price.toFixed(2)}</p>
-                <p>{item.quantity}</p>
+                <p><CartAmmountToggle/></p>
                 <p className="cart-hide">
                   BDT {(item.price * item.quantity).toFixed(2)}
                 </p>
