@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  loadAllMedicines,
-  deleteMedicine,
-} from "../../service/medicine_service";
+import { loadAllMedicines, deleteMedicine } from "../../service/medicine_service";
 import { toast } from "react-toastify";
 import Medicine from "./Medicine";
 import { Row, Col, Container } from "reactstrap";
@@ -39,20 +36,12 @@ const MedicineFeed = () => {
       });
   };
 
-  const containerStyle = {
-    padding: "20px",
-  };
-
-  const rowStyle = {
-    marginBottom: "20px",
-  };
-
   return (
     <div>
-      <Container style={containerStyle}>
-        <Row style={rowStyle}>
+      <Container style={{ padding: "20px" }}>
+        <Row>
           {medicineContent.map((medicine, index) => (
-            <Col key={index} sm="6" md="4" lg="3">
+            <Col key={index} sm="6" md="4" lg="3" className="mb-4">
               <Medicine
                 medicine={medicine}
                 deleteMedicine={() => doDeleteMedicine(medicine.medicineId)}

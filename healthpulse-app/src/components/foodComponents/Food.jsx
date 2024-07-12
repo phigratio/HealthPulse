@@ -41,49 +41,51 @@ const Food = ({ food, deleteFood }) => {
     }, []);
 
     return (
-        <Card style={cardStyle}>
-            <CardImg
-                top
-                width="100%"
-                src={
-                    food?.imageName
-                        ? BASE_URL + "/users/user/image/" + food.imageName
-                        : "https://via.placeholder.com/150"
-                }
-                alt={food?.name}
-                style={imgStyle}
-            />
-            <CardBody className="text-center">
-                <CardTitle tag="h5">{food?.name}</CardTitle>
-                <CardText>{truncateDescription(food?.description)}</CardText>
-                <CardText>Price: ${food?.price}</CardText>
-                <CardText>Quantity: {food?.quantity}</CardText>
-                <div className="text-center">
-                    <Link
-                        className="btn btn-secondary border-0 button small-button"
-                        to={"/food/" + food.foodId}
-                    >
-                        View
-                    </Link>
-                    {login && user?.role === "admin" && (
-                        <Link
-                            className="btn btn-warning border-0 button small-button"
-                            to={"/food/edit/" + food.foodId}
-                        >
-                            Edit
-                        </Link>
-                    )}
-                    {login && user?.role === "admin" && (
-                        <Button
-                            className="btn btn-danger border-0 button small-button"
-                            onClick={() => deleteFood(food.foodId)}
-                        >
-                            Delete
-                        </Button>
-                    )}
-                </div>
-            </CardBody>
-        </Card>
+      <Card
+        style={{ marginBottom: "20px", textAlign: "center", width: "100%" }}
+      >
+        <CardImg
+          top
+          width="100%"
+          src={
+            food?.imageName
+              ? BASE_URL + "/users/user/image/" + food.imageName
+              : "https://via.placeholder.com/150"
+          }
+          alt={food?.name}
+          style={imgStyle}
+        />
+        <CardBody className="text-center">
+          <CardTitle tag="h5">{food?.name}</CardTitle>
+          <CardText>{truncateDescription(food?.description)}</CardText>
+          <CardText>Price: ${food?.price}</CardText>
+          <CardText>Quantity: {food?.quantity}</CardText>
+          <div className="text-center">
+            <Link
+              className="btn btn-secondary border-0 button small-button"
+              to={"/food/" + food.foodId}
+            >
+              View
+            </Link>
+            {login && user?.role === "admin" && (
+              <Link
+                className="btn btn-warning border-0 button small-button"
+                to={"/food/edit/" + food.foodId}
+              >
+                Edit
+              </Link>
+            )}
+            {login && user?.role === "admin" && (
+              <Button
+                className="btn btn-danger border-0 button small-button"
+                onClick={() => deleteFood(food.foodId)}
+              >
+                Delete
+              </Button>
+            )}
+          </div>
+        </CardBody>
+      </Card>
     );
 }
 

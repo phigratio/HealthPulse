@@ -1,6 +1,6 @@
 /* Existing Button styles */
 .button {
-  background-color: #11a2d7; /* Initial background color matching the theme */
+  background-color: #11a2d7;  /* Initial background color matching the theme */
   color: white; /* Text color */
   font-size: 1.125rem; /* Text size (18px) */
   padding: 0.75rem 1.5rem; /* Padding for top/bottom and left/right */
