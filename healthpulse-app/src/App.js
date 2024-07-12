@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Landing from "./pages/Landing";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -31,6 +32,7 @@ import MedicineShop from "./pages/MedicineShop";
 import FoodPage from "./pages/FoodPage";
 import Cart from "./pages/Cart";
 
+
 import FoodFeed from "./components/foodComponents/FoodFeed";
 import FoodShop from "./pages/FoodShop";
 import FoodCategories from "./components/foodComponents/FoodCategories";
@@ -52,6 +54,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/cart" element={<Cart />} />
+
+        <Route path="/landing" element={<Landing />} />
 
         <Route path="/service/doctor-chat-bot" element={<DoctorChatBot />} />
         <Route
