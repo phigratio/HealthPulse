@@ -1,0 +1,80 @@
+.course-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.course-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.course-card {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.course-card .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.course-card .card-title {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.course-card .card-text {
+  margin: 10px 0;
+}
+
+.course-card .btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.course-card .btn-group .btn {
+  flex: 1;
+}
+.vaccine-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vaccine-card {
+  margin: 10px;
+  width: 300px;
+}
+
+.update-form {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.update-form h2 {
+  margin-bottom: 10px;
+}
+
+.update-form .form-group {
+  margin-bottom: 10px;
+}
+
+.update-form .form-group label {
+  margin-bottom: 5px;
+}
+
+.update-form .form-group input,
+.update-form .form-group textarea {
+  width: 100%;
+}
+
+.update-form .btn {
+  margin-right: 10px;
+}

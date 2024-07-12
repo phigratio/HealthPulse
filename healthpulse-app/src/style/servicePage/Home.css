@@ -1,0 +1,19 @@
+.home-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-card {
+  width: 65%;
+  background-color: #064c96;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.home-card-text {
+  font-size: 1.2em;
+  line-height: 1.5;
+  color: white;
+}
