@@ -42,7 +42,8 @@ dependencies {
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
     
     // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
-	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 	
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation:3.3.1'

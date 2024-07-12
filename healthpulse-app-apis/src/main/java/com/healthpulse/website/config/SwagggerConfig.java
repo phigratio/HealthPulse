@@ -18,42 +18,46 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
-
 @Configuration
 public class SwagggerConfig {
 
-	public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String AUTHORIZATION_HEADER = "Authorization";
 
-	private ApiKey apiKeys() {
-		return new ApiKey("JWT", AUTHORIZATION_HEADER, "header");
-	}
+    private ApiKey apiKeys() {
+        return new ApiKey("JWT", AUTHORIZATION_HEADER, "header");
+    }
 
-	private List<SecurityContext> securityContexts() {
-		return Arrays.asList(SecurityContext.builder().securityReferences(sf()).build());
-	}
+    private List<SecurityContext> securityContexts() {
+        return Arrays.asList(SecurityContext.builder().securityReferences(defaultAuth()).build());
+    }
 
-	private List<SecurityReference> sf() {
+    private List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        return Arrays.asList(new SecurityReference("JWT", new AuthorizationScope[] { authorizationScope }));
+    }
 
-		AuthorizationScope scope = new AuthorizationScope("global", "accessEverything");
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .securityContexts(securityContexts())
+                .securitySchemes(Arrays.asList(apiKeys()))
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build();
+    }
 
-		return Arrays.asList(new SecurityReference("JWT", new AuthorizationScope[] { scope }));
-	}
-
-	@Bean
-	public Docket api() {
-
-		return new Docket(DocumentationType.SWAGGER_2).apiInfo(getInfo()).securityContexts(securityContexts())
-				.securitySchemes(Arrays.asList(apiKeys())).select().apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.any()).build();
-
-	}
-
-	private ApiInfo getInfo() {
-
-		return new ApiInfo("Blogging Application : Backend Course",
-				"This project is developed by Learn Code With Durgesh", "1.0", "Terms of Service",
-				new Contact("Durgesh", "https://learncodewithdurgesh.com", "learncodewithdurgesh@gmail.com"),
-				"License of APIS", "API license URL", Collections.emptyList());
-	};
-
+    private ApiInfo apiInfo() {
+        return new ApiInfo(
+                "Health Pulse API Documentation",
+                "This project is developed by Health Pulse Team",
+                "1.0",
+                "Terms of Service",
+                new Contact("Health Pulse Team", "https://healthpulse.com", "support@healthpulse.com"),
+                "License of API",
+                "API license URL",
+                Collections.emptyList()
+        );
+    }
 }
