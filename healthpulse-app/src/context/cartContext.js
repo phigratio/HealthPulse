@@ -4,8 +4,18 @@ import cartReducer from "./cartReducer";
 
 const CartContext = createContext();
 
+const getLocalStorageData = () => {
+  let localSotorageCart = localStorage.getItem("medicineCart");
+  if (localSotorageCart) {
+    return JSON.parse(localSotorageCart);
+  } else {
+    return [];
+  }
+}
+
 const initialState = {
-  cart: [],
+  //cart: [],
+  cart: getLocalStorageData(),
   totalAmount: 0,
   totalItems: 0,
   shippingFee: 5000,
@@ -33,6 +43,12 @@ const CartProvider = ({ children }) => {
   useEffect(() => {
     dispatch({ type: "CALCULATE_TOTALS" });
   }, [state.cart]);
+
+  //add the data to the local storage
+  useEffect(()=> {
+    localStorage.setItem("medicineCart", JSON.stringify(state.cart))
+  }, [state.cart]
+  )
 
   return (
     <CartContext.Provider
