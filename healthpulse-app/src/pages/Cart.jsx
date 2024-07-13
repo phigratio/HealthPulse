@@ -48,7 +48,7 @@ const Cart = () => {
                   BDT {(item.price * item.quantity)?.toFixed(2) || 0.0}
                 </p>
                 <button
-                  className="remove-button"
+                  className="remove-button" 
                   onClick={() => removeItem(item.id)}
                 >
                   <FaTrashAlt />
