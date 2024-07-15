@@ -12,7 +12,9 @@ import lombok.Setter;
 public class Rating {
 	private String ratingId;
 	private String userId;
-	private String hotelId;
+	private String cabinId;
 	private int rating;
 	private String feedback;
+	
+	private Cabin cabin;
 }
