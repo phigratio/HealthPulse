@@ -1,43 +1,68 @@
 package com.healthpulse.UserSection.services.impl;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import com.healthpulse.UserSection.entities.Rating;
 import com.healthpulse.UserSection.entities.User;
 import com.healthpulse.UserSection.repositories.UserRepo;
 import com.healthpulse.UserSection.services.UserService;
 import com.healthpulse.UserSection.exceptions.ResourceNotFoundException;
-
+import com.healthpulse.UserSection.entities.Cabin;
+import com.healthpulse.UserSection.external.CabinSection;
 
 @Service
-
-
 public class UserServiceImpl implements UserService {
-	
-	
-	@Autowired
-	private UserRepo userRepo;
 
-	@Override
-	public User createUser(User user) {
-		String randomId = UUID.randomUUID().toString();
-		user.setId(randomId);
-		return userRepo.save(user);
-	}
+    @Autowired
+    private UserRepo userRepo;
 
-	@Override
-	public User getUser(String id) {
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private CabinSection cabinSection;
+
+    private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    @Override
+    public User createUser(User user) {
+        String randomId = UUID.randomUUID().toString();
+        user.setId(randomId);
+        return userRepo.save(user);
+    }
+
+    @Override
+    public User getUser(String id) {
+        User user = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id + " !!!"));
+        
+        
+        Rating[] ratingsOfUser = restTemplate.getForObject("http://RATING-SECTION/rating/user/" + id, Rating[].class);
+        
+        List<Rating> ratings = Arrays.stream(ratingsOfUser).toList();
+        
+		List<Rating> ratingsOfUserWithCabin = ratings.stream().map(rating -> {
+			Cabin cabin = cabinSection.getCabin(rating.getCabinId());
+			rating.setCabin(cabin);
+			return rating;
+		}).collect(Collectors.toList());
 		
-		return userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: "+id +" !!!" ));
-	}
+		user.setRatings(ratingsOfUserWithCabin);
+       
+        return user;
+    }
 
-	@Override
-	public List<User> getAllUser() {
-		
-		return userRepo.findAll();
-	}
-
+    @Override
+    public List<User> getAllUser() {
+        return userRepo.findAll();
+    }
 }
