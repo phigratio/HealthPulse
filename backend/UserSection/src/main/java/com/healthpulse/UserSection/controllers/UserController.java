@@ -16,6 +16,10 @@ import com.healthpulse.UserSection.entities.User;
 import com.healthpulse.UserSection.payload.ApiResponse;
 import com.healthpulse.UserSection.services.UserService;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -33,10 +37,27 @@ public class UserController {
 	
 	//get user by id
 	@GetMapping("/{id}")
+	@CircuitBreaker(name = "ratingCabinBreaker", fallbackMethod = "ratingCabinFallback")
+	@Retry(name = "ratingCabinRetry", fallbackMethod = "ratingCabinFallback")
+	@RateLimiter(name = "ratingCabinRateLimiter",fallbackMethod = "ratingCabinFallback")
 	public ResponseEntity<User> getUser(@PathVariable ("id") String id) {
 		User user = userService.getUser(id);
 		return ResponseEntity.ok(user);
 	}
+	
+	
+	// Fallback method for getUser method 
+	
+	public ResponseEntity<User> ratingCabinFallback(String id, Exception e) {
+		User user =  User.builder()
+			.email("dummy@example.com")
+			.name("dummy")
+			.about("dummy")
+			.id("dummy")
+			.build();
+		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
+	
 	
 	
 	//get all users
