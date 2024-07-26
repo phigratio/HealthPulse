@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.healthpulse.CabinSection.entities.Cabin;
@@ -21,7 +22,8 @@ public class CabinController {
         Cabin createdCabin = cabinService.createCabin(cabin);
         return ResponseEntity.ok(createdCabin);
     }
-
+    
+//    @PreAuthorize("hasRole('ADMIN')") // This is for Role based authentication
     @GetMapping("/{id}")
     public ResponseEntity<Cabin> getCabinById(@PathVariable ("id") String id) {
         Cabin cabin = cabinService.getCabinById(id);
