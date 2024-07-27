@@ -38,6 +38,9 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'org.springframework.cloud:spring-cloud-starter'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation 'javax.validation:validation-api:2.0.1.Final'
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
+	
 }
 
 dependencyManagement {
