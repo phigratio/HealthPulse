@@ -35,9 +35,8 @@ public class UserServiceImpl implements UserService {
     private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
-    public UserInfo createUser(UserInfo user) {
-        String randomId = UUID.randomUUID().toString();
-        user.setId(randomId);
+    public UserInfo createUser(UserInfo user, String id) {
+    	user.setId(id);
         return userRepo.save(user);
     }
 

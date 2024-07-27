@@ -6,7 +6,7 @@ import com.healthpulse.UserSection.entities.UserInfo;
 
 public interface UserService {
 	
-	UserInfo createUser(UserInfo user);
+	UserInfo createUser(UserInfo user, String id);
 	
 	UserInfo getUser(String id);
 	
