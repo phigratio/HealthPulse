@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.healthpulse.UserSection.entities.User;
+import com.healthpulse.UserSection.entities.UserInfo;
 import com.healthpulse.UserSection.payload.ApiResponse;
 import com.healthpulse.UserSection.services.UserService;
 
@@ -28,9 +28,9 @@ public class UserController {
 	private UserService userService;
 	
 	//create user 
-	@PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-    	 User createdUser = userService.createUser(user);
+	@PostMapping("/{id}")
+    public ResponseEntity<UserInfo> createUser(@RequestBody UserInfo user, @PathVariable ("id") String id ) {
+    	 UserInfo createdUser = userService.createUser(user, id);
     	 return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     	        		
     }
@@ -40,16 +40,16 @@ public class UserController {
 	@CircuitBreaker(name = "ratingCabinBreaker", fallbackMethod = "ratingCabinFallback")
 	@Retry(name = "ratingCabinRetry", fallbackMethod = "ratingCabinFallback")
 	@RateLimiter(name = "ratingCabinRateLimiter",fallbackMethod = "ratingCabinFallback")
-	public ResponseEntity<User> getUser(@PathVariable ("id") String id) {
-		User user = userService.getUser(id);
+	public ResponseEntity<UserInfo> getUser(@PathVariable ("id") String id) {
+		UserInfo user = userService.getUser(id);
 		return ResponseEntity.ok(user);
 	}
 	
 	
 	// Fallback method for getUser method 
 	
-	public ResponseEntity<User> ratingCabinFallback(String id, Exception e) {
-		User user =  User.builder()
+	public ResponseEntity<UserInfo> ratingCabinFallback(String id, Exception e) {
+		UserInfo user =  UserInfo.builder()
 			.email("dummy@example.com")
 			.name("dummy")
 			.about("dummy")
@@ -63,8 +63,8 @@ public class UserController {
 	//get all users
 	
 	@GetMapping
-	public ResponseEntity<List<User>> getAllUser() {
-		List<User> users = userService.getAllUser();
+	public ResponseEntity<List<UserInfo>> getAllUser() {
+		List<UserInfo> users = userService.getAllUser();
 		return ResponseEntity.ok(users);
 	}
 	
