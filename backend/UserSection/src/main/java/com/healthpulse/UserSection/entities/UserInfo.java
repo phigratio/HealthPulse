@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
+@Table(name = "userInfo")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Builder
 
 
-public class User {
+public class UserInfo {
 	
 	@Id
 	private String id;

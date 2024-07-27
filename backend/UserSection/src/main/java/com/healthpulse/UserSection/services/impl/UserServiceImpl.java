@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.healthpulse.UserSection.entities.Rating;
-import com.healthpulse.UserSection.entities.User;
+import com.healthpulse.UserSection.entities.UserInfo;
 import com.healthpulse.UserSection.repositories.UserRepo;
 import com.healthpulse.UserSection.services.UserService;
 import com.healthpulse.UserSection.exceptions.ResourceNotFoundException;
@@ -35,15 +35,15 @@ public class UserServiceImpl implements UserService {
     private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
-    public User createUser(User user) {
+    public UserInfo createUser(UserInfo user) {
         String randomId = UUID.randomUUID().toString();
         user.setId(randomId);
         return userRepo.save(user);
     }
 
     @Override
-    public User getUser(String id) {
-        User user = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id + " !!!"));
+    public UserInfo getUser(String id) {
+        UserInfo user = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id + " !!!"));
         
         
         Rating[] ratingsOfUser = restTemplate.getForObject("http://RATING-SECTION/rating/user/" + id, Rating[].class);
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUser() {
+    public List<UserInfo> getAllUser() {
         return userRepo.findAll();
     }
 }

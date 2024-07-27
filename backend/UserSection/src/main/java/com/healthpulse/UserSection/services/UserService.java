@@ -2,15 +2,15 @@ package com.healthpulse.UserSection.services;
 
 import java.util.List;
 
-import com.healthpulse.UserSection.entities.User;
+import com.healthpulse.UserSection.entities.UserInfo;
 
 public interface UserService {
 	
-	User createUser(User user);
+	UserInfo createUser(UserInfo user);
 	
-	User getUser(String id);
+	UserInfo getUser(String id);
 	
-	List<User> getAllUser();
+	List<UserInfo> getAllUser();
 	
 	
 	// TODO: Add more methods to interact with User entity
