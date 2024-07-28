@@ -32,8 +32,26 @@ export const loadPost = (postId) => {
   return myAxios.get("/api/posts/" + postId).then((reponse) => reponse.data);
 };
 
+//create comment function
+
+// export const createComment = (comment, postId) => {
+//   return privateAxios.post(`/api/post/${postId}/comments`, comment);
+// };
+
 export const createComment = (comment, postId) => {
-  return privateAxios.post(`/api/post/${postId}/comments`, comment);
+  console.log("Creating comment with postId:", postId);
+  console.log("Comment data:", comment);
+
+  return privateAxios
+    .post(`/api/post/${postId}/comments`, comment)
+    .then((response) => {
+      console.log("Response data:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error creating comment:", error);
+      throw error;
+    });
 };
 
 //upload post banner image

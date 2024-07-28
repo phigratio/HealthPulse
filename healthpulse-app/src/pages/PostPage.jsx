@@ -1,6 +1,5 @@
 //this page is used to show the post and comments of the post
 
-
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -86,7 +85,7 @@ const PostPage = () => {
                 <CardBody>
                   <CardText>
                     {" "}
-                    Posted By <b>{post.user.name}</b> on{" "}
+                    Posted By <b>{post.userId}</b> on{" "}
                     <b>{printDate(post.addedDate)} </b>{" "}
                   </CardText>
 
