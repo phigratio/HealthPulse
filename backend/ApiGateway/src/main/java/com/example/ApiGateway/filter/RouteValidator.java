@@ -1,5 +1,6 @@
 package com.example.ApiGateway.filter;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +17,12 @@ public class RouteValidator {
             "/eureka"
     );
 
-    public Predicate<ServerHttpRequest> isSecured =
-            request -> openApiEndpoints
-                    .stream()
-                    .noneMatch(uri -> request.getURI().getPath().contains(uri));
+    public Predicate<ServerHttpRequest> isSecured = request -> {
+        String path = request.getURI().getPath();
+        HttpMethod method = request.getMethod();
+        return method != HttpMethod.GET && openApiEndpoints
+                .stream()
+                .noneMatch(uri -> path.contains(uri));
+    };
 
 }

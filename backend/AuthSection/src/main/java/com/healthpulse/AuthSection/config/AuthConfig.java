@@ -3,6 +3,7 @@ package com.healthpulse.AuthSection.config;
 import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,6 +33,7 @@ public class AuthConfig {
 	        return http.csrf().disable()
 	                .authorizeHttpRequests()
 	                .requestMatchers("/auth/**").permitAll()
+	                .requestMatchers(HttpMethod.GET).permitAll()
 	                .and()
 	                .build();
 	    }

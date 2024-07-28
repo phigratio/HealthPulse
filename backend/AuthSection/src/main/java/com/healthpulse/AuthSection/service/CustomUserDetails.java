@@ -11,11 +11,13 @@ public class CustomUserDetails implements UserDetails {
 
     private String username;
     private String password;
+    private String email;
 
     public CustomUserDetails(UserCredential userCredential) {
-        this.username = userCredential.getName();
+        this.email = userCredential.getEmail();
         this.password = userCredential.getPassword();
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -28,8 +30,8 @@ public class CustomUserDetails implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
-        return username;
+    public String getUsername() {  // this method must still return the principal identifier
+        return email;
     }
 
     @Override

@@ -27,7 +27,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [loginDetail, setLoginDetail] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -42,7 +42,7 @@ const Login = () => {
 
   const handleReset = () => {
     setLoginDetail({
-      username: "",
+      email: "",
       password: "",
     });
   };
@@ -50,10 +50,7 @@ const Login = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     console.log(loginDetail);
-    if (
-      loginDetail.username.trim() === "" ||
-      loginDetail.password.trim() === ""
-    ) {
+    if (loginDetail.email.trim() === "" || loginDetail.password.trim() === "") {
       toast.error("Please fill all the fields !!!");
       return;
     }
@@ -107,8 +104,8 @@ const Login = () => {
                         type="email"
                         placeholder="Enter your email"
                         id="email"
-                        value={loginDetail.username}
-                        onChange={(e) => handleChange(e, "username")}
+                        value={loginDetail.email}
+                        onChange={(e) => handleChange(e, "email")}
                       />
                     </FormGroup>
 

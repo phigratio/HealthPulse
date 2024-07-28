@@ -7,7 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.healthpulse.AuthSection.entity.UserCredential;
 
 public interface UserCredentialRepo extends JpaRepository<UserCredential, String> {
-
-	Optional<UserCredential> findByName(String username);
-	
+    Optional<UserCredential> findByEmail(String email);
 }

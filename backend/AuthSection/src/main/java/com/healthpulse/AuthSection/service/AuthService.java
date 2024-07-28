@@ -42,9 +42,10 @@ public class AuthService {
 		return ("User Saved with info : "+userCredential.getName()+" "+userCredential.getEmail());
     }
 	
-	 public String generateToken(String username) {
-	        return jwtService.generateToken(username);
-	    }
+	public String generateToken(String email) {
+	    return jwtService.generateToken(email);
+	}
+
 
 	    public void validateToken(String token) {
 	        jwtService.validateToken(token);
