@@ -26,7 +26,7 @@ import com.healthpulse.AuthSection.service.UserService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin // Add this if you need to handle cross-origin requests
+//@CrossOrigin // Add this if you need to handle cross-origin requests
 public class AuthController {
 
     @Autowired

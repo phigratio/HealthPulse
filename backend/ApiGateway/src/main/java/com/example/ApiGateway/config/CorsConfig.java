@@ -18,10 +18,14 @@ public class CorsConfig {
         config.setAllowCredentials(true);
         config.addExposedHeader("Authorization");
 
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
 
-        return new CorsWebFilter(source);
+        CorsWebFilter filter = new CorsWebFilter(source);
+
+        // Log CORS configuration
+        System.out.println("CORS Configuration: " + config);
+
+        return filter;
     }
 }

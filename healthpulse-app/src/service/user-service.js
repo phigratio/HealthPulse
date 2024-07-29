@@ -7,9 +7,10 @@ export const signUp = (user, roleId) => {
 };
 
 export const login = (loginDetail) => {
+  console.log("Login Detail:"); 
   console.log(loginDetail);
   return myAxios
-    .post("/auth/token", loginDetail)
+    .post("/auth/login", loginDetail)
     .then((response) => response.data);
 };
 
