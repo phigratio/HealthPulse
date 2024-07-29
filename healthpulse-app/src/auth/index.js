@@ -31,12 +31,14 @@ export const getCurrentUserDetail = () => {
 
 export const getToken = () => {
   if (isLoggedIn()) {
+    console.log(
+      "The token is:" + JSON.parse(localStorage.getItem("data")).token
+    );
     return JSON.parse(localStorage.getItem("data")).token;
   } else {
     return null;
   }
 };
-
 
 //get current user role
 export const getCurrentUserRole = () => {

@@ -104,9 +104,9 @@ const Login = () => {
                     <FormGroup>
                       <Label>Email: </Label>
                       <Input
-                        type="email"
+                        type="username"
                         placeholder="Enter your email"
-                        id="email"
+                        id="username"
                         value={loginDetail.username}
                         onChange={(e) => handleChange(e, "username")}
                       />
