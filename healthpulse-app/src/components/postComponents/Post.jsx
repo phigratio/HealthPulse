@@ -43,7 +43,7 @@ function Post({
           {userContextData &&
             userContextData.user &&
             userContextData.user.login &&
-            (user && user.id === post.user.id ? (
+            (user && user.id === post.userId ? (
               <>
                 <Button
                   onClick={(event) => deletePost(post)}
