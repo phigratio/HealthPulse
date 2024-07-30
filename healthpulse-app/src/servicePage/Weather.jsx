@@ -9,6 +9,8 @@ import TextToSpeechButton from "./TextToSpeechButton"; // Make sure you have thi
 import banner from "../images/banner/kidsCorner.mp4";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
+import HeartRate from "../components/LottieComponents/HeartRate";
+import BriefCase from "../components/LottieComponents/Breifcase";
 
 const geminiKey = "AIzaSyBtbcmMGUk34mU0LGJ83pLAfKVWTUKXGIE";
 const dateBuilder = (d) => {
@@ -201,53 +203,63 @@ class Weather extends React.Component {
             </div>
             <React.Fragment>
               {this.state.temperatureC ? (
-                <div className="weather-container">
-                  {/* Current Weather Card */}
-                  <div className="weather-card">
-                    <div className="city-info">
-                      <div className="title">
-                        <h2>{this.state.city}</h2>
-                        <h3>{this.state.country}</h3>
-                      </div>
-                      <div className="mb-icon">
-                        <ReactAnimatedWeather
-                          icon={this.state.icon}
-                          color={defaults.color}
-                          size={defaults.size}
-                          animate={defaults.animate}
-                        />
-                        <p>{this.state.main}</p>
-                      </div>
-                      <div className="date-time">
-                        <div className="dmy">
-                          <div id="txt"></div>
-                          <div className="current-time">
-                            <Clock
-                              format="HH:mm:ss"
-                              interval={1000}
-                              ticking={true}
+                <div className="content-container">
+                  <div className="left-side">
+                    <BriefCase />
+                  </div>
+                  <div className="middle-side">
+                    <div className="weather-container">
+                      {/* Current Weather Card */}
+                      <div className="weather-card">
+                        <div className="city-info">
+                          <div className="title">
+                            <h2>{this.state.city}</h2>
+                            <h3>{this.state.country}</h3>
+                          </div>
+                          <div className="mb-icon">
+                            <ReactAnimatedWeather
+                              icon={this.state.icon}
+                              color={defaults.color}
+                              size={defaults.size}
+                              animate={defaults.animate}
                             />
+                            <p>{this.state.main}</p>
                           </div>
-                          <div className="current-date">
-                            {dateBuilder(new Date())}
+                          <div className="date-time">
+                            <div className="dmy">
+                              <div id="txt"></div>
+                              <div className="current-time">
+                                <Clock
+                                  format="HH:mm:ss"
+                                  interval={1000}
+                                  ticking={true}
+                                />
+                              </div>
+                              <div className="current-date">
+                                {dateBuilder(new Date())}
+                              </div>
+                            </div>
+                            <div className="temperature">
+                              <p>
+                                {this.state.temperatureC}°<span>C</span>
+                              </p>
+                            </div>
                           </div>
                         </div>
-                        <div className="temperature">
-                          <p>
-                            {this.state.temperatureC}°<span>C</span>
-                          </p>
-                        </div>
+                      </div>
+
+                      {/* Health Recommendation Card */}
+                      <div className="health-card">
+                        <h3>Health Recommendation</h3>
+                        <p>{this.state.healthRecommendation}</p>
+                        <TextToSpeechButton
+                          text={this.state.healthRecommendation}
+                        />
                       </div>
                     </div>
                   </div>
-
-                  {/* Health Recommendation Card */}
-                  <div className="health-card">
-                    <h3>Health Recommendation</h3>
-                    <p>{this.state.healthRecommendation}</p>
-                    <TextToSpeechButton
-                      text={this.state.healthRecommendation}
-                    />
+                  <div className="right-side">
+                    <BriefCase />
                   </div>
                 </div>
               ) : (
@@ -261,6 +273,7 @@ class Weather extends React.Component {
                       }}
                     >
                       Detecting your location
+                      <HeartRate />
                     </h3>
                     <h3 style={{ color: "white", marginTop: "10px" }}>
                       Your current location will be displayed on the App{" "}
