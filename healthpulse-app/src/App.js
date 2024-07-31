@@ -32,7 +32,6 @@ import MedicineShop from "./pages/MedicineShop";
 import FoodPage from "./pages/FoodPage";
 import Cart from "./pages/Cart";
 
-
 import FoodFeed from "./components/foodComponents/FoodFeed";
 import FoodShop from "./pages/FoodShop";
 import FoodCategories from "./components/foodComponents/FoodCategories";
@@ -41,6 +40,10 @@ import MedicineCategories from "./components/medicineComponents/MedicineCategori
 import NewsList from "./servicePage/NewsList";
 import Weather from "./servicePage/Weather";
 import PrescriptionAnalyzer from "./servicePage/PrescriptionAnalyzer";
+
+// Ecommerce part
+
+import EcommerceMainPage from "./ecommerce/EcommerceMainPage";
 
 library.add(fas);
 function App() {
@@ -81,7 +84,10 @@ function App() {
           element={<MedicineCategories />}
         />
 
-        <Route path="/foodCategories/:categoryId" element={<FoodCategories />} />
+        <Route
+          path="/foodCategories/:categoryId"
+          element={<FoodCategories />}
+        />
 
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/medicine-feed" element={<MedicineFeed />} />
@@ -94,6 +100,10 @@ function App() {
           <Route path="my-posts" element={<MyPosts />} />
           <Route path="update-blog/:blogId" element={<UpdateBlog />} />
         </Route>
+
+        {/* Ecommerce part */}
+
+        <Route path="/ecommerce" element={<EcommerceMainPage />} />
       </Routes>
     </BrowserRouter>
   );
