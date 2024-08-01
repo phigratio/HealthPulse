@@ -13,7 +13,15 @@ const EcommerceMainCarousel = () => {
     />
   ));
 
-  return <AliceCarousel items={items} />;
+  return (
+    <AliceCarousel
+      items={items}
+      disableButtonsControls
+      autoPlay
+      autoPlayInterval="2000"
+      infinite
+    />
+  );
 };
 
 export default EcommerceMainCarousel;
