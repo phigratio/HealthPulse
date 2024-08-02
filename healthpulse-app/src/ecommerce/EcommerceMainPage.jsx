@@ -3,6 +3,7 @@ import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 import EcommerceNavigation from "./customer/components/navication/Navigation";
 import EcomHomePage from "./customer/components/Pages/HomePage/HomePage";
+import Product from "./customer/components/Product/Product";
 
 const EcommerceMainPage = () => {
   return (
@@ -11,7 +12,8 @@ const EcommerceMainPage = () => {
       <Base>
         <EcommerceNavigation />
         <div className="main">
-          <EcomHomePage />
+          {/* <EcomHomePage /> */}
+          <Product />
         </div>
       </Base>
     </div>
