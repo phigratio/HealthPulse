@@ -1,8 +1,8 @@
 import React from "react";
-import EcommerceMainCarousel from "../../HomeCarousel/EcommerceMainCarousel";
+import EcommerceMainCarousel from "../../components/HomeCarousel/EcommerceMainCarousel";
 import { Home } from "@mui/icons-material";
-import HomeSectionProduct from "../../HomeProdect/HomeSectionProduct";
-import { MedicineData } from "../../../../data/Medicine";
+import HomeSectionProduct from "../../components/HomeProdect/HomeSectionProduct";
+import { MedicineData } from "../../../data/Medicine";
 
 const EcomHomePage = () => {
   return (
