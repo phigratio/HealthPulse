@@ -6,6 +6,8 @@ import EcomHomePage from "./customer/Pages/HomePage/HomePage";
 import Product from "./customer/components/Product/Product";
 import ProductDetails from "./customer/components/ProductDetails/ProductDetails";
 import Cart from "./customer/components/Cart/Cart";
+import { Check } from "@mui/icons-material";
+import Checkout from "./customer/components/Checkout/Checkout";
 
 const EcommerceMainPage = () => {
   return (
@@ -17,7 +19,8 @@ const EcommerceMainPage = () => {
           {/* <EcomHomePage /> */}
           {/* <Product /> */}
           {/* <ProductDetails /> */}
-          <Cart />
+          {/* <Cart /> */}
+          <Checkout />
         </div>
       </Base>
     </div>
