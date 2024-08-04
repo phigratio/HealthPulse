@@ -30,7 +30,6 @@ import UpdateUser from "./pages/UpdateUser";
 import MedicineFeed from "./components/medicineComponents/MedicineFeed";
 import MedicineShop from "./pages/MedicineShop";
 import FoodPage from "./pages/FoodPage";
-import Cart from "./pages/Cart";
 
 import FoodFeed from "./components/foodComponents/FoodFeed";
 import FoodShop from "./pages/FoodShop";
@@ -56,7 +55,6 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route path="/cart" element={<Cart />} />
 
         <Route path="/landing" element={<Landing />} />
 
@@ -94,6 +92,7 @@ function App() {
         <Route path="/food-feed" element={<FoodFeed />} />
         <Route path="/medicine" element={<MedicineShop />} />
         <Route path="/food" element={<FoodShop />} />
+
         <Route path="/user" element={<User />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="my-profile/:userId" element={<ProfileInfo />} />
@@ -103,7 +102,7 @@ function App() {
 
         {/* Ecommerce part */}
 
-        <Route path="/ecommerce" element={<EcommerceMainPage />} />
+        <Route path="/ecommerce/*" element={<EcommerceMainPage />} />
       </Routes>
     </BrowserRouter>
   );
