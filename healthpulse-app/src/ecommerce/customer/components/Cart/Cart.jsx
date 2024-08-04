@@ -2,8 +2,15 @@ import React from "react";
 import CartItem from "./CartItem";
 import { Divider } from "@mui/material";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate();
+
+  const handleCheckOut = () => {
+    navigate("/ecommerce/checkout?step=2");
+  };
+
   return (
     <div>
       <div className="lg:grid grid-cols-3 lg:px-16 relative  ">
@@ -35,6 +42,7 @@ const Cart = () => {
                 <span className="text-green-600">$775</span>
               </div>
               <Button
+                onClick={handleCheckOut}
                 variant="contained"
                 className="w-full text-center "
                 sx={{ px: "2rem", py: "1rem" }}

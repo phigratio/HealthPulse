@@ -6,10 +6,10 @@ import EcomHomePage from "./customer/Pages/HomePage/HomePage";
 import Product from "./customer/components/Product/Product";
 import ProductDetails from "./customer/components/ProductDetails/ProductDetails";
 import Cart from "./customer/components/Cart/Cart";
-import { Check } from "@mui/icons-material";
 import Checkout from "./customer/components/Checkout/Checkout";
 import Order from "./customer/components/Order/Order";
 import OrderDetails from "./customer/components/Order/OrderDetails";
+import { Route, Routes } from "react-router-dom";
 
 const EcommerceMainPage = () => {
   return (
@@ -18,13 +18,18 @@ const EcommerceMainPage = () => {
       <Base>
         <EcommerceNavigation />
         <div className="main">
-          {/* <EcomHomePage /> */}
-          {/* <Product /> */}
-          {/* <ProductDetails /> */}
-          {/* <Cart /> */}
-          {/* <Checkout /> */}
-          {/* <Order />  */}
-          <OrderDetails />
+          <Routes>
+            <Route path="/" element={<EcomHomePage />} />
+            <Route
+              path="/:levelOne/:levelTwo/:levelThree"
+              element={<Product />}
+            />
+            <Route path="product/:productId" element={<ProductDetails />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="order" element={<Order />} />
+            <Route path="order/:orderId" element={<OrderDetails />} />
+          </Routes>
         </div>
       </Base>
     </div>
