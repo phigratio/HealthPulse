@@ -14,7 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Product {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -36,6 +35,8 @@ public class Product {
     private int price;
     
     private int discountPrice;
+    
+    private int discountPercentage;
     
     private int quantity;
     
@@ -53,8 +54,16 @@ public class Product {
     private List<Review> reviews = new ArrayList<>();
     
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @JoinColumn(name = "top_level_category_id")
+    private Category topLevelCategory;
+    
+    @ManyToOne
+    @JoinColumn(name = "second_level_category_id")
+    private Category secondLevelCategory;
+    
+    @ManyToOne
+    @JoinColumn(name = "third_level_category_id")
+    private Category thirdLevelCategory;
     
     private LocalDate createdOn;
 }
