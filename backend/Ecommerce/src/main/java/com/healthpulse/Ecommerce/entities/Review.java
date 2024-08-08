@@ -1,6 +1,7 @@
 package com.healthpulse.Ecommerce.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +31,7 @@ public class Review {
 	
 	private String review;
 	
-	private LocalDate createdOn;
+	private LocalDateTime createdOn;
 	
 //	@ManyToOne
 //	@JoinColumn(name = "user_id")

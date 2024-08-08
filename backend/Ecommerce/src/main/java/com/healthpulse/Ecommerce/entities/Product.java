@@ -1,6 +1,7 @@
 package com.healthpulse.Ecommerce.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -65,5 +66,7 @@ public class Product {
     @JoinColumn(name = "third_level_category_id")
     private Category thirdLevelCategory;
     
-    private LocalDate createdOn;
+    private LocalDateTime createdOn;
+
+	
 }

@@ -40,6 +40,8 @@ public class Cart {
 	private Integer totalDiscountedPrice;
 	
 	private Integer discount;
+
+	private Integer totalItems;
 	
 	
 	

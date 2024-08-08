@@ -10,8 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.healthpulse.Ecommerce.entities.Address;
 import com.healthpulse.Ecommerce.entities.Order;
+import com.healthpulse.Ecommerce.entities.OrderItem;
 import com.healthpulse.Ecommerce.entities.User;
+import com.healthpulse.Ecommerce.repositories.CartRepository;
 import com.healthpulse.Ecommerce.repositories.OrderRepository;
+import com.healthpulse.Ecommerce.services.CartItemService;
 import com.healthpulse.Ecommerce.services.OrderService;
 import com.healthpulse.Ecommerce.services.ProductService;
 
@@ -22,27 +25,49 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
     
+    @Autowired
     private CartRepository cartRepository;
     
+    @Autowired
     private CartItemService cartItemService;
     
+    @Autowired
     private ProductService productService;
     
-	public OrderServiceImpl(OrderRepository orderRepository, CartRepository cartRepository, CartItemService cartItemService, ProductService productService) {
+    public OrderServiceImpl(OrderRepository orderRepository, CartRepository cartRepository, CartItemService cartItemService, ProductService productService) {
         this.orderRepository = orderRepository;
         this.cartRepository = cartRepository;
         this.cartItemService = cartItemService;
         this.productService = productService;
-        }
+    }
 
     @Override
     public Order createOrder(User user, Address shippingAddress) {
+        // Create a new order
         Order order = new Order();
-        order.setUser(user);
+        order.setUserId(user.getId());
         order.setShippingAddress(shippingAddress);
         order.setOrderDate(LocalDateTime.now());
         order.setOrderStatus("Created");
-        // Calculate and set other fields like totalPrice, totalDiscountedPrice, etc.
+        
+        // Retrieve cart items associated with the user and create order items
+        List<OrderItem> orderItems = cartItemService.convertCartItemsToOrderItems(user);
+        order.setOrderItems(orderItems);
+        
+        // Calculate total price, discount, and total discounted price
+        double totalPrice = calculateTotalPrice(orderItems);
+        order.setTotalPrice(totalPrice);
+        int discount = calculateDiscount(totalPrice);
+        order.setDiscount(discount);
+        order.setTotalDiscountedPrice((int) (totalPrice - discount));
+        
+        // Calculate the total number of items
+        order.setTotalItems(orderItems.size());
+        
+        // Set created at timestamp
+        order.setCreatedAt(LocalDateTime.now());
+
+        // Save and return the order
         return orderRepository.save(order);
     }
 
@@ -105,5 +130,17 @@ public class OrderServiceImpl implements OrderService {
             return orderRepository.save(order);
         }
         return null;
+    }
+
+    private double calculateTotalPrice(List<OrderItem> orderItems) {
+        return orderItems.stream().mapToDouble(OrderItem::getPrice).sum();
+    }
+
+    private int calculateDiscount(double totalPrice) {
+        // Example discount calculation logic (can be customized)
+        if (totalPrice > 100) {
+            return (int) (totalPrice * 0.1); // 10% discount for orders above $100
+        }
+        return 0;
     }
 }
