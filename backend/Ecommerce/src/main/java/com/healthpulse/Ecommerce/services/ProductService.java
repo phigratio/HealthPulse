@@ -2,34 +2,26 @@ package com.healthpulse.Ecommerce.services;
 
 import java.util.List;
 
-
-
-
-
-import com.healthpulse.Ecommerce.dto.ProductDTO;
-
+import com.healthpulse.Ecommerce.entities.Product;
+import com.healthpulse.Ecommerce.payloads.CreateProductRequest;
 
 public interface ProductService {
 
-    ProductDTO createProduct(ProductDTO productDTO);
+    Product createProduct(CreateProductRequest createProductRequest);
 
-    ProductDTO getProductById(Long id);
-    
-    
-    ProductDTO updateProduct(Long productId, ProductDTO productDTO);
-    
-    
-    List<ProductDTO> getProductsByCategory(String category);
+    Product updateProduct(Long productId, CreateProductRequest updateProductRequest);
 
-    List<ProductDTO> getAllProducts();
+    Product getProductById(Long productId);
 
-    void deleteProduct(Long id);
+    List<Product> getAllProducts();
 
-    List<ProductDTO> filterProducts(String keyword);
-    
-    List<ProductDTO> filterProductsByCategoryAndPrice(String category, Integer minPrice, Integer maxPrice, Integer minDiscount, String sort);
+    List<Product> getProductsByCategory(String categoryName);
 
+    void deleteProduct(Long productId);
 
-    
-    
+    List<Product> filterProducts(String keyword);
+
+    List<Product> filterProductsByCategoryAndPrice(String categoryName, Integer minPrice, Integer maxPrice, Integer minDiscount, String sort);
+
+    Product findProductById(Long productId);
 }

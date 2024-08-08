@@ -1,12 +1,15 @@
 package com.healthpulse.Ecommerce.services.impl;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.healthpulse.Ecommerce.entities.Cart;
 import com.healthpulse.Ecommerce.entities.CartItem;
+import com.healthpulse.Ecommerce.entities.OrderItem;
 import com.healthpulse.Ecommerce.entities.Product;
 import com.healthpulse.Ecommerce.entities.User;
 import com.healthpulse.Ecommerce.repositories.CartItemRepository;
@@ -93,5 +96,25 @@ public class CartItemServiceImpl implements CartItemService {
 		}
 		return null;
 	}
+	
+	@Override
+    public List<OrderItem> convertCartItemsToOrderItems(User user) {
+        // Retrieve cart items associated with the user
+        List<CartItem> cartItems = cartItemRepository.findByUserId(user.getId());
+        
+        // Convert each CartItem to OrderItem
+        return cartItems.stream().map(this::convertToOrderItem).collect(Collectors.toList());
+    }
+
+    private OrderItem convertToOrderItem(CartItem cartItem) {
+        // Create a new OrderItem
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(cartItem.getProduct());
+        orderItem.setQuantity(cartItem.getQuantity());
+        orderItem.setPrice(cartItem.getPrice());
+        orderItem.setPrice(cartItem.getPrice());
+        return orderItem;
+    }
+
 
 }

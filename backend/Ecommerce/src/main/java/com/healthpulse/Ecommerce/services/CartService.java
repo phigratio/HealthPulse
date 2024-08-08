@@ -9,7 +9,7 @@ public interface CartService {
 	
 	public Cart createCart(User user);
 	
-	public String addCartItem(Integer userId, AddItemRequest addItemRequest);
+	public Cart addCartItem(Integer userId, AddItemRequest addItemRequest);
 	
 	public Cart findUserCart(Integer userId);
 
