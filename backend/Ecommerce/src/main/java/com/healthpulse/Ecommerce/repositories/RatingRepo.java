@@ -11,7 +11,9 @@ import com.healthpulse.Ecommerce.entities.Rating;
 public interface RatingRepo extends JpaRepository<Rating, Long> {
 	
 	
-	@Query("SELECT r FROM Rating r WHERE r.product.id = :productId")
-	public List<Rating> getAllProductsRating( @Param ("productId") Long productId);
+//	@Query("SELECT r FROM Rating r WHERE r.product.id = :productId")
+//	public List<Rating> getAllProductsRating( @Param ("productId") Long productId);
+	
+	List<Rating> findByProductId(Long productId);
 
 }
