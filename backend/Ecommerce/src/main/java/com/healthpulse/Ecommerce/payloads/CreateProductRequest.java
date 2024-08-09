@@ -29,17 +29,20 @@ public class CreateProductRequest {
 	
 	private String brand;
 	
-	private Set<Power> power = new HashSet<>();
+	private Set<CreatePowerRequest> powers = new HashSet<>();
+
 	
 	private String imageUrl;
 	
 	
-	private String topLavelCategory;
-	
-	private String secondLavelCategory;
-	
-	private String thirdLavelCategory;
+//	private String topLavelCategory;
+//	
+//	private String secondLavelCategory;
+//	
+//	private String thirdLavelCategory;
 
-	
+	private Long topLevelCategoryId;
+    private Long secondLevelCategoryId;
+    private Long thirdLevelCategoryId;
 
 }

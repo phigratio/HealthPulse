@@ -42,7 +42,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public String addCartItem(Integer userId, AddItemRequest addItemRequest) {
+	public Cart addCartItem(Integer userId, AddItemRequest addItemRequest) {
 		Cart cart = cartRepository.findByUserId(userId);
 		Product product = productService.findProductById(addItemRequest.getProductId());
 		
@@ -64,7 +64,7 @@ public class CartServiceImpl implements CartService {
 			
 		} 
 		
-		return "Item added to cart";
+		return cartRepository.save(cart);
 		
 		
 		

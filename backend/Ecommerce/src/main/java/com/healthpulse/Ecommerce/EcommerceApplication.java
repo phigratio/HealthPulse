@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableFeignClients
-@EnableJpaRepositories(basePackages = "com.healthpulse.Ecommerce.repositories")
 public class EcommerceApplication {
 
 	public static void main(String[] args) {

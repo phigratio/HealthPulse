@@ -52,7 +52,7 @@ public class RatingServiceImpl implements RatingService {
 	@Override
 	public List<Rating> getProductRating(Long productId) {
 		
-		return ratingRepository.getAllProductsRating(productId);
+		return ratingRepository.findByProductId(productId);
 		
 		
 	}

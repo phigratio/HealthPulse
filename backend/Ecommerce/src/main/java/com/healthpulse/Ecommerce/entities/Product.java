@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -56,14 +58,17 @@ public class Product {
     
     @ManyToOne
     @JoinColumn(name = "top_level_category_id")
+    @JsonIgnore
     private Category topLevelCategory;
     
     @ManyToOne
     @JoinColumn(name = "second_level_category_id")
+    @JsonIgnore
     private Category secondLevelCategory;
     
     @ManyToOne
     @JoinColumn(name = "third_level_category_id")
+    @JsonIgnore
     private Category thirdLevelCategory;
     
     private LocalDateTime createdOn;
