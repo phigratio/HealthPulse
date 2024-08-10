@@ -44,9 +44,4 @@ public class Cart {
 	private Integer totalItems;
 	
 	
-	
-
-	
-	
-	
 }
