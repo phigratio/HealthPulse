@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.healthpulse.CabinBooking.dto.BookingDTO;
 import com.healthpulse.CabinBooking.dto.Response;
+import com.healthpulse.CabinBooking.dto.UserDTO;
 import com.healthpulse.CabinBooking.entities.Booking;
 import com.healthpulse.CabinBooking.entities.Room;
 import com.healthpulse.CabinBooking.entities.User;
@@ -151,6 +152,34 @@ public class BookingServiceImpl implements BookingService {
         }
         return response;
     }
+    
+    
+    @Override
+    public Response getUserBookingHistory(Integer userId) {
+
+        Response response = new Response();
+
+
+        try {
+//            User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(() -> new OurException("User Not Found"));
+            User user = userService.getUserById(userId);
+        	UserDTO userDTO = Utils.mapUserEntityToUserDTOPlusUserBookingsAndRoom(user);
+            response.setStatusCode(200);
+            response.setMessage("successful");
+            response.setUser(userDTO);
+
+        } catch (OurException e) {
+            response.setStatusCode(404);
+            response.setMessage(e.getMessage());
+
+        } catch (Exception e) {
+
+            response.setStatusCode(500);
+            response.setMessage("Error getting all users " + e.getMessage());
+        }
+        return response;
+    }
+
 
 
     private boolean roomIsAvailable(Booking bookingRequest, List<Booking> existingBookings) {

@@ -44,6 +44,10 @@ import PrescriptionAnalyzer from "./servicePage/PrescriptionAnalyzer";
 
 import EcommerceMainPage from "./ecommerce/EcommerceMainPage";
 
+//cabin booking part
+
+import CabinMainPage from "./CabinBooking/CabinMainPage";
+
 library.add(fas);
 function App() {
   return (
@@ -103,6 +107,10 @@ function App() {
         {/* Ecommerce part */}
 
         <Route path="/ecommerce/*" element={<EcommerceMainPage />} />
+
+        {/* Cabin booking part */}
+
+        <Route path="/cabin-booking/*" element={<CabinMainPage />} />
       </Routes>
     </BrowserRouter>
   );

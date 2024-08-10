@@ -1,0 +1,46 @@
+.cb-header-image-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cb-header-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cb-header-image-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Adjust opacity for desired darkness */
+  z-index: 1;
+}
+
+.cb-overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  z-index: 2;
+}
+
+.cb-header-banner h1 {
+  font-size: 50px;
+  color: #f8f3f3;
+}
+
+.cb-header-banner h3 {
+  color: #f8f3f3;
+  font-size: 30px;
+}
+
+.cb-phegon-color {
+  color: rgb(3, 202, 252);
+}
