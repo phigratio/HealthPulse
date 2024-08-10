@@ -12,5 +12,7 @@ public interface BookingService {
     Response getAllBookings();
 
     Response cancelBooking(Long bookingId);
+    
+    Response getUserBookingHistory(Integer userId);
 
 }

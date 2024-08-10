@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.healthpulse.CabinBooking.dto.Response;
 import com.healthpulse.CabinBooking.entities.Booking;
 import com.healthpulse.CabinBooking.services.BookingService;
+import com.healthpulse.CabinBooking.services.UserService;
 
 @RestController
 @RequestMapping("/cb/bookings")
@@ -16,6 +17,9 @@ public class BookingController {
 
     @Autowired
     private BookingService bookingService;
+    
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/book-room/{roomId}/{userId}")
 //    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
@@ -46,6 +50,13 @@ public class BookingController {
 //    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ResponseEntity<Response> cancelBooking(@PathVariable ("bookingId") Long bookingId) {
         Response response = bookingService.cancelBooking(bookingId);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
+    
+    
+    @GetMapping("/get-user-bookings/{userId}")
+    public ResponseEntity<Response> getUserBookingHistory(@PathVariable("userId") Integer userId) {
+        Response response = bookingService.getUserBookingHistory(userId);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
