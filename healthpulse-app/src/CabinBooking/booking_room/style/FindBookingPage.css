@@ -1,0 +1,68 @@
+.cb-find-booking-page {
+  max-width: 50%;
+  margin: 10px auto 60px auto;
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background for better readability */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a subtle depth effect */
+}
+
+.cb-search-container input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 300px;
+}
+
+.cb-search-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007f86;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cb-search-container button:hover {
+  background-color: rgb(34, 80, 128);
+}
+
+.cb-booking-details {
+  margin-top: 20px;
+  border: 1px solid #007f86;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #ffffff; /* White background for clarity */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow for better separation */
+}
+
+.cb-booking-details h3 {
+  color: #007f86;
+  border-bottom: 2px solid #007f86; /* Add bottom border for section headers */
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.cb-booking-details p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #333; /* Darker text for better readability */
+}
+
+.cb-booking-details img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* Rounded corners for images */
+  margin-top: 10px;
+}
+
+.cb-booking-details hr {
+  border: 0;
+  height: 1px;
+  background-color: #ddd;
+  margin: 20px 0; /* Add space around separators */
+}

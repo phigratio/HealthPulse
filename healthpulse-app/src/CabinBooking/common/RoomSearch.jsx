@@ -52,6 +52,8 @@ const RoomSearch = ({ handleSearchResult }) => {
         roomType
       );
 
+      console.log(response);
+
       // Check if the response is successful
       if (response.statusCode === 200) {
         if (response.roomList.length === 0) {
