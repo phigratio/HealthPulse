@@ -2,15 +2,24 @@ package com.healthpulse.CabinBooking.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.healthpulse.CabinBooking.dto.Response;
 import com.healthpulse.CabinBooking.services.BookingService;
+import com.healthpulse.CabinBooking.services.FileService;
 import com.healthpulse.CabinBooking.services.RoomService;
 
+
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,6 +32,11 @@ public class RoomController {
     private RoomService roomService;
     @Autowired
     private BookingService iBookingService;
+    @Autowired
+	private FileService fileService;
+
+	@Value("${project.image}")
+	private String path;
 
 
     @PostMapping("/add")
@@ -139,6 +153,19 @@ public class RoomController {
     public ResponseEntity<Response> deleteRoom(@PathVariable ("roomId") Long roomId) {
         Response response = roomService.deleteRoom(roomId);
         return ResponseEntity.status(response.getStatusCode()).body(response);
+
+    }
+    
+  //method to serve files
+    @GetMapping(value = "/image/{imageName}",produces = MediaType.IMAGE_JPEG_VALUE)
+    public void downloadImage(
+            @PathVariable("imageName") String imageName,
+            HttpServletResponse response
+    ) throws IOException {
+
+        InputStream resource = this.fileService.getResource(path, imageName);
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        StreamUtils.copy(resource,response.getOutputStream())   ;
 
     }
 

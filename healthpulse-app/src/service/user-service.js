@@ -7,7 +7,7 @@ export const signUp = (user, roleId) => {
 };
 
 export const login = (loginDetail) => {
-  console.log("Login Detail:"); 
+  console.log("Login Detail:");
   console.log(loginDetail);
   return myAxios
     .post("/auth/login", loginDetail)
@@ -36,4 +36,28 @@ export const uploadProfileImage = (image, userId) => {
       },
     })
     .then((response) => response.data);
+};
+
+// Function to get user data from local storage
+const getUserData = () => {
+  const data = localStorage.getItem("data");
+  return data ? JSON.parse(data).user : null;
+};
+
+// Function to check if the user is an admin
+export const isAdmin = () => {
+  const user = getUserData();
+  return user && user.roles.some((role) => role.id === 501);
+};
+
+// Function to check if the user is a doctor
+export const isDoctor = () => {
+  const user = getUserData();
+  return user && user.roles.some((role) => role.id === 503);
+};
+
+// Function to check if the user is a normal user
+export const isUser = () => {
+  const user = getUserData();
+  return user && user.roles.some((role) => role.id === 502);
 };

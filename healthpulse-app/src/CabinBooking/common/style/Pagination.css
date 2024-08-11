@@ -1,0 +1,43 @@
+/* PAGINATION COMPONENT STYLING */
+
+/* Pagination Navigation Container */
+.cb-pagination-nav {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+/* Pagination List */
+.cb-pagination-ul {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+}
+
+/* Pagination List Item */
+.cb-pagination-li {
+  margin: 0 5px;
+}
+
+/* Pagination Button */
+.cb-pagination-button {
+  background-color: #fff;
+  color: #007f86;
+  border: 1px solid #007f86;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Pagination Button Hover Effect */
+.cb-pagination-button:hover {
+  background-color: rgb(34, 80, 128);
+  color: #fff;
+}
+
+/* Current Page Button Styling */
+.current-page {
+  background-color: #007f86;
+  color: #fff;
+}
