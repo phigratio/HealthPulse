@@ -98,10 +98,15 @@ export default class ApiService {
   }
 
   /* This gets all bookings from the database */
+  // static async getAllBookings() {
+  //   const result = await myAxios.get(`/cb/bookings/all`, {
+  //     headers: this.getHeader(),
+  //   });
+  //   return result.data;
+  // }
+
   static async getAllBookings() {
-    const result = await myAxios.get(`/cb/bookings/all`, {
-      headers: this.getHeader(),
-    });
+    const result = await myAxios.get(`/cb/bookings/all`);
     return result.data;
   }
 

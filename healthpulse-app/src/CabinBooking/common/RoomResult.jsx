@@ -32,7 +32,9 @@ const RoomResult = ({ roomSearchResults }) => {
                 {userIsAdmin ? (
                   <button
                     className="cb-edit-room-button"
-                    onClick={() => navigate(`/admin/edit-room/${room.id}`)} // Navigate to edit room with room ID
+                    onClick={() =>
+                      navigate(`/cabin-booking/admin/edit-room/${room.id}`)
+                    } // Navigate to edit room with room ID
                   >
                     Edit Room
                   </button>

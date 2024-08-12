@@ -28,13 +28,13 @@ const AdminPage = () => {
       <div className="cb-admin-actions">
         <button
           className="cb-admin-button"
-          onClick={() => navigate("/admin/manage-rooms")}
+          onClick={() => navigate("/cabin-booking/admin/manage-rooms")}
         >
           Manage Rooms
         </button>
         <button
           className="cb-admin-button"
-          onClick={() => navigate("/admin/manage-bookings")}
+          onClick={() => navigate("/cabin-booking/admin/manage-bookings")}
         >
           Manage Bookings
         </button>
