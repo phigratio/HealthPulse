@@ -39,7 +39,9 @@ const RoomResult = ({ roomSearchResults }) => {
                 ) : (
                   <button
                     className="cb-book-now-button"
-                    onClick={() => navigate(`/room-details-book/${room.id}`)} // Navigate to book room with room ID
+                    onClick={() =>
+                      navigate(`/cabin-booking/room-details-book/${room.id}`)
+                    } // Navigate to book room with room ID
                   >
                     View/Book Now
                   </button>

@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import AllRoomsPage from "./booking_room/AllRoomsPage";
 import FindBookingPage from "./booking_room/FindBookingPage";
 import RoomDetailsPage from "./booking_room/RoomDetailsPage";
+import AdminPage from "./admin/AdminPage";
 
 const CabinMainPage = () => {
   return (
@@ -24,6 +25,7 @@ const CabinMainPage = () => {
               path="/room-details-book/:roomId"
               element={<RoomDetailsPage />}
             />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </div>
       </Base>

@@ -1,9 +1,6 @@
 import { privateAxios, myAxios } from "../../service/helper";
 
 export default class ApiService {
-
-
-
   /* This is the  to get user bookings by the user id */
   static async getUserBookings(userId) {
     const response = await myAxios.get(
@@ -29,9 +26,7 @@ export default class ApiService {
 
   /* This  gets all availavle rooms */
   static async getAllAvailableRooms() {
-    const result = await myAxios.get(
-      `/cb/rooms/all-available-rooms`
-    );
+    const result = await myAxios.get(`/cb/rooms/all-available-rooms`);
     return result.data;
   }
 
@@ -61,20 +56,15 @@ export default class ApiService {
 
   /* This gets a room by ID */
   static async getRoomById(roomId) {
-    const result = await myAxios.get(
-      `/cb/rooms/room-by-id/${roomId}`
-    );
+    const result = await myAxios.get(`/cb/rooms/room-by-id/${roomId}`);
     return result.data;
   }
 
   /* This deletes a room by ID */
   static async deleteRoom(roomId) {
-    const result = await privateAxios.delete(
-      `/cb/rooms/delete/${roomId}`,
-      {
-        headers: this.getHeader(),
-      }
-    );
+    const result = await privateAxios.delete(`/cb/rooms/delete/${roomId}`, {
+      headers: this.getHeader(),
+    });
     return result.data;
   }
 
@@ -134,8 +124,6 @@ export default class ApiService {
     return result.data;
   }
 
-  
-
   /**AUTHENTICATION CHECKER */
   static logout() {
     localStorage.removeItem("token");
@@ -150,8 +138,6 @@ export default class ApiService {
   static isAdmin() {
     const role = localStorage.getItem("role");
     return role === "ADMIN";
-   
-
   }
 
   static isUser() {
