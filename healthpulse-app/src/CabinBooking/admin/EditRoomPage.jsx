@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ApiService from "../services/ApiService";
+import { BASE_URL } from "../../service/helper";
+import "./style/EditRoomPage.css";
 
 const EditRoomPage = () => {
   const { roomId } = useParams();
@@ -99,12 +101,12 @@ const EditRoomPage = () => {
   };
 
   return (
-    <div className="edit-room-container">
+    <div className="cb-edit-room-container">
       <h2>Edit Room</h2>
-      {error && <p className="error-message">{error}</p>}
-      {success && <p className="success-message">{success}</p>}
-      <div className="edit-room-form">
-        <div className="form-group">
+      {error && <p className="cb-error-message">{error}</p>}
+      {success && <p className="cb-success-message">{success}</p>}
+      <div className="cb-edit-room-form">
+        <div className="cb-form-group">
           {preview ? (
             <img
               src={preview}
@@ -114,7 +116,8 @@ const EditRoomPage = () => {
           ) : (
             roomDetails.roomPhotoUrl && (
               <img
-                src={roomDetails.roomPhotoUrl}
+                // src={roomDetails.roomPhotoUrl}
+                src={BASE_URL + "/cb/rooms/image/" + roomDetails.roomPhotoUrl}
                 alt="Room"
                 className="room-photo"
               />
@@ -122,7 +125,7 @@ const EditRoomPage = () => {
           )}
           <input type="file" name="roomPhoto" onChange={handleFileChange} />
         </div>
-        <div className="form-group">
+        <div className="cb-form-group">
           <label>Room Type</label>
           <input
             type="text"
@@ -140,7 +143,7 @@ const EditRoomPage = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group">
+        <div className="cb-form-group">
           <label>Room Description</label>
           <textarea
             name="roomDescription"
@@ -148,10 +151,10 @@ const EditRoomPage = () => {
             onChange={handleChange}
           ></textarea>
         </div>
-        <button className="update-button" onClick={handleUpdate}>
+        <button className="cb-update-button" onClick={handleUpdate}>
           Update Room
         </button>
-        <button className="delete-button" onClick={handleDelete}>
+        <button className="cb-delete-button" onClick={handleDelete}>
           Delete Room
         </button>
       </div>

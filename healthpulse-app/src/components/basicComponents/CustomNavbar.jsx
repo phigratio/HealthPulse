@@ -47,6 +47,8 @@ const CustomNavbar = () => {
 
   const isDoctor = user?.roles?.some((role) => role.id === 503);
 
+  const isAdmin = user?.roles?.some((role) => role.id === 501);
+
   const handleUserImageClick = () => {
     if (login) {
       navigate(`/user/my-profile/${user.id}`);
@@ -86,7 +88,7 @@ const CustomNavbar = () => {
               </NavLink>
             </NavItem>
 
-            <NavItem>
+            {/* <NavItem>
               <NavLink
                 className="nav-link-light"
                 tag={ReactLink}
@@ -94,13 +96,13 @@ const CustomNavbar = () => {
               >
                 Medicine Shop
               </NavLink>
-            </NavItem>
+            </NavItem> */}
 
-            <NavItem>
+            {/* <NavItem>
               <NavLink className="nav-link-light" tag={ReactLink} to="/food">
                 Food Shop
               </NavLink>
-            </NavItem>
+            </NavItem> */}
 
             <NavItem>
               <NavLink className="nav-link-light" tag={ReactLink} to="/blogs">
@@ -120,9 +122,17 @@ const CustomNavbar = () => {
               </NavItem>
             )}
 
+            {login && isAdmin && (
+              <NavItem>
+                <NavLink className="nav-link-light" tag={ReactLink} to="/admin">
+                  Admin-Dashboard
+                </NavLink>
+              </NavItem>
+            )}
+
             {login ? (
               <>
-                <NavItem>
+                {/* <NavItem>
                   <NavLink
                     className="nav-link-light"
                     tag={ReactLink}
@@ -130,7 +140,7 @@ const CustomNavbar = () => {
                   >
                     Cart
                   </NavLink>
-                </NavItem>
+                </NavItem> */}
 
                 <NavItem>
                   <NavLink

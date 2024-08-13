@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ApiService from "../services/ApiService";
+import "./style/EditBookingPage.css";
 
 const EditBookingPage = () => {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const EditBookingPage = () => {
       {error && <p className="error-message">{error}</p>}
       {success && <p className="success-message">{success}</p>}
       {bookingDetails && (
-        <div className="booking-details">
+        <div className="cb-booking-details">
           <h3>Booking Details</h3>
           <p>Confirmation Code: {bookingDetails.bookingConfirmationCode}</p>
           <p>Check-in Date: {bookingDetails.checkInDate}</p>
@@ -64,11 +65,11 @@ const EditBookingPage = () => {
           <hr />
           <br />
           <h3>Booker Detials</h3>
-          <div>
+          {/* <div>
             <p> Name: {bookingDetails.user.name}</p>
             <p> Email: {bookingDetails.user.email}</p>
             <p> Phone Number: {bookingDetails.user.phoneNumber}</p>
-          </div>
+          </div> */}
 
           <br />
           <hr />
@@ -86,7 +87,7 @@ const EditBookingPage = () => {
             />
           </div>
           <button
-            className="acheive-booking"
+            className="cb-acheive-booking"
             onClick={() => acheiveBooking(bookingDetails.id)}
           >
             Acheive Booking

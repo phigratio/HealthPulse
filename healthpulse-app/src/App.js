@@ -48,6 +48,10 @@ import EcommerceMainPage from "./ecommerce/EcommerceMainPage";
 
 import CabinMainPage from "./CabinBooking/CabinMainPage";
 
+//Admin part
+
+import AdminMainPage from "./admin_part/AdminMainPage";
+
 library.add(fas);
 function App() {
   return (
@@ -111,6 +115,9 @@ function App() {
         {/* Cabin booking part */}
 
         <Route path="/cabin-booking/*" element={<CabinMainPage />} />
+
+        {/* Admin part */}
+        <Route path="/admin/*" element={<AdminMainPage />} />
       </Routes>
     </BrowserRouter>
   );
