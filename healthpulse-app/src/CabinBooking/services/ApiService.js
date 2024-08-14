@@ -44,6 +44,7 @@ export default class ApiService {
     const result = await myAxios.get(
       `/cb/rooms/available-rooms-by-date-and-type?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}&hospital=${hospital}`
     );
+
     return result.data;
   }
 

@@ -64,7 +64,7 @@ const RoomSearch = ({ handleSearchResult }) => {
         formattedStartDate,
         formattedEndDate,
         roomType,
-        hospitals
+        hospital
       );
 
       console.log(response);
