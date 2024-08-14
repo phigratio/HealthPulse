@@ -23,8 +23,10 @@ const RoomResult = ({ roomSearchResults }) => {
                 alt={room.roomType}
               />
               <div className="cb-room-details">
-                <h3>{room.roomType}</h3>
-                <p>Price: ${room.roomPrice} / night</p>
+                <h3>{room.hospital}</h3>
+                <p>Type: {room.roomType} </p>
+                {/* <h3>{room.roomType}</h3> */}
+                <p>Price: {room.roomPrice} BDT / night</p>
                 <p>Description: {room.roomDescription}</p>
               </div>
 
@@ -32,14 +34,18 @@ const RoomResult = ({ roomSearchResults }) => {
                 {userIsAdmin ? (
                   <button
                     className="cb-edit-room-button"
-                    onClick={() => navigate(`/admin/edit-room/${room.id}`)} // Navigate to edit room with room ID
+                    onClick={() =>
+                      navigate(`/cabin-booking/admin/edit-room/${room.id}`)
+                    } // Navigate to edit room with room ID
                   >
                     Edit Room
                   </button>
                 ) : (
                   <button
                     className="cb-book-now-button"
-                    onClick={() => navigate(`/room-details-book/${room.id}`)} // Navigate to book room with room ID
+                    onClick={() =>
+                      navigate(`/cabin-booking/room-details-book/${room.id}`)
+                    } // Navigate to book room with room ID
                   >
                     View/Book Now
                   </button>

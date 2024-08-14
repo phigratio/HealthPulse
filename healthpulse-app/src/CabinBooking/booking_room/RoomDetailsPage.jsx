@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ApiService from "../services/ApiService";
 import DatePicker from "react-datepicker";
+import { getUserData } from "../../service/user-service";
 // import 'react-datepicker/dist/react-datepicker.css';
-
+import "./style/RoomDetailsPage.css";
+import { BASE_URL } from "../../service/helper";
 const RoomDetailsPage = () => {
   const navigate = useNavigate(); // Access the navigate function to navigate
   const { roomId } = useParams(); // Get room ID from URL parameters
@@ -28,8 +30,14 @@ const RoomDetailsPage = () => {
         setIsLoading(true); // Set loading state to true
         const response = await ApiService.getRoomById(roomId);
         setRoomDetails(response.room);
-        const userProfile = await ApiService.getUserProfile();
-        setUserId(userProfile.user.id);
+        const userProfile = getUserData();
+        console.log("User Profile:", userProfile);
+
+        if (userProfile && userProfile.id) {
+          setUserId(userProfile.id);
+        } else {
+          throw new Error("User ID is undefined");
+        }
       } catch (error) {
         setError(error.response?.data?.message || error.message);
       } finally {
@@ -130,33 +138,37 @@ const RoomDetailsPage = () => {
   };
 
   if (isLoading) {
-    return <p className="room-detail-loading">Loading room details...</p>;
+    return <p className="cb-room-detail-loading">Loading room details...</p>;
   }
 
   if (error) {
-    return <p className="room-detail-loading">{error}</p>;
+    return <p className="cb-room-detail-loading">{error}</p>;
   }
 
   if (!roomDetails) {
-    return <p className="room-detail-loading">Room not found.</p>;
+    return <p className="cb-room-detail-loading">Room not found.</p>;
   }
 
   const { roomType, roomPrice, roomPhotoUrl, description, bookings } =
     roomDetails;
 
   return (
-    <div className="room-details-booking">
+    <div className="cb-room-details-booking">
       {showMessage && (
-        <p className="booking-success-message">
+        <p className="cb-booking-success-message">
           Booking successful! Confirmation code: {confirmationCode}. An SMS and
           email of your booking details have been sent to you.
         </p>
       )}
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <p className="cb-error-message">{errorMessage}</p>}
       <h2>Room Details</h2>
       <br />
-      <img src={roomPhotoUrl} alt={roomType} className="room-details-image" />
-      <div className="room-details-info">
+      <img
+        src={BASE_URL + "/cb/rooms/image/" +roomPhotoUrl}
+        alt={roomType}
+        className="cb-room-details-image"
+      />
+      <div className="cb-room-details-info">
         <h3>{roomType}</h3>
         <p>Price: ${roomPrice} / night</p>
         <p>{description}</p>
@@ -164,14 +176,14 @@ const RoomDetailsPage = () => {
       {bookings && bookings.length > 0 && (
         <div>
           <h3>Existing Booking Details</h3>
-          <ul className="booking-list">
+          <ul className="cb-booking-list">
             {bookings.map((booking, index) => (
-              <li key={booking.id} className="booking-item">
-                <span className="booking-number">Booking {index + 1} </span>
-                <span className="booking-text">
+              <li key={booking.id} className="cb-booking-item">
+                <span className="cb-booking-number">Booking {index + 1} </span>
+                <span className="cb-booking-text">
                   Check-in: {booking.checkInDate}{" "}
                 </span>
-                <span className="booking-text">
+                <span className="cb-booking-text">
                   Out: {booking.checkOutDate}
                 </span>
               </li>
@@ -179,23 +191,23 @@ const RoomDetailsPage = () => {
           </ul>
         </div>
       )}
-      <div className="booking-info">
+      <div className="cb-booking-info">
         <button
-          className="book-now-button"
+          className="cb-book-now-button"
           onClick={() => setShowDatePicker(true)}
         >
           Book Now
         </button>
         <button
-          className="go-back-button"
+          className="cb-go-back-button"
           onClick={() => setShowDatePicker(false)}
         >
           Go Back
         </button>
         {showDatePicker && (
-          <div className="date-picker-container">
+          <div className="cb-date-picker-container">
             <DatePicker
-              className="detail-search-field"
+              className="cb-detail-search-field"
               selected={checkInDate}
               onChange={(date) => setCheckInDate(date)}
               selectsStart
@@ -206,7 +218,7 @@ const RoomDetailsPage = () => {
               // dateFormat="yyyy-MM-dd"
             />
             <DatePicker
-              className="detail-search-field"
+              className="cb-detail-search-field"
               selected={checkOutDate}
               onChange={(date) => setCheckOutDate(date)}
               selectsEnd
@@ -218,7 +230,7 @@ const RoomDetailsPage = () => {
               dateFormat="dd/MM/yyyy"
             />
 
-            <div className="guest-container">
+            <div className="cb-guest-container">
               <div className="guest-div">
                 <label>Adults:</label>
                 <input
@@ -238,7 +250,7 @@ const RoomDetailsPage = () => {
                 />
               </div>
               <button
-                className="confirm-booking"
+                className="cb-confirm-booking"
                 onClick={handleConfirmBooking}
               >
                 Confirm Booking
@@ -247,10 +259,10 @@ const RoomDetailsPage = () => {
           </div>
         )}
         {totalPrice > 0 && (
-          <div className="total-price">
+          <div className="cb-total-price">
             <p>Total Price: ${totalPrice}</p>
             <p>Total Guests: {totalGuests}</p>
-            <button onClick={acceptBooking} className="accept-booking">
+            <button onClick={acceptBooking} className="cb-accept-booking">
               Accept Booking
             </button>
           </div>

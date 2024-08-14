@@ -8,7 +8,9 @@ const RoomSearch = ({ handleSearchResult }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [roomType, setRoomType] = useState("");
+  const [hospital, setHospital] = useState("");
   const [roomTypes, setRoomTypes] = useState([]);
+  const [hospitals, setHospitals] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -23,6 +25,18 @@ const RoomSearch = ({ handleSearchResult }) => {
     fetchRoomTypes();
   }, []);
 
+  useEffect(() => {
+    const fetchHospitals = async () => {
+      try {
+        const hospitals = await ApiService.getHospitals();
+        setHospitals(hospitals);
+      } catch (error) {
+        console.error("Error fetching hospitals:", error.message);
+      }
+    };
+    fetchHospitals();
+  }, []);
+
   /**This methods is going to be used to show errors */
   const showError = (message, timeout = 5000) => {
     setError(message);
@@ -33,7 +47,7 @@ const RoomSearch = ({ handleSearchResult }) => {
 
   /**THis is going to be used to fetch avaailabe rooms from database base on seach data that'll be passed in */
   const handleInternalSearch = async () => {
-    if (!startDate || !endDate || !roomType) {
+    if (!startDate || !endDate || !roomType || !hospital) {
       showError("Please select all fields");
       return false;
     }
@@ -49,7 +63,8 @@ const RoomSearch = ({ handleSearchResult }) => {
       const response = await ApiService.getAvailableRoomsByDateAndType(
         formattedStartDate,
         formattedEndDate,
-        roomType
+        roomType,
+        hospitals
       );
 
       console.log(response);
@@ -104,6 +119,23 @@ const RoomSearch = ({ handleSearchResult }) => {
             {roomTypes.map((roomType) => (
               <option key={roomType} value={roomType}>
                 {roomType}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="cb-search-field">
+          <label>Hospital</label>
+          <select
+            value={hospital}
+            onChange={(e) => setHospital(e.target.value)}
+          >
+            <option disabled value="">
+              Select Hospital
+            </option>
+            {hospitals.map((hospital) => (
+              <option key={hospital} value={hospital}>
+                {hospital}
               </option>
             ))}
           </select>

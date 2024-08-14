@@ -39,7 +39,7 @@ export const uploadProfileImage = (image, userId) => {
 };
 
 // Function to get user data from local storage
-const getUserData = () => {
+export const getUserData = () => {
   const data = localStorage.getItem("data");
   return data ? JSON.parse(data).user : null;
 };

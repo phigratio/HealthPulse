@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import ApiService from "../services/ApiService";
+import { getUser } from "../../service/user-service";
 import "./style/FindBookingPage.css";
 
 const FindBookingPage = () => {
   const [confirmationCode, setConfirmationCode] = useState(""); // State variable for confirmation code
   const [bookingDetails, setBookingDetails] = useState(null); // State variable for booking details
   const [error, setError] = useState(null); // Track any errors
+  const [userDetail, setUserDetail] = useState(null);
 
   const handleSearch = async () => {
     if (!confirmationCode.trim()) {
@@ -19,7 +21,10 @@ const FindBookingPage = () => {
         confirmationCode
       );
       setBookingDetails(response.booking);
-      setError(null); // Clear error if successful
+
+      setUserDetail(getUser(bookingDetails.userId));
+
+      console.log("User Details", userDetail);
     } catch (error) {
       setError(error.response?.data?.message || error.message);
       setTimeout(() => setError(""), 5000);
@@ -53,18 +58,22 @@ const FindBookingPage = () => {
           <hr />
           <br />
           <h3>Booker Detials</h3>
-          {/* <div>
-            <p> Name: {bookingDetails.user.name}</p>
-            <p> Email: {bookingDetails.user.email}</p>
-            <p> Phone Number: {bookingDetails.user.phoneNumber}</p>
-          </div> */}
+          <div>
+            <p> Name: {userDetail.name}</p>
+            <p> Email: {userDetail.email}</p>
+            {/* <p> Phone Number: {bookingDetails.user.phoneNumber}</p>  */}
+          </div>
 
           <br />
           <hr />
           <br />
           <h3>Room Details</h3>
           <div>
+            <p>Hospital: {bookingDetails.room.hospital} </p>
+            <p> Room Price: {bookingDetails.room.roomPrice} BDT</p>
             <p> Room Type: {bookingDetails.room.roomType}</p>
+            <p>Address: {bookingDetails.room.address}</p>
+
             <img
               src={bookingDetails.room.roomPhotoUrl}
               alt=""

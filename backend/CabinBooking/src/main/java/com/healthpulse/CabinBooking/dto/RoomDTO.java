@@ -11,6 +11,8 @@ import java.util.List;
 public class RoomDTO {
 
     private Long id;
+    private String hospital;
+    private String address;
     private String roomType;
     private BigDecimal roomPrice;
     private String roomPhotoUrl;

@@ -1,9 +1,6 @@
 import { privateAxios, myAxios } from "../../service/helper";
 
 export default class ApiService {
-
-
-
   /* This is the  to get user bookings by the user id */
   static async getUserBookings(userId) {
     const response = await myAxios.get(
@@ -17,21 +14,23 @@ export default class ApiService {
 
   /**ROOM */
   /* This  adds a new room room to the database */
+  // static async addRoom(formData) {
+  //   const result = await privateAxios.post(`/cb/rooms/add`, formData, {
+  //     headers: {
+  //       "Content-Type": "multipart/form-data",
+  //     },
+  //   });
+  //   return result.data;
+  // }
+
   static async addRoom(formData) {
-    const result = await privateAxios.post(`/cb/rooms/add`, formData, {
-      headers: {
-        ...this.getHeader(),
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const result = await privateAxios.post(`/cb/rooms/add`, formData);
     return result.data;
   }
 
   /* This  gets all availavle rooms */
   static async getAllAvailableRooms() {
-    const result = await myAxios.get(
-      `/cb/rooms/all-available-rooms`
-    );
+    const result = await myAxios.get(`/cb/rooms/all-available-rooms`);
     return result.data;
   }
 
@@ -39,10 +38,11 @@ export default class ApiService {
   static async getAvailableRoomsByDateAndType(
     checkInDate,
     checkOutDate,
-    roomType
+    roomType,
+    hospital
   ) {
     const result = await myAxios.get(
-      `/cb/rooms/available-rooms-by-date-and-type?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}`
+      `/cb/rooms/available-rooms-by-date-and-type?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}&hospital=${hospital}`
     );
     return result.data;
   }
@@ -50,6 +50,13 @@ export default class ApiService {
   /* This gets all room types from the database */
   static async getRoomTypes() {
     const response = await myAxios.get(`/cb/rooms/types`);
+    return response.data;
+  }
+
+  /* This gets hospitals */
+
+  static async getHospitals() {
+    const response = await myAxios.get(`/cb/rooms/hospitals`);
     return response.data;
   }
 
@@ -61,34 +68,35 @@ export default class ApiService {
 
   /* This gets a room by ID */
   static async getRoomById(roomId) {
-    const result = await myAxios.get(
-      `/cb/rooms/room-by-id/${roomId}`
-    );
+    const result = await myAxios.get(`/cb/rooms/room-by-id/${roomId}`);
     return result.data;
   }
 
   /* This deletes a room by ID */
   static async deleteRoom(roomId) {
-    const result = await privateAxios.delete(
-      `/cb/rooms/delete/${roomId}`,
-      {
-        headers: this.getHeader(),
-      }
-    );
+    const result = await privateAxios.delete(`/cb/rooms/delete/${roomId}`);
     return result.data;
   }
 
   /* This updates a room */
+  // static async updateRoom(roomId, formData) {
+  //   const result = await privateAxios.put(
+  //     `/cb/rooms/update/${roomId}`,
+  //     formData,
+  //     {
+  //       headers: {
+  //         ...this.getHeader(),
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     }
+  //   );
+  //   return result.data;
+  // }
+
   static async updateRoom(roomId, formData) {
     const result = await privateAxios.put(
       `/cb/rooms/update/${roomId}`,
-      formData,
-      {
-        headers: {
-          ...this.getHeader(),
-          "Content-Type": "multipart/form-data",
-        },
-      }
+      formData
     );
     return result.data;
   }
@@ -99,19 +107,21 @@ export default class ApiService {
   static async bookRoom(roomId, userId, booking) {
     const response = await privateAxios.post(
       `/cb/bookings/book-room/${roomId}/${userId}`,
-      booking,
-      {
-        headers: this.getHeader(),
-      }
+      booking
     );
     return response.data;
   }
 
   /* This gets all bookings from the database */
+  // static async getAllBookings() {
+  //   const result = await myAxios.get(`/cb/bookings/all`, {
+  //     headers: this.getHeader(),
+  //   });
+  //   return result.data;
+  // }
+
   static async getAllBookings() {
-    const result = await myAxios.get(`/cb/bookings/all`, {
-      headers: this.getHeader(),
-    });
+    const result = await myAxios.get(`/cb/bookings/all`);
     return result.data;
   }
 
@@ -134,8 +144,6 @@ export default class ApiService {
     return result.data;
   }
 
-  
-
   /**AUTHENTICATION CHECKER */
   static logout() {
     localStorage.removeItem("token");
@@ -150,8 +158,6 @@ export default class ApiService {
   static isAdmin() {
     const role = localStorage.getItem("role");
     return role === "ADMIN";
-   
-
   }
 
   static isUser() {

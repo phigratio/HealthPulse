@@ -43,6 +43,8 @@ public class RoomController {
 //    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> addNewRoom(
             @RequestParam(value = "photo", required = false) MultipartFile photo,
+            @RequestParam(value = "hospital", required = false) String hospital,
+            @RequestParam(value = "address", required = false) String address,
             @RequestParam(value = "roomType", required = false) String roomType,
             @RequestParam(value = "roomPrice", required = false) BigDecimal roomPrice,
             @RequestParam(value = "roomDescription", required = false) String roomDescription
@@ -68,6 +70,20 @@ public class RoomController {
 			response.setMessage("Please provide a room price");
 			return ResponseEntity.status(response.getStatusCode()).body(response);
 		}
+		
+		if (hospital == null || hospital.isBlank()) {
+			Response response = new Response();
+			response.setStatusCode(400);
+			response.setMessage("Please provide a hospital");
+			return ResponseEntity.status(response.getStatusCode()).body(response);
+		}
+		
+		if (address == null || address.isBlank()) {
+			Response response = new Response();
+			response.setStatusCode(400);
+			response.setMessage("Please provide an address");
+			return ResponseEntity.status(response.getStatusCode()).body(response);
+		}
 
 //        if (photo == null || photo.isEmpty() || roomType == null || roomType.isBlank() || roomPrice == null || roomType.isBlank()) {
 //            Response response = new Response();
@@ -75,7 +91,7 @@ public class RoomController {
 //            response.setMessage("Please provide values for all fields(photo, roomType,roomPrice)");
 //            return ResponseEntity.status(response.getStatusCode()).body(response);
 //        }
-        Response response = roomService.addNewRoom(photo, roomType, roomPrice, roomDescription);
+        Response response = roomService.addNewRoom(photo, hospital , address , roomType, roomPrice, roomDescription);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
@@ -89,6 +105,11 @@ public class RoomController {
     public List<String> getRoomTypes() {
         return roomService.getAllRoomTypes();
     }
+    
+    @GetMapping("/hospitals")
+	public List<String> getHospitals() {
+		return roomService.getAllHospitals();
+	}
 
     @GetMapping("/room-by-id/{roomId}")
     public ResponseEntity<Response> getRoomById(@PathVariable ("roomId")  Long roomId) {
@@ -123,15 +144,16 @@ public class RoomController {
     public ResponseEntity<Response> getAvailableRoomsByDateAndType(
             @RequestParam(value = "checkInDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkInDate,
             @RequestParam(value = "checkOutDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkOutDate,
-            @RequestParam(value = "roomType", required = false) String roomType
+            @RequestParam(value = "roomType", required = false) String roomType,
+            @RequestParam(value = "hospital", required = false) String hospital
     ) {
-        if (checkInDate == null || roomType == null || roomType.isBlank() || checkOutDate == null) {
+        if (checkInDate == null || roomType == null || roomType.isBlank() || checkOutDate == null || hospital.isBlank() ) {
             Response response = new Response();
             response.setStatusCode(400);
-            response.setMessage("Please provide values for all fields(checkInDate, roomType, checkOutDate)");
+            response.setMessage("Please provide values for all fields(checkInDate, roomType, checkOutDate , hospital )");
             return ResponseEntity.status(response.getStatusCode()).body(response);
         }
-        Response response = roomService.getAvailableRoomsByDataAndType(checkInDate, checkOutDate, roomType);
+        Response response = roomService.getAvailableRoomsByDataAndType(checkInDate, checkOutDate, roomType , hospital);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
@@ -139,12 +161,14 @@ public class RoomController {
 //    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> updateRoom(@PathVariable ("roomId")  Long roomId,
                                                @RequestParam(value = "photo", required = false) MultipartFile photo,
+                                               @RequestParam(value = "hospital", required = false) String hospital,
+                                               @RequestParam(value = "address", required = false) String address,
                                                @RequestParam(value = "roomType", required = false) String roomType,
                                                @RequestParam(value = "roomPrice", required = false) BigDecimal roomPrice,
                                                @RequestParam(value = "roomDescription", required = false) String roomDescription
 
     ) {
-        Response response = roomService.updateRoom(roomId, roomDescription, roomType, roomPrice, photo);
+        Response response = roomService.updateRoom(roomId, hospital, address, roomDescription, roomType, roomPrice, photo);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
