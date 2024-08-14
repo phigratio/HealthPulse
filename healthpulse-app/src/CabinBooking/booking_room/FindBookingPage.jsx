@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import ApiService from "../services/ApiService";
 import { getUser } from "../../service/user-service";
 import "./style/FindBookingPage.css";
 
 const FindBookingPage = () => {
-  const [confirmationCode, setConfirmationCode] = useState(""); // State variable for confirmation code
-  const [bookingDetails, setBookingDetails] = useState(null); // State variable for booking details
-  const [error, setError] = useState(null); // Track any errors
+  const [confirmationCode, setConfirmationCode] = useState("");
+  const [bookingDetails, setBookingDetails] = useState(null);
   const [userDetail, setUserDetail] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleSearch = async () => {
     if (!confirmationCode.trim()) {
@@ -16,20 +16,32 @@ const FindBookingPage = () => {
       return;
     }
     try {
-      // Call API to get booking details
       const response = await ApiService.getBookingByConfirmationCode(
         confirmationCode
       );
       setBookingDetails(response.booking);
-
-      setUserDetail(getUser(bookingDetails.userId));
-
-      console.log("User Details", userDetail);
     } catch (error) {
       setError(error.response?.data?.message || error.message);
       setTimeout(() => setError(""), 5000);
     }
   };
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      if (bookingDetails && bookingDetails.userId) {
+        try {
+          const user = await getUser(bookingDetails.userId);
+          setUserDetail(user);
+          console.log("User Details: ", user);
+        } catch (error) {
+          console.error("Failed to fetch user details", error);
+          setError("Failed to fetch user details");
+        }
+      }
+    };
+
+    fetchUserDetails();
+  }, [bookingDetails]);
 
   return (
     <div className="cb-find-booking-page">
@@ -57,21 +69,25 @@ const FindBookingPage = () => {
           <br />
           <hr />
           <br />
-          <h3>Booker Detials</h3>
-          <div>
-            <p> Name: {userDetail.name}</p>
-            <p> Email: {userDetail.email}</p>
-            {/* <p> Phone Number: {bookingDetails.user.phoneNumber}</p>  */}
-          </div>
+          <h3>Booker Details</h3>
+          {userDetail ? (
+            <div>
+              <p>Name: {userDetail.name}</p>
+              <p>Email: {userDetail.email}</p>
+              {/* <p>Phone Number: {userDetail.phoneNumber}</p> */}
+            </div>
+          ) : (
+            <p>Loading user details...</p>
+          )}
 
           <br />
           <hr />
           <br />
           <h3>Room Details</h3>
           <div>
-            <p>Hospital: {bookingDetails.room.hospital} </p>
-            <p> Room Price: {bookingDetails.room.roomPrice} BDT</p>
-            <p> Room Type: {bookingDetails.room.roomType}</p>
+            <p>Hospital: {bookingDetails.room.hospital}</p>
+            <p>Room Price: {bookingDetails.room.roomPrice} BDT</p>
+            <p>Room Type: {bookingDetails.room.roomType}</p>
             <p>Address: {bookingDetails.room.address}</p>
 
             <img

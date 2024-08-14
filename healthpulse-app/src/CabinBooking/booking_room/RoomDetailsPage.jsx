@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import ApiService from "../services/ApiService";
 import DatePicker from "react-datepicker";
 import { getUserData } from "../../service/user-service";
@@ -125,17 +126,69 @@ const RoomDetailsPage = () => {
       if (response.statusCode === 200) {
         setConfirmationCode(response.bookingConfirmationCode); // Set booking confirmation code
         setShowMessage(true); // Show message
-        // Hide message and navigate to homepage after 5 seconds
+        //use toast to show message
+        toast.success(
+          "Booking successful! Confirmation code: " +
+            response.bookingConfirmationCode
+        );
+
+        console.log("Booking Response:", response);
+        // Hide message and navigate to homepage after 1 seconds
         setTimeout(() => {
           setShowMessage(false);
-          navigate("/rooms"); // Navigate to rooms
-        }, 10000);
+          navigate("/cabin-booking/rooms"); // Navigate to rooms
+        }, 1000);
       }
     } catch (error) {
       setErrorMessage(error.response?.data?.message || error.message);
       setTimeout(() => setErrorMessage(""), 5000); // Clear error message after 5 seconds
     }
   };
+
+  // const acceptBooking = async () => {
+  //   try {
+  //     // Ensure checkInDate and checkOutDate are Date objects
+  //     const startDate = new Date(checkInDate);
+  //     const endDate = new Date(checkOutDate);
+
+  //     // Convert dates to YYYY-MM-DD format, adjusting for time zone differences
+  //     const formattedCheckInDate = new Date(
+  //       startDate.getTime() - startDate.getTimezoneOffset() * 60000
+  //     )
+  //       .toISOString()
+  //       .split("T")[0];
+  //     const formattedCheckOutDate = new Date(
+  //       endDate.getTime() - endDate.getTimezoneOffset() * 60000
+  //     )
+  //       .toISOString()
+  //       .split("T")[0];
+
+  //     // Create booking object
+  //     const booking = {
+  //       checkInDate: formattedCheckInDate,
+  //       checkOutDate: formattedCheckOutDate,
+  //       numOfAdults: numAdults,
+  //       numOfChildren: numChildren,
+  //     };
+
+  //     // Make booking
+  //     const response = await ApiService.bookRoom(roomId, userId, booking);
+  //     if (response.statusCode === 200) {
+  //       setConfirmationCode(response.bookingConfirmationCode); // Set booking confirmation code
+  //       // console.log("Booking Confirmation Code:", confirmationCode);
+  //       // console.log("Booking Response:", response);
+  //       setShowMessage(true); // Show message
+
+  //       // Add a delay to ensure the message is displayed before redirecting
+  //       setTimeout(() => {
+  //         navigate("/cabin-booking/rooms"); // Navigate to rooms
+  //       }, 3000); // Delay of 3 seconds
+  //     }
+  //   } catch (error) {
+  //     setErrorMessage(error.response?.data?.message || error.message);
+  //     setTimeout(() => setErrorMessage(""), 5000); // Clear error message after 5 seconds
+  //   }
+  // };
 
   if (isLoading) {
     return <p className="cb-room-detail-loading">Loading room details...</p>;
@@ -149,8 +202,15 @@ const RoomDetailsPage = () => {
     return <p className="cb-room-detail-loading">Room not found.</p>;
   }
 
-  const { roomType, roomPrice, roomPhotoUrl, description, bookings } =
-    roomDetails;
+  const {
+    roomType,
+    roomPrice,
+    roomPhotoUrl,
+    roomDescription,
+    bookings,
+    hospital,
+    address,
+  } = roomDetails;
 
   return (
     <div className="cb-room-details-booking">
@@ -164,14 +224,16 @@ const RoomDetailsPage = () => {
       <h2>Room Details</h2>
       <br />
       <img
-        src={BASE_URL + "/cb/rooms/image/" +roomPhotoUrl}
+        src={BASE_URL + "/cb/rooms/image/" + roomPhotoUrl}
         alt={roomType}
         className="cb-room-details-image"
       />
       <div className="cb-room-details-info">
-        <h3>{roomType}</h3>
+        <h1>{hospital}</h1>
+        <h2>{roomType}</h2>
         <p>Price: ${roomPrice} / night</p>
-        <p>{description}</p>
+        <p>{roomDescription}</p>
+        <p>Address: {address}</p>
       </div>
       {bookings && bookings.length > 0 && (
         <div>
