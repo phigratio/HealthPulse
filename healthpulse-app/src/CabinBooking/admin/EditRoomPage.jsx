@@ -9,8 +9,10 @@ const EditRoomPage = () => {
   const navigate = useNavigate();
   const [roomDetails, setRoomDetails] = useState({
     roomPhotoUrl: "",
+    hospital: "",
     roomType: "",
     roomPrice: "",
+    address: "",
     roomDescription: "",
   });
   const [file, setFile] = useState(null);
@@ -24,8 +26,10 @@ const EditRoomPage = () => {
         const response = await ApiService.getRoomById(roomId);
         setRoomDetails({
           roomPhotoUrl: response.room.roomPhotoUrl,
+          hospital: response.room.hospital,
           roomType: response.room.roomType,
           roomPrice: response.room.roomPrice,
+          address: response.room.address,
           roomDescription: response.room.roomDescription,
         });
       } catch (error) {
@@ -60,6 +64,8 @@ const EditRoomPage = () => {
       formData.append("roomType", roomDetails.roomType);
       formData.append("roomPrice", roomDetails.roomPrice);
       formData.append("roomDescription", roomDetails.roomDescription);
+      formData.append("address", roomDetails.address);
+      formData.append("hospital", roomDetails.hospital);
 
       if (file) {
         formData.append("photo", file);
@@ -71,7 +77,7 @@ const EditRoomPage = () => {
 
         setTimeout(() => {
           setSuccess("");
-          navigate("/admin/manage-rooms");
+          navigate("/cabin-booking/admin/manage-rooms");
         }, 3000);
       }
       setTimeout(() => setSuccess(""), 5000);
@@ -90,7 +96,7 @@ const EditRoomPage = () => {
 
           setTimeout(() => {
             setSuccess("");
-            navigate("/admin/manage-rooms");
+            navigate("/cabin-booking/admin/manage-rooms");
           }, 3000);
         }
       } catch (error) {
@@ -134,6 +140,16 @@ const EditRoomPage = () => {
             onChange={handleChange}
           />
         </div>
+
+        <div className="cb-form-group">
+          <label>Hospital</label>
+          <input
+            type="text"
+            name="hospital"
+            value={roomDetails.hospital}
+            onChange={handleChange}
+          />
+        </div>
         <div className="form-group">
           <label>Room Price</label>
           <input
@@ -142,6 +158,15 @@ const EditRoomPage = () => {
             value={roomDetails.roomPrice}
             onChange={handleChange}
           />
+        </div>
+
+        <div className="cb-form-group">
+          <label>Address</label>
+          <textarea
+            name="address"
+            value={roomDetails.address}
+            onChange={handleChange}
+          ></textarea>
         </div>
         <div className="cb-form-group">
           <label>Room Description</label>

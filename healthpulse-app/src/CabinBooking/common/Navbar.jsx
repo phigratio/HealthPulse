@@ -8,21 +8,21 @@ function Navbar() {
   return (
     <nav className="cb-navbar mt-16">
       <div className="cb-navbar-brand">
-        <NavLink to="/home">Phegon Hotel</NavLink>
+        <NavLink to="/cabin-booking/">Book Cabin</NavLink>
       </div>
       <ul className="cb-navbar-ul">
         <li>
-          <NavLink to="/home" activeclassname="active">
+          <NavLink to="/cabin-booking/" activeclassname="active">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/rooms" activeclassname="active">
+          <NavLink to="/cabin-booking/rooms" activeclassname="active">
             Rooms
           </NavLink>
         </li>
         <li>
-          <NavLink to="/find-booking" activeclassname="active">
+          <NavLink to="/cabin-booking/find-booking" activeclassname="active">
             Find my Booking
           </NavLink>
         </li>

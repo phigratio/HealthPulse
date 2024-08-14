@@ -8,7 +8,9 @@ const AddRoomPage = () => {
   const [roomDetails, setRoomDetails] = useState({
     roomPhotoUrl: "",
     roomType: "",
+    hospital: "",
     roomPrice: "",
+    address: "",
     roomDescription: "",
   });
   const [file, setFile] = useState(null);
@@ -17,6 +19,8 @@ const AddRoomPage = () => {
   const [success, setSuccess] = useState("");
   const [roomTypes, setRoomTypes] = useState([]);
   const [newRoomType, setNewRoomType] = useState(false);
+  const [hospitals, setHospitals] = useState([]);
+  const [newHospital, setNewHospital] = useState(false);
 
   useEffect(() => {
     const fetchRoomTypes = async () => {
@@ -28,6 +32,18 @@ const AddRoomPage = () => {
       }
     };
     fetchRoomTypes();
+  }, []);
+
+  useEffect(() => {
+    const fetchHospitals = async () => {
+      try {
+        const hospitals = await ApiService.getHospitals();
+        setHospitals(hospitals);
+      } catch (error) {
+        console.error("Error fetching hospitals:", error.message);
+      }
+    };
+    fetchHospitals();
   }, []);
 
   const handleChange = (e) => {
@@ -51,6 +67,19 @@ const AddRoomPage = () => {
     }
   };
 
+  const handleHospitalChange = (e) => {
+    if (e.target.value === "new") {
+      setNewHospital(true);
+      setRoomDetails((prevState) => ({ ...prevState, hospital: "" }));
+    } else {
+      setNewHospital(false);
+      setRoomDetails((prevState) => ({
+        ...prevState,
+        hospital: e.target.value,
+      }));
+    }
+  };
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -62,7 +91,48 @@ const AddRoomPage = () => {
     }
   };
 
+  // const addRoom = async () => {
+  //   if (
+  //     !roomDetails.roomType ||
+  //     !roomDetails.roomPrice ||
+  //     !roomDetails.roomDescription
+  //   ) {
+  //     setError("All room details must be provided.");
+  //     setTimeout(() => setError(""), 5000);
+  //     return;
+  //   }
+
+  //   if (!window.confirm("Do you want to add this room?")) {
+  //     return;
+  //   }
+
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("roomType", roomDetails.roomType);
+  //     formData.append("roomPrice", roomDetails.roomPrice);
+  //     formData.append("roomDescription", roomDetails.roomDescription);
+
+  //     if (file) {
+  //       formData.append("photo", file);
+  //     }
+
+  //     const result = await ApiService.addRoom(formData);
+  //     if (result.statusCode === 200) {
+  //       setSuccess("Room Added successfully.");
+
+  //       setTimeout(() => {
+  //         setSuccess("");
+  //         navigate("/cabin-booking/admin/manage-rooms");
+  //       }, 3000);
+  //     }
+  //   } catch (error) {
+  //     setError(error.response?.data?.message || error.message);
+  //     setTimeout(() => setError(""), 5000);
+  //   }
+  // };
+
   const addRoom = async () => {
+    console.log("Add room called");
     if (
       !roomDetails.roomType ||
       !roomDetails.roomPrice ||
@@ -78,25 +148,33 @@ const AddRoomPage = () => {
     }
 
     try {
+      console.log("Making API call");
       const formData = new FormData();
       formData.append("roomType", roomDetails.roomType);
       formData.append("roomPrice", roomDetails.roomPrice);
       formData.append("roomDescription", roomDetails.roomDescription);
+      formData.append("hospital", roomDetails.hospital);
+      formData.append("address", roomDetails.address);
 
       if (file) {
         formData.append("photo", file);
       }
 
       const result = await ApiService.addRoom(formData);
+      console.log("API response", result);
       if (result.statusCode === 200) {
+        console.log("Room added successfully");
         setSuccess("Room Added successfully.");
 
         setTimeout(() => {
           setSuccess("");
-          navigate("/admin/manage-rooms");
+          navigate("/cabin-booking/admin/manage-rooms");
         }, 3000);
+      } else {
+        console.log("Room addition failed", result);
       }
     } catch (error) {
+      console.log("Error occurred:", error);
       setError(error.response?.data?.message || error.message);
       setTimeout(() => setError(""), 5000);
     }
@@ -140,6 +218,28 @@ const AddRoomPage = () => {
             />
           )}
         </div>
+
+        <div className="cb-form-group">
+          <label>Hospital</label>
+          <select value={roomDetails.hospital} onChange={handleHospitalChange}>
+            <option value="">Select a hospital</option>
+            {hospitals.map((hospital) => (
+              <option key={hospital} value={hospital}>
+                {hospital}
+              </option>
+            ))}
+            <option value="new">Other (please specify)</option>
+          </select>
+          {newHospital && (
+            <input
+              type="text"
+              name="hospital"
+              placeholder="Enter new hospital"
+              value={roomDetails.hospital}
+              onChange={handleChange}
+            />
+          )}
+        </div>
         <div className="cb-form-group">
           <label>Room Price</label>
           <input
@@ -149,6 +249,16 @@ const AddRoomPage = () => {
             onChange={handleChange}
           />
         </div>
+
+        <div className="cb-form-group">
+          <label>Cabin Location</label>
+          <textarea
+            name="address"
+            value={roomDetails.address}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+
         <div className="cb-form-group">
           <label>Room Description</label>
           <textarea

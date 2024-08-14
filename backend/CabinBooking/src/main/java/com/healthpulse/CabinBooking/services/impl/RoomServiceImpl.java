@@ -39,13 +39,15 @@ public class RoomServiceImpl implements RoomService {
  
 
 	    @Override
-	    public Response addNewRoom(MultipartFile photo, String roomType, BigDecimal roomPrice, String description) {
+	    public Response addNewRoom(MultipartFile photo,String hospital, String address, String roomType, BigDecimal roomPrice, String description) {
 	        Response response = new Response();
 
 	        try {
 	            String imageUrl = fileService.uploadImage(path, photo);
 	            Room room = new Room();
 	            room.setRoomPhotoUrl(imageUrl);
+	            room.setHospital(hospital);
+	            room.setAddress(address);
 	            room.setRoomType(roomType);
 	            room.setRoomPrice(roomPrice);
 	            room.setRoomDescription(description);
@@ -66,6 +68,13 @@ public class RoomServiceImpl implements RoomService {
 	    public List<String> getAllRoomTypes() {
 	        return roomRepository.findDistinctRoomTypes();
 	    }
+	    
+	    @Override
+		public List<String> getAllHospitals() {
+			return roomRepository.findDistinctHospital();
+		}
+	    
+	    
 
 	    @Override
 	    public Response getAllRooms() {
@@ -106,7 +115,7 @@ public class RoomServiceImpl implements RoomService {
 	    }
 
 	    @Override
-	    public Response updateRoom(Long roomId, String description, String roomType, BigDecimal roomPrice, MultipartFile photo) {
+	    public Response updateRoom(Long roomId, String hospital, String address, String description, String roomType, BigDecimal roomPrice, MultipartFile photo) {
 	        Response response = new Response();
 
 	        try {
@@ -120,6 +129,8 @@ public class RoomServiceImpl implements RoomService {
 	            if (roomPrice != null) room.setRoomPrice(roomPrice);
 	            if (description != null) room.setRoomDescription(description);
 	            if (imageUrl != null) room.setRoomPhotoUrl(imageUrl);
+	            if (hospital != null) room.setHospital(hospital);
+	            if (address != null) room.setAddress(address);
 
 	            Room updatedRoom = roomRepository.save(room);
 	            RoomDTO roomDTO = Utils.mapRoomEntityToRoomDTO(updatedRoom);
@@ -160,11 +171,11 @@ public class RoomServiceImpl implements RoomService {
 	    }
 
 	    @Override
-	    public Response getAvailableRoomsByDataAndType(LocalDate checkInDate, LocalDate checkOutDate, String roomType) {
+	    public Response getAvailableRoomsByDataAndType(LocalDate checkInDate, LocalDate checkOutDate, String roomType, String hospital ) {
 	        Response response = new Response();
 
 	        try {
-	            List<Room> availableRooms = roomRepository.findAvailableRoomsByDatesAndTypes(checkInDate, checkOutDate, roomType);
+	            List<Room> availableRooms = roomRepository.findAvailableRoomsByDatesAndTypes(checkInDate, checkOutDate, roomType, hospital);
 	            List<RoomDTO> roomDTOList = Utils.mapRoomListEntityToRoomListDTO(availableRooms);
 	            response.setStatusCode(200);
 	            response.setMessage("successful");

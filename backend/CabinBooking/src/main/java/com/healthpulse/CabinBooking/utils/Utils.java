@@ -55,6 +55,8 @@ public class Utils {
         roomDTO.setRoomPrice(room.getRoomPrice());
         roomDTO.setRoomPhotoUrl(room.getRoomPhotoUrl());
         roomDTO.setRoomDescription(room.getRoomDescription());
+        roomDTO.setHospital(room.getHospital());
+        roomDTO.setAddress(room.getAddress());
         return roomDTO;
     }
 
@@ -80,6 +82,8 @@ public class Utils {
         roomDTO.setRoomPrice(room.getRoomPrice());
         roomDTO.setRoomPhotoUrl(room.getRoomPhotoUrl());
         roomDTO.setRoomDescription(room.getRoomDescription());
+        roomDTO.setHospital(room.getHospital());
+        roomDTO.setAddress(room.getAddress ());
 
         if (room.getBookings() != null) {
             roomDTO.setBookings(room.getBookings().stream().map(Utils::mapBookingEntityToBookingDTO).collect(Collectors.toList()));
@@ -110,10 +114,28 @@ public class Utils {
             RoomDTO roomDTO = new RoomDTO();
 
             roomDTO.setId(booking.getRoom().getId());
+//            roomDTO.setHospital(booking.getRoom().getHospital());
+//            roomDTO.setAddress(booking.getRoom().getAddress());
             roomDTO.setRoomType(booking.getRoom().getRoomType());
             roomDTO.setRoomPrice(booking.getRoom().getRoomPrice());
             roomDTO.setRoomPhotoUrl(booking.getRoom().getRoomPhotoUrl());
             roomDTO.setRoomDescription(booking.getRoom().getRoomDescription());
+            
+            if(booking.getRoom().getAddress() == null) {
+            	roomDTO.setAddress("Address not available");
+            } else {
+				roomDTO.setAddress(booking.getRoom().getAddress());
+			}
+            
+            if(booking.getRoom().getHospital() == null) {
+            	roomDTO.setHospital("Hospital not available");
+            } else {
+            	roomDTO.setHospital(booking.getRoom().getHospital());
+            }
+            	
+            
+            
+           
             bookingDTO.setRoom(roomDTO);
         }
         return bookingDTO;

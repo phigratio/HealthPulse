@@ -23,8 +23,10 @@ const RoomResult = ({ roomSearchResults }) => {
                 alt={room.roomType}
               />
               <div className="cb-room-details">
-                <h3>{room.roomType}</h3>
-                <p>Price: ${room.roomPrice} / night</p>
+                <h3>{room.hospital}</h3>
+                <p>Type: {room.roomType} </p>
+                {/* <h3>{room.roomType}</h3> */}
+                <p>Price: {room.roomPrice} BDT / night</p>
                 <p>Description: {room.roomDescription}</p>
               </div>
 

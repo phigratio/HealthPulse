@@ -87,28 +87,27 @@ const CustomNavbar = () => {
                 About
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink className="nav-link-light" tag={ReactLink} to="/blogs">
+                Blogs
+              </NavLink>
+            </NavItem>
 
-            {/* <NavItem>
+            <NavItem>
               <NavLink
                 className="nav-link-light"
                 tag={ReactLink}
-                to="/medicine"
+                to="/cabin-booking"
               >
-                Medicine Shop
+                Book-Cabin
               </NavLink>
-            </NavItem> */}
+            </NavItem>
 
             {/* <NavItem>
               <NavLink className="nav-link-light" tag={ReactLink} to="/food">
                 Food Shop
               </NavLink>
             </NavItem> */}
-
-            <NavItem>
-              <NavLink className="nav-link-light" tag={ReactLink} to="/blogs">
-                Blogs
-              </NavLink>
-            </NavItem>
 
             {login && isDoctor && (
               <NavItem>
