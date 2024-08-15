@@ -1,0 +1,59 @@
+.result-appointment-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.result-appointment-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.result-appointment-header h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.result-appointment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.result-appointment-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.result-appointment-item h3 {
+  font-size: 18px;
+  color: #333;
+}
+
+.result-appointment-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.result-appointment-item .status {
+  font-weight: bold;
+}
+
+.result-appointment-item .book-button {
+  background-color: #03cafc;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.result-appointment-item .book-button:hover {
+  background-color: #028cc4;
+}
