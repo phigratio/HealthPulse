@@ -28,13 +28,28 @@ public class AppointmentController {
         return ResponseEntity.ok(createdAppointment);
     }
 
-
     // Endpoint to find available appointments by date and specialization
     @GetMapping("/available")
     public ResponseEntity<List<AppointmentData>> getAvailableAppointments(
             @RequestParam("date") LocalDate date, 
             @RequestParam("specialization") String specialization) {
         List<AppointmentData> availableAppointments = appointmentService.findAvailableAppointments(date, specialization);
+        return ResponseEntity.ok(availableAppointments);
+    }
+
+    // Endpoint to find available appointments by date without specialization filter
+    @GetMapping("/available-by-date")
+    public ResponseEntity<List<AppointmentData>> getAvailableAppointmentsByDate(
+            @RequestParam("date") LocalDate date) {
+        List<AppointmentData> availableAppointments = appointmentService.findAvailableAppointmentsByDate(date);
+        return ResponseEntity.ok(availableAppointments);
+    }
+
+    // Endpoint to find available appointments by doctorId
+    @GetMapping("/available-by-doctor")
+    public ResponseEntity<List<AppointmentData>> getAvailableAppointmentsByDoctorId(
+            @RequestParam("doctorId") int doctorId) {
+        List<AppointmentData> availableAppointments = appointmentService.findAvailableAppointmentsByDoctorId(doctorId);
         return ResponseEntity.ok(availableAppointments);
     }
 
@@ -47,5 +62,20 @@ public class AppointmentController {
         return ResponseEntity.ok(bookedAppointment);
     }
 
-    // Additional endpoints can be added here
+    // Endpoint to get all bookings made by a user
+    @GetMapping("/user-bookings")
+    public ResponseEntity<List<AppointmentData>> getBookingsByUserId(
+            @RequestParam("userId") int userId) {
+        List<AppointmentData> userBookings = appointmentService.findBookingsByUserId(userId);
+        return ResponseEntity.ok(userBookings);
+    }
+
+    // Endpoint to cancel a booking
+    @PostMapping("/{appointmentId}/cancel")
+    public ResponseEntity<AppointmentData> cancelBooking(
+            @PathVariable ("appointmentId")  Long appointmentId, 
+            @RequestParam("userId") int userId) {
+        AppointmentData cancelledAppointment = appointmentService.cancelBooking(appointmentId, userId);
+        return ResponseEntity.ok(cancelledAppointment);
+    }
 }
