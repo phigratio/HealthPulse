@@ -78,4 +78,13 @@ public class AppointmentController {
         AppointmentData cancelledAppointment = appointmentService.cancelBooking(appointmentId, userId);
         return ResponseEntity.ok(cancelledAppointment);
     }
+    
+    // Endpoint to get all unique specializations
+    @GetMapping("/specializations")
+    public ResponseEntity<List<String>> getAllSpecializations() {
+        List<String> specializations = appointmentService.findAllSpecializations();
+        return ResponseEntity.ok(specializations);
+    }
+    
+    
 }

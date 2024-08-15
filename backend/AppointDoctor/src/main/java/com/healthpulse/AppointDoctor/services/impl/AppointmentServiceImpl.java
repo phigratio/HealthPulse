@@ -20,7 +20,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository) {
         this.appointmentRepository = appointmentRepository;
     }
-    
+
     @Override
     public AppointmentData createAppointment(AppointmentData appointmentData) {
         return appointmentRepository.save(appointmentData);
@@ -31,7 +31,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.findAll().stream()
                 .filter(appointment -> appointment.getAppointmentDate().equals(date) &&
                         appointment.getDoctorSpecialization().equalsIgnoreCase(specialization) &&
-                        appointment.getStatus().equals("AVAILABLE"))
+                        "AVAILABLE".equals(appointment.getStatus()))  // Ensure status is checked for "AVAILABLE"
                 .collect(Collectors.toList());
     }
 
@@ -39,7 +39,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentData> findAvailableAppointmentsByDate(LocalDate date) {
         return appointmentRepository.findAll().stream()
                 .filter(appointment -> appointment.getAppointmentDate().equals(date) &&
-                        appointment.getStatus().equals("AVAILABLE"))
+                        "AVAILABLE".equals(appointment.getStatus()))  // Ensure status is checked for "AVAILABLE"
                 .collect(Collectors.toList());
     }
 
@@ -47,7 +47,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentData> findAvailableAppointmentsByDoctorId(int doctorId) {
         return appointmentRepository.findAll().stream()
                 .filter(appointment -> appointment.getDoctorId() == doctorId &&
-                        appointment.getStatus().equals("AVAILABLE"))
+                        "AVAILABLE".equals(appointment.getStatus()))  // Ensure status is checked for "AVAILABLE"
                 .collect(Collectors.toList());
     }
 
@@ -80,4 +80,15 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setPatientId(0); // Reset patient ID
         return appointmentRepository.save(appointment);
     }
+    
+    @Override
+    public List<String> findAllSpecializations() {
+        return appointmentRepository.findAll().stream()
+                .map(AppointmentData::getDoctorSpecialization)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    
+    
 }

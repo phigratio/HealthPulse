@@ -27,5 +27,6 @@ public interface AppointmentService {
     // Method to cancel a booking
     AppointmentData cancelBooking(Long appointmentId, int userId);
 
-    // Additional service methods can be added here
+    // Method to find all specializations
+    List<String> findAllSpecializations();
 }
