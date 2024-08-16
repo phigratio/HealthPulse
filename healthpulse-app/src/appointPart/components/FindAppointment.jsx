@@ -29,18 +29,28 @@ const FindAppointment = ({ handleSearchResult }) => {
     }, timeout);
   };
 
+  const formatDateWithoutTimezone = (date) => {
+    const year = date.getFullYear();
+    const month = `0${date.getMonth() + 1}`.slice(-2); // Months are 0-based
+    const day = `0${date.getDate()}`.slice(-2);
+    return `${year}-${month}-${day}`;
+  };
+
   const handleSearch = async () => {
     if (!date || !specialization) {
       showError("Please select both date and specialization.");
       return;
     }
     try {
-      const formattedDate = date.toISOString().split("T")[0];
+      const formattedDate = formatDateWithoutTimezone(date);
+      console.log("calling the service");
+
       const response = await AppointService.getAvailableAppointments(
         formattedDate,
         specialization
       );
       handleSearchResult(response);
+      console.log(response);
       setError("");
     } catch (error) {
       showError("An error occurred: " + error.message);
@@ -49,8 +59,8 @@ const FindAppointment = ({ handleSearchResult }) => {
 
   return (
     <section>
-      <div className="appointment-search-container">
-        <div className="appointment-search-field">
+      <div className="cb-search-container">
+        <div className="cb-search-field">
           <label>Date</label>
           <DatePicker
             selected={date}
@@ -60,7 +70,7 @@ const FindAppointment = ({ handleSearchResult }) => {
           />
         </div>
 
-        <div className="appointment-search-field">
+        <div className="cb-search-field">
           <label>Specialization</label>
           <select
             value={specialization}
@@ -77,7 +87,7 @@ const FindAppointment = ({ handleSearchResult }) => {
           </select>
         </div>
 
-        <button className="search-button" onClick={handleSearch}>
+        <button className="cb-home-search-button" onClick={handleSearch}>
           Search Appointments
         </button>
       </div>

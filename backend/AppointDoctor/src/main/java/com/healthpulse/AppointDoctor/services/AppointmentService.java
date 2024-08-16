@@ -8,6 +8,9 @@ public interface AppointmentService {
 
     // Method to create a new appointment
     AppointmentData createAppointment(AppointmentData appointmentData);
+    
+    // Method to find appointment by ID
+    AppointmentData findAppointmentById(Long appointmentId);
 
     // Method to find available appointments by date and specialization
     List<AppointmentData> findAvailableAppointments(LocalDate date, String specialization);

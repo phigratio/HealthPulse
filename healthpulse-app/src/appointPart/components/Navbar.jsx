@@ -1,8 +1,10 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { isDoctor } from "../../service/user-service";
 
 function Navbar() {
   const navigate = useNavigate();
+  const userIsDoctor = isDoctor();
 
   return (
     <nav className="cb-navbar mt-16">
@@ -19,6 +21,17 @@ function Navbar() {
           <NavLink to="/cabin-booking/rooms" activeclassname="active">
             Rooms
           </NavLink>
+        </li>
+        <li>
+          {userIsDoctor ? (
+            <NavLink to="/appoint/doctor-dashboard" activeclassname="active">
+              Doctor Dashboard
+            </NavLink>
+          ) : (
+            <NavLink to="/appoint/doctor-bookings" activeclassname="active">
+              Appoinments
+            </NavLink>
+          )}
         </li>
         <li>
           <NavLink to="/cabin-booking/find-booking" activeclassname="active">

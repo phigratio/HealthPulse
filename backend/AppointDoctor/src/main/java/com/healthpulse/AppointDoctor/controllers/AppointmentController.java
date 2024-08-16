@@ -21,11 +21,19 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
     
+    
+    
     // Endpoint to create a new appointment
     @PostMapping("/create")
     public ResponseEntity<AppointmentData> createAppointment(@RequestBody AppointmentData appointmentData) {
         AppointmentData createdAppointment = appointmentService.createAppointment(appointmentData);
         return ResponseEntity.ok(createdAppointment);
+    }
+    
+    @GetMapping("/{appointmentId}")
+    public ResponseEntity<AppointmentData> getAppointmentById(@PathVariable("appointmentId") Long appointmentId) {
+        AppointmentData appointmentData = appointmentService.findAppointmentById(appointmentId);
+        return ResponseEntity.ok(appointmentData);
     }
 
     // Endpoint to find available appointments by date and specialization

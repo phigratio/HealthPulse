@@ -12,8 +12,24 @@ class AppointService {
       });
   }
 
+  // Method to get an appointment by ID
+  getAppointmentById(appointmentId) {
+    return myAxios
+      .get(`/ad/appointments/${appointmentId}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error("There was an error fetching the appointment!", error);
+        throw error;
+      });
+  }
+
+  
+
   // Method to find available appointments by date and specialization
   getAvailableAppointments(date, specialization) {
+    console.log("Method called with date:", date);
+    console.log("Method called with specialization:", specialization);
+
     return myAxios
       .get(`/ad/appointments/available`, {
         params: { date: date, specialization: specialization },
