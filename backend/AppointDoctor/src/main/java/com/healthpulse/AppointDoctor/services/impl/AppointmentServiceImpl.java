@@ -25,6 +25,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentData createAppointment(AppointmentData appointmentData) {
         return appointmentRepository.save(appointmentData);
     }
+    
+    @Override
+    public AppointmentData findAppointmentById(Long appointmentId) {
+        return appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid appointment ID"));
+    }
 
     @Override
     public List<AppointmentData> findAvailableAppointments(LocalDate date, String specialization) {

@@ -1,0 +1,46 @@
+/* DoctorDashboard.css */
+
+.doctor-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  /* background-color: #f7f9fc; */
+  min-height: 100vh;
+}
+
+h2 {
+  color: #3a3a3a;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.dashboard-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  width: 100%;
+}
+
+.dashboard-button {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.dashboard-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}

@@ -1,0 +1,54 @@
+.find-appointment-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.find-appointment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.find-appointment-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.find-appointment-form .field label {
+  font-weight: bold;
+}
+
+.find-appointment-form .field input,
+.find-appointment-form .field select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.find-appointment-form .field input:focus,
+.find-appointment-form .field select:focus {
+  border-color: #03cafc;
+  outline: none;
+}
+
+.find-appointment-form .submit-button {
+  background-color: #03cafc;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.find-appointment-form .submit-button:hover {
+  background-color: #028cc4;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 14px;
+  text-align: center;
+}

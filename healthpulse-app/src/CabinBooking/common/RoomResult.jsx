@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import ApiService from "../services/ApiService";
-import "./style/RoomResult.css";
+import "./style/RoomResult.css"; 
 import { isAdmin } from "../../service/user-service";
 import { BASE_URL } from "../../service/helper";
 

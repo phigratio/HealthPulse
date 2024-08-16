@@ -1,0 +1,52 @@
+.cb-add-appointment-page {
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.cb-add-appointment-page h2 {
+  margin-bottom: 20px;
+}
+
+.cb-add-appointment-page .form-group {
+  margin-bottom: 15px;
+}
+
+.cb-add-appointment-page label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.cb-add-appointment-page input,
+.cb-add-appointment-page select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cb-add-appointment-page button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cb-add-appointment-page button:hover {
+  background-color: #0056b3;
+}
+
+.cb-add-appointment-page .error {
+  color: red;
+}
+
+.cb-add-appointment-page .success {
+  color: green;
+}

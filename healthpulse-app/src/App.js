@@ -52,6 +52,9 @@ import CabinMainPage from "./CabinBooking/CabinMainPage";
 
 import AdminMainPage from "./admin_part/AdminMainPage";
 
+//Appointment part
+import AppointMainPage from "./appointPart/AppointMainPage";
+
 library.add(fas);
 function App() {
   return (
@@ -118,6 +121,9 @@ function App() {
 
         {/* Admin part */}
         <Route path="/admin/*" element={<AdminMainPage />} />
+
+        {/* Appointment part */}
+        <Route path="/appoint/*" element={<AppointMainPage />} />
       </Routes>
     </BrowserRouter>
   );
