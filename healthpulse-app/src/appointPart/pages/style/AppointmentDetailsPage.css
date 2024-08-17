@@ -46,6 +46,19 @@
   margin-bottom: 0;
 }
 
+.book-now-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.book-now-button:hover {
+  background-color: #218838;
+}
+
 @media (max-width: 768px) {
   .ad-details-page {
     padding: 10px;

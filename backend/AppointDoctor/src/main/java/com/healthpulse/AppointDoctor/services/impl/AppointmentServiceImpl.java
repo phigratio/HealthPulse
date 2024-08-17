@@ -1,6 +1,7 @@
 package com.healthpulse.AppointDoctor.services.impl;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -86,6 +87,14 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setPatientId(0); // Reset patient ID
         return appointmentRepository.save(appointment);
     }
+    
+    @Override
+    public List<AppointmentData> findAppointmentsByDoctorId(int doctorId) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        return appointmentRepository.findByDoctorIdAndAppointmentTimeAfterOrderByAppointmentTimeAsc(doctorId, currentTime);
+    }
+    
+   
     
     @Override
     public List<String> findAllSpecializations() {

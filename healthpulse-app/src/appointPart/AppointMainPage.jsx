@@ -9,6 +9,8 @@ import AppointmentDetailsPage from "./pages/AppointmentDetailsPage";
 import AddAppointmentPage from "./pages/AddAppointmentPage";
 import DoctorDashboard from "./doctor/DoctorDashboard";
 import SeeAppointments from "./patient/SeeAppointments";
+import NextAppointments from "./doctor/NextAppointments";
+import FindBooking from "./patient/FindBooking";
 
 const AppointMainPage = () => {
   return (
@@ -26,6 +28,8 @@ const AppointMainPage = () => {
             <Route path="/add" element={<AddAppointmentPage />} />
             <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
             <Route path="/doctor-bookings" element={<SeeAppointments />} />
+            <Route path="/doctor-next-appointments" element={<NextAppointments />} />
+            <Route path="/patient-bookings" element={<FindBooking />} />
           </Routes>
         </div>
       </Base>

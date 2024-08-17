@@ -95,4 +95,17 @@ public class AppointmentController {
     }
     
     
+    // Endpoint to get all appointments by doctorId after the current time
+    
+    @GetMapping("/doctor/{doctorId}/appointments")
+    public ResponseEntity<List<AppointmentData>> getAppointmentsByDoctorId(
+            @PathVariable("doctorId") int doctorId) {
+        List<AppointmentData> appointments = appointmentService.findAppointmentsByDoctorId(doctorId);
+        return ResponseEntity.ok(appointments);
+    }
+
+    
+    
+    
+    
 }

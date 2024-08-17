@@ -20,6 +20,11 @@ public interface AppointmentService {
 
     // Method to find available appointments by doctorId
     List<AppointmentData> findAvailableAppointmentsByDoctorId(int doctorId);
+    
+    // Method to find all appointments by doctorId after the current time 
+    
+    List<AppointmentData> findAppointmentsByDoctorId(int doctorId);
+    
 
     // Method to book an appointment
     AppointmentData bookAppointment(Long appointmentId, int userId);
