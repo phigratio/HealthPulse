@@ -99,7 +99,13 @@ const CustomNavbar = () => {
                 tag={ReactLink}
                 to="/cabin-booking"
               >
-                Book-Cabin
+                Cabin
+              </NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink className="nav-link-light" tag={ReactLink} to="/appoint">
+                Doctor
               </NavLink>
             </NavItem>
 

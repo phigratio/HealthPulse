@@ -17,24 +17,20 @@ function Navbar() {
             Home
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/cabin-booking/rooms" activeclassname="active">
             Rooms
           </NavLink>
-        </li>
+        </li> */}
         <li>
-          {userIsDoctor ? (
+          {userIsDoctor && (
             <NavLink to="/appoint/doctor-dashboard" activeclassname="active">
               Doctor Dashboard
-            </NavLink>
-          ) : (
-            <NavLink to="/appoint/doctor-bookings" activeclassname="active">
-              Appoinments
             </NavLink>
           )}
         </li>
         <li>
-          <NavLink to="/cabin-booking/find-booking" activeclassname="active">
+          <NavLink to="/appoint/patient-bookings" activeclassname="active">
             Find my Booking
           </NavLink>
         </li>

@@ -36,9 +36,9 @@ const DoctorDashboard = () => {
         </button>
         <button
           className="dashboard-button"
-          onClick={() => handleNavigation("/todays-appointments")}
+          onClick={() => handleNavigation("/doctor-next-appointments")}
         >
-          See Today's Appointments
+          See My Appointments
         </button>
         <button
           className="dashboard-button"

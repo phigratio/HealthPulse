@@ -23,8 +23,6 @@ class AppointService {
       });
   }
 
-  
-
   // Method to find available appointments by date and specialization
   getAvailableAppointments(date, specialization) {
     console.log("Method called with date:", date);
@@ -126,6 +124,21 @@ class AppointService {
       .catch((error) => {
         console.error(
           "There was an error fetching the specializations!",
+          error
+        );
+        throw error;
+      });
+  }
+
+  //get next appointment by doctorID
+
+  getNextAppointmentByDoctorId(doctorId) {
+    return myAxios
+      .get(`/ad/appointments/doctor/${doctorId}/appointments`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(
+          "There was an error fetching the next appointment by doctor!",
           error
         );
         throw error;
