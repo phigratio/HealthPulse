@@ -1,0 +1,137 @@
+/* Room Details Page Styles */
+.cb-room-details-booking {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 10px 90px 10px;
+  padding: 20px;
+}
+
+.cb-room-details-image {
+  width: 400px;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.cb-room-details-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cb-book-now-button,
+.cb-accept-booking,
+.cb-go-back-button {
+  background-color: #007f86;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px;
+}
+
+.cb-book-now-button:hover,
+.cb-accept-booking:hover,
+.cb-go-back-button:hover {
+  background-color: rgb(34, 80, 128);
+}
+
+.cb-booking-info {
+  margin-top: 20px;
+}
+
+.cb-booking-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cb-booking-item {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.cb-booking-number {
+  font-weight: bold;
+  color: #333;
+}
+
+.cb-booking-text {
+  font-style: italic;
+  color: #666;
+}
+
+.cb-detail-search-field {
+  margin: 5px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cb-guest-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.cb-guest-div {
+  margin-bottom: 10px;
+}
+
+.cb-guest-div label {
+  margin-right: 10px;
+}
+
+.cb-guest-div input[type="number"],
+.cb-guest-div input[type="tel"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cb-confirm-booking {
+  background-color: #007f86;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cb-confirm-booking:hover {
+  background-color: rgb(34, 80, 128);
+}
+
+.cb-booking-success-message {
+  text-align: center;
+  color: #45a049;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.cb-error-message {
+  text-align: center;
+  color: #b10505;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.cb-success-message {
+  text-align: center;
+  color: #051fb1;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.cb-room-detail-loading {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+  margin-top: 20px;
+}

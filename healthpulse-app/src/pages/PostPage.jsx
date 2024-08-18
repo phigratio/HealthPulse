@@ -1,6 +1,3 @@
-//this page is used to show the post and comments of the post
-
-
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -23,7 +20,7 @@ const PostPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
   const [comment, setComment] = useState({
-    conent: "",
+    content: "",
   });
 
   useEffect(() => {
@@ -57,6 +54,10 @@ const PostPage = () => {
       .then((data) => {
         console.log(data);
         toast.success("comment added ..");
+        //for a page refresh
+
+        window.location.reload();
+
         setPost({
           ...post,
           comments: [...post.comments, data.data],
@@ -86,7 +87,7 @@ const PostPage = () => {
                 <CardBody>
                   <CardText>
                     {" "}
-                    Posted By <b>{post.user.name}</b> on{" "}
+                    Posted By <b>{post.userId}</b> on{" "}
                     <b>{printDate(post.addedDate)} </b>{" "}
                   </CardText>
 
@@ -114,7 +115,7 @@ const PostPage = () => {
                   >
                     <img
                       className="img-fluid"
-                      src={BASE_URL + "/post/image/" + post.imageName}
+                      src={BASE_URL + "/api/post/image/" + post.imageName}
                       alt=""
                     />
                   </div>
@@ -137,6 +138,7 @@ const PostPage = () => {
             <h3>Comments ( {post ? post.comments.length : 0} )</h3>
 
             {post &&
+              post.comments &&
               post.comments.map((c, index) => (
                 <Card className="mt-4 border-0" key={index}>
                   <CardBody>

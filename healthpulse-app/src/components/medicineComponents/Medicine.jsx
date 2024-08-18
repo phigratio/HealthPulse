@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardBody,
@@ -8,27 +8,11 @@ import {
   Button,
 } from "reactstrap";
 import { getCurrentUserDetail, isLoggedIn } from "../../auth";
-import { useState, useEffect } from "react";
 import { BASE_URL } from "../../service/helper";
 import { Link } from "react-router-dom";
+import { useCartContext } from "../../context/cartContext";
 
 const Medicine = ({ medicine, deleteMedicine }) => {
-  const cardStyle = {
-    marginBottom: "20px",
-    textAlign: "center",
-  };
-
-  const imgStyle = {
-    height: "150px",
-    objectFit: "cover",
-  };
-
-  const truncateDescription = (description) => {
-    if (description?.length > 40) {
-      return description.substring(0, 40) + "...";
-    }
-    return description;
-  };
   const [user, setUser] = useState(null);
   const [login, setLogin] = useState(null);
 
@@ -36,8 +20,18 @@ const Medicine = ({ medicine, deleteMedicine }) => {
     setUser(getCurrentUserDetail());
     setLogin(isLoggedIn());
   }, []);
+
+  const { addToCart } = useCartContext();
+
+  const truncateDescription = (description) => {
+    if (description?.length > 40) {
+      return description.substring(0, 40) + "...";
+    }
+    return description;
+  };
+
   return (
-    <Card style={cardStyle}>
+    <Card style={{ marginBottom: "20px", textAlign: "center", width: "100%" }}>
       <CardImg
         top
         width="100%"
@@ -47,35 +41,33 @@ const Medicine = ({ medicine, deleteMedicine }) => {
             : "https://via.placeholder.com/150"
         }
         alt={medicine?.name}
-        style={imgStyle}
+        style={{ height: "150px", objectFit: "cover" }}
       />
-      <CardBody className="text-center">
-        <CardTitle tag="h5">{medicine?.name}</CardTitle>
-        <CardText>{truncateDescription(medicine?.description)}</CardText>
-        <CardText>Price: ${medicine?.price}</CardText>
-        <CardText>Quantity: {medicine?.quantity}</CardText>
-        <div className="text-center">
+      <CardBody className="d-flex flex-column justify-content-between">
+        <div>
+          <CardTitle tag="h5">{medicine?.name}</CardTitle>
+          <CardText>{truncateDescription(medicine?.description)}</CardText>
+          <CardText>Price: ${medicine?.price}</CardText>
+          <CardText>Quantity: {medicine?.quantity}</CardText>
+        </div>
+        <div>
           <Link
-            className="btn btn-secondary border-0 button small-button"
+            className="btn-secondary border-0 button small-button"
             to={"/medicine/" + medicine.medicineId}
           >
             View Details
           </Link>
           <Button
-            color="primary"
             className="ml-2 button small-button mt-1 mr-2"
+            onClick={() => addToCart({ medicine })}
           >
             Add to cart
           </Button>
-
-          {user &&
-            (user.roles[0].id === 501 ? (
-              <>
-                <Button color="danger" onClick={deleteMedicine}>
-                  Delete
-                </Button>
-              </>
-            ) : null)}
+          {user && user.roles[0].id === 501 && (
+            <Button color="danger" onClick={deleteMedicine}>
+              Delete
+            </Button>
+          )}
         </div>
       </CardBody>
     </Card>

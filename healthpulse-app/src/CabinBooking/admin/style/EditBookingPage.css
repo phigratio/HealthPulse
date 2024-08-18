@@ -1,0 +1,83 @@
+/* EditBookingPage.css */
+
+.find-booking-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cb-booking-details {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cb-booking-details h3 {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.cb-booking-details p {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.cb-booking-details img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.cb-acheive-booking {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #03cafc;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cb-acheive-booking:hover {
+  background-color: #029fca;
+}
+
+.error-message {
+  color: #d9534f;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.success-message {
+  color: #5cb85c;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #ddd;
+  margin: 20px 0;
+}

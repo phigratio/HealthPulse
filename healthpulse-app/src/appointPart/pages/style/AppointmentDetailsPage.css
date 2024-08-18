@@ -1,0 +1,82 @@
+.ad-details-page {
+  font-family: "Arial", sans-serif;
+  /* background-color: #f4f4f4; */
+  min-height: 100vh;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.ad-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.ad-details {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 800px;
+  width: 100%;
+}
+
+.ad-details h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.ad-details h2 {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.ad-details p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.ad-details p:last-child {
+  margin-bottom: 0;
+}
+
+.book-now-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.book-now-button:hover {
+  background-color: #218838;
+}
+
+@media (max-width: 768px) {
+  .ad-details-page {
+    padding: 10px;
+  }
+
+  .ad-details {
+    padding: 15px;
+  }
+
+  .ad-details h1 {
+    font-size: 1.5rem;
+  }
+
+  .ad-details h2 {
+    font-size: 1.25rem;
+  }
+
+  .ad-details p {
+    font-size: 0.9rem;
+  }
+}

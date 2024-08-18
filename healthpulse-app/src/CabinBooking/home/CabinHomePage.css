@@ -1,0 +1,166 @@
+.cb-header-image-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cb-header-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cb-header-image-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Adjust opacity for desired darkness */
+  z-index: 1;
+}
+
+.cb-overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  z-index: 2;
+}
+
+.cb-header-banner h1 {
+  font-size: 50px;
+  color: #f8f3f3;
+}
+
+.cb-header-banner h3 {
+  color: #f8f3f3;
+  font-size: 30px;
+}
+
+.cb-phegon-color {
+  color: rgb(3, 202, 252);
+}
+
+/* View all rooms home section */
+.cb-view-rooms-home {
+  margin: 15px 0px 0px 4.6rem;
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: underline;
+  color: #36bff5;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.cb-view-rooms-home:hover {
+  color: #03b5fc;
+}
+
+/* Home services section */
+.cb-home-services {
+  font-weight: 800;
+  color: #007f86;
+  text-align: center;
+  margin: 5px auto 30px auto;
+  font-size: 26px;
+  text-transform: uppercase;
+}
+
+.cb-phegon-color {
+  color: #36bff5;
+}
+
+.cb-service-section {
+  margin: 0px 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Add space between the cards */
+}
+
+.cb-service-card {
+  flex: 1 1 45%;
+  /* Two cards on one row, adjust width as needed */
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  display: flex;
+  background-color: #f9f9f9;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cb-service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cb-service-card img {
+  width: 50px;
+  /* Adjust size of icon */
+  margin-right: 15px;
+}
+
+.cb-service-details {
+  flex: 1;
+}
+
+.cb-service-title {
+  font-size: 18px;
+  margin-bottom: 5px;
+  font-weight: 900;
+  color: #007f86;
+}
+
+.cb-service-description {
+  color: #444;
+  line-height: 1.5;
+}
+
+.cb-header-banner {
+  position: relative;
+  height: 60vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cb-header-image-container {
+  width: 100%;
+  height: 100%;
+}
+
+.cb-header-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(70%);
+}
+
+.cb-overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  max-width: 600px;
+}
+
+.cb-overlay-content h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.cb-overlay-content h3 {
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.text-center {
+  text-align: center;
+}

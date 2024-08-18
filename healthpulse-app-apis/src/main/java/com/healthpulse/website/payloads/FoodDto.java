@@ -12,13 +12,17 @@ import lombok.Setter;
 public class FoodDto {
 
     private Integer foodId;
+    
+    private Float price;
 
     private String name;
 
     private String description;
 
     private String ingredients;
-
+    
+    private String imageName;
+    
     private Float proteinPercentage;
 
     private Float fatPercentage;

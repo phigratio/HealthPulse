@@ -47,6 +47,8 @@ const CustomNavbar = () => {
 
   const isDoctor = user?.roles?.some((role) => role.id === 503);
 
+  const isAdmin = user?.roles?.some((role) => role.id === 501);
+
   const handleUserImageClick = () => {
     if (login) {
       navigate(`/user/my-profile/${user.id}`);
@@ -85,22 +87,33 @@ const CustomNavbar = () => {
                 About
               </NavLink>
             </NavItem>
-
-            <NavItem>
-              <NavLink
-                className="nav-link-light"
-                tag={ReactLink}
-                to="/medicine"
-              >
-                Medicine Shop
-              </NavLink>
-            </NavItem>
-
             <NavItem>
               <NavLink className="nav-link-light" tag={ReactLink} to="/blogs">
                 Blogs
               </NavLink>
             </NavItem>
+
+            <NavItem>
+              <NavLink
+                className="nav-link-light"
+                tag={ReactLink}
+                to="/cabin-booking"
+              >
+                Cabin
+              </NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink className="nav-link-light" tag={ReactLink} to="/appoint">
+                Doctor
+              </NavLink>
+            </NavItem>
+
+            {/* <NavItem>
+              <NavLink className="nav-link-light" tag={ReactLink} to="/food">
+                Food Shop
+              </NavLink>
+            </NavItem> */}
 
             {login && isDoctor && (
               <NavItem>
@@ -114,8 +127,26 @@ const CustomNavbar = () => {
               </NavItem>
             )}
 
+            {login && isAdmin && (
+              <NavItem>
+                <NavLink className="nav-link-light" tag={ReactLink} to="/admin">
+                  Admin-Dashboard
+                </NavLink>
+              </NavItem>
+            )}
+
             {login ? (
               <>
+                {/* <NavItem>
+                  <NavLink
+                    className="nav-link-light"
+                    tag={ReactLink}
+                    to="/cart"
+                  >
+                    Cart
+                  </NavLink>
+                </NavItem> */}
+
                 <NavItem>
                   <NavLink
                     onClick={logout}

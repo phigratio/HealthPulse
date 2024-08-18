@@ -1,0 +1,89 @@
+/* AddRoomPage.css */
+
+.cb-edit-room-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cb-edit-room-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.cb-error-message,
+.cb-success-message {
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.cb-error-message {
+  background-color: #e74c3c;
+}
+
+.cb-success-message {
+  background-color: #2ecc71;
+}
+
+.cb-edit-room-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.cb-form-group {
+  margin-bottom: 15px;
+}
+
+.cb-form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.cb-form-group input[type="text"],
+.cb-form-group select,
+.cb-form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.cb-form-group input[type="file"] {
+  display: block;
+  margin-top: 10px;
+}
+
+.cb-room-photo-preview {
+  display: block;
+  max-width: 100%;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cb-update-button {
+  width: 100%;
+  padding: 12px;
+  background-color: rgb(3, 202, 252);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cb-update-button:hover {
+  background-color: rgb(1, 150, 188);
+}

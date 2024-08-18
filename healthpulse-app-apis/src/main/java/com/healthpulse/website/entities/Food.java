@@ -37,6 +37,10 @@ public class Food {
 
     @Column(length = 500)
     private String ingredients;
+    
+    private String imageName;
+    
+    private Float price;
 
     private Float proteinPercentage;
 

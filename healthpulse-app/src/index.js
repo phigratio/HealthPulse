@@ -5,11 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserProvider from "./context/userProvider"; // Import the UserProvider
+import {CartProvider} from "./context/cartContext"; // Import the CartProvider
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <UserProvider>
-    <App />
+    <CartProvider>
+      <App />
+    </CartProvider>
   </UserProvider>
 );
 

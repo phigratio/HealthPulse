@@ -1,0 +1,38 @@
+.cb-admin-page {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.cb-welcome-message {
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #007f86;
+}
+
+.cb-admin-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cb-admin-button {
+  padding: 15px 30px;
+  font-size: 1em;
+  color: white;
+  background-color: #007f86;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cb-admin-button:hover {
+  background-color: rgb(34, 80, 128);
+}

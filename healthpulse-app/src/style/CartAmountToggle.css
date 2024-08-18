@@ -1,0 +1,48 @@
+/* Container for the toggle buttons */
+.cart-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* Styling for the toggle buttons */
+.amount-toggle {
+  display: flex;
+  align-items: center;
+  background: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styling */
+.amount-toggle-button {
+  background: #11a2d7;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.amount-toggle-button:hover {
+  background: #0d8ab8;
+}
+
+.amount-toggle-button:active {
+  background: #0a7396;
+}
+
+/* Styling for the amount display */
+.amount-style {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  font-size: 1.25rem;
+  background: white;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 5px 0;
+}

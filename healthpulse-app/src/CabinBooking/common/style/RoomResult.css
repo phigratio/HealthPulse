@@ -1,0 +1,73 @@
+.cb-room-results {
+  display: block;
+  flex-wrap: wrap;
+  margin: 10px 30px;
+}
+
+.cb-room-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.cb-room-list-item {
+  width: calc(95% - 20px);
+  height: 20vh;
+  margin: 5px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  align-items: center; /* Center content vertically */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cb-room-list-item-image {
+  width: 20%;
+  height: 100%;
+  object-fit: cover; /* Ensure image covers the entire area */
+}
+
+.cb-room-details {
+  flex: 1;
+  padding: 15px;
+  margin-left: 10px;
+}
+
+.cb-room-details h3 {
+  color: #007f86;
+  margin-bottom: 10px;
+}
+
+.cb-room-details p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.cb-room-detail-loading {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+  color: #666;
+}
+
+.cb-book-now-div {
+  align-self: center;
+}
+
+.cb-book-now-button,
+.cb-edit-room-button {
+  background-color: #007f86;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.cb-book-now-button:hover,
+.cb-edit-room-button:hover {
+  background-color: rgb(34, 80, 128);
+}
