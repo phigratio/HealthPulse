@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const API_KEY = "AIzaSyCBks9NXTg4i-Ie_fRRIOIamvS-cFFBejs"; // Replace with your actual API key
 
 const TextToSpeechButton = ({ text }) => {
+  const [audio, setAudio] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    if (audio) {
+      audio.addEventListener("ended", () => setIsPlaying(false));
+    }
+    return () => {
+      if (audio) {
+        audio.removeEventListener("ended", () => setIsPlaying(false));
+      }
+    };
+  }, [audio]);
+
   const speakText = async () => {
     if (text.trim() === "") return;
+
+    if (audio && isPlaying) {
+      audio.pause();
+      audio.currentTime = 0;
+      setIsPlaying(false);
+      return;
+    }
 
     const requestBody = {
       input: { text },
@@ -25,14 +46,20 @@ const TextToSpeechButton = ({ text }) => {
       );
 
       const audioContent = response.data.audioContent;
-      const audio = new Audio("data:audio/mp3;base64," + audioContent);
-      audio.play();
+      const newAudio = new Audio("data:audio/mp3;base64," + audioContent);
+      newAudio.play();
+      setAudio(newAudio);
+      setIsPlaying(true);
     } catch (error) {
       console.error("Error converting text to speech:", error);
     }
   };
 
-  return <button onClick={speakText}>🔊</button>;
+  return (
+    <button onClick={speakText} style={{ fontSize: "small" }}>
+      {isPlaying ? "⏹️" : "🔊"}
+    </button>
+  );
 };
 
 export default TextToSpeechButton;

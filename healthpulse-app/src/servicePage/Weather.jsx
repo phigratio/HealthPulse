@@ -9,7 +9,9 @@ import TextToSpeechButton from "./TextToSpeechButton"; // Make sure you have thi
 import banner from "../images/banner/kidsCorner.mp4";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
+
 import { getCurrentUserDetail } from "../auth";
+
 
 const geminiKey = "AIzaSyBtbcmMGUk34mU0LGJ83pLAfKVWTUKXGIE";
 const dateBuilder = (d) => {
@@ -201,7 +203,9 @@ class Weather extends React.Component {
             {
               parts: [
                 {
+
                   text: `Tell me what health beneficiary steps I can take based on this condition where ${combinedText} . Give response in a single paragraph. Give response with in 200 words`,
+
                 },
               ],
             },
@@ -233,6 +237,7 @@ class Weather extends React.Component {
             {console.log(this.state)}
             <React.Fragment>
               {this.state.temperatureC ? (
+
                 <div className="weather-container">
                   {/* Current Weather Card */}
                   <div className="weather-card">
@@ -265,34 +270,50 @@ class Weather extends React.Component {
                               interval={1000}
                               ticking={true}
                             />
+                            <p>{this.state.main}</p>
                           </div>
-                          <div className="current-date">
-                            {dateBuilder(new Date())}
+                          <div className="date-time">
+                            <div className="dmy">
+                              <div id="txt"></div>
+                              <div className="current-time">
+                                <Clock
+                                  format="HH:mm:ss"
+                                  interval={1000}
+                                  ticking={true}
+                                />
+                              </div>
+                              <div className="current-date">
+                                {dateBuilder(new Date())}
+                              </div>
+                            </div>
+                            <div className="temperature">
+                              <p>
+                                {this.state.temperatureC}°<span>C</span>
+                              </p>
+                            </div>
                           </div>
                         </div>
+
                         <div className="temperature">
                           <p>
                             {this.state.temperatureC}°<span>C</span> |{" "}
                             {this.state.temperatureF}°<span>F</span>
                           </p>
                         </div>
+
                       </div>
                     </div>
                   </div>
-
-                  {/* Health Recommendation Card */}
-                  <div className="health-card">
-                    <h3>Health Recommendation</h3>
-                    <p>{this.state.healthRecommendation}</p>
-                    <TextToSpeechButton
-                      text={this.state.healthRecommendation}
-                    />
+                  <div className="right-side">
+                    <BriefCase />
                   </div>
                 </div>
               ) : (
+
                 <div className="error-message">
                   <p>{this.state.errorMsg}</p>
                 </div>
+
               )}
             </React.Fragment>
           </div>
