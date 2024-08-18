@@ -11,6 +11,7 @@ import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 import HeartRate from "../components/LottieComponents/HeartRate";
 import BriefCase from "../components/LottieComponents/Breifcase";
+import DoctorImg from "../components/LottieComponents/Doctor";
 
 const geminiKey = "AIzaSyBtbcmMGUk34mU0LGJ83pLAfKVWTUKXGIE";
 const dateBuilder = (d) => {
@@ -172,7 +173,8 @@ class Weather extends React.Component {
             {
               parts: [
                 {
-                  text: `I am unable to reach doctor. Give me primary support by telling me what is in the image data and don't mention data. Give some primary remedies based on this information: ${combinedText}`,
+                  text: ` Give me health tips based on this weather: ${combinedText} .Try to ans in one single paragraph and within 500 words
+                  `,
                 },
               ],
             },
@@ -205,7 +207,7 @@ class Weather extends React.Component {
               {this.state.temperatureC ? (
                 <div className="content-container">
                   <div className="left-side">
-                    <BriefCase />
+                    <DoctorImg />
                   </div>
                   <div className="middle-side">
                     <div className="weather-container">

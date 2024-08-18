@@ -16,15 +16,15 @@ import Places from "./Places";
 import Distance from "./Distance";
 import markerHospital from "./hospital-marker-48.png";
 import "./Map.css";
+import HospitalList from "./HospitalList";
 //b181cac70f27f5e6
 const YOUR_API_KEY = process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY;
-
 const Map = () => {
   const [office, setOffice] = useState(null);
   const [directions, setDirections] = useState(null);
   const [hospitals, setHospitals] = useState([]);
+  const [currentLocation, setCurrentLocation] = useState(null);
   const mapRef = useRef(null);
-  const center = useMemo(() => ({ lat: 43.45, lng: -80.49 }), []);
   const options = useMemo(
     () => ({
       mapId: "e103b58ca6729d88",
@@ -70,6 +70,8 @@ const Map = () => {
       });
 
       const { lat, lng } = await location;
+      setCurrentLocation({ lat, lng });
+      setOffice({ lat, lng });
 
       const map = new google.maps.Map(document.createElement("div"), {
         center: { lat, lng },
@@ -81,13 +83,12 @@ const Map = () => {
       service.nearbySearch(
         {
           location: { lat, lng },
-          radius: 5000, // Adjust radius as needed
+          radius: 5000,
           type: ["hospital"],
         },
         (results, status) => {
           if (status === google.maps.places.PlacesServiceStatus.OK && results) {
             setHospitals(results);
-            setOffice({ lat, lng });
           }
         }
       );
@@ -101,21 +102,10 @@ const Map = () => {
   return (
     <div>
       <div className="container">
-        <div className="controls">
-          <h1>Commute?</h1>
-          <Places
-            setOffice={(position) => {
-              setOffice(position);
-              mapRef.current?.panTo(position);
-            }}
-          />
-
-          {directions && <Distance leg={directions.routes[0].legs[0]} />}
-        </div>
         <div className="map">
           <GoogleMap
-            zoom={10}
-            center={center}
+            zoom={15}
+            center={currentLocation}
             mapContainerClassName="map-container"
             options={options}
             onLoad={onLoad}
@@ -167,6 +157,7 @@ const Map = () => {
           </GoogleMap>
         </div>
       </div>
+      <HospitalList hospitals={hospitals} onHospitalClick={fetchDirections} />
     </div>
   );
 };
