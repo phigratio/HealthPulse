@@ -74,6 +74,8 @@ const CreatePrescription = () => {
       });
   };
 
+  //getting current user
+
   useEffect(() => {
     setUser(getCurrentUserDetail());
   }, []);
@@ -87,15 +89,12 @@ const CreatePrescription = () => {
         className="mt-2"
         style={{
           boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)",
-          width: "100%",
+          width: "70%",
         }}
       >
         <CardBody style={{ padding: "20px" }}>
           <h3 className="text-center">Create a New Prescription</h3>
-          <Form
-            onSubmit={createPrescription}
-            style={{ width: "50%", margin: "0 auto" }}
-          >
+          <Form onSubmit={createPrescription} style={{ width: "100%" }}>
             <div className="my-3">
               <Label for="doctorId">Doctor ID</Label>
               <Input
@@ -126,6 +125,7 @@ const CreatePrescription = () => {
                 onChange={contentFieldChanged}
                 tabIndex={1}
                 onBlur={(newContent) => setContent(newContent)}
+                style={{ minHeight: "300px", width: "100%" }}
               />
             </div>
             <div className="button-container text-center">
