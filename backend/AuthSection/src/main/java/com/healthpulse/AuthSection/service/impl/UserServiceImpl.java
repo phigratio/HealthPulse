@@ -50,32 +50,34 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto updateUser(UserDto userDto, Integer userId) {
 
-		User user = this.userRepo.findById(userId)
-				.orElseThrow(() -> new ResourceNotFoundException("User", " Id ", userId));
+	    User user = this.userRepo.findById(userId)
+	            .orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
 
-		user.setName(userDto.getName());
-		user.setEmail(userDto.getEmail());
-//		user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-		user.setAbout(userDto.getAbout());
-		user.setAge(userDto.getAge());
-		user.setImageName(userDto.getImageName());
+	    user.setName(userDto.getName());
+	    user.setEmail(userDto.getEmail());
+	    user.setAbout(userDto.getAbout());
+	    user.setAge(userDto.getAge());
+	    user.setImageName(userDto.getImageName());
 
-		
-		//Set the doctor info
-		
-		DoctorInfo doctorInfo = user.getDoctorInfo();
-		if (doctorInfo != null) {
-			DoctorInfoDto doctorInfoDto = userDto.getDoctorInfo();
-			doctorInfo.setSpecialization(doctorInfoDto.getSpecialization());
-			doctorInfo.setDegrees(doctorInfoDto.getDegrees());
-			doctorInfo.setCertificates(doctorInfoDto.getCertificates());
-			doctorInfo.setExperience(doctorInfoDto.getExperience());
-			doctorInfo.setApprovedByAdmin(doctorInfoDto.getApprovedByAdmin());
-		}
+	    // Update DoctorInfo if it exists
+	    DoctorInfo doctorInfo = user.getDoctorInfo();
+	    if (doctorInfo != null) {
+	        DoctorInfoDto doctorInfoDto = userDto.getDoctorInfo();
+	        if (doctorInfoDto != null) {
+	            doctorInfo.setSpecialization(doctorInfoDto.getSpecialization());
+	            doctorInfo.setDegrees(doctorInfoDto.getDegrees());
+	            doctorInfo.setCertificates(doctorInfoDto.getCertificates());
+	            doctorInfo.setCV(doctorInfoDto.getCV());
+	            doctorInfo.setCertificateOfRegistration(doctorInfoDto.getCertificateOfRegistration());
+	            doctorInfo.setExperience(doctorInfoDto.getExperience());
+//	            doctorInfo.setApprovedByAdmin(doctorInfoDto.getApprovedByAdmin());
+	        }
+	    }
 
-		User updatedUser = this.userRepo.save(user);
-		return this.userToDto(updatedUser);
+	    User updatedUser = this.userRepo.save(user);
+	    return this.userToDto(updatedUser);
 	}
+
 
 	@Override
 	public UserDto getUserById(Integer userId) {

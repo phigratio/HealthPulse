@@ -10,6 +10,7 @@ import {
 import { getCurrentUserDetail, isLoggedIn } from "../auth";
 import { BASE_URL } from "../service/helper";
 import { Link as ReactLink } from "react-router-dom";
+import empty from "../images/basic/empty.png";
 
 const ViewUserProfile = ({ user, updateProfileClick }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -36,14 +37,19 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
   return (
     <Card
       className="mt-32 border-0 rounded-4"
-      style={{ boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)" }}
+      style={{
+        boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)",
+        width: "100%",
+        maxWidth: "1200px",
+        margin: "auto",
+      }}
     >
       <CardBody>
         <h3 className="text-uppercase text-center">User Information</h3>
 
         <Container className="text-center">
           <img
-            style={{ maxWidth: "200px", maxHeight: "200px" }}
+            style={{ maxWidth: "250px", maxHeight: "250px" }}
             src={
               user.imageName
                 ? BASE_URL + "/users/user/image/" + user.imageName
@@ -59,6 +65,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
           hover
           bordered={true}
           className="text-center mt-5"
+          style={{ width: "100%" }}
         >
           <tbody>
             <tr>
@@ -97,6 +104,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
               hover
               bordered={true}
               className="text-center mt-5"
+              style={{ width: "100%" }}
             >
               <tbody>
                 <tr>
@@ -119,6 +127,46 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                   <td>Approved By Admin</td>
                   <td>{user.doctorInfo.approvedByAdmin}</td>
                 </tr>
+
+                <tr>
+                  <td>Doctor Certificate:</td>
+                  <td>
+                    <Container className="text-center">
+                      <img
+                        style={{ maxWidth: "250px", maxHeight: "250px" }}
+                        src={
+                          user.imageName
+                            ? BASE_URL +
+                              "/users/user/image/" +
+                              user.doctorInfo.certificateOfRegistration
+                            : empty
+                        }
+                        alt="Doctor Certificate"
+                        className="img-fluid d-block mx-auto text-center"
+                      />
+                    </Container>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Doctor CV:</td>
+                  <td>
+                    <Container className="text-center">
+                      <img
+                        style={{ maxWidth: "250px", maxHeight: "250px" }}
+                        src={
+                          user.imageName
+                            ? BASE_URL +
+                              "/users/user/image/" +
+                              user.doctorInfo.cv
+                            : empty
+                        }
+                        alt="Doctor CV"
+                        className="img-fluid d-block mx-auto text-center"
+                      />
+                    </Container>
+                  </td>
+                </tr>
               </tbody>
             </Table>
           </>
@@ -133,6 +181,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
               hover
               bordered={true}
               className="text-center mt-5"
+              style={{ width: "100%" }}
             >
               <tbody>
                 <tr>
@@ -218,14 +267,6 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                   <td>{user.metabolicAge === 0 ? "N/A" : user.metabolicAge}</td>
                 </tr>
                 <tr>
-                  <td>Metabolic Age Needs</td>
-                  <td>
-                    {user.metabolicAgeNeeds === 0
-                      ? "N/A"
-                      : user.metabolicAgeNeeds}
-                  </td>
-                </tr>
-                <tr>
                   <td>Muscle Mass</td>
                   <td>{user.muscleMass === 0 ? "N/A" : user.muscleMass}</td>
                 </tr>
@@ -252,12 +293,6 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                   </td>
                 </tr>
                 <tr>
-                  <td>Waist To Hip Ratio</td>
-                  <td>
-                    {user.waistToHipRatio === 0 ? "N/A" : user.waistToHipRatio}
-                  </td>
-                </tr>
-                <tr>
                   <td>Water Intake</td>
                   <td>{user.waterIntake === 0 ? "N/A" : user.waterIntake}</td>
                 </tr>
@@ -266,19 +301,42 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
           </>
         )}
 
-        {currentUser && currentUser.id === user.id && (
-          <CardFooter className="text-center">
+        <Container className="text-center">
+          <Button
+            tag={ReactLink}
+            to={`/edit-profile/${user.id}`}
+            color="primary"
+            onClick={updateProfileClick}
+            className="my-3"
+          >
+            Update Profile
+          </Button>
+        </Container>
+        {isDoctor && user.doctorInfo && (
+          <Container className="text-center">
             <Button
               tag={ReactLink}
-              to="/user/update-user"
-              color="warning"
-              className="button"
+              to={`/update-doctor-info/${user.id}`}
+              color="primary"
+              className="my-3"
             >
-              Update Profile
+              Update Doctor Info
             </Button>
-          </CardFooter>
+          </Container>
         )}
       </CardBody>
+      <CardFooter className="text-center">
+        <Container className="d-flex justify-content-center">
+          <Button
+            tag={ReactLink}
+            to="/user/dashboard"
+            color="secondary"
+            className="mx-2"
+          >
+            Back to Dashboard
+          </Button>
+        </Container>
+      </CardFooter>
     </Card>
   );
 };

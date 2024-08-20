@@ -1,10 +1,18 @@
-import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { isDoctor } from "../../service/user-service";
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { isDoctor, getUserData } from "../../service/user-service";
 
 function Navbar() {
-  const navigate = useNavigate();
+  const [userId, setUserId] = useState(null);
   const userIsDoctor = isDoctor();
+
+  useEffect(() => {
+    // Retrieve user data from local storage
+    const user = getUserData();
+    if (user) {
+      setUserId(user.id);
+    }
+  }, []);
 
   return (
     <nav className="cb-navbar mt-16">
@@ -17,23 +25,35 @@ function Navbar() {
             Home
           </NavLink>
         </li>
-        {/* <li>
-          <NavLink to="/cabin-booking/rooms" activeclassname="active">
-            Rooms
-          </NavLink>
-        </li> */}
-        <li>
-          {userIsDoctor && (
-            <NavLink to="/appoint/doctor-dashboard" activeclassname="active">
-              Doctor Dashboard
-            </NavLink>
-          )}
-        </li>
+        {userIsDoctor && (
+          <>
+            <li>
+              <NavLink to="/appoint/doctor-dashboard" activeclassname="active">
+                Doctor Dashboard
+              </NavLink>
+            </li>
+            {/* <li>
+              <NavLink to="/appoint/patient-history" activeclassname="active">
+                Patient History
+              </NavLink>
+            </li> */}
+          </>
+        )}
         <li>
           <NavLink to="/appoint/patient-bookings" activeclassname="active">
             Find my Booking
           </NavLink>
         </li>
+        {userId && (
+          <li>
+            <NavLink
+              to={`/appoint/user-prescriptions/${userId}`}
+              activeclassname="active"
+            >
+              My Prescriptions
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   );

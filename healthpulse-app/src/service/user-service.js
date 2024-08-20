@@ -38,6 +38,34 @@ export const uploadProfileImage = (image, userId) => {
     .then((response) => response.data);
 };
 
+//upload CV
+
+export const uploadCV = (cv, userId) => {
+  let formData = new FormData();
+  formData.append("cv", cv);
+  return privateAxios
+    .post(`/users/doctor/upload-cv/${userId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
+};
+
+// Upload certificate
+
+export const uploadCertificate = (certificate, userId) => {
+  let formData = new FormData();
+  formData.append("certificate", certificate);
+  return privateAxios
+    .post(`/users/doctor/upload-certificate/${userId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
+};
+
 // Function to get user data from local storage
 export const getUserData = () => {
   const data = localStorage.getItem("data");
@@ -60,4 +88,16 @@ export const isDoctor = () => {
 export const isUser = () => {
   const user = getUserData();
   return user && user.roles.some((role) => role.id === 502);
+};
+
+//Function to update doctor info
+
+export const updateDoctorInfo = (formData, userId) => {
+  return privateAxios
+    .put(`/doctors/update-info/${userId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
 };

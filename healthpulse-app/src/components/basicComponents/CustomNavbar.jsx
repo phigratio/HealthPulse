@@ -1,21 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { NavLink as ReactLink, useNavigate } from "react-router-dom";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-} from "reactstrap";
 import logo from "../../images/logo/HealthPulseLogo3-removebg.png";
-import defaultUserImage from "../../images/default/user.png"; // Add a default user image
+import defaultUserImage from "../../images/default/user.png";
 import "../../style/CustomNavbar.css";
 import { getCurrentUserDetail, isLoggedIn, doLogout } from "../../auth";
 import userContext from "../../context/userContext";
@@ -27,7 +13,6 @@ const CustomNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [login, setLogin] = useState(false);
   const [user, setUser] = useState(undefined);
-  const toggle = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     setLogin(isLoggedIn());
@@ -46,7 +31,6 @@ const CustomNavbar = () => {
   };
 
   const isDoctor = user?.roles?.some((role) => role.id === 503);
-
   const isAdmin = user?.roles?.some((role) => role.id === 501);
 
   const handleUserImageClick = () => {
@@ -57,171 +41,156 @@ const CustomNavbar = () => {
     }
   };
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div>
-      <Navbar className="custom-navbar fixed-top" expand="md">
-        {login ? (
-          <NavbarBrand
-            tag={ReactLink}
-            to="/user/dashboard"
-            className="d-flex align-items-center"
+    <header className="cn-custom-navbar fixed-top">
+      <div className="cn-navbar-content">
+        <div className="cn-navbar-brand">
+          <ReactLink
+            to={login ? "/user/dashboard" : "/"}
+            className="cn-navbar-brand-link"
           >
-            <img src={logo} alt="Health Pulse Logo" className="navbar-logo" />
-            <span className="brand-text">HealthPulse</span>
-          </NavbarBrand>
-        ) : (
-          <NavbarBrand
-            tag={ReactLink}
-            to="/"
-            className="d-flex align-items-center"
-          >
-            <img src={logo} alt="Health Pulse Logo" className="navbar-logo" />
-            <span className="brand-text">HealthPulse</span>
-          </NavbarBrand>
-        )}
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink className="nav-link-light" tag={ReactLink} to="/about">
+            <img
+              src={logo}
+              alt="Health Pulse Logo"
+              className="cn-navbar-logo"
+            />
+            <span className="cn-brand-text">HealthPulse</span>
+          </ReactLink>
+        </div>
+
+        <button className="cn-navbar-toggler" onClick={toggleMenu}>
+          <span className="cn-navbar-toggler-icon">&#9776;</span>
+        </button>
+
+        <nav className={`cn-navbar-menu ${isOpen ? "open" : ""}`}>
+          <ul className="cn-navbar-nav">
+            <li className="cn-nav-item">
+              <ReactLink className="cn-nav-link-light" to="/about">
                 About
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink className="nav-link-light" tag={ReactLink} to="/blogs">
+              </ReactLink>
+            </li>
+            <li className="cn-nav-item">
+              <ReactLink className="cn-nav-link-light" to="/blogs">
                 Blogs
-              </NavLink>
-            </NavItem>
-
-            <NavItem>
-              <NavLink
-                className="nav-link-light"
-                tag={ReactLink}
-                to="/cabin-booking"
-              >
+              </ReactLink>
+            </li>
+            <li className="cn-nav-item">
+              <ReactLink className="cn-nav-link-light" to="/cabin-booking">
                 Cabin
-              </NavLink>
-            </NavItem>
-
-            <NavItem>
-              <NavLink className="nav-link-light" tag={ReactLink} to="/appoint">
+              </ReactLink>
+            </li>
+            <li className="cn-nav-item">
+              <ReactLink className="cn-nav-link-light" to="/appoint">
                 Doctor
-              </NavLink>
-            </NavItem>
-
-            {/* <NavItem>
-              <NavLink className="nav-link-light" tag={ReactLink} to="/food">
+              </ReactLink>
+            </li>
+            {/* <li className="cn-nav-item">
+              <ReactLink className="cn-nav-link-light" to="/food">
                 Food Shop
-              </NavLink>
-            </NavItem> */}
+              </ReactLink>
+            </li> */}
 
             {login && isDoctor && (
-              <NavItem>
-                <NavLink
-                  className="nav-link-light"
-                  tag={ReactLink}
-                  to="/user/my-posts"
-                >
+              <li className="cn-nav-item">
+                <ReactLink className="cn-nav-link-light" to="/user/my-posts">
                   My Blogs
-                </NavLink>
-              </NavItem>
+                </ReactLink>
+              </li>
             )}
 
             {login && isAdmin && (
-              <NavItem>
-                <NavLink className="nav-link-light" tag={ReactLink} to="/admin">
+              <li className="cn-nav-item">
+                <ReactLink className="cn-nav-link-light" to="/admin">
                   Admin-Dashboard
-                </NavLink>
-              </NavItem>
+                </ReactLink>
+              </li>
             )}
 
             {login ? (
               <>
-                {/* <NavItem>
-                  <NavLink
-                    className="nav-link-light"
-                    tag={ReactLink}
-                    to="/cart"
-                  >
-                    Cart
-                  </NavLink>
-                </NavItem> */}
-
-                <NavItem>
-                  <NavLink
+                <li className="cn-nav-item">
+                  <ReactLink
                     onClick={logout}
-                    className="nav-link-light"
-                    tag={ReactLink}
+                    className="cn-nav-link-light"
                     to="/"
                   >
                     Log Out
-                  </NavLink>
-                </NavItem>
+                  </ReactLink>
+                </li>
 
-                <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret className="nav-link-light">
-                    Services
-                  </DropdownToggle>
-                  <DropdownMenu right>
-                    <DropdownItem tag={ReactLink} to="/service/doctor-chat-bot">
-                      Doctor Chat Bot
-                    </DropdownItem>
-                    <DropdownItem
-                      tag={ReactLink}
-                      to="/service/health-calculator"
-                    >
-                      Health Calculator
-                    </DropdownItem>
-                    <DropdownItem tag={ReactLink} to="/service/kids-corner">
-                      Kids Corner
-                    </DropdownItem>
-                    <DropdownItem tag={ReactLink} to="/service/book-doctor">
-                      Book Doctor
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>Reset</DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
+                <li className="cn-nav-item dropdown">
+                  <button className="cn-dropdown-toggle">Services</button>
+                  <ul className="cn-dropdown-menu">
+                    <li>
+                      <ReactLink
+                        className="cn-dropdown-item"
+                        to="/service/doctor-chat-bot"
+                      >
+                        Doctor Chat Bot
+                      </ReactLink>
+                    </li>
+                    <li>
+                      <ReactLink
+                        className="cn-dropdown-item"
+                        to="/service/health-calculator"
+                      >
+                        Health Calculator
+                      </ReactLink>
+                    </li>
+                    <li>
+                      <ReactLink
+                        className="cn-dropdown-item"
+                        to="/service/kids-corner"
+                      >
+                        Kids Corner
+                      </ReactLink>
+                    </li>
+                    <li>
+                      <ReactLink
+                        className="cn-dropdown-item"
+                        to="/service/book-doctor"
+                      >
+                        Book Doctor
+                      </ReactLink>
+                    </li>
+                    <li className="cn-dropdown-divider"></li>
+                    {/* <li>
+                      <ReactLink
+                        className="cn-dropdown-item"
+                        to="/service/food-shop"
+                      >
+                        Food Shop
+                      </ReactLink>
+                    </li> */}
+                  </ul>
+                </li>
               </>
             ) : (
-              <>
-                <NavItem>
-                  <NavLink
-                    className="nav-link-light"
-                    tag={ReactLink}
-                    to="/login"
-                  >
-                    LogIn
-                  </NavLink>
-                </NavItem>
-
-                <NavItem>
-                  <NavLink
-                    className="nav-link-light"
-                    tag={ReactLink}
-                    to="/signup"
-                  >
-                    Sign Up
-                  </NavLink>
-                </NavItem>
-              </>
+              <li className="cn-nav-item">
+                <ReactLink className="cn-nav-link-light" to="/login">
+                  Log In
+                </ReactLink>
+              </li>
             )}
-          </Nav>
-        </Collapse>
-        <div className="navbar-user-image-container">
+          </ul>
+        </nav>
+
+        <div
+          className="cn-navbar-user-image-container"
+          onClick={handleUserImageClick}
+        >
           <img
-            src={
-              login && user?.imageName
-                ? BASE_URL + "/users/user/image/" + user.imageName
-                : defaultUserImage
-            }
+            src={user?.image ? `${BASE_URL}${user.image}` : defaultUserImage}
             alt="User"
-            className="navbar-user-image"
-            onClick={handleUserImageClick}
+            className="cn-navbar-user-image"
           />
         </div>
-      </Navbar>
-    </div>
+      </div>
+    </header>
   );
 };
 
