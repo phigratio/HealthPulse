@@ -30,6 +30,7 @@ import UpdateUser from "./pages/UpdateUser";
 import MedicineFeed from "./components/medicineComponents/MedicineFeed";
 import MedicineShop from "./pages/MedicineShop";
 import FoodPage from "./pages/FoodPage";
+import UpdateDoctorInfoPage from "./pages/UpdateDoctorInfoPage";
 
 import FoodFeed from "./components/foodComponents/FoodFeed";
 import FoodShop from "./pages/FoodShop";
@@ -110,6 +111,11 @@ function App() {
           <Route path="my-posts" element={<MyPosts />} />
           <Route path="update-blog/:blogId" element={<UpdateBlog />} />
         </Route>
+
+        <Route
+          path="/update-doctor-info/:userId"
+          element={<UpdateDoctorInfoPage />}
+        />
 
         {/* Ecommerce part */}
 
