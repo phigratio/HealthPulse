@@ -1,0 +1,92 @@
+/* login.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  /* Gradient background */
+}
+
+.lottie-container {
+  position: absolute;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lottie-container.left {
+  left: 0;
+}
+
+.lottie-container.right {
+  right: 0;
+}
+
+.form-container {
+  width: 60%;
+
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.login-button,
+.reset-button {
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+}
+
+.login-button:hover,
+.reset-button:hover {
+  background-color: #16a085;
+}
+
+.login-button:focus,
+.reset-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.small-button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lottie-container {
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .form-container {
+    width: 100%;
+  }
+}

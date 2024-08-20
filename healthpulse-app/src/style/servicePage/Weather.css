@@ -4,29 +4,32 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  color: white;
+  color: #ffffff; /* Pure white color */
 }
 
 .weather-card,
 .health-card {
-  background: #2c2c5c; /* dark navy bluish */
+  background: #2c2c5c; /* Dark navy bluish */
   padding: 20px;
   margin: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 60%;
   text-align: center;
+  color: #ffffff; /* Pure white color */
 }
 
 .city-info {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #ffffff; /* Pure white color */
 }
 
 .title h2,
 .title h3 {
   margin: 5px 0;
+  color: #ffffff; /* Pure white color */
 }
 
 .mb-icon {
@@ -37,18 +40,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #ffffff; /* Pure white color */
 }
 
 .temperature p {
   font-size: 2rem;
   font-weight: bold;
+  color: #ffffff; /* Pure white color */
 }
 
 .health-card h3 {
   margin-bottom: 10px;
+  color: #ffffff; /* Pure white color */
 }
 
 .loading-container {
   text-align: center;
   margin-top: 20%;
+  color: #ffffff; /* Pure white color */
 }
