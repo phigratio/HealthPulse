@@ -9,7 +9,9 @@ import TextToSpeechButton from "./TextToSpeechButton"; // Make sure you have thi
 import banner from "../images/banner/kidsCorner.mp4";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
-import { getCurrentUserDetail } from "../auth";
+import HeartRate from "../components/LottieComponents/HeartRate";
+import Briefcase from "../components/LottieComponents/Breifcase";
+import DoctorImg from "../components/LottieComponents/Doctor";
 
 const geminiKey = "AIzaSyBtbcmMGUk34mU0LGJ83pLAfKVWTUKXGIE";
 const dateBuilder = (d) => {
@@ -52,45 +54,23 @@ const defaults = {
 };
 
 class Weather extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      lat: undefined,
-      lon: undefined,
-      errorMessage: undefined,
-      temperatureC: undefined,
-      temperatureF: undefined,
-      city: undefined,
-      country: undefined,
-      humidity: undefined,
-      description: undefined,
-      icon: "CLEAR_DAY",
-      main: undefined,
-      errorMsg: undefined,
-      healthRecommendation: "", // State for health recommendation
-      weight: "",
-      heightCm: "",
-      age: "",
-      gender: "",
-      bmi: "",
-    };
-  }
+  state = {
+    lat: undefined,
+    lon: undefined,
+    errorMessage: undefined,
+    temperatureC: undefined,
+    temperatureF: undefined,
+    city: undefined,
+    country: undefined,
+    humidity: undefined,
+    description: undefined,
+    icon: "CLEAR_DAY",
+    main: undefined,
+    errorMsg: undefined,
+    healthRecommendation: "", // State for health recommendation
+  };
 
   componentDidMount() {
-    const user = getCurrentUserDetail();
-    console.log("Fetched user details:", user); // Debugging line to check user details
-
-    if (user) {
-      this.setState({
-        weight: user.weight > 0 ? user.weight : "",
-        heightCm: user.height > 0 ? user.height : "",
-        age: user.age > 0 ? user.age : "",
-        gender: user.gender ? user.gender : "",
-        bmi: user.bmi > 0 ? user.bmi : "",
-      });
-    }
-
     if (navigator.geolocation) {
       this.getPosition()
         .then((position) => {
@@ -139,11 +119,7 @@ class Weather extends React.Component {
         country: data.sys.country,
       });
       this.setIcon(data.weather[0].main);
-      this.fetchHealthRecommendation(
-        data.weather[0].main,
-        data.main.temp,
-        data.main.humidity
-      );
+      this.fetchHealthRecommendation(data.weather[0].main, data.main.temp);
     } catch (error) {
       console.error("Error fetching weather data:", error);
       this.setState({
@@ -186,12 +162,8 @@ class Weather extends React.Component {
     }
   };
 
-  fetchHealthRecommendation = async (
-    weatherCondition,
-    temperature,
-    humidity
-  ) => {
-    const combinedText = `Weather is ${weatherCondition} with temperature ${temperature}°C. and humidity ${humidity}%. My age is ${this.state.age} weight is ${this.state.weight} kg, height is ${this.state.heightCm} cm,  bmi is ${this.state.bmi}`;
+  fetchHealthRecommendation = async (weatherCondition, temperature) => {
+    const combinedText = `Weather is ${weatherCondition} with temperature ${temperature}°C.`;
 
     try {
       const response = await axios.post(
@@ -201,7 +173,7 @@ class Weather extends React.Component {
             {
               parts: [
                 {
-                  text: `Tell me what health beneficiary steps I can take based on this condition where ${combinedText} . Give response in a single paragraph. Give response with in 200 words`,
+                  text: ` Give me health tips based on this weather: ${combinedText} .Try to ans in one single paragraph and within 500 words`,
                 },
               ],
             },
@@ -230,69 +202,86 @@ class Weather extends React.Component {
             <div className="video-container">
               <video src={banner} autoPlay loop muted></video>
             </div>
-            {console.log(this.state)}
             <React.Fragment>
               {this.state.temperatureC ? (
-                <div className="weather-container">
-                  {/* Current Weather Card */}
-                  <div className="weather-card">
-                    <div className="city-info">
-                      <div className="title">
-                        <h2>{this.state.city}</h2>
-                        <h3>{this.state.country}</h3>
-                      </div>
-                      <div className="mb-icon">
-                        <ReactAnimatedWeather
-                          icon={this.state.icon}
-                          color={defaults.color}
-                          size={defaults.size}
-                          animate={defaults.animate}
-                        />
-                        <p>{this.state.main}</p>
-                      </div>
-                      <div>
-                        <p>
-                          {"Humidity: "}
-                          {this.state.humidity} {"%"}
-                        </p>
-                      </div>
-                      <div className="date-time">
-                        <div className="dmy">
-                          <div id="txt"></div>
-                          <div className="current-time">
-                            <Clock
-                              format="HH:mm:ss"
-                              interval={1000}
-                              ticking={true}
+                <div className="content-container">
+                  <div className="left-side">
+                    <Briefcase /> {/* Positioned top-left */}
+                  </div>
+                  <div className="middle-side">
+                    <div className="weather-container">
+                      {/* Current Weather Card */}
+                      <div className="weather-card">
+                        <div className="city-info">
+                          <div className="title">
+                            <h2>{this.state.city}</h2>
+                            <h3>{this.state.country}</h3>
+                          </div>
+                          <div className="mb-icon">
+                            <ReactAnimatedWeather
+                              icon={this.state.icon}
+                              color={defaults.color}
+                              size={defaults.size}
+                              animate={defaults.animate}
                             />
+                            <p>{this.state.main}</p>
                           </div>
-                          <div className="current-date">
-                            {dateBuilder(new Date())}
+                          <div className="date-time">
+                            <div className="dmy">
+                              <div id="txt"></div>
+                              <div className="current-time">
+                                <Clock
+                                  format="HH:mm:ss"
+                                  interval={1000}
+                                  ticking={true}
+                                />
+                              </div>
+                              <div className="current-date">
+                                {dateBuilder(new Date())}
+                              </div>
+                            </div>
+                            <div className="temperature">
+                              <p>
+                                {this.state.temperatureC}°<span>C</span>
+                              </p>
+                            </div>
                           </div>
                         </div>
-                        <div className="temperature">
-                          <p>
-                            {this.state.temperatureC}°<span>C</span> |{" "}
-                            {this.state.temperatureF}°<span>F</span>
-                          </p>
-                        </div>
+                      </div>
+
+                      {/* Health Recommendation Card */}
+                      <div className="health-card">
+                        <h3>Health Recommendation</h3>
+                        <p>{this.state.healthRecommendation}</p>
+                        <TextToSpeechButton
+                          text={this.state.healthRecommendation}
+                        />
                       </div>
                     </div>
                   </div>
-
-                  {/* Health Recommendation Card */}
-                  <div className="health-card">
-                    <h3>Health Recommendation</h3>
-                    <p>{this.state.healthRecommendation}</p>
-                    <TextToSpeechButton
-                      text={this.state.healthRecommendation}
-                    />
+                  <div className="right-side">
+                    <DoctorImg /> {/* Positioned bottom-right */}
                   </div>
                 </div>
               ) : (
-                <div className="error-message">
-                  <p>{this.state.errorMsg}</p>
-                </div>
+                <React.Fragment>
+                  <div className="loading-container">
+                    <h3
+                      style={{
+                        color: "white",
+                        fontSize: "22px",
+                        fontWeight: "600",
+                      }}
+                    >
+                      Detecting your location
+                      <HeartRate />
+                    </h3>
+                    <h3 style={{ color: "white", marginTop: "10px" }}>
+                      Your current location will be displayed on the App{" "}
+                      <br></br> & used for calculating Real-time weather.
+                    </h3>
+                  </div>
+                </React.Fragment>
               )}
             </React.Fragment>
           </div>

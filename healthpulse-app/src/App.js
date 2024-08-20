@@ -40,6 +40,8 @@ import MedicineCategories from "./components/medicineComponents/MedicineCategori
 import NewsList from "./servicePage/NewsList";
 import Weather from "./servicePage/Weather";
 import PrescriptionAnalyzer from "./servicePage/PrescriptionAnalyzer";
+import NearestHospital from "./servicePage/NearestHospital";
+import MapHome from "./servicePage/MapHome";
 
 // Ecommerce part
 
@@ -83,6 +85,7 @@ function App() {
           path="/service/prescription-analyzer"
           element={<PrescriptionAnalyzer />}
         />
+        <Route path="/service/nearest-hospital" element={<MapHome />} />
 
         <Route path="/user/update-user" element={<UpdateUser />} />
         <Route path="/posts/:postId" element={<PostPage />} />

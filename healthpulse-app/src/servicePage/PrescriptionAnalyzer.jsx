@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../style/servicePage/PrescriptionAnalyzer.css";
 import TextToSpeechButton from "./TextToSpeechButton";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 import banner from "../images/banner/kidsCorner.mp4";
+import HeartRate from "../components/LottieComponents/HeartRate";
+import BriefCase from "../components/LottieComponents/Breifcase";
 
 const PrescriptionAnalyzer = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -18,6 +20,13 @@ const PrescriptionAnalyzer = () => {
 
   const apiKeyVision = "AIzaSyCj5hRY6tg826SELZMcacxPpiCZMuY-VJ4";
   const apiKeyGemini = "AIzaSyBtbcmMGUk34mU0LGJ83pLAfKVWTUKXGIE";
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (visionText || result) {
+      setLoading(false);
+    }
+  }, [visionText, result]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -70,7 +79,7 @@ const PrescriptionAnalyzer = () => {
                 {
                   parts: [
                     {
-                      text: `This text probably contains some medicine names. Can you guess the names and provide when these medicines are used? The text is ${combinedText}`,
+                      text: `This text probably contains some medicine names. Can you guess the names and provide when these medicines are used?Please answer in one single paragraph containing all the information The text is ${combinedText}`,
                     },
                   ],
                 },
@@ -106,38 +115,55 @@ const PrescriptionAnalyzer = () => {
           <div className="video-container">
             <video src={banner} autoPlay loop muted></video>
           </div>
-          <div className="image-analyzer-container">
-            <h1 className="heading">Prescription Analyzer</h1>
-            <form onSubmit={handleSubmit}>
-              <div className="button-group">
-                <input
-                  type="file"
-                  onChange={handleFileChange}
-                  id="fileInput"
-                  className="file-input"
-                />
-                <label htmlFor="fileInput" className="btn">
-                  Choose Photo
-                </label>
-                <button type="submit" className="btn" disabled={isGenerating}>
-                  {isGenerating ? "Processing..." : "Upload Photo"}
-                </button>
+
+          <div className="content-container">
+            <div className="left-side">
+              <BriefCase />
+            </div>
+            <div className="middle-side">
+              <div className="image-analyzer-container">
+                <h1 className="heading">Prescription Analyzer</h1>
+                <form onSubmit={handleSubmit}>
+                  <div className="button-group">
+                    <input
+                      type="file"
+                      onChange={handleFileChange}
+                      id="fileInput"
+                      className="file-input"
+                    />
+                    <label htmlFor="fileInput" className="btn">
+                      Choose Prescription
+                    </label>
+                    <button
+                      type="submit"
+                      className="btn"
+                      disabled={isGenerating}
+                    >
+                      {isGenerating ? "Processing..." : "Process Prescription"}
+                    </button>
+                  </div>
+                </form>
+
+                {loading && <HeartRate />}
+                {visionText && !loading && (
+                  <div className="card">
+                    <h2>Extracted Text By AI</h2>
+                    <p>{visionText}</p>
+                    <TextToSpeechButton text={visionText} />
+                  </div>
+                )}
+                {result && !loading && (
+                  <div className="card">
+                    <h2>Medicines Usecases By AI</h2>
+                    <p>{result}</p>
+                    <TextToSpeechButton text={result} />
+                  </div>
+                )}
               </div>
-            </form>
-            {visionText && (
-              <div className="card">
-                <h2>Extracted Text By AI</h2>
-                <p>{visionText}</p>
-                <TextToSpeechButton text={visionText} />
-              </div>
-            )}
-            {result && (
-              <div className="card">
-                <h2>Medicines Usecases By AI</h2>
-                <p>{result}</p>
-                <TextToSpeechButton text={result} />
-              </div>
-            )}
+            </div>
+            <div className="right-side">
+              <BriefCase />
+            </div>
           </div>
         </div>
       </Base>
