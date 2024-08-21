@@ -35,4 +35,20 @@ public class DoctorInfo {
     private String approvedByAdmin; // Admin can approve or reject the doctor's profile
     
     // Add other fields as needed
+
+    // Method to approve doctor
+    public void approve() {
+        this.approvedByAdmin = "Approved";
+    }
+
+    // Method to reject doctor
+    public void reject() {
+        this.approvedByAdmin = "Rejected";
+    }
+
+    // Method to check if approval status is pending
+    public boolean isPendingApproval() {
+        return "Pending".equals(this.approvedByAdmin);
+    }
 }
+

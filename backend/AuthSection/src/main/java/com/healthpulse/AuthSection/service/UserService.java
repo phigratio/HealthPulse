@@ -2,6 +2,7 @@ package com.healthpulse.AuthSection.service;
 
 import java.util.List;
 
+import com.healthpulse.AuthSection.payloads.DoctorInfoDto;
 import com.healthpulse.AuthSection.payloads.UserDto;
 
 import jakarta.transaction.Transactional;
@@ -21,5 +22,12 @@ public interface UserService {
 	List<UserDto> getAllUsers();
 
 	void deleteUser(Integer userId);
+	
+	@Transactional
+	UserDto approveDoctor(int doctorId);
 
+	@Transactional
+	UserDto rejectDoctor(int doctorId);
+
+	List<UserDto> getPendingDoctorApprovals();
 }

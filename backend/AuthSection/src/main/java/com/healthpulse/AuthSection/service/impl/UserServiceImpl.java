@@ -178,6 +178,42 @@ public class UserServiceImpl implements UserService {
 
         return this.modelMapper.map(newUser, UserDto.class);
     }
+	
+	@Override
+	@Transactional
+	public UserDto approveDoctor(int userId) {
+	    DoctorInfo doctorInfo = doctorInfoRepo.findByUser_Id(userId)
+	            .orElseThrow(() -> new ResourceNotFoundException("DoctorInfo", "userId", userId));
+	    doctorInfo.approve();
+	    doctorInfoRepo.save(doctorInfo);
 
+	    // Return the updated User with DoctorInfo
+	    User user = doctorInfo.getUser();
+	    return userToDto(user);
+	}
+
+	@Override
+	@Transactional
+	public UserDto rejectDoctor(int userId) {
+	    DoctorInfo doctorInfo = doctorInfoRepo.findByUser_Id(userId)
+	            .orElseThrow(() -> new ResourceNotFoundException("DoctorInfo", "userId", userId));
+	    doctorInfo.reject();
+	    doctorInfoRepo.save(doctorInfo);
+
+	    // Return the updated User with DoctorInfo
+	    User user = doctorInfo.getUser();
+	    return userToDto(user);
+	}
+
+	@Override
+	public List<UserDto> getPendingDoctorApprovals() {
+	    List<DoctorInfo> pendingDoctors = doctorInfoRepo.findByApprovedByAdmin("Pending");
+	    return pendingDoctors.stream()
+	            .map(doctorInfo -> {
+	                User user = doctorInfo.getUser();
+	                return userToDto(user);
+	            })
+	            .collect(Collectors.toList());
+	}
 
 }

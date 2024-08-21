@@ -11,6 +11,8 @@ import { getCurrentUserDetail, isLoggedIn } from "../auth";
 import { BASE_URL } from "../service/helper";
 import { Link as ReactLink } from "react-router-dom";
 import empty from "../images/basic/empty.png";
+import { approveDoctor, rejectDoctor } from "../service/user-service";
+import { toast } from "react-toastify";
 
 const ViewUserProfile = ({ user, updateProfileClick }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -25,6 +27,13 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
     return roles.some((role) => role.id === roleId);
   };
 
+  const canUpdateProfile = () => {
+    if (!currentUser) {
+      return false;
+    }
+    return currentUser.id === user.id;
+  };
+
   const canViewPersonalInfo = () => {
     if (!currentUser) {
       return false;
@@ -32,7 +41,36 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
     return currentUser.id === user.id || hasRole(currentUser.roles, 503);
   };
 
+  const canApproveDoctor = () => {
+    if (!currentUser) {
+      return false;
+    }
+    return hasRole(currentUser.roles, 501);
+  };
+
   const isDoctor = hasRole(user.roles, 503);
+
+  const handleApproveDoctor = () => {
+    approveDoctor(user.id)
+      .then((response) => {
+        toast.success("Doctor approved successfully!");
+        // Optionally, refresh or update the user info here
+      })
+      .catch((error) => {
+        toast.error("Failed to approve the doctor!");
+      });
+  };
+
+  const handleRejectDoctor = () => {
+    rejectDoctor(user.id)
+      .then((response) => {
+        toast.success("Doctor rejected successfully!");
+        // Optionally, refresh or update the user info here
+      })
+      .catch((error) => {
+        toast.error("Failed to reject the doctor!");
+      });
+  };
 
   return (
     <Card
@@ -246,96 +284,48 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                       : user.boneDensityNeeds}
                   </td>
                 </tr>
-                <tr>
-                  <td>BSA</td>
-                  <td>{user.bsa === 0 ? "N/A" : user.bsa}</td>
-                </tr>
-                <tr>
-                  <td>Calorie Needs</td>
-                  <td>{user.calorieNeeds === 0 ? "N/A" : user.calorieNeeds}</td>
-                </tr>
-                <tr>
-                  <td>Carb Needs</td>
-                  <td>{user.carbNeeds === 0 ? "N/A" : user.carbNeeds}</td>
-                </tr>
-                <tr>
-                  <td>Ideal Weight</td>
-                  <td>{user.idealWeight === 0 ? "N/A" : user.idealWeight}</td>
-                </tr>
-                <tr>
-                  <td>Metabolic Age</td>
-                  <td>{user.metabolicAge === 0 ? "N/A" : user.metabolicAge}</td>
-                </tr>
-                <tr>
-                  <td>Muscle Mass</td>
-                  <td>{user.muscleMass === 0 ? "N/A" : user.muscleMass}</td>
-                </tr>
-                <tr>
-                  <td>Muscle Mass Needs</td>
-                  <td>
-                    {user.muscleMassNeeds === 0 ? "N/A" : user.muscleMassNeeds}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Protein Needs</td>
-                  <td>{user.proteinNeeds === 0 ? "N/A" : user.proteinNeeds}</td>
-                </tr>
-                <tr>
-                  <td>Visceral Fat</td>
-                  <td>{user.visceralFat === 0 ? "N/A" : user.visceralFat}</td>
-                </tr>
-                <tr>
-                  <td>Visceral Fat Needs</td>
-                  <td>
-                    {user.visceralFatNeeds === 0
-                      ? "N/A"
-                      : user.visceralFatNeeds}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Water Intake</td>
-                  <td>{user.waterIntake === 0 ? "N/A" : user.waterIntake}</td>
-                </tr>
               </tbody>
             </Table>
           </>
         )}
 
-        <Container className="text-center">
-          <Button
-            tag={ReactLink}
-            to={`/edit-profile/${user.id}`}
-            color="primary"
-            onClick={updateProfileClick}
-            className="my-3"
-          >
-            Update Profile
-          </Button>
-        </Container>
-        {isDoctor && user.doctorInfo && (
+        {canUpdateProfile() && (
+          <Container className="text-center">
+            <Button onClick={updateProfileClick} color="success" size="lg">
+              Update Profile
+            </Button>
+          </Container>
+        )}
+
+        {canApproveDoctor() && isDoctor && (
           <Container className="text-center">
             <Button
-              tag={ReactLink}
-              to={`/update-doctor-info/${user.id}`}
+              onClick={handleApproveDoctor}
               color="primary"
-              className="my-3"
+              size="lg"
+              className="me-2"
             >
-              Update Doctor Info
+              Approve Doctor
+            </Button>
+            <Button
+              onClick={handleRejectDoctor}
+              color="danger"
+              size="lg"
+              className="ms-2"
+            >
+              Reject Doctor
             </Button>
           </Container>
         )}
       </CardBody>
       <CardFooter className="text-center">
-        <Container className="d-flex justify-content-center">
-          <Button
-            tag={ReactLink}
-            to="/user/dashboard"
-            color="secondary"
-            className="mx-2"
-          >
-            Back to Dashboard
-          </Button>
-        </Container>
+        <Button
+          onClick={() => window.history.back()}
+          color="secondary"
+          size="lg"
+        >
+          Go Back
+        </Button>
       </CardFooter>
     </Card>
   );

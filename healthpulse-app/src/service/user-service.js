@@ -101,3 +101,27 @@ export const updateDoctorInfo = (formData, userId) => {
     })
     .then((response) => response.data);
 };
+
+// get Pending Doctors
+
+export const getPendingDoctors = () => {
+  return privateAxios
+    .get(`/doctors/pending-approvals`)
+    .then((resp) => resp.data);
+};
+
+// Approve Doctor
+
+export const approveDoctor = (doctorId) => {
+  return privateAxios
+    .put(`/doctors/approve/${doctorId}`)
+    .then((resp) => resp.data);
+};
+
+// Reject Doctor
+
+export const rejectDoctor = (doctorId) => {
+  return privateAxios
+    .put(`/doctors/reject/${doctorId}`)
+    .then((resp) => resp.data);
+};
