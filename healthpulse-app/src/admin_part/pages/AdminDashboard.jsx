@@ -34,20 +34,20 @@ const AdminDashboard = () => {
         </button>
         <button
           className="cb-admin-button"
-          onClick={() => navigate("/cabin-booking/admin/manage-bookings")}
+          onClick={() => navigate("/admin/pending-doctors")}
         >
           Manage Doctors
         </button>
         <button
           className="cb-admin-button"
-          onClick={() => navigate("/cabin-booking/admin/manage-bookings")}
+          onClick={() => navigate("/admin/pending-doctors")}
         >
           Manage Blogs
         </button>
 
         <button
           className="cb-admin-button"
-          onClick={() => navigate("/cabin-booking/admin/manage-bookings")}
+          onClick={() => navigate("/admin/pending-doctors")}
         >
           Manage Ecommerce
         </button>
