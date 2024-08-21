@@ -3,9 +3,10 @@ import Children from "../../assets/Children.json";
 import Lottie from "lottie-react";
 
 const containerStyle = {
-  position: "absolute", // Positioning the element absolutely within its container
-  top: "50%", // Adjust this value to move it down or up
-  left: "2%", // Adjust this value to move it right or left
+  display: "flex",
+  justifyContent: "left",
+  alignItems: "left",
+  height: "100vh",
 };
 
 const animationStyle = {
