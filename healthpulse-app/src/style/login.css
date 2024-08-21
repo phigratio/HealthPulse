@@ -1,92 +1,86 @@
-/* login.css */
-
+/* General styles */
 body {
-  margin: 0;
-  padding: 0;
   font-family: Arial, sans-serif;
 }
 
-.main-container {
+/* Login container */
+.login-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between; /* Adjust as needed */
   height: 100vh;
-  /* Gradient background */
+  background-color: #f0f0f0;
+  padding: 20px; /* Add padding to create space around the elements */
 }
 
+/* Lottie containers */
 .lottie-container {
-  position: absolute;
-  width: 20%;
+  flex: 1;
+  /* Adjust width and height as needed */
+  width: 300px;
+  height: 300px;
+}
+
+/* Login card container */
+.login-card-container {
+  flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-.lottie-container.left {
-  left: 0;
+/* ... rest of your CSS */
+.login-card {
+  width: 300px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.lottie-container.right {
-  right: 0;
-}
-
-.form-container {
-  width: 60%;
-
-  border-radius: 10px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  padding: 30px;
+/* Login card header */
+.login-card h3 {
   text-align: center;
-  position: relative;
-  z-index: 1;
-  background: linear-gradient(to right, #1e3c72, #2a5298);
+  margin-bottom: 20px;
 }
 
-.text-center {
-  text-align: center;
+/* Form group */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  justify-content: center;
 }
 
 .login-button,
 .reset-button {
-  background-color: #1abc9c;
-  color: white;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  transition: background-color 0.3s ease;
-  margin: 5px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .login-button:hover,
 .reset-button:hover {
-  background-color: #16a085;
+  background-color: #0069d9;
 }
 
-.login-button:focus,
-.reset-button:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.small-button {
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-
-@media (max-width: 768px) {
-  .main-container {
-    flex-direction: column;
-    padding: 20px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .lottie-container {
-    width: 100%;
-    position: relative;
-    margin-bottom: 20px;
-  }
-
-  .form-container {
-    width: 100%;
-  }
+.reset-button {
+  margin-left: 10px;
 }

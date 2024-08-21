@@ -149,26 +149,15 @@
 // export default Login;
 
 import React, { useState, useContext } from "react";
-import {
-  Container,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Button,
-  Row,
-  Col,
-} from "reactstrap";
-import Base from "../components/Base";
-import { toast } from "react-toastify";
-import { login } from "../service/user-service";
-import { doLogin } from "../auth";
 import { useNavigate } from "react-router-dom";
 import userContext from "../context/userContext";
-import "../style/login.css"; // CSS file for custom styles
+import { login } from "../service/user-service";
+import { doLogin } from "../auth";
 import KitBoxL from "../components/LottieComponents/KitBox"; // Left Lottie Component
-import BacteriaL from "../components/LottieComponents/Bacteria"; // Right Lottie Component
-import Background from "../components/basicComponents/Background";
+import LoginL from "../components/LottieComponents/Login"; // Right Lottie Component
+import "../style/login.css"; // Import custom styles for login card
+
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const userContxtData = useContext(userContext);
@@ -180,9 +169,10 @@ const Login = () => {
   });
 
   const handleChange = (event, field) => {
+    let actualValue = event.target.value;
     setLoginDetail({
       ...loginDetail,
-      [field]: event.target.value,
+      [field]: actualValue,
     });
   };
 
@@ -212,7 +202,7 @@ const Login = () => {
             login: true,
           });
         });
-        toast.success("Token received successfully  !!!");
+        toast.success("Token received successfully  !!!");
       })
       .catch((error) => {
         if (error.response.status === 400 || error.response.status === 404) {
@@ -224,66 +214,60 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <Base>
-        <Background />
-        <div className="main-container">
-          <div className="lottie-container left">
-            <KitBoxL />
-          </div>
-          <div className="form-container">
-            <Container>
-              <Row>
-                <Col>
-                  <h3 className="text-center">Fill Information to Log In</h3>
-                  <Form onSubmit={handleFormSubmit}>
-                    <FormGroup>
-                      <Label>Email: </Label>
-                      <Input
-                        type="username"
-                        placeholder="Enter your email"
-                        id="username"
-                        value={loginDetail.username}
-                        onChange={(e) => handleChange(e, "username")}
-                      />
-                    </FormGroup>
+    <div className="login-container">
+      {/* Left Lottie Container */}
+      <div className="lottie-container left">
+        <KitBoxL />
+      </div>
 
-                    <FormGroup>
-                      <Label>Password: </Label>
-                      <Input
-                        type="password"
-                        placeholder="Enter your password"
-                        id="password"
-                        value={loginDetail.password}
-                        onChange={(e) => handleChange(e, "password")}
-                      />
-                    </FormGroup>
+      {/* Login Card */}
+      <div className="login-card-container">
+        <div className="login-card">
+          <h3>Fill Information to Log In</h3>
 
-                    <Container className="text-center">
-                      <Button
-                        className="login-button small-button me-2"
-                        type="submit"
-                      >
-                        Log In
-                      </Button>
-                      <Button
-                        onClick={handleReset}
-                        className="reset-button small-button ms-2"
-                        type="button"
-                      >
-                        Reset
-                      </Button>
-                    </Container>
-                  </Form>
-                </Col>
-              </Row>
-            </Container>
-          </div>
-          <div className="lottie-container right">
-            <BacteriaL />
-          </div>
+          <form onSubmit={handleFormSubmit}>
+            <div className="form-group">
+              <label htmlFor="username">Email: </label>
+              <input
+                type="username"
+                placeholder="Enter your email"
+                id="username"
+                value={loginDetail.username}
+                onChange={(e) => handleChange(e, "username")}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Password: </label>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                id="password"
+                value={loginDetail.password}
+                onChange={(e) => handleChange(e, "password")}
+              />
+            </div>
+
+            <div className="button-container">
+              <button className="login-button" type="submit">
+                Log In
+              </button>
+              <button
+                className="reset-button"
+                type="button"
+                onClick={handleReset}
+              >
+                Reset
+              </button>
+            </div>
+          </form>
         </div>
-      </Base>
+      </div>
+
+      {/* Right Lottie Container */}
+      <div className="lottie-container right">
+        <LoginL />
+      </div>
     </div>
   );
 };
