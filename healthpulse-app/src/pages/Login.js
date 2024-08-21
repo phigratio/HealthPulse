@@ -168,6 +168,7 @@ import userContext from "../context/userContext";
 import "../style/login.css"; // CSS file for custom styles
 import KitBoxL from "../components/LottieComponents/KitBox"; // Left Lottie Component
 import BacteriaL from "../components/LottieComponents/Bacteria"; // Right Lottie Component
+import Background from "../components/basicComponents/Background";
 
 const Login = () => {
   const userContxtData = useContext(userContext);
@@ -225,6 +226,7 @@ const Login = () => {
   return (
     <div>
       <Base>
+        <Background />
         <div className="main-container">
           <div className="lottie-container left">
             <KitBoxL />

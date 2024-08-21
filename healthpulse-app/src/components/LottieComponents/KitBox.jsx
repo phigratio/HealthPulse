@@ -3,9 +3,9 @@ import KitBox from "../../assets/KitBox.json";
 import Lottie from "lottie-react";
 
 const containerStyle = {
-  position: "absolute", // Positioning the element absolutely within its container
-  top: "50%", // Adjust this value to move it down or up
-  left: "2%", // Adjust this value to move it right or left
+  position: "relative", // Change this from "absolute" to "relative"
+  margin: "20px", // Add margin if needed
+  width: "280px", // Ensure width is set
 };
 
 const animationStyle = {
