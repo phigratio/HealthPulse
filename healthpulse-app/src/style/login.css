@@ -9,7 +9,7 @@ body {
   align-items: center;
   justify-content: space-between; /* Adjust as needed */
   height: 100vh;
-  background-color: #f0f0f0;
+
   padding: 20px; /* Add padding to create space around the elements */
 }
 
@@ -29,21 +29,30 @@ body {
 }
 
 /* ... rest of your CSS */
+/* Login Card */
 .login-card {
   width: 300px;
   padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    135deg,
+    #1a2a6c,
+    #34495e,
+    #566578
+  ); /* Dark bluish gradient */
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  color: #fff;
 }
 
-/* Login card header */
+/* Login Card Header */
 .login-card h3 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-/* Form group */
+/* Form Group */
 .form-group {
   margin-bottom: 15px;
 }
@@ -51,16 +60,19 @@ body {
 .form-group label {
   display: block;
   margin-bottom: 5px;
+  color: #96a7b8; /* Lighter grey text color */
 }
 
 .form-group input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #007bff;
   border-radius: 3px;
+  background-color: #2c3e50;
+  color: #fff;
 }
 
-/* Button container */
+/* Button Container */
 .button-container {
   display: flex;
   justify-content: center;
@@ -69,16 +81,17 @@ body {
 .login-button,
 .reset-button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background: linear-gradient(135deg, #007bff, #00c6ff);
   color: #fff;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .login-button:hover,
 .reset-button:hover {
-  background-color: #0069d9;
+  background: linear-gradient(135deg, #0069d9, #005b96);
 }
 
 .reset-button {

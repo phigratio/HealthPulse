@@ -157,7 +157,12 @@ import KitBoxL from "../components/LottieComponents/KitBox"; // Left Lottie Comp
 import LoginL from "../components/LottieComponents/Login"; // Right Lottie Component
 import "../style/login.css"; // Import custom styles for login card
 
+import Background from "../components/basicComponents/Background";
+import Base from "../components/Base";
+
 import { ToastContainer, toast } from "react-toastify";
+import KitBox from "../components/LottieComponents/KitBox";
+import MentalHealthL from "../components/LottieComponents/MentalHealth";
 
 const Login = () => {
   const userContxtData = useContext(userContext);
@@ -214,60 +219,65 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      {/* Left Lottie Container */}
-      <div className="lottie-container left">
-        <KitBoxL />
-      </div>
+    <div>
+      <Background />
+      <Base>
+        <div className="login-container">
+          {/* Left Lottie Container */}
+          <div className="lottie-container left">
+            <MentalHealthL />
+          </div>
 
-      {/* Login Card */}
-      <div className="login-card-container">
-        <div className="login-card">
-          <h3>Fill Information to Log In</h3>
+          {/* Login Card */}
+          <div className="login-card-container">
+            <div className="login-card">
+              <h3>Fill Information to Log In</h3>
 
-          <form onSubmit={handleFormSubmit}>
-            <div className="form-group">
-              <label htmlFor="username">Email: </label>
-              <input
-                type="username"
-                placeholder="Enter your email"
-                id="username"
-                value={loginDetail.username}
-                onChange={(e) => handleChange(e, "username")}
-              />
+              <form onSubmit={handleFormSubmit}>
+                <div className="form-group">
+                  <label htmlFor="username">Email: </label>
+                  <input
+                    type="username"
+                    placeholder="Enter your email"
+                    id="username"
+                    value={loginDetail.username}
+                    onChange={(e) => handleChange(e, "username")}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="password">Password: </label>
+                  <input
+                    type="password"
+                    placeholder="Enter your password"
+                    id="password"
+                    value={loginDetail.password}
+                    onChange={(e) => handleChange(e, "password")}
+                  />
+                </div>
+
+                <div className="button-container">
+                  <button className="login-button" type="submit">
+                    Log In
+                  </button>
+                  <button
+                    className="reset-button"
+                    type="button"
+                    onClick={handleReset}
+                  >
+                    Reset
+                  </button>
+                </div>
+              </form>
             </div>
+          </div>
 
-            <div className="form-group">
-              <label htmlFor="password">Password: </label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                id="password"
-                value={loginDetail.password}
-                onChange={(e) => handleChange(e, "password")}
-              />
-            </div>
-
-            <div className="button-container">
-              <button className="login-button" type="submit">
-                Log In
-              </button>
-              <button
-                className="reset-button"
-                type="button"
-                onClick={handleReset}
-              >
-                Reset
-              </button>
-            </div>
-          </form>
+          {/* Right Lottie Container */}
+          <div className="lottie-container right">
+            <LoginL />
+          </div>
         </div>
-      </div>
-
-      {/* Right Lottie Container */}
-      <div className="lottie-container right">
-        <LoginL />
-      </div>
+      </Base>
     </div>
   );
 };
