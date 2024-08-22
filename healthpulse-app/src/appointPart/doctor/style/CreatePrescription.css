@@ -1,0 +1,39 @@
+/* Center the wrapper and make it full-width */
+.cp-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Style the card with shadow and width adjustments */
+.cp-card {
+  width: 100%;
+  max-width: 1000px; /* Increase width of the card */
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a more pronounced shadow */
+}
+
+.cp-wrapper {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+/* Override form styles for better appearance */
+.cp-wrapper form {
+  max-width: 100%; /* Ensure form takes full width */
+  margin: 0 auto; /* Center the form */
+  padding: 20px; /* Maintain padding */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Add slight border radius */
+  background-color: #ffffff; /* Set a white background for the form */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Adjust button container styling */
+.cp-button-container {
+  margin-top: 20px;
+}
+
+/* Style buttons with consistent width and spacing */
+.cp-button {
+  width: 150px; /* Set button width */
+  margin: 5px; /* Add margin between buttons */
+}

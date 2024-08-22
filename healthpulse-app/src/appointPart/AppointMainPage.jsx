@@ -12,7 +12,8 @@ import SeeAppointments from "./patient/SeeAppointments";
 import NextAppointments from "./doctor/NextAppointments";
 import FindBooking from "./patient/FindBooking";
 import CreatePrescription from "./doctor/CreatePrescription";
-
+import UserPrescriptions from "./patient/UserPrescriptions";
+import PatientHistory from "./doctor/PatientHistory";
 const AppointMainPage = () => {
   return (
     <div>
@@ -34,8 +35,16 @@ const AppointMainPage = () => {
               element={<NextAppointments />}
             />
             <Route path="/patient-bookings" element={<FindBooking />} />
-            <Route path="/create-prescription" element={<CreatePrescription />} />
+            <Route
+              path="/create-prescription"
+              element={<CreatePrescription />}
+            />
 
+            <Route
+              path="/user-prescriptions/:userId"
+              element={<UserPrescriptions />}
+            />
+            <Route path="/patient-history" element={<PatientHistory />} />
           </Routes>
         </div>
       </Base>

@@ -10,8 +10,9 @@ import lombok.Setter;
 public class DoctorInfoDto {
     private String specialization;
     private String degrees;
-    private String certificates;
+    private String certificates; // URLs or paths to certificates
     private String experience;
     private String approvedByAdmin;
-
+    private String CV; // URL or path to CV
+    private String certificateOfRegistration; // URL or path to certificate of registration
 }

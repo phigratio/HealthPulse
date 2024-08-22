@@ -1,0 +1,47 @@
+.user-prescriptions {
+  padding: 20px;
+}
+
+.user-prescriptions h2 {
+  margin-bottom: 20px;
+}
+
+.user-prescriptions ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.user-prescriptions li {
+  background-color: #fff; /* White background for each card */
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  border-radius: 5px; /* Optional: Add some rounding to the corners */
+}
+
+.user-prescriptions h3 {
+  margin: 0;
+}
+
+.user-prescriptions p {
+  margin: 5px 0;
+}
+
+/* Style for the "Go to Home" button */
+.redirect-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* Bootstrap's primary blue color */
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.redirect-button:hover {
+  background-color: #0056b3; /* Darker shade of blue on hover */
+}

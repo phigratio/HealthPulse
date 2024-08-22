@@ -1,50 +1,173 @@
-.custom-navbar {
-  background-color: #ace2fc;
-  padding: 0.5rem 1rem;
+/* General Styles */
+.cn-custom-navbar {
+  background-color: #ace2fc !important;
+  padding: 0.5rem 1rem !important;
+  width: 100% !important;
 }
 
-.navbar-logo {
-  height: 40px;
-  margin-right: 10px;
+.cn-navbar-content {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
 }
 
-.brand-text {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: #000000;
+.cn-navbar-brand {
+  display: flex !important;
+  align-items: center !important;
 }
 
-.nav-link-light {
-  font-weight: 300;
+.cn-navbar-brand-link {
+  display: flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+}
+
+.cn-navbar-logo {
+  height: 40px !important;
+  margin-right: 10px !important;
+}
+
+.cn-brand-text {
+  font-size: 1.25rem !important;
+  font-weight: 500 !important;
   color: #000000 !important;
 }
 
-.nav-link-light:hover {
+.cn-navbar-toggler {
+  background: none !important;
+  border: none !important;
+  font-size: 24px !important;
+  cursor: pointer !important;
+}
+
+.cn-navbar-toggler-icon {
+  font-size: 24px !important;
+  color: #000000 !important;
+}
+
+.cn-navbar-menu {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important; /* Ensures items stay horizontally aligned */
+  transition: max-height 0.3s ease !important;
+  margin: 0 !important;
+}
+
+.cn-navbar-menu.open {
+  max-height: 500px !important;
+}
+
+.cn-navbar-nav {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important; /* Prevents wrapping */
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.cn-nav-item {
+  margin-left: 20px !important; /* Spacing between items */
+}
+
+.cn-nav-link-light {
+  font-weight: 300 !important;
+  color: #000000 !important;
+  text-decoration: none !important;
+}
+
+.cn-nav-link-light:hover {
   color: #5f61f0 !important;
 }
 
-.navbar-text {
-  color: #000000;
+.cn-navbar-user-image-container {
+  display: flex !important;
+  align-items: center !important;
 }
 
-.navbar-user-image-container {
-  margin-left: auto;
-  margin-right: 15px;
-  display: flex;
-  align-items: center;
+.cn-navbar-user-image {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  object-fit: cover !important;
 }
 
-.navbar-user-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  object-fit: cover;
+/* Dropdown */
+.cn-nav-item.dropdown {
+  position: relative !important;
 }
 
+.cn-dropdown-toggle {
+  background: none !important;
+  border: none !important;
+  color: #000000 !important;
+  font-weight: 300 !important;
+  cursor: pointer !important;
+}
 
-@media (min-width: 768px) {
-  .custom-navbar {
-    justify-content: space-between;
+.cn-dropdown-menu {
+  display: none !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  background-color: #fff !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 4px !important;
+  z-index: 1000 !important;
+  min-width: 200px !important;
+}
+
+.cn-dropdown-menu .cn-dropdown-item {
+  padding: 8px 16px !important;
+  color: #000000 !important;
+  text-decoration: none !important;
+  display: block !important;
+}
+
+.cn-dropdown-menu .cn-dropdown-item:hover {
+  background-color: #f8f9fa !important;
+}
+
+.cn-dropdown-menu .cn-dropdown-divider {
+  height: 1px !important;
+  margin: 0.5rem 0 !important;
+  background-color: #e9ecef !important;
+}
+
+.cn-nav-item.dropdown:hover .cn-dropdown-menu {
+  display: block !important;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .cn-navbar-menu {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    background-color: #ace2fc !important; /* Background for mobile dropdown */
+  }
+
+  .cn-navbar-menu.open {
+    max-height: 500px !important;
+  }
+
+  .cn-nav-item {
+    margin: 10px 0 !important;
+  }
+
+  .cn-navbar-user-image-container {
+    margin-left: auto !important;
+    margin-top: 10px !important; /* Space from menu items */
+  }
+
+  .cn-dropdown-menu {
+    position: static !important;
+    width: 100% !important;
+    box-shadow: none !important; /* Remove shadow for dropdown on mobile */
+    border-radius: 0 !important; /* Remove border-radius */
   }
 }
