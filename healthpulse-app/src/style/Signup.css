@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  /* Light background */
 }
 
 .signup-container {
@@ -13,15 +12,16 @@
   border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  width: 80%;
 }
 
 .lottie-container {
-  flex: 1;
+  flex-basis: 20%;
   text-align: center;
 }
 
 .signup-form {
-  flex: 2;
+  flex-basis: 60%;
   padding: 20px;
   color: #333;
 }
@@ -81,4 +81,20 @@
 .signup-button:hover,
 .reset-button:hover {
   background: linear-gradient(135deg, #7fb3ff, #a1c4fd);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .signup-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .lottie-container {
+    flex-basis: 100%;
+  }
+
+  .signup-form {
+    flex-basis: 100%;
+  }
 }

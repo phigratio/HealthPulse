@@ -80,5 +80,3 @@ const ZegoVideoCall = ({ onReady }) => {
 };
 
 export default ZegoVideoCall;
-
-//const apiKeyVision = "AIzaSyCj5hRY6tg826SELZMcacxPpiCZMuY-VJ4";

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./FoodSuggestion.css";
+import "../style/servicePage/FoodSuggestion.css";
+import Background from "../components/basicComponents/Background";
+import Base from "../components/Base";
+import FoodL from "../components/LottieComponents/Food";
+import DoctorL from "../components/LottieComponents/Doctor";
 
 const apiKeyGemini = "AIzaSyCSlDKg-ZCMGgC3v4TQ1D8626oawLVCPhA";
 
-const FoodSuggestionComponent = () => {
+const FoodSuggestion = () => {
   const [selectedPreferences, setSelectedPreferences] = useState([]);
   const [customPreference, setCustomPreference] = useState("");
+  const [disease, setDisease] = useState("");
   const [suggestion, setSuggestion] = useState("");
 
   const foodPreferences = [
@@ -36,7 +41,7 @@ const FoodSuggestionComponent = () => {
   };
 
   const generateSuggestion = async () => {
-    const prompt = `Suggest a food suggestion that is good for health and of 2000 calories give calorie description alongside food.Generate in a paragraph but give enough spaces ${selectedPreferences.join(
+    const prompt = `Suggest a food suggestion that is good for health, suitable for someone with ${disease}, and is around 2000 calories. Give a calorie breakdown alongside the food. Consider the following preferences: ${selectedPreferences.join(
       ", "
     )}.`;
 
@@ -64,41 +69,62 @@ const FoodSuggestionComponent = () => {
   };
 
   return (
-    <div className="food-suggestion-container">
-      <h2>Select Food Preferences</h2>
-      <div className="preferences-grid">
-        {foodPreferences.map((preference) => (
-          <button
-            key={preference}
-            className={`preference-button ${
-              selectedPreferences.includes(preference) ? "selected" : ""
-            }`}
-            onClick={() => handlePreferenceClick(preference)}
-          >
-            {preference}
-          </button>
-        ))}
-      </div>
-      <div className="custom-preference">
-        <input
-          type="text"
-          value={customPreference}
-          onChange={(e) => setCustomPreference(e.target.value)}
-          placeholder="Add custom preference"
-        />
-        <button onClick={handleCustomPreferenceAdd}>Add</button>
-      </div>
-      <button className="generate-button" onClick={generateSuggestion}>
-        Generate Food Suggestion
-      </button>
-      {suggestion && (
-        <div className="suggestion">
-          <h3>Suggested Dish:</h3>
-          <p>{suggestion}</p>
+    <div>
+      <Background />
+      <Base>
+        <div className="food-suggestion-container">
+          <div className="lottie-container">
+            <FoodL />
+          </div>
+          <div className="food-suggestion-content">
+            <h2>Select Food Preferences</h2>
+            <div className="preferences-grid">
+              {foodPreferences.map((preference) => (
+                <button
+                  key={preference}
+                  className={`preference-button ${
+                    selectedPreferences.includes(preference) ? "selected" : ""
+                  }`}
+                  onClick={() => handlePreferenceClick(preference)}
+                >
+                  {preference}
+                </button>
+              ))}
+            </div>
+            <div className="custom-preference">
+              <input
+                type="text"
+                value={customPreference}
+                onChange={(e) => setCustomPreference(e.target.value)}
+                placeholder="Add custom preference"
+              />
+              <button onClick={handleCustomPreferenceAdd}>Add</button>
+            </div>
+            <div className="disease-input">
+              <input
+                type="text"
+                value={disease}
+                onChange={(e) => setDisease(e.target.value)}
+                placeholder="Enter your disease (optional)"
+              />
+            </div>
+            <button className="generate-button" onClick={generateSuggestion}>
+              Generate Food Suggestion
+            </button>
+            {suggestion && (
+              <div className="suggestion">
+                <h3>Suggested Dish:</h3>
+                <p>{suggestion}</p>
+              </div>
+            )}
+          </div>
+          <div className="lottie-container">
+            <DoctorL />
+          </div>
         </div>
-      )}
+      </Base>
     </div>
   );
 };
 
-export default FoodSuggestionComponent;
+export default FoodSuggestion;
