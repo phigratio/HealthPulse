@@ -30,7 +30,7 @@ const DoctorDashboard = () => {
         </button>
         <button
           className="dashboard-button"
-          onClick={() => handleNavigation("/add-prescription")}
+          onClick={() => handleNavigation("/create-prescription")}
         >
           Add Prescription
         </button>

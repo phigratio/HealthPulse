@@ -114,7 +114,48 @@ public class UserController {
         UserDto updatedUser = this.userService.updateUser(userDto, userId);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
+    
+    
+    @PostMapping("/doctor/upload-cv/{userId}")
+    public ResponseEntity<UserDto> uploadDoctorCV(
+            @RequestParam("cv") MultipartFile cv,
+            @PathVariable("userId") Integer userId) throws IOException {
 
-	
+        if (cv.isEmpty()) {
+            throw new IllegalArgumentException("CV file is missing");
+        }
+
+        String fileName = this.fileService.uploadImage(path, cv);
+        UserDto userDto = this.userService.getUserById(userId);
+        
+        // Update CV path in DoctorInfo
+        if (userDto.getDoctorInfo() != null) {
+            userDto.getDoctorInfo().setCV(fileName);
+        }
+
+        UserDto updatedUser = this.userService.updateUser(userDto, userId);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+    @PostMapping("/doctor/upload-certificate/{userId}")
+    public ResponseEntity<UserDto> uploadDoctorCertificate(
+            @RequestParam("certificate") MultipartFile certificate,
+            @PathVariable("userId") Integer userId) throws IOException {
+
+        if (certificate.isEmpty()) {
+            throw new IllegalArgumentException("Certificate file is missing");
+        }
+
+        String fileName = this.fileService.uploadImage(path, certificate);
+        UserDto userDto = this.userService.getUserById(userId);
+        
+        // Update certificate path in DoctorInfo
+        if (userDto.getDoctorInfo() != null) {
+            userDto.getDoctorInfo().setCertificateOfRegistration(fileName);
+        }
+
+        UserDto updatedUser = this.userService.updateUser(userDto, userId);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
 
 }

@@ -10,6 +10,9 @@ import {
 import { getCurrentUserDetail, isLoggedIn } from "../auth";
 import { BASE_URL } from "../service/helper";
 import { Link as ReactLink } from "react-router-dom";
+import empty from "../images/basic/empty.png";
+import { approveDoctor, rejectDoctor } from "../service/user-service";
+import { toast } from "react-toastify";
 
 const ViewUserProfile = ({ user, updateProfileClick }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -24,6 +27,13 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
     return roles.some((role) => role.id === roleId);
   };
 
+  const canUpdateProfile = () => {
+    if (!currentUser) {
+      return false;
+    }
+    return currentUser.id === user.id;
+  };
+
   const canViewPersonalInfo = () => {
     if (!currentUser) {
       return false;
@@ -31,19 +41,53 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
     return currentUser.id === user.id || hasRole(currentUser.roles, 503);
   };
 
+  const canApproveDoctor = () => {
+    if (!currentUser) {
+      return false;
+    }
+    return hasRole(currentUser.roles, 501);
+  };
+
   const isDoctor = hasRole(user.roles, 503);
+
+  const handleApproveDoctor = () => {
+    approveDoctor(user.id)
+      .then((response) => {
+        toast.success("Doctor approved successfully!");
+        // Optionally, refresh or update the user info here
+      })
+      .catch((error) => {
+        toast.error("Failed to approve the doctor!");
+      });
+  };
+
+  const handleRejectDoctor = () => {
+    rejectDoctor(user.id)
+      .then((response) => {
+        toast.success("Doctor rejected successfully!");
+        // Optionally, refresh or update the user info here
+      })
+      .catch((error) => {
+        toast.error("Failed to reject the doctor!");
+      });
+  };
 
   return (
     <Card
       className="mt-32 border-0 rounded-4"
-      style={{ boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)" }}
+      style={{
+        boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)",
+        width: "100%",
+        maxWidth: "1200px",
+        margin: "auto",
+      }}
     >
       <CardBody>
         <h3 className="text-uppercase text-center">User Information</h3>
 
         <Container className="text-center">
           <img
-            style={{ maxWidth: "200px", maxHeight: "200px" }}
+            style={{ maxWidth: "250px", maxHeight: "250px" }}
             src={
               user.imageName
                 ? BASE_URL + "/users/user/image/" + user.imageName
@@ -59,6 +103,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
           hover
           bordered={true}
           className="text-center mt-5"
+          style={{ width: "100%" }}
         >
           <tbody>
             <tr>
@@ -97,6 +142,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
               hover
               bordered={true}
               className="text-center mt-5"
+              style={{ width: "100%" }}
             >
               <tbody>
                 <tr>
@@ -119,6 +165,46 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                   <td>Approved By Admin</td>
                   <td>{user.doctorInfo.approvedByAdmin}</td>
                 </tr>
+
+                <tr>
+                  <td>Doctor Certificate:</td>
+                  <td>
+                    <Container className="text-center">
+                      <img
+                        style={{ maxWidth: "250px", maxHeight: "250px" }}
+                        src={
+                          user.imageName
+                            ? BASE_URL +
+                              "/users/user/image/" +
+                              user.doctorInfo.certificateOfRegistration
+                            : empty
+                        }
+                        alt="Doctor Certificate"
+                        className="img-fluid d-block mx-auto text-center"
+                      />
+                    </Container>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Doctor CV:</td>
+                  <td>
+                    <Container className="text-center">
+                      <img
+                        style={{ maxWidth: "250px", maxHeight: "250px" }}
+                        src={
+                          user.imageName
+                            ? BASE_URL +
+                              "/users/user/image/" +
+                              user.doctorInfo.cv
+                            : empty
+                        }
+                        alt="Doctor CV"
+                        className="img-fluid d-block mx-auto text-center"
+                      />
+                    </Container>
+                  </td>
+                </tr>
               </tbody>
             </Table>
           </>
@@ -133,6 +219,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
               hover
               bordered={true}
               className="text-center mt-5"
+              style={{ width: "100%" }}
             >
               <tbody>
                 <tr>
@@ -197,88 +284,49 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                       : user.boneDensityNeeds}
                   </td>
                 </tr>
-                <tr>
-                  <td>BSA</td>
-                  <td>{user.bsa === 0 ? "N/A" : user.bsa}</td>
-                </tr>
-                <tr>
-                  <td>Calorie Needs</td>
-                  <td>{user.calorieNeeds === 0 ? "N/A" : user.calorieNeeds}</td>
-                </tr>
-                <tr>
-                  <td>Carb Needs</td>
-                  <td>{user.carbNeeds === 0 ? "N/A" : user.carbNeeds}</td>
-                </tr>
-                <tr>
-                  <td>Ideal Weight</td>
-                  <td>{user.idealWeight === 0 ? "N/A" : user.idealWeight}</td>
-                </tr>
-                <tr>
-                  <td>Metabolic Age</td>
-                  <td>{user.metabolicAge === 0 ? "N/A" : user.metabolicAge}</td>
-                </tr>
-                <tr>
-                  <td>Metabolic Age Needs</td>
-                  <td>
-                    {user.metabolicAgeNeeds === 0
-                      ? "N/A"
-                      : user.metabolicAgeNeeds}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Muscle Mass</td>
-                  <td>{user.muscleMass === 0 ? "N/A" : user.muscleMass}</td>
-                </tr>
-                <tr>
-                  <td>Muscle Mass Needs</td>
-                  <td>
-                    {user.muscleMassNeeds === 0 ? "N/A" : user.muscleMassNeeds}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Protein Needs</td>
-                  <td>{user.proteinNeeds === 0 ? "N/A" : user.proteinNeeds}</td>
-                </tr>
-                <tr>
-                  <td>Visceral Fat</td>
-                  <td>{user.visceralFat === 0 ? "N/A" : user.visceralFat}</td>
-                </tr>
-                <tr>
-                  <td>Visceral Fat Needs</td>
-                  <td>
-                    {user.visceralFatNeeds === 0
-                      ? "N/A"
-                      : user.visceralFatNeeds}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Waist To Hip Ratio</td>
-                  <td>
-                    {user.waistToHipRatio === 0 ? "N/A" : user.waistToHipRatio}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Water Intake</td>
-                  <td>{user.waterIntake === 0 ? "N/A" : user.waterIntake}</td>
-                </tr>
               </tbody>
             </Table>
           </>
         )}
 
-        {currentUser && currentUser.id === user.id && (
-          <CardFooter className="text-center">
-            <Button
-              tag={ReactLink}
-              to="/user/update-user"
-              color="warning"
-              className="button"
-            >
+        {canUpdateProfile() && (
+          <Container className="text-center">
+            <Button onClick={updateProfileClick} color="success" size="lg">
               Update Profile
             </Button>
-          </CardFooter>
+          </Container>
+        )}
+
+        {canApproveDoctor() && isDoctor && (
+          <Container className="text-center">
+            <Button
+              onClick={handleApproveDoctor}
+              color="primary"
+              size="lg"
+              className="me-2"
+            >
+              Approve Doctor
+            </Button>
+            <Button
+              onClick={handleRejectDoctor}
+              color="danger"
+              size="lg"
+              className="ms-2"
+            >
+              Reject Doctor
+            </Button>
+          </Container>
         )}
       </CardBody>
+      <CardFooter className="text-center">
+        <Button
+          onClick={() => window.history.back()}
+          color="secondary"
+          size="lg"
+        >
+          Go Back
+        </Button>
+      </CardFooter>
     </Card>
   );
 };
