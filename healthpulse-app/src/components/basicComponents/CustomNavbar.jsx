@@ -12,11 +12,12 @@ const CustomNavbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [login, setLogin] = useState(false);
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState(null); // Initialize as null
 
   useEffect(() => {
     setLogin(isLoggedIn());
-    setUser(getCurrentUserDetail());
+    const currentUser = getCurrentUserDetail();
+    setUser(currentUser || {}); // Set to an empty object if null
   }, [login]);
 
   const logout = () => {
@@ -62,9 +63,9 @@ const CustomNavbar = () => {
           </ReactLink>
         </div>
 
-        <button className="cn-navbar-toggler" onClick={toggleMenu}>
+        {/* <button className="cn-navbar-toggler" onClick={toggleMenu}>
           <span className="cn-navbar-toggler-icon">&#9776;</span>
-        </button>
+        </button> */}
 
         <nav className={`cn-navbar-menu ${isOpen ? "open" : ""}`}>
           <ul className="cn-navbar-nav">
@@ -184,7 +185,11 @@ const CustomNavbar = () => {
           onClick={handleUserImageClick}
         >
           <img
-            src={user?.image ? `${BASE_URL}${user.image}` : defaultUserImage}
+            src={
+              user?.imageName
+                ? `${BASE_URL}/users/user/image/${user.imageName}`
+                : defaultUserImage
+            }
             alt="User"
             className="cn-navbar-user-image"
           />

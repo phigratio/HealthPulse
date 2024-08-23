@@ -1,0 +1,23 @@
+.blog-count-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.blog-count {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.count-number {
+  font-size: 3rem;
+  color: #ff6b6b;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}

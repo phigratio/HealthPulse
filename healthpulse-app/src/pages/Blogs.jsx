@@ -13,16 +13,18 @@ const Blogs = () => {
     <div>
       <Background />
       <Base>
-        <Container className="mt-40">
-          <Row>
-            <Col md={2} className="">
-              <CategorySideMenu />
-            </Col>
-            <Col md={10}>
-              <NewFeed />
-            </Col>
-          </Row>
-        </Container>
+        <div className="mt-24">
+          <Container className="mt-24">
+            <Row>
+              <Col md={2} className="">
+                <CategorySideMenu />
+              </Col>
+              <Col md={10}>
+                <NewFeed />
+              </Col>
+            </Row>
+          </Container>
+        </div>
       </Base>
     </div>
   );

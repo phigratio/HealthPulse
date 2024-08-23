@@ -46,12 +46,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 //         Pageable pageable);
     
     @Query("SELECT p FROM Product p " +
-    	       "WHERE (:category = '' OR p.topLevelCategory.name = :category OR p.secondLevelCategory.name = :category OR p.thirdLevelCategory.name = :category) " +
-    	       "AND ((:minPrice IS NULL AND :maxPrice IS NULL) OR (p.price BETWEEN :minPrice AND :maxPrice)) " +
+    	       "WHERE (:category IS NULL OR :category = '' OR p.topLevelCategory.name = :category OR p.secondLevelCategory.name = :category OR p.thirdLevelCategory.name = :category) " +
+    	       "AND (:minPrice IS NULL OR :maxPrice IS NULL OR p.price BETWEEN :minPrice AND :maxPrice) " +
     	       "AND (:minDiscount IS NULL OR p.discountPercentage >= :minDiscount) " +
     	       "ORDER BY " +
     	       "CASE WHEN :sort = 'price_low' THEN p.price END ASC, " +
-    	       "CASE WHEN :sort = 'price_high' THEN p.price END DESC")
+    	       "CASE WHEN :sort = 'price_high' THEN p.price END DESC, " +
+    	       "CASE WHEN :sort = 'rating' THEN (SELECT AVG(r.rating) FROM p.ratings r) END DESC")
     	Page<Product> filterProductsByCategoryAndPrice(
     	       @Param("category") String category,
     	       @Param("minPrice") Integer minPrice,
@@ -59,7 +60,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     	       @Param("minDiscount") Integer minDiscount,
     	       @Param("sort") String sort,
     	       Pageable pageable);
-
 
     
 

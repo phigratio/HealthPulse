@@ -11,6 +11,7 @@ import {
   Container,
 } from "reactstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
+import "./style/NewFeedPagination.css"; // Import the CSS file
 
 const NewFeedPagination = () => {
   const [postContent, setPostContent] = useState({
@@ -23,12 +24,26 @@ const NewFeedPagination = () => {
   });
 
   const [currentPage, setCurrentPage] = useState(0);
+  const [count, setCount] = useState(0); // State for animated count
 
   useEffect(() => {
-    console.log("loading posts");
-    console.log(currentPage);
     changePage(currentPage);
   }, [currentPage]);
+
+  useEffect(() => {
+    let start = 0;
+    const end = postContent.totalElements;
+    if (start === end) return;
+
+    const incrementTime = Math.abs(Math.floor(2000 / end)); // Adjust the duration (2000ms) as needed
+    const timer = setInterval(() => {
+      start += 1;
+      setCount(start);
+      if (start === end) clearInterval(timer);
+    }, incrementTime);
+
+    return () => clearInterval(timer);
+  }, [postContent.totalElements]);
 
   const changePage = (pageNumber = 0, pageSize = 5) => {
     if (pageNumber > postContent.pageNumber && postContent.lastPage) return;
@@ -37,7 +52,6 @@ const NewFeedPagination = () => {
 
     loadAllPosts(pageNumber, pageSize)
       .then((data) => {
-        console.log(data);
         setPostContent({
           content: data.content,
           totalPages: data.totalPages,
@@ -53,10 +67,8 @@ const NewFeedPagination = () => {
   };
 
   const deletePost = (post) => {
-    console.log(post);
     deletePostService(post.postId)
       .then((res) => {
-        console.log(res);
         toast.success("Post is deleted.");
         let newPostContents = postContent.content.filter(
           (p) => p.postId !== post.postId
@@ -64,21 +76,24 @@ const NewFeedPagination = () => {
         setPostContent({ ...postContent, content: newPostContents });
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Error in deleting post");
       });
   };
 
   const changePageInfinite = () => {
-    console.log("Page changed");
     setCurrentPage(currentPage + 1);
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid mt-24">
       <Row className="justify-content-center">
         <Col sm="9" className="mx-auto">
-          <h1>Blogs Count ({postContent?.totalElements})</h1>
+          <div className="blog-count-container">
+            <h1 className="blog-count">
+              Blogs Count&nbsp;
+              <span className="count-number">{count}</span>
+            </h1>
+          </div>
           <InfiniteScroll
             dataLength={postContent.content.length}
             next={changePageInfinite}

@@ -8,6 +8,7 @@ import { createPost as doCreatePost } from "../../service/post-service";
 import { uploadPostImage } from "../../service/post-service";
 import { toast } from "react-toastify";
 import { getCurrentUserDetail } from "../../auth";
+import "./AddPost.css";
 
 const AddPost = () => {
   const editor = useRef(null);
@@ -114,15 +115,18 @@ const AddPost = () => {
   return (
     <div
       className="wrapper"
-      style={{ margin: "0 auto", maxWidth: "1200px", padding: "20px" }}
+      style={{ margin: "0 auto", maxWidth: "800px", padding: "20px" }}
     >
       <Card
-        className="mt-2"
-        style={{ boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)" }}
+        className="mt-24"
+        style={{
+          boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)",
+          width: "100%",
+        }}
       >
         <CardBody>
           <h3 className="text-center">What's going on in your mind?</h3>
-          <Form onSubmit={createPost}>
+          <Form onSubmit={createPost} style={{ width: "100%" }}>
             <div className="my-3">
               <Label for="title">Post Title</Label>
               <Input

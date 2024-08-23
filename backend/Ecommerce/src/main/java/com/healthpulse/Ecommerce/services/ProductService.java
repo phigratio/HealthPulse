@@ -32,6 +32,8 @@ public interface ProductService {
 	List<Product> getAllProducts();
 	
 	Page<Product> getAllProducts(String category, Integer minPrice, Integer maxPrice, Integer minDiscount, String sort, String stock, Integer pageNumber, Integer pageSize);
+	
+	Page<Product> getAllProducts(String category, Integer minPrice, Integer maxPrice, Integer minDiscount, String sort, Integer pageNumber, Integer pageSize);
 
 
 }
