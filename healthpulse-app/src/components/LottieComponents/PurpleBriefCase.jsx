@@ -2,20 +2,23 @@ import React from "react";
 import PurpleBriefCase from "../../assets/PurpleBriefCase.json";
 import Lottie from "lottie-react";
 
-const containerStyle = {
+const wrapperStyle = {
   display: "flex",
-  justifyContent: "left",
-  alignItems: "left",
-  height: "100vh",
+  justifyContent: "center", // Center horizontally
+  alignItems: "center", // Center vertically
+  width: "300px", // Adjust to your container size
+  height: "300px", // Adjust to your container size
+  margin: "0 auto", // Center the wrapper in its parent container
 };
 
 const animationStyle = {
-  width: "280px",
+  width: "100%", // Make the animation fill the container
+  height: "100%",
 };
 
 const PurpleBriefCaseL = () => {
   return (
-    <div style={containerStyle}>
+    <div style={wrapperStyle}>
       <Lottie style={animationStyle} animationData={PurpleBriefCase} />
     </div>
   );
