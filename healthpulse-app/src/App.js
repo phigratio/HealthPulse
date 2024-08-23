@@ -21,31 +21,19 @@ import BookDoctor from "./servicePage/BookDoctor";
 import AddPost from "./components/postComponents/AddPost";
 import User from "./components/User";
 import PostPage from "./pages/PostPage";
-import MedicinePage from "./pages/MedicinePage";
 import Blogs from "./pages/Blogs";
 import Categories from "./components/postComponents/Categories";
 import MyPosts from "./pages/user-routes/MyPosts";
 import UpdateBlog from "./pages/UpdateBlog";
 import UpdateUser from "./pages/UpdateUser";
-import MedicineFeed from "./components/medicineComponents/MedicineFeed";
-import MedicineShop from "./pages/MedicineShop";
-import FoodPage from "./pages/FoodPage";
+
 import UpdateDoctorInfoPage from "./pages/UpdateDoctorInfoPage";
 
-import FoodFeed from "./components/foodComponents/FoodFeed";
-import FoodShop from "./pages/FoodShop";
-import FoodCategories from "./components/foodComponents/FoodCategories";
-
-import MedicineCategories from "./components/medicineComponents/MedicineCategories";
 import NewsList from "./servicePage/NewsList";
 import Weather from "./servicePage/Weather";
 import PrescriptionAnalyzer from "./servicePage/PrescriptionAnalyzer";
 import NearestHospital from "./servicePage/NearestHospital";
 import MapHome from "./servicePage/MapHome";
-
-// Ecommerce part
-
-import EcommerceMainPage from "./ecommerce/EcommerceMainPage";
 
 //cabin booking part
 
@@ -89,24 +77,9 @@ function App() {
 
         <Route path="/user/update-user" element={<UpdateUser />} />
         <Route path="/posts/:postId" element={<PostPage />} />
-        <Route path="/medicine/:medicineId" element={<MedicinePage />} />
-        <Route path="/food/:foodId" element={<FoodPage />} />
         <Route path="/categories/:categoryId" element={<Categories />} />
-        <Route
-          path="/medicineCategories/:categoryId"
-          element={<MedicineCategories />}
-        />
-
-        <Route
-          path="/foodCategories/:categoryId"
-          element={<FoodCategories />}
-        />
 
         <Route path="/addpost" element={<AddPost />} />
-        <Route path="/medicine-feed" element={<MedicineFeed />} />
-        <Route path="/food-feed" element={<FoodFeed />} />
-        <Route path="/medicine" element={<MedicineShop />} />
-        <Route path="/food" element={<FoodShop />} />
 
         <Route path="/user" element={<User />}>
           <Route path="dashboard" element={<Dashboard />} />
@@ -120,10 +93,6 @@ function App() {
           element={<UpdateDoctorInfoPage />}
         />
 
-        {/* Ecommerce part */}
-
-        <Route path="/ecommerce/*" element={<EcommerceMainPage />} />
-
         {/* Cabin booking part */}
 
         <Route path="/cabin-booking/*" element={<CabinMainPage />} />
@@ -133,6 +102,8 @@ function App() {
 
         {/* Appointment part */}
         <Route path="/appoint/*" element={<AppointMainPage />} />
+
+        
       </Routes>
     </BrowserRouter>
   );

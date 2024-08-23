@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Button,
@@ -16,25 +15,35 @@ import { createComment, loadPost } from "../service/post-service";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../service/helper";
 import { isLoggedIn } from "../auth";
+import { getUser } from "../service/user-service";
+
 const PostPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
+  const [user, setUser] = useState(null);
   const [comment, setComment] = useState({
     content: "",
   });
 
   useEffect(() => {
-    // load post of postId
+    // Load post of postId
     loadPost(postId)
       .then((data) => {
         console.log(data);
         setPost(data);
+
+        // Fetch user data by userId
+        return getUser(data.userId);
+      })
+      .then((userData) => {
+        console.log(userData);
+        setUser(userData);
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Error in loading post");
+        toast.error("Error in loading post or user data");
       });
-  }, []);
+  }, [postId]);
 
   const printDate = (numbers) => {
     return new Date(numbers).toLocaleDateString();
@@ -42,7 +51,7 @@ const PostPage = () => {
 
   const submitPost = () => {
     if (!isLoggedIn()) {
-      toast.error("Need to login first !!");
+      toast.error("Need to login first!!");
       return;
     }
 
@@ -50,12 +59,13 @@ const PostPage = () => {
       toast.error("Comment can't be empty");
       return;
     }
+
     createComment(comment, post.postId)
       .then((data) => {
         console.log(data);
-        toast.success("comment added ..");
-        //for a page refresh
+        toast.success("Comment added!");
 
+        // Refresh the page
         window.location.reload();
 
         setPost({
@@ -75,20 +85,29 @@ const PostPage = () => {
   return (
     <Base>
       <Container className="mt-4">
-        <Link to="/">Home</Link> / {post && <Link to=""> {post.title} </Link>}
+        <Link to="/">Home</Link> / {post && <Link to="">{post.title}</Link>}
         <Row>
-          <Col
-            md={{
-              size: 12,
-            }}
-          >
+          <Col md={{ size: 12 }}>
             <Card className="mt-3 ps-2 border-0 shadow-sm">
               {post && (
                 <CardBody>
+                  {/* <CardText>
+                    Posted By{" "}
+                    <b>{user ? user.name.toUpperCase() : "Loading..."}</b> on{" "}
+                    <b>{printDate(post.addedDate)}</b>
+                  </CardText> */}
+
                   <CardText>
-                    {" "}
-                    Posted By <b>{post.userId}</b> on{" "}
-                    <b>{printDate(post.addedDate)} </b>{" "}
+                    Posted By{" "}
+                    <b>
+                      <Link
+                        to={`/user/my-profile/${post.userId}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        {user ? user.name.toUpperCase() : "Loading..."}
+                      </Link>
+                    </b>{" "}
+                    on <b>{printDate(post.addedDate)}</b>
                   </CardText>
 
                   <CardText>
@@ -110,7 +129,7 @@ const PostPage = () => {
                     <h1>{post.title}</h1>
                   </CardText>
                   <div
-                    className="image-container  mt-4 shadow  "
+                    className="image-container mt-4 shadow"
                     style={{ maxWidth: "50%" }}
                   >
                     <img
@@ -129,13 +148,8 @@ const PostPage = () => {
           </Col>
         </Row>
         <Row className="my-4">
-          <Col
-            md={{
-              size: 9,
-              offset: 1,
-            }}
-          >
-            <h3>Comments ( {post ? post.comments.length : 0} )</h3>
+          <Col md={{ size: 9, offset: 1 }}>
+            <h3>Comments ({post ? post.comments.length : 0})</h3>
 
             {post &&
               post.comments &&
@@ -157,7 +171,6 @@ const PostPage = () => {
                     setComment({ content: event.target.value })
                   }
                 />
-
                 <Button onClick={submitPost} className="mt-2" color="primary">
                   Submit
                 </Button>
