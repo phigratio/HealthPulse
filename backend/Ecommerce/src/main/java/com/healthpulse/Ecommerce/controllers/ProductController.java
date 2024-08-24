@@ -83,6 +83,20 @@ public class ProductController {
 	    Page<Product> res = productService.getAllProducts(category, minPrice, maxPrice, minDiscount, sort, stock, pageNumber, pageSize);
 	    return new ResponseEntity<>(res, HttpStatus.OK);
 	}
+	
+	
+    @GetMapping
+    public Page<Product> getAllProducts(
+            @RequestParam(name= "category" , required = false) String category,
+            @RequestParam(name= "minPrice" ,required = false) Integer minPrice,
+            @RequestParam(name= "maxPrice" ,required = false) Integer maxPrice,
+            @RequestParam(name= "minDiscount" ,required = false) Integer minDiscount,
+            @RequestParam(name= "sort" ,required = false) String sort,
+            @RequestParam(name= "pageNumber" ,defaultValue = "0") Integer pageNumber,
+            @RequestParam(name= "pageSize" ,defaultValue = "10") Integer pageSize) {
+        
+        return productService.getAllProducts(category, minPrice, maxPrice, minDiscount, sort, pageNumber, pageSize);
+    }
 
 	
 	

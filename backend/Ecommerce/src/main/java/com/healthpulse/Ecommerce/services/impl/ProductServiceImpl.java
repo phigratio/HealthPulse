@@ -241,6 +241,13 @@ public class ProductServiceImpl implements ProductService {
         
         return productRepository.filterProductsByCategoryAndPrice(category, minPrice, maxPrice, minDiscount, sort, pageable);
     }
+    
+    @Override
+    public Page<Product> getAllProducts(String category, Integer minPrice, Integer maxPrice, Integer minDiscount, String sort, Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return productRepository.filterProductsByCategoryAndPrice(category, minPrice, maxPrice, minDiscount, sort, pageable);
+    }
+
 
 
 }
