@@ -12,16 +12,18 @@ import {
   Circle,
   MarkerClusterer,
 } from "@react-google-maps/api";
-import Places from "./Places";
-import Distance from "./Distance";
 import markerHospital from "./hospital-marker-48.png";
 import "./Map.css";
+import Distance from "./Distance";
 import HospitalList from "./HospitalList";
+import { mapsApi } from "../../servicePage/apiKeys";
+import AmbulanceServices from "./AmbulanceServices";
 //b181cac70f27f5e6
-const YOUR_API_KEY = process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY;
+const YOUR_API_KEY = mapsApi;
 const Map = () => {
   const [office, setOffice] = useState(null);
   const [directions, setDirections] = useState(null);
+  const [calculatedCost, setCalculatedCost] = useState(0);
   const [hospitals, setHospitals] = useState([]);
   const [currentLocation, setCurrentLocation] = useState(null);
   const mapRef = useRef(null);
@@ -33,6 +35,9 @@ const Map = () => {
     }),
     []
   );
+  const handleCostCalculated = useCallback((cost) => {
+    setCalculatedCost(cost);
+  }, []);
   const onLoad = useCallback((map) => (mapRef.current = map), []);
 
   const fetchDirections = (house) => {
@@ -154,9 +159,17 @@ const Map = () => {
                 <Circle center={office} radius={4500} options={farOptions} />
               </>
             )}
+            {directions && directions.routes && directions.routes[0] && (
+              <Distance
+                leg={directions.routes[0].legs[0]}
+                onCostCalculated={handleCostCalculated}
+              />
+            )}
           </GoogleMap>
         </div>
       </div>
+
+      <AmbulanceServices calculatedCost={calculatedCost} />
       <HospitalList hospitals={hospitals} onHospitalClick={fetchDirections} />
     </div>
   );

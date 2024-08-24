@@ -94,7 +94,7 @@
 //         onClick={isRecording ? stopRecording : startRecording}
 //         className={`recording-button ${isRecording ? "stop" : "start"}`}
 //       >
-//         <i className={`fas ${isRecording ? "fa-stop" : "fa-microphone"}`}></i>
+//         <FontAwesomeIcon icon={isRecording ? faStop : faMicrophone} />
 //       </button>
 //     </div>
 //   );
@@ -107,8 +107,9 @@ import axios from "axios";
 import "../style/servicePage/RecordingButtons.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone, faStop } from "@fortawesome/free-solid-svg-icons";
+import { speechToText } from "./apiKeys";
 
-const API_KEY = "AIzaSyDpFU-kHOjaho5XkiPTrfvXOxebgw9T2Kg"; // Be cautious with exposing this key
+const API_KEY = speechToText;
 
 const SpeechToTextApp = ({ onTranscriptUpdate }) => {
   const [isRecording, setIsRecording] = useState(false);
@@ -133,16 +134,20 @@ const SpeechToTextApp = ({ onTranscriptUpdate }) => {
   }, []);
 
   const startRecording = () => {
-    if (mediaRecorder) {
+    if (mediaRecorder && mediaRecorder.state !== "recording") {
       mediaRecorder.start();
       setIsRecording(true);
+    } else {
+      console.warn("Recording is already in progress");
     }
   };
 
   const stopRecording = () => {
-    if (mediaRecorder) {
+    if (mediaRecorder && mediaRecorder.state === "recording") {
       mediaRecorder.stop();
       setIsRecording(false);
+    } else {
+      console.warn("No recording in progress to stop");
     }
   };
 

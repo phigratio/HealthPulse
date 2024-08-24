@@ -4,10 +4,8 @@ import "../style/servicePage/DoctorChatBot.css";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 import ChatWindow from "./ChatWindow";
-import KitBoxL from "../components/LottieComponents/KitBox";
-import VirusL from "../components/LottieComponents/Virus";
-import DoctorImg from "../components/LottieComponents/Doctor";
 import PreventionL from "../components/LottieComponents/Prevention";
+import BacteriaL from "../components/LottieComponents/Bacteria";
 
 // DoctorChatBot Component
 const DoctorChatBot = () => {
@@ -29,7 +27,7 @@ const DoctorChatBot = () => {
               <ChatWindow />
             </div>
             <div className="lottie-container">
-              <PreventionL />
+              <BacteriaL />
             </div>
           </div>
         </div>

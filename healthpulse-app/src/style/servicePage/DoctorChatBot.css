@@ -22,13 +22,13 @@
 }
 
 .lottie-container {
+  display: flex;
   flex: 0 0 20%;
   max-width: 20%;
 }
 
 .chat-container {
   flex: 0 0 60%;
-  max-width: 60%;
 }
 
 /* Responsive design */
