@@ -72,6 +72,21 @@
   margin-top: 1rem;
 }
 
+.add-button {
+  background-color: #4a90e2;
+  border: none;
+  border-radius: 10%;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
 .custom-issue input {
   flex-grow: 1;
   margin-right: 0.5rem;

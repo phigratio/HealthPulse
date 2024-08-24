@@ -1,11 +1,7 @@
-// apikeys.jsx
-
-export const weatherKey = "e826eaf58bea2af5b1ad353c0625e0f7";
-export const geminiKey = "AIzaSyBtbcmMGUk34mU0LGJ83pLAfKVWTUKXGIE";
-export const speechToText = "AIzaSyDpFU-kHOjaho5XkiPTrfvXOxebgw9T2Kg";
-
-export const textToSpeech = "AIzaSyCBks9NXTg4i-Ie_fRRIOIamvS-cFFBejs";
-
-export const mapsApi = "AIzaSyDYucWqYUXlE6FfuDK1osA2nvF58a4LdVE";
-
-// Add more keys as needed
+export const weatherKey = process.env.REACT_APP_WEATHER_API_KEY;
+export const geminiKey = process.env.REACT_APP_GEMINI_API_KEY;
+export const speechToText = process.env.REACT_APP_SPEECH_TO_TEXT_API_KEY;
+export const textToSpeech = process.env.REACT_APP_TEXT_TO_SPEECH_API_KEY;
+export const mapsApi = process.env.REACT_APP_MAPS_API_KEY;
+export const visionApi = process.env.REACT_APP_VISION_API_KEY;
+export const newsApi = process.env.REACT_APP_NEWS_API_KEY;
