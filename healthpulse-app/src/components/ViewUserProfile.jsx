@@ -11,17 +11,34 @@ import { getCurrentUserDetail, isLoggedIn } from "../auth";
 import { BASE_URL } from "../service/helper";
 import { Link as ReactLink } from "react-router-dom";
 import empty from "../images/basic/empty.png";
-import { approveDoctor, rejectDoctor } from "../service/user-service";
+import {
+  approveDoctor,
+  rejectDoctor,
+  getUserInfo,
+} from "../service/user-service";
 import { toast } from "react-toastify";
 
 const ViewUserProfile = ({ user, updateProfileClick }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [login, setLogin] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     setCurrentUser(getCurrentUserDetail());
     setLogin(isLoggedIn());
-  }, []);
+
+    // Fetch user info when the component mounts
+    if (user && user.id) {
+      getUserInfo(user.id)
+        .then((data) => {
+          setUserInfo(data);
+        })
+        .catch((error) => {
+          toast.error("Failed to fetch user info!");
+          console.error(error);
+        });
+    }
+  }, [user]);
 
   const hasRole = (roles, roleId) => {
     return roles.some((role) => role.id === roleId);
@@ -74,7 +91,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
 
   return (
     <Card
-      className="mt-32 border-0 rounded-4"
+      className="mt-24 border-0 rounded-4"
       style={{
         boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)",
         width: "100%",
@@ -83,7 +100,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
       }}
     >
       <CardBody>
-        <h3 className="text-uppercase text-center">User Information</h3>
+        <h3 className="text-uppercase text-center mt-24">User Information</h3>
 
         <Container className="text-center">
           <img
@@ -133,8 +150,19 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
           </tbody>
         </Table>
 
+        {canUpdateProfile() && (
+          <CardFooter className="text-center">
+            <Button color="primary" tag={ReactLink} to={"/user/update-user"}>
+              Update Basic Profile
+            </Button>
+          </CardFooter>
+        )}
+
         {isDoctor && user.doctorInfo && (
           <>
+            <h3>
+              <br />
+            </h3>
             <h3 className="text-center">Doctor Info</h3>
             <Table
               responsive
@@ -173,7 +201,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                       <img
                         style={{ maxWidth: "250px", maxHeight: "250px" }}
                         src={
-                          user.imageName
+                          user.doctorInfo.certificateOfRegistration
                             ? BASE_URL +
                               "/users/user/image/" +
                               user.doctorInfo.certificateOfRegistration
@@ -193,7 +221,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                       <img
                         style={{ maxWidth: "250px", maxHeight: "250px" }}
                         src={
-                          user.imageName
+                          user.doctorInfo.cv
                             ? BASE_URL +
                               "/users/user/image/" +
                               user.doctorInfo.cv
@@ -207,12 +235,26 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                 </tr>
               </tbody>
             </Table>
+            {isDoctor && canUpdateProfile() && (
+              <CardFooter className="text-center">
+                <Button
+                  color="primary"
+                  tag={ReactLink}
+                  to={"/update-doctor-info/" + user.id}
+                >
+                  Update Doctor Info
+                </Button>
+              </CardFooter>
+            )}
           </>
         )}
 
         {canViewPersonalInfo() && currentUser.id === user.id && (
           <>
-            <h3 className="text-center">Person Info</h3>
+            <h3>
+              <br />
+            </h3>
+            <h3 className="text-center">Personal Info</h3>
             <Table
               responsive
               striped
@@ -224,109 +266,123 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
               <tbody>
                 <tr>
                   <td>Age</td>
-                  <td>{user.age === 0 ? "N/A" : user.age}</td>
+                  <td>{userInfo ? userInfo.age : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>Blood Group</td>
-                  <td>{user.bloodGroup ? user.bloodGroup : "N/A"}</td>
+                  <td>{userInfo ? userInfo.bloodGroup : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>Gender</td>
-                  <td>{user.gender === 0 ? "N/A" : user.gender}</td>
+                  <td>{userInfo ? userInfo.gender : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>Weight</td>
-                  <td>{user.weight === 0 ? "N/A" : user.weight}</td>
+                  <td>{userInfo ? userInfo.weight : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>Height</td>
-                  <td>{user.height === 0 ? "N/A" : user.height}</td>
+                  <td>{userInfo ? userInfo.height : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>Waist Size</td>
-                  <td>{user.waist === 0 ? "N/A" : user.waist}</td>
+                  <td>{userInfo ? userInfo.waist : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>Hip Size</td>
-                  <td>{user.hip === 0 ? "N/A" : user.hip}</td>
+                  <td>{userInfo ? userInfo.hip : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>BMI</td>
-                  <td>{user.bmi === 0 ? "N/A" : user.bmi}</td>
+                  <td>{userInfo ? userInfo.bmi : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>Body Fat Percentage</td>
-                  <td>
-                    {user.bodyFatPercentage === 0
-                      ? "N/A"
-                      : user.bodyFatPercentage}
-                  </td>
+                  <td>{userInfo ? userInfo.bodyFatPercentage : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>Body Water</td>
-                  <td>{user.bodyWater === 0 ? "N/A" : user.bodyWater}</td>
+                  <td>{userInfo ? userInfo.bodyWater : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>Body Water Needs</td>
-                  <td>
-                    {user.bodyWaterNeeds === 0 ? "N/A" : user.bodyWaterNeeds}
-                  </td>
+                  <td>{userInfo ? userInfo.bodyWaterNeeds : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td>Muscle Mass</td>
+                  <td>{userInfo ? userInfo.muscleMass : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td>Muscle Mass Needs</td>
+                  <td>{userInfo ? userInfo.muscleMassNeeds : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>Bone Density</td>
-                  <td>{user.boneDensity === 0 ? "N/A" : user.boneDensity}</td>
+                  <td>{userInfo ? userInfo.boneDensity : "N/A"}</td>
                 </tr>
                 <tr>
                   <td>Bone Density Needs</td>
-                  <td>
-                    {user.boneDensityNeeds === 0
-                      ? "N/A"
-                      : user.boneDensityNeeds}
-                  </td>
+                  <td>{userInfo ? userInfo.boneDensityNeeds : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td>Metabolic Age</td>
+                  <td>{userInfo ? userInfo.metabolicAge : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td>Metabolic Age Needs</td>
+                  <td>{userInfo ? userInfo.metabolicAgeNeeds : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td>Visceral Fat</td>
+                  <td>{userInfo ? userInfo.visceralFat : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td>Visceral Fat Needs</td>
+                  <td>{userInfo ? userInfo.visceralFatNeeds : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td>Genetic Disease</td>
+                  <td>{userInfo ? userInfo.geneticDisease : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td>Chronic Disease</td>
+                  <td>{userInfo ? userInfo.chronicDisease : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td>Allergies</td>
+                  <td>{userInfo ? userInfo.allergies : "N/A"}</td>
                 </tr>
               </tbody>
             </Table>
+            {canUpdateProfile() && (
+              <CardFooter className="text-center">
+                <Button
+                  color="primary"
+                  tag={ReactLink}
+                  to={"/user/update-personal-info"}
+                >
+                  Update Personal Info
+                </Button>
+              </CardFooter>
+            )}
           </>
         )}
 
-        {canUpdateProfile() && (
-          <Container className="text-center">
-            <Button onClick={updateProfileClick} color="success" size="lg">
-              Update Profile
-            </Button>
-          </Container>
-        )}
-
-        {canApproveDoctor() && isDoctor && (
-          <Container className="text-center">
-            <Button
-              onClick={handleApproveDoctor}
-              color="primary"
-              size="lg"
-              className="me-2"
-            >
+        {canApproveDoctor() && (
+          <CardFooter className="text-center">
+            <Button color="success" onClick={handleApproveDoctor}>
               Approve Doctor
             </Button>
             <Button
-              onClick={handleRejectDoctor}
               color="danger"
-              size="lg"
-              className="ms-2"
+              onClick={handleRejectDoctor}
+              className="ml-2"
             >
               Reject Doctor
             </Button>
-          </Container>
+          </CardFooter>
         )}
       </CardBody>
-      <CardFooter className="text-center">
-        <Button
-          onClick={() => window.history.back()}
-          color="secondary"
-          size="lg"
-        >
-          Go Back
-        </Button>
-      </CardFooter>
     </Card>
   );
 };

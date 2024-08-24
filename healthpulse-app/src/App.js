@@ -26,6 +26,7 @@ import Categories from "./components/postComponents/Categories";
 import MyPosts from "./pages/user-routes/MyPosts";
 import UpdateBlog from "./pages/UpdateBlog";
 import UpdateUser from "./pages/UpdateUser";
+import UpdatePersonalData from "./pages/UpdatePersonalData";
 
 import UpdateDoctorInfoPage from "./pages/UpdateDoctorInfoPage";
 
@@ -86,6 +87,7 @@ function App() {
           <Route path="my-profile/:userId" element={<ProfileInfo />} />
           <Route path="my-posts" element={<MyPosts />} />
           <Route path="update-blog/:blogId" element={<UpdateBlog />} />
+          <Route path="update-personal-info" element={<UpdatePersonalData />} />
         </Route>
 
         <Route
@@ -102,8 +104,6 @@ function App() {
 
         {/* Appointment part */}
         <Route path="/appoint/*" element={<AppointMainPage />} />
-
-        
       </Routes>
     </BrowserRouter>
   );

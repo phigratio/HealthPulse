@@ -14,7 +14,7 @@ import {
   FormFeedback,
 } from "reactstrap";
 import Base from "../components/Base";
-import { signUp } from "../service/user-service";
+import { signUp, addUserInfo } from "../service/user-service";
 import { toast } from "react-toastify";
 import Background from "../components/basicComponents/Background";
 
@@ -89,6 +89,55 @@ const Signup = () => {
         });
       });
   };
+
+  // const submitForm = (e) => {
+  //   e.preventDefault();
+
+  //   if (error.isError) {
+  //     toast.error("Please fill the form correctly !!!");
+  //     setError({
+  //       error: {},
+  //       isError: false,
+  //     });
+  //     return; // Exit early if there is an error
+  //   }
+
+  //   console.log(data);
+
+  //   signUp(data, data.role)
+  //     .then((resp) => {
+  //       console.log(resp);
+  //       console.log("User Registered Successfully");
+  //       toast.success(
+  //         "User Registered Successfully with user id: " + resp.id + " !!!"
+  //       );
+
+  //       // Add user info after successful registration
+  //       addUserInfo({}, resp.id)
+  //         .then(() => {
+  //           console.log("User Info added successfully");
+  //           toast.success("User Info added successfully!");
+  //           // Reset data after successfully adding user info
+  //           resetData();
+  //           // Redirect to login page after successful registration
+  //           window.location.href = "/login";
+  //         })
+  //         .catch((addUserInfoError) => {
+  //           console.error("Failed to add user info", addUserInfoError);
+  //           toast.error("Failed to add user info. Please try again.");
+  //         });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       console.log("User Registration Failed");
+
+  //       setError({
+  //         error: err,
+  //         isError: true,
+  //       });
+  //       toast.error("User Registration Failed. Please try again.");
+  //     });
+  // };
 
   return (
     <div>

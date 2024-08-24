@@ -125,3 +125,24 @@ export const rejectDoctor = (doctorId) => {
     .put(`/doctors/reject/${doctorId}`)
     .then((resp) => resp.data);
 };
+
+//Add user info
+export const addUserInfo = (userInfo, userId) => {
+  return privateAxios
+    .post(`/userinfo/${userId}`, userInfo)
+    .then((response) => response.data);
+};
+
+//get user info
+
+export const getUserInfo = (userId) => {
+  return privateAxios.get(`/userinfo/${userId}`).then((resp) => resp.data);
+};
+
+//update user info
+
+export const updateUserInfo = (userInfo, userId) => {
+  return privateAxios
+    .put(`/userinfo/${userId}`, userInfo)
+    .then((resp) => resp.data);
+};
