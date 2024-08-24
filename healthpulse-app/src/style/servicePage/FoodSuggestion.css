@@ -94,16 +94,38 @@
 
 /* Disease input field */
 .disease-input {
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 .disease-input input {
-  width: 100%;
+  flex: 1;
   padding: 10px;
-  border: 1px solid #70a1ff;
-  border-radius: 5px;
-  background-color: #eef6fc;
-  color: #2c3e50;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.recording-buttons-container {
+  margin-left: 10px;
+}
+
+.recording-button {
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.recording-button.start {
+  color: #1d2590;
+}
+
+.recording-button.stop {
+  color: #9e195e;
 }
 
 /* Generate button styling */

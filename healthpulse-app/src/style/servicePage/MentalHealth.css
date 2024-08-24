@@ -1,31 +1,43 @@
+/* Main container */
 .mental-health-page {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 2rem;
+  min-height: calc(100vh - 100px); /* Assuming Base header is about 100px */
+  margin-top: 100px;
 }
 
+/* Lottie animation containers */
 .lottie-container {
   width: 20%;
+  position: sticky;
+  top: 120px;
 }
 
 /* Main content container */
 .mental-health-container {
-  padding-top: 100px;
-  flex: 1 1 60%; /* Takes up 60% of the container width */
-  padding: 40px; /* Increased padding */
+  flex: 1;
+  max-width: 60%;
+  margin: 0 2rem;
+  padding: 40px;
   background: linear-gradient(135deg, #e0f7fa, #b3e5fc);
   border-radius: 10px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-
-  width: 40%; /* Adjusted width to 40% */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: calc(
+    100vh - 140px
+  ); /* Adjusted to account for Base header and margins */
 }
+
+/* Grid for issue buttons */
 .issues-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 1rem;
 }
 
+/* Issue button styles */
 .issue-button {
   background-color: #f1f1f1;
   border: none;
@@ -53,6 +65,7 @@
   background-color: #0056b3;
 }
 
+/* Custom issue input styles */
 .custom-issue {
   display: flex;
   align-items: center;
@@ -73,6 +86,7 @@
   border-color: #007bff;
 }
 
+/* Generate button styles */
 .generate-button {
   margin-top: 1rem;
   background-color: #007bff;
@@ -92,9 +106,31 @@
   background-color: #0056b3;
 }
 
+/* Recommendation styles */
 .recommendation {
   margin-top: 1rem;
   padding: 1rem;
   background-color: #f1f1f1;
   border-radius: 4px;
+}
+
+@media (max-width: 1200px) {
+  .mental-health-page {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px; /* Slightly reduced margin for smaller screens */
+  }
+
+  .lottie-container {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 2rem;
+    position: static; /* Remove sticky positioning on smaller screens */
+  }
+
+  .mental-health-container {
+    max-width: 100%;
+    margin: 0;
+    max-height: none; /* Remove max-height on smaller screens */
+  }
 }
