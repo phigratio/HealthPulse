@@ -6,8 +6,8 @@ const wrapperStyle = {
   display: "flex",
   justifyContent: "center", // Center horizontally
   alignItems: "center", // Center vertically
-  width: "300px", // Adjust to your container size
-  height: "300px", // Adjust to your container size
+  width: "270px", // Adjust to your container size
+  height: "270px", // Adjust to your container size
   margin: "0 auto", // Center the wrapper in its parent container
 };
 

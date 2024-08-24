@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { newsApi } from "../servicePage/apiKeys";
 
-const apiKey = "1dbc3a04952fe3b6bf950a167666ce94";
+const apiKey = newsApi;
 
 const useNewsData = () => {
   const [newsData, setNewsData] = useState([]);

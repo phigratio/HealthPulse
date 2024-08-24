@@ -5,8 +5,9 @@ import TextToSpeechButton from "./TextToSpeechButton";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 import banner from "../images/banner/kidsCorner.mp4";
-import HeartRate from "../components/LottieComponents/HeartRate";
-import BriefCase from "../components/LottieComponents/Breifcase";
+import VirusL from "../components/LottieComponents/Virus";
+import HeartL from "../components/LottieComponents/Heart";
+import { geminiKey, visionApi } from "./apiKeys";
 
 const PrescriptionAnalyzer = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -18,8 +19,8 @@ const PrescriptionAnalyzer = () => {
     setSelectedFile(event.target.files[0]);
   };
 
-  const apiKeyVision = "AIzaSyCj5hRY6tg826SELZMcacxPpiCZMuY-VJ4";
-  const apiKeyGemini = "AIzaSyBtbcmMGUk34mU0LGJ83pLAfKVWTUKXGIE";
+  const apiKeyVision = visionApi;
+  const apiKeyGemini = geminiKey;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -79,7 +80,7 @@ const PrescriptionAnalyzer = () => {
                 {
                   parts: [
                     {
-                      text: `This text probably contains some medicine names. Can you guess the names and provide when these medicines are used?Please answer in one single paragraph containing all the information The text is ${combinedText}`,
+                      text: `This text probably contains some medicine names. Can you guess the names and provide when these medicines are used?Please answer in one single paragraph containing all the information The text is ${combinedText}.Please provide necessary information of the medicines if possible`,
                     },
                   ],
                 },
@@ -118,7 +119,7 @@ const PrescriptionAnalyzer = () => {
 
           <div className="content-container">
             <div className="left-side">
-              <BriefCase />
+              <VirusL />
             </div>
             <div className="middle-side">
               <div className="image-analyzer-container">
@@ -144,7 +145,6 @@ const PrescriptionAnalyzer = () => {
                   </div>
                 </form>
 
-                {loading && <HeartRate />}
                 {visionText && !loading && (
                   <div className="card">
                     <h2>Extracted Text By AI</h2>
@@ -162,7 +162,7 @@ const PrescriptionAnalyzer = () => {
               </div>
             </div>
             <div className="right-side">
-              <BriefCase />
+              <HeartL />
             </div>
           </div>
         </div>
