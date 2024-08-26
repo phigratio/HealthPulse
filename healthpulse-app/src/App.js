@@ -48,6 +48,7 @@ import AdminMainPage from "./admin_part/AdminMainPage";
 
 //Appointment part
 import AppointMainPage from "./appointPart/AppointMainPage";
+import ImageAndPdfGenerator from "./servicePage/ImageGenerator";
 
 library.add(fas);
 function App() {
@@ -74,6 +75,7 @@ function App() {
         <Route path="/service/newsapp" element={<NewsList />} />
         <Route path="/service/book-doctor" element={<BookDoctor />} />
         <Route path="/service/weatherapp" element={<Weather />} />
+        <Route path="/service/story-generator" element={<KidsCorner />} />
         <Route
           path="/service/prescription-analyzer"
           element={<PrescriptionAnalyzer />}

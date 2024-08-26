@@ -3,6 +3,7 @@ import banner from "../images/banner/kidsCorner.mp4";
 import "../style/servicePage/KidsCorner.css";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
+import ImageAndPdfGenerator from "./ImageGenerator";
 
 const KidsCorner = () => {
   return (
@@ -14,18 +15,7 @@ const KidsCorner = () => {
             <video src={banner} autoPlay loop muted></video>
           </div>
           <div className="text-container">
-            <h1>Hello hi i</h1>
-            <h1>Hello hi i</h1>
-            <h1>Hello hi i</h1>
-            <h1>Hello hi i</h1>
-            <h1>Hello hi i</h1>
-            <h1>Hello hi i</h1>
-            <h1>Hello hi i</h1>
-            <h1>Hello hi i</h1>
-            <h1>Hello hi i</h1>
-            <h1>Hello hi i</h1>
-            <h1>Hello hi i</h1>
-            <h1>Hello hi i</h1>
+            <ImageAndPdfGenerator />
           </div>
         </div>
       </Base>
