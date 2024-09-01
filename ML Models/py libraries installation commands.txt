@@ -1,0 +1,9 @@
+pip install fastapi
+pip install uvicorn
+pip install pydantic
+pip install scikit-learn
+pip install requests
+pip install pypi-json
+
+#if python version less than 3.8.*
+pip install pickle5 

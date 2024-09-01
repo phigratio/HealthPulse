@@ -42,7 +42,8 @@ const ImageAndPdfGenerator = () => {
       setStory(storyResponse.data.candidates[0].content.parts[0].text);
 
       // Modify the prompt for generating cartoon images
-      const modifiedPrompt = `${prompt} cartoon images of people doctor treating this `;
+      // const modifiedPrompt = `${prompt} cartoon images of people doctor treating this `;
+      const modifiedPrompt = `image of a flying elephant `;
 
       // Generate the image
       const imageResponse = await axios.post(
