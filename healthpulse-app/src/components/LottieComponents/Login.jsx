@@ -11,6 +11,7 @@ const wrapperStyle = {
   margin: "0 auto", // Center the wrapper in its parent container
 };
 
+//how are you
 const animationStyle = {
   width: "100%", // Make the animation fill the container
   height: "100%",
