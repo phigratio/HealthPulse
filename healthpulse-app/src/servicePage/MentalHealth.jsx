@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./MentalHealth.css";
+import "../style/servicePage/MentalHealth.css";
+import DoctorL from "../components/LottieComponents/Doctor"; // Reuse the doctor icon
+import MentalHealthL from "../components/LottieComponents/MentalHealth";
+import Background from "../components/basicComponents/Background";
+import Base from "../components/Base";
+import PurpleBriefCaseL from "../components/LottieComponents/PurpleBriefCase";
 
 const apiKeyGemini = "AIzaSyCSlDKg-ZCMGgC3v4TQ1D8626oawLVCPhA";
 
-const MentalHealthComponent = () => {
+const Mentalhealth = () => {
   const [selectedIssues, setSelectedIssues] = useState([]);
   const [customIssue, setCustomIssue] = useState("");
   const [recommendation, setRecommendation] = useState("");
@@ -64,41 +69,58 @@ const MentalHealthComponent = () => {
   };
 
   return (
-    <div className="mental-health-container">
-      <h2>Select Mental Health Issues</h2>
-      <div className="issues-grid">
-        {mentalHealthIssues.map((issue) => (
-          <button
-            key={issue}
-            className={`issue-button ${
-              selectedIssues.includes(issue) ? "selected" : ""
-            }`}
-            onClick={() => handleIssueClick(issue)}
-          >
-            {issue}
-          </button>
-        ))}
-      </div>
-      <div className="custom-issue">
-        <input
-          type="text"
-          value={customIssue}
-          onChange={(e) => setCustomIssue(e.target.value)}
-          placeholder="Add custom issue"
-        />
-        <button onClick={handleCustomIssueAdd}>Add</button>
-      </div>
-      <button className="generate-button" onClick={generateRecommendation}>
-        Generate Recommendation
-      </button>
-      {recommendation && (
-        <div className="recommendation">
-          <h3>Recommendation:</h3>
-          <p>{recommendation}</p>
+    <div>
+      <Background />
+      <Base>
+        <div className="mental-health-page">
+          <div className="lottie-container">
+            <PurpleBriefCaseL />
+          </div>
+          <div className="mental-health-container">
+            <h2>Select Mental Health Issues</h2>
+            <div className="issues-grid">
+              {mentalHealthIssues.map((issue) => (
+                <button
+                  key={issue}
+                  className={`issue-button ${
+                    selectedIssues.includes(issue) ? "selected" : ""
+                  }`}
+                  onClick={() => handleIssueClick(issue)}
+                >
+                  {issue}
+                </button>
+              ))}
+            </div>
+            <div className="custom-issue">
+              <input
+                type="text"
+                value={customIssue}
+                onChange={(e) => setCustomIssue(e.target.value)}
+                placeholder="Add custom issue"
+              />
+              <button onClick={handleCustomIssueAdd}>Add</button>
+            </div>
+            <button
+              className="generate-button"
+              onClick={generateRecommendation}
+            >
+              Generate Recommendation
+            </button>
+            {recommendation && (
+              <div className="recommendation">
+                <h3>Recommendation:</h3>
+                <p>{recommendation}</p>
+              </div>
+            )}
+          </div>
+
+          <div className="lottie-container">
+            <MentalHealthL />
+          </div>
         </div>
-      )}
+      </Base>
     </div>
   );
 };
 
-export default MentalHealthComponent;
+export default Mentalhealth;

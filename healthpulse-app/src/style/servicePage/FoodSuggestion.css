@@ -1,87 +1,132 @@
+/* Container for the entire food suggestion component */
 .food-suggestion-container {
-  max-width: 800px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
   padding: 20px;
-  background-color: #e6f3ff;
+  padding-top: 100px;
+  box-sizing: border-box;
+}
+
+/* Lottie containers on left and right */
+.lottie-container {
+  flex: 0 1 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 20%;
+}
+
+/* Main content container */
+.food-suggestion-content {
+  flex: 1 1 60%; /* Allow it to take up to 60% of space but flexible */
+  padding: 20px;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #e0f7fa, #b3e5fc);
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  color: #2c3e50;
-  text-align: center;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  overflow-y: auto; /* Ensure content doesn't overflow vertically */
 }
 
+/* Grid for preferences buttons */
 .preferences-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
+/* Individual preference buttons */
 .preference-button {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 10px;
+  background-color: #cce7ff;
+  border: 2px solid #70a1ff;
+  color: #2c3e50;
+  padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .preference-button:hover {
-  background-color: #2980b9;
+  background-color: #a1c4fd;
+  transform: scale(1.05);
 }
 
 .preference-button.selected {
-  background-color: #2c3e50;
+  background-color: #70a1ff;
+  color: white;
 }
 
+/* Custom preference input and button */
 .custom-preference {
   display: flex;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
 .custom-preference input {
-  flex-grow: 1;
+  flex: 1;
   padding: 10px;
-  border: 1px solid #bdc3c7;
-  border-radius: 5px 0 0 5px;
+  border: 1px solid #70a1ff;
+  border-radius: 5px;
+  background-color: #eef6fc;
+  color: #2c3e50;
 }
 
 .custom-preference button {
-  background-color: #3498db;
-  color: white;
-  border: none;
   padding: 10px 15px;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-}
-
-.generate-button {
-  display: block;
-  width: 100%;
-  background-color: #2c3e50;
+  background-color: #70a1ff;
   color: white;
   border: none;
-  padding: 15px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.custom-preference button:hover {
+  background-color: #a1c4fd;
+  transform: scale(1.05);
+}
+
+/* Disease input field */
+.disease-input {
+  margin-bottom: 20px;
+}
+
+.disease-input input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #70a1ff;
+  border-radius: 5px;
+  background-color: #eef6fc;
+  color: #2c3e50;
+}
+
+/* Generate button styling */
+.generate-button {
+  width: 100%;
+  padding: 15px;
+  background-color: #70a1ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-bottom: 20px;
 }
 
 .generate-button:hover {
-  background-color: #34495e;
+  background-color: #a1c4fd;
+  transform: scale(1.05);
 }
 
+/* Suggestion section styling */
 .suggestion {
   margin-top: 20px;
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .suggestion h3 {
@@ -90,6 +135,20 @@ h2 {
 }
 
 .suggestion p {
-  color: #34495e;
-  line-height: 1.6;
+  background-color: #eef6fc;
+  padding: 15px;
+  border-radius: 5px;
+  color: #2c3e50;
+}
+
+/* Base component */
+.Base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+  width: 100%; /* Full width */
+  padding: 20px; /* Add some padding */
+  overflow: auto; /* Allow both horizontal and vertical scrolling */
+  box-sizing: border-box;
 }

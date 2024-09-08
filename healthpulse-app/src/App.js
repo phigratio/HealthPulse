@@ -37,6 +37,7 @@ import PrescriptionAnalyzer from "./servicePage/PrescriptionAnalyzer";
 import NearestHospital from "./servicePage/NearestHospital";
 import MapHome from "./servicePage/MapHome";
 
+
 //cabin booking part
 
 import CabinMainPage from "./CabinBooking/CabinMainPage";
@@ -77,6 +78,8 @@ function App() {
           element={<HealthCalculator />}
         />
         <Route path="/service/kids-corner" element={<KidsCorner />} />
+        <Route path="/service/mentalhealth" element={<Mentalhealth />} />
+        <Route path="/service/food-suggestion" element={<FoodSuggestion />} />
         <Route path="/service/newsapp" element={<NewsList />} />
         <Route path="/service/book-doctor" element={<BookDoctor />} />
         <Route path="/service/weatherapp" element={<Weather />} />
