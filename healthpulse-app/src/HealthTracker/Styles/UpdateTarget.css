@@ -1,0 +1,44 @@
+/* UpdateTarget.css */
+.target-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  background: #ffffff; /* White background for the container */
+  border-radius: 8px; /* Rounded corners for the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Distinct shadow */
+}
+
+.target-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.target-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.target-label {
+  margin-bottom: 10px;
+}
+
+.target-input {
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.target-button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.target-button:hover {
+  background-color: #0056b3;
+}

@@ -38,36 +38,6 @@ const Login = () => {
     });
   };
 
-  // const handleFormSubmit = (event) => {
-  //   event.preventDefault();
-  //   if (
-  //     loginDetail.username.trim() === "" ||
-  //     loginDetail.password.trim() === ""
-  //   ) {
-  //     toast.error("Please fill all the fields !!!");
-  //     return;
-  //   }
-
-  //   login(loginDetail)
-  //     .then((data) => {
-  //       doLogin(data, () => {
-  //         navigate("/user/dashboard");
-  //         userContxtData.setUser({
-  //           data: data.user,
-  //           login: true,
-  //         });
-  //       });
-  //       toast.success("Token received successfully  !!!");
-  //     })
-  //     .catch((error) => {
-  //       if (error.response.status === 400 || error.response.status === 404) {
-  //         toast.error(error.response.data.message);
-  //       } else {
-  //         toast.error("Something went wrong !!!");
-  //       }
-  //     });
-  // };
-
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
@@ -110,6 +80,10 @@ const Login = () => {
                 console.error(error);
               }
             });
+
+          // Save the username and password to local storage
+          localStorage.setItem("username", loginDetail.username);
+          localStorage.setItem("password", loginDetail.password);
 
           // Set user context and navigate to user dashboard
           userContxtData.setUser({

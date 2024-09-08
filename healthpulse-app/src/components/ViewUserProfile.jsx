@@ -265,6 +265,21 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
             >
               <tbody>
                 <tr>
+                  <td>Phone No</td>
+                  <td>{userInfo ? userInfo.phoneNumber : "N/A"}</td>
+                </tr>
+
+                <tr>
+                  <td>District</td>
+                  <td>{userInfo ? userInfo.district : "N/A"}</td>
+                </tr>
+
+                <tr>
+                  <td>Full Address</td>
+                  <td>{userInfo ? userInfo.address : "N/A"}</td>
+                </tr>
+
+                <tr>
                   <td>Age</td>
                   <td>{userInfo ? userInfo.age : "N/A"}</td>
                 </tr>
@@ -272,6 +287,12 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
                   <td>Blood Group</td>
                   <td>{userInfo ? userInfo.bloodGroup : "N/A"}</td>
                 </tr>
+
+                <tr>
+                  <td>Ready to Donate Blood</td>
+                  <td>{userInfo ? userInfo.readyToDonateBlood : "N/A"}</td>
+                </tr>
+
                 <tr>
                   <td>Gender</td>
                   <td>{userInfo ? userInfo.gender : "N/A"}</td>

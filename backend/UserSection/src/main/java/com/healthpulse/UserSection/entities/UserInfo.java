@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,6 +31,14 @@ public class UserInfo {
 	private Long id;
 	
 	private int userId;
+	
+	private String district;
+	
+	private String address;
+	
+	private String phoneNumber;
+	
+    private String readyToDonateBlood ;
 	
 	private int age;
 	
@@ -92,7 +99,5 @@ public class UserInfo {
 	private String chronicDisease;
 	
 	private String allergies;
-	
-	
 	
 }

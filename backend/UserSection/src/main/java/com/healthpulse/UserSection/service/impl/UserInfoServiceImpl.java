@@ -7,7 +7,9 @@ import com.healthpulse.UserSection.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -17,6 +19,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfoDTO addUserInfo(UserInfoDTO userInfoDTO) {
+    	if (userInfoDTO.getReadyToDonateBlood() == null || userInfoDTO.getReadyToDonateBlood().isEmpty()) {
+            userInfoDTO.setReadyToDonateBlood("NO");
+        }
+
         UserInfo userInfo = convertToEntity(userInfoDTO);
         UserInfo savedUserInfo = userInfoRepository.save(userInfo);
         return convertToDTO(savedUserInfo);
@@ -45,12 +51,36 @@ public class UserInfoServiceImpl implements UserInfoService {
         Optional<UserInfo> optionalUserInfo = userInfoRepository.findByUserId(userId);
         optionalUserInfo.ifPresent(userInfoRepository::delete);
     }
+    
+    // New method to get all users ready to donate blood
+    @Override
+    public List<UserInfoDTO> getUsersReadyToDonateBlood() {
+        List<UserInfo> usersReadyToDonate = userInfoRepository.findByReadyToDonateBlood("YES");
+        return usersReadyToDonate.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+    
+    @Override
+    public List<UserInfoDTO> getUserInfoByBloodGroupAndReadyToDonate(String bloodGroup) {
+        List<UserInfo> users = userInfoRepository.findByBloodGroupAndReadyToDonateBlood(bloodGroup, "YES");
+        return users.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+    
+    @Override
+    public List<UserInfoDTO> getUserInfoByBloodGroupReadyToDonateAndDistrict(String bloodGroup, String district) {
+        List<UserInfo> users = userInfoRepository.findByBloodGroupAndReadyToDonateBloodAndDistrict(bloodGroup, "YES", district);
+        return users.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
 
     private UserInfo convertToEntity(UserInfoDTO userInfoDTO) {
         return UserInfo.builder()
                 .id(userInfoDTO.getId())
                 .userId(userInfoDTO.getUserId())
                 .age(userInfoDTO.getAge())
+                .district(userInfoDTO.getDistrict())
+                .address(userInfoDTO.getAddress())
+                .phoneNumber(userInfoDTO.getPhoneNumber())
+                .readyToDonateBlood(userInfoDTO.getReadyToDonateBlood())
                 .height(userInfoDTO.getHeight())
                 .weight(userInfoDTO.getWeight())
                 .gender(userInfoDTO.getGender())
@@ -88,6 +118,10 @@ public class UserInfoServiceImpl implements UserInfoService {
                 .id(userInfo.getId())
                 .userId(userInfo.getUserId())
                 .age(userInfo.getAge())
+                .district(userInfo.getDistrict())
+                .address(userInfo.getAddress())
+                .phoneNumber(userInfo.getPhoneNumber())
+                .readyToDonateBlood(userInfo.getReadyToDonateBlood())
                 .height(userInfo.getHeight())
                 .weight(userInfo.getWeight())
                 .gender(userInfo.getGender())
@@ -122,6 +156,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     private void updateUserInfoFromDTO(UserInfo userInfo, UserInfoDTO userInfoDTO) {
         userInfo.setAge(userInfoDTO.getAge());
+        userInfo.setDistrict(userInfoDTO.getDistrict());
+        userInfo.setAddress(userInfoDTO.getAddress());
+        userInfo.setPhoneNumber(userInfoDTO.getPhoneNumber());
+        userInfo.setReadyToDonateBlood(userInfoDTO.getReadyToDonateBlood());
         userInfo.setHeight(userInfoDTO.getHeight());
         userInfo.setWeight(userInfoDTO.getWeight());
         userInfo.setGender(userInfoDTO.getGender());

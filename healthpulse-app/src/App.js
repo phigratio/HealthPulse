@@ -27,6 +27,7 @@ import MyPosts from "./pages/user-routes/MyPosts";
 import UpdateBlog from "./pages/UpdateBlog";
 import UpdateUser from "./pages/UpdateUser";
 import UpdatePersonalData from "./pages/UpdatePersonalData";
+import DonorList from "./pages/BloodDoner";
 
 import UpdateDoctorInfoPage from "./pages/UpdateDoctorInfoPage";
 
@@ -46,6 +47,15 @@ import AdminMainPage from "./admin_part/AdminMainPage";
 
 //Appointment part
 import AppointMainPage from "./appointPart/AppointMainPage";
+
+//Chat part
+import ChatMainPage from "./Chat/ChatMainPage";
+
+//Health Tracker part
+import HealthTrackerMainPage from "./HealthTracker/HealthTrackerMainPage";
+
+//Medication part
+import MedicationMainPage from "./madication/MedicationMainPage";
 
 library.add(fas);
 function App() {
@@ -82,6 +92,8 @@ function App() {
 
         <Route path="/addpost" element={<AddPost />} />
 
+        <Route path="/donors" element={<DonorList />} />
+
         <Route path="/user" element={<User />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="my-profile/:userId" element={<ProfileInfo />} />
@@ -104,6 +116,15 @@ function App() {
 
         {/* Appointment part */}
         <Route path="/appoint/*" element={<AppointMainPage />} />
+
+        {/* Chat part */}
+        <Route path="/chat/*" element={<ChatMainPage />} />
+
+        {/* Health Tracker part */}
+        <Route path="/tracker/*" element={<HealthTrackerMainPage />} />
+
+        {/* Medication part */}
+        <Route path="/medication/*" element={<MedicationMainPage />} />
       </Routes>
     </BrowserRouter>
   );

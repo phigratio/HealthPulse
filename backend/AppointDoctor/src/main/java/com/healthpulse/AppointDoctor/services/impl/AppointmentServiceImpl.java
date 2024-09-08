@@ -103,6 +103,14 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .distinct()
                 .collect(Collectors.toList());
     }
+    
+    @Override
+    public boolean hasAppointment(int userId, int doctorId) {
+        return appointmentRepository.findAll().stream()
+                .anyMatch(appointment -> appointment.getPatientId() == userId &&
+                                          appointment.getDoctorId() == doctorId &&
+                                          "BOOKED".equals(appointment.getStatus()));
+    }
 
     
     

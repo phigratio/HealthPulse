@@ -37,4 +37,7 @@ public interface AppointmentService {
 
     // Method to find all specializations
     List<String> findAllSpecializations();
+    
+ // Method to check if a user has an appointment with a doctor
+    boolean hasAppointment(int userId, int doctorId);
 }

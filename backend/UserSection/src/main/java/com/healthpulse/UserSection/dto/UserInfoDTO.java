@@ -16,6 +16,10 @@ public class UserInfoDTO {
     private Long id;
     private int userId;
     private int age;
+    private String district;
+    private String address;
+    private String phoneNumber;
+    private String readyToDonateBlood;
     private float height;
     private float weight;
     private String gender;

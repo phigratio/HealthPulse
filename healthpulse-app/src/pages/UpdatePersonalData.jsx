@@ -17,11 +17,15 @@ import {
 const UpdatePersonalData = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
+    address: "",
+    district: "",
+    phoneNumber: "",
     age: "",
     height: "",
     weight: "",
     gender: "",
     bloodGroup: "",
+    readyToDonateBlood: "",
     Waist: "",
     Hip: "",
     bmi: "",
@@ -92,6 +96,118 @@ const UpdatePersonalData = () => {
         <CardBody>
           <h3>Update Personal Information</h3>
           <Form onSubmit={handleUpdateUser}>
+            {/* <div>
+              <Label for="district">District</Label>
+              <Input
+                type="text"
+                id="district"
+                placeholder="Enter your district"
+                className="rounded-0"
+                value={userInfo.district}
+                onChange={(event) => handleChange(event, "district")}
+              />
+            </div> */}
+            <div>
+              <Label for="district">District</Label>
+              <Input
+                type="select"
+                id="district"
+                className="rounded-0"
+                value={userInfo.district}
+                onChange={(event) => handleChange(event, "district")}
+              >
+                <option value="">Select your district</option>
+                <option value="Bagerhat">Bagerhat</option>
+                <option value="Bandarban">Bandarban</option>
+                <option value="Barguna">Barguna</option>
+                <option value="Barisal">Barisal</option>
+                <option value="Bhola">Bhola</option>
+                <option value="Bogra">Bogra</option>
+                <option value="Brahmanbaria">Brahmanbaria</option>
+                <option value="Chandpur">Chandpur</option>
+                <option value="Chapai Nawabganj">Chapai Nawabganj</option>
+                <option value="Chattogram">Chattogram</option>
+                <option value="Chuadanga">Chuadanga</option>
+                <option value="Cox's Bazar">Cox's Bazar</option>
+                <option value="Cumilla">Cumilla</option>
+                <option value="Dhaka">Dhaka</option>
+                <option value="Dinajpur">Dinajpur</option>
+                <option value="Faridpur">Faridpur</option>
+                <option value="Feni">Feni</option>
+                <option value="Gaibandha">Gaibandha</option>
+                <option value="Gazipur">Gazipur</option>
+                <option value="Gopalganj">Gopalganj</option>
+                <option value="Habiganj">Habiganj</option>
+                <option value="Jamalpur">Jamalpur</option>
+                <option value="Jashore">Jashore</option>
+                <option value="Jhalokathi">Jhalokathi</option>
+                <option value="Jhenaidah">Jhenaidah</option>
+                <option value="Joypurhat">Joypurhat</option>
+                <option value="Khagrachari">Khagrachari</option>
+                <option value="Khulna">Khulna</option>
+                <option value="Kishoreganj">Kishoreganj</option>
+                <option value="Kurigram">Kurigram</option>
+                <option value="Kushtia">Kushtia</option>
+                <option value="Lakshmipur">Lakshmipur</option>
+                <option value="Lalmonirhat">Lalmonirhat</option>
+                <option value="Madaripur">Madaripur</option>
+                <option value="Magura">Magura</option>
+                <option value="Manikganj">Manikganj</option>
+                <option value="Meherpur">Meherpur</option>
+                <option value="Moulvibazar">Moulvibazar</option>
+                <option value="Munshiganj">Munshiganj</option>
+                <option value="Mymensingh">Mymensingh</option>
+                <option value="Naogaon">Naogaon</option>
+                <option value="Narail">Narail</option>
+                <option value="Narayanganj">Narayanganj</option>
+                <option value="Narsingdi">Narsingdi</option>
+                <option value="Natore">Natore</option>
+                <option value="Netrokona">Netrokona</option>
+                <option value="Nilphamari">Nilphamari</option>
+                <option value="Noakhali">Noakhali</option>
+                <option value="Pabna">Pabna</option>
+                <option value="Panchagarh">Panchagarh</option>
+                <option value="Patuakhali">Patuakhali</option>
+                <option value="Pirojpur">Pirojpur</option>
+                <option value="Rajbari">Rajbari</option>
+                <option value="Rajshahi">Rajshahi</option>
+                <option value="Rangamati">Rangamati</option>
+                <option value="Rangpur">Rangpur</option>
+                <option value="Satkhira">Satkhira</option>
+                <option value="Shariatpur">Shariatpur</option>
+                <option value="Sherpur">Sherpur</option>
+                <option value="Sirajganj">Sirajganj</option>
+                <option value="Sunamganj">Sunamganj</option>
+                <option value="Sylhet">Sylhet</option>
+                <option value="Tangail">Tangail</option>
+                <option value="Thakurgaon">Thakurgaon</option>
+              </Input>
+            </div>
+
+            <div>
+              <Label for="address">Full Address</Label>
+              <Input
+                type="text"
+                id="address"
+                placeholder="Enter your address"
+                className="rounded-0"
+                value={userInfo.address}
+                onChange={(event) => handleChange(event, "address")}
+              />
+            </div>
+
+            <div>
+              <Label for="phoneNumber">Phone Number</Label>
+              <Input
+                type="text"
+                id="phoneNumber"
+                placeholder="Enter your phone number"
+                className="rounded-0"
+                value={userInfo.phoneNumber}
+                onChange={(event) => handleChange(event, "phoneNumber")}
+              />
+            </div>
+
             <div className="my-3">
               <Label for="age">Age</Label>
               <Input
@@ -125,7 +241,8 @@ const UpdatePersonalData = () => {
                 onChange={(event) => handleChange(event, "weight")}
               />
             </div>
-            <div className="my-3">
+
+            {/* <div className="my-3">
               <Label for="gender">Gender</Label>
               <Input
                 type="text"
@@ -135,8 +252,26 @@ const UpdatePersonalData = () => {
                 value={userInfo.gender}
                 onChange={(event) => handleChange(event, "gender")}
               />
-            </div>
+            </div> */}
+
             <div className="my-3">
+              <Label for="gender">Gender</Label>
+              <Input
+                type="select" // Changed from "text" to "select" to show dropdown
+                id="gender"
+                className="rounded-0"
+                value={userInfo.gender}
+                onChange={(event) => handleChange(event, "gender")}
+              >
+                <option value="">Select your gender</option>
+                <option value="male">Male</option>
+                <option value="Female">Female</option>
+                <option value="ThridGender">Thrid Gender</option>
+                <option value="">No option for others</option>
+              </Input>
+            </div>
+
+            {/* <div className="my-3">
               <Label for="bloodGroup">Blood Group</Label>
               <Input
                 type="text"
@@ -146,7 +281,44 @@ const UpdatePersonalData = () => {
                 value={userInfo.bloodGroup}
                 onChange={(event) => handleChange(event, "bloodGroup")}
               />
+            </div> */}
+
+            <div className="my-3">
+              <Label for="bloodGroup">Blood Group</Label>
+              <Input
+                type="select"
+                id="bloodGroup"
+                className="rounded-0"
+                value={userInfo.bloodGroup}
+                onChange={(event) => handleChange(event, "bloodGroup")}
+              >
+                <option value="">Select your blood group</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </Input>
             </div>
+
+            <div>
+              <Label for="readyToDonateBlood">Ready to Donate Blood</Label>
+              <Input
+                type="select"
+                id="readyToDonateBlood"
+                className="rounded-0"
+                value={userInfo.readyToDonateBlood}
+                onChange={(event) => handleChange(event, "readyToDonateBlood")}
+              >
+                <option value="">Select your option</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+              </Input>
+            </div>
+
             <div className="my-3">
               <Label for="Waist">Waist (cm)</Label>
               <Input
