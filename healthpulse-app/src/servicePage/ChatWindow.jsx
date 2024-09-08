@@ -5,8 +5,9 @@ import MDEditor from "@uiw/react-md-editor";
 import InputBox from "./InputBox";
 import TextToSpeechButton from "./TextToSpeechButton";
 import "../style/servicePage/ChatWindow.css";
+import { geminiKey } from "./apiKeys";
 
-const API_KEY = "AIzaSyBtbcmMGUk34mU0LGJ83pLAfKVWTUKXGIE";
+const API_KEY = geminiKey;
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
 

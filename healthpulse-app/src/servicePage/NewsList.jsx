@@ -61,7 +61,12 @@ const NewsList = () => {
                       <Card.Text className="news-card-text">
                         {article.description}
                       </Card.Text>
-                      <Card.Link href={article.url} className="news-card-link">
+                      <Card.Link
+                        href={article.url}
+                        className="news-card-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         Read More
                       </Card.Link>
                     </Card.Body>

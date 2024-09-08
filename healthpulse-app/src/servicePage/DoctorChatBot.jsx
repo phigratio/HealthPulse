@@ -4,9 +4,8 @@ import "../style/servicePage/DoctorChatBot.css";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 import ChatWindow from "./ChatWindow";
-import KitBoxL from "../components/LottieComponents/KitBox";
-import VirusL from "../components/LottieComponents/Virus";
-import DoctorImg from "../components/LottieComponents/Doctor";
+import PreventionL from "../components/LottieComponents/Prevention";
+import BacteriaL from "../components/LottieComponents/Bacteria";
 
 // DoctorChatBot Component
 const DoctorChatBot = () => {
@@ -20,16 +19,15 @@ const DoctorChatBot = () => {
             <video src={banner} autoPlay loop muted></video>
           </div>
 
-          {/* Layout with Lottie animations and ChatWindow */}
           <div className="chat-layout">
             <div className="lottie-container">
-              <VirusL />
+              <PreventionL />
             </div>
             <div className="chat-container">
               <ChatWindow />
             </div>
             <div className="lottie-container">
-              <DoctorImg />
+              <BacteriaL />
             </div>
           </div>
         </div>

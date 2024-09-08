@@ -35,8 +35,10 @@ import NewsList from "./servicePage/NewsList";
 import Weather from "./servicePage/Weather";
 import PrescriptionAnalyzer from "./servicePage/PrescriptionAnalyzer";
 import NearestHospital from "./servicePage/NearestHospital";
-import MapHome from "./servicePage/MapHome";
 
+import MentalHealth from "./servicePage/MentalHealth";
+import FoodSuggestion from "./servicePage/FoodSuggestion";
+import MapHome from "./servicePage/MapHome";
 
 //cabin booking part
 
@@ -48,6 +50,7 @@ import AdminMainPage from "./admin_part/AdminMainPage";
 
 //Appointment part
 import AppointMainPage from "./appointPart/AppointMainPage";
+import ImageAndPdfGenerator from "./servicePage/ImageGenerator";
 
 //Chat part
 import ChatMainPage from "./Chat/ChatMainPage";
@@ -78,11 +81,12 @@ function App() {
           element={<HealthCalculator />}
         />
         <Route path="/service/kids-corner" element={<KidsCorner />} />
-        <Route path="/service/mentalhealth" element={<Mentalhealth />} />
+        <Route path="/service/mentalhealth" element={<MentalHealth />} />
         <Route path="/service/food-suggestion" element={<FoodSuggestion />} />
         <Route path="/service/newsapp" element={<NewsList />} />
         <Route path="/service/book-doctor" element={<BookDoctor />} />
         <Route path="/service/weatherapp" element={<Weather />} />
+        <Route path="/service/story-generator" element={<KidsCorner />} />
         <Route
           path="/service/prescription-analyzer"
           element={<PrescriptionAnalyzer />}
@@ -119,6 +123,7 @@ function App() {
 
         {/* Appointment part */}
         <Route path="/appoint/*" element={<AppointMainPage />} />
+<<<<<<< HEAD
 
         {/* Chat part */}
         <Route path="/chat/*" element={<ChatMainPage />} />
@@ -128,6 +133,8 @@ function App() {
 
         {/* Medication part */}
         <Route path="/medication/*" element={<MedicationMainPage />} />
+=======
+>>>>>>> 428a0a05a238d9ea8e0cf0cbfb683779d1d1e8e6
       </Routes>
     </BrowserRouter>
   );

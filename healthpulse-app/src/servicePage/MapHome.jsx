@@ -4,10 +4,11 @@ import Map from "../components/MapComponents/Map";
 import HeartRate from "../components/LottieComponents/HeartRate";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
+import { mapsApi } from "./apiKeys";
 
 const MapHome = () => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: mapsApi,
     libraries: ["places"],
   });
   if (!isLoaded)

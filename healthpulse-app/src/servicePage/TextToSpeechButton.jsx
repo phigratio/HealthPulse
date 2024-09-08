@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { textToSpeech } from "./apiKeys";
 
-const API_KEY = "AIzaSyCBks9NXTg4i-Ie_fRRIOIamvS-cFFBejs"; // Replace with your actual API key
+const API_KEY = textToSpeech;
 
 const TextToSpeechButton = ({ text }) => {
   const [audio, setAudio] = useState(null);

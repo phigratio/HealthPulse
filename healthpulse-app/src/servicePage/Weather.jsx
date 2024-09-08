@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import apiKeys from "./apiKeys";
+import { geminiKey, weatherKey } from "./apiKeys";
 import Clock from "react-live-clock";
 import ReactAnimatedWeather from "react-animated-weather";
 import "../style/servicePage/Weather.css";
@@ -12,8 +12,9 @@ import Base from "../components/Base";
 import HeartRate from "../components/LottieComponents/HeartRate";
 import Briefcase from "../components/LottieComponents/Breifcase";
 import DoctorImg from "../components/LottieComponents/Doctor";
-
-const geminiKey = "AIzaSyBtbcmMGUk34mU0LGJ83pLAfKVWTUKXGIE";
+const base = "https://api.openweathermap.org/data/2.5/";
+const GeminiKey = geminiKey;
+const key = weatherKey;
 const dateBuilder = (d) => {
   let months = [
     "January",
@@ -105,7 +106,7 @@ class Weather extends React.Component {
   getWeather = async (lat, lon) => {
     try {
       const api_call = await fetch(
-        `${apiKeys.base}weather?lat=${lat}&lon=${lon}&units=metric&APPID=${apiKeys.key}`
+        `${base}weather?lat=${lat}&lon=${lon}&units=metric&APPID=${key}`
       );
       const data = await api_call.json();
       this.setState({
@@ -167,7 +168,7 @@ class Weather extends React.Component {
 
     try {
       const response = await axios.post(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${geminiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GeminiKey}`,
         {
           contents: [
             {

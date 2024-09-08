@@ -6,10 +6,19 @@
 /* Card styling */
 .news-card {
   border: 1px solid #007bff;
-  background-color: #f0f8ff;
+  background-color: rgba(
+    240,
+    248,
+    255,
+    0.8
+  ); /* Transparent bluish background */
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
   transition: transform 0.2s;
+  aspect-ratio: 1/ 1.5; /* This makes the card square */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* This ensures content doesn't overflow */
 }
 
 .news-card:hover {
@@ -20,11 +29,19 @@
 .news-card-title {
   color: #003366;
   font-weight: bold;
+  font-size: 1rem; /* Adjust font size to fit in square */
 }
 
 /* Card text styling */
 .news-card-text {
   color: #00509e;
+  font-size: 0.8rem; /* Adjust font size to fit in square */
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* limit to 3 lines */
+  -webkit-box-orient: vertical;
 }
 
 /* Card link styling */
@@ -41,19 +58,15 @@
 
 /* Card image styling */
 .news-card-img {
-  height: 200px;
+  height: 50%; /* Make image take up half of the square */
   object-fit: cover;
+  width: 100%;
 }
 
 /* Ensure all cards are the same size */
-.news-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
 .news-card .card-body {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  justify-content: space-between;
+  height: 50%; /* Make body take up other half of the square */
 }
