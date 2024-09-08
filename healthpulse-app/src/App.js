@@ -124,6 +124,7 @@ function App() {
         {/* Appointment part */}
         <Route path="/appoint/*" element={<AppointMainPage />} />
 
+
         {/* Chat part */}
         <Route path="/chat/*" element={<ChatMainPage />} />
 
@@ -132,6 +133,7 @@ function App() {
 
         {/* Medication part */}
         <Route path="/medication/*" element={<MedicationMainPage />} />
+
       </Routes>
     </BrowserRouter>
   );

@@ -89,6 +89,18 @@ const CustomNavbar = () => {
                 Doctor
               </ReactLink>
             </li>
+
+            <li className="cn-nav-item">
+              <ReactLink className="cn-nav-link-light" to="/donors">
+                Blood Donors
+              </ReactLink>
+            </li>
+
+            <li className="cn-nav-item">
+              <ReactLink className="cn-nav-link-light" to="/tracker">
+                Health Tracker
+              </ReactLink>
+            </li>
             {/* <li className="cn-nav-item">
               <ReactLink className="cn-nav-link-light" to="/food">
                 Food Shop

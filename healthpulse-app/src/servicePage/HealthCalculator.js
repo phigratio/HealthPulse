@@ -16,6 +16,7 @@ import { getCurrentUserDetail } from "../auth";
 import banner from "../images/banner/healthCalculator.mp4";
 import axios from "axios";
 import TextToSpeechButton from "./TextToSpeechButton";
+import { getUserInfo } from "../service/user-service";
 
 const HealthCalculator = () => {
   const [weight, setWeight] = useState("");
@@ -36,19 +37,46 @@ const HealthCalculator = () => {
 
   const [generatingAnswer, setGeneratingAnswer] = useState(false);
   const [answer, setAnswer] = useState("");
-  useEffect(() => {
-    const user = getCurrentUserDetail();
-    console.log("Fetched user details:", user); // Debugging line to check user details
+  // useEffect(() => {
+  //   const user = getUserInfo(getCurrentUserDetail().id);
+  //   console.log("Fetched user id in health calculator:", getCurrentUserDetail().id);
+  //   console.log("Fetched user details:", user); // Debugging line to check user details
 
-    if (user) {
-      setWeight(user.weight > 0 ? user.weight : "");
-      setHeightCm(user.height > 0 ? user.height : "");
-      setAge(user.age > 0 ? user.age : "");
-      setGender(user.gender ? user.gender : "");
-      setWaist(user.waist > 0 ? user.waist : "");
-      setHip(user.hip > 0 ? user.hip : "");
-      setActivityLevel(user.activityLevel ? user.activityLevel : "");
-    }
+  //   if (user) {
+  //     setWeight(user.weight > 0 ? user.weight : "");
+  //     setHeightCm(user.height > 0 ? user.height : "");
+  //     setAge(user.age > 0 ? user.age : "");
+  //     setGender(user.gender ? user.gender : "");
+  //     setWaist(user.waist > 0 ? user.waist : "");
+  //     setHip(user.hip > 0 ? user.hip : "");
+  //     setActivityLevel(user.activityLevel ? user.activityLevel : "");
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const userId = getCurrentUserDetail().id;
+        console.log("Fetched user id in health calculator:", userId);
+        const user = await getUserInfo(userId);
+        console.log("Fetched user details:", user);
+
+        if (user) {
+          setWeight(user.weight > 0 ? user.weight : "");
+          setHeightCm(user.height > 0 ? user.height : "");
+          setAge(user.age > 0 ? user.age : "");
+          setGender(user.gender ? user.gender : "");
+          setWaist(user.waist > 0 ? user.waist : "");
+          setHip(user.hip > 0 ? user.hip : "");
+          setActivityLevel(user.activityLevel ? user.activityLevel : "");
+        }
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+        setError("Failed to fetch user information.");
+      }
+    };
+
+    fetchUserInfo();
   }, []);
 
   const convertWeightToKg = (weight, unit) =>

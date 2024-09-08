@@ -1,0 +1,67 @@
+/* TrackerHomePage.css */
+
+.tracker-home-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tracker-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 40px;
+}
+/* 
+.tracker-section:nth-child(even) {
+  flex-direction: row-reverse;
+} */
+
+.tracker-section-content {
+  flex: 1;
+  padding: 20px;
+  color: #333;
+}
+
+.tracker-section-content h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #007bff;
+}
+
+.tracker-section-content p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.graph-container {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.graph-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.graph-filters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.graph-date-range {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 16px;
+}

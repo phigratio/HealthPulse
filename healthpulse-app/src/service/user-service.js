@@ -125,3 +125,57 @@ export const rejectDoctor = (doctorId) => {
     .put(`/doctors/reject/${doctorId}`)
     .then((resp) => resp.data);
 };
+
+//Add user info
+export const addUserInfo = (userInfo, userId) => {
+  return privateAxios
+    .post(`/userinfo/${userId}`, userInfo)
+    .then((response) => response.data);
+};
+
+//get user info
+
+export const getUserInfo = (userId) => {
+  return privateAxios.get(`/userinfo/${userId}`).then((resp) => resp.data);
+};
+
+//update user info
+
+export const updateUserInfo = (userInfo, userId) => {
+  return privateAxios
+    .put(`/userinfo/${userId}`, userInfo)
+    .then((resp) => resp.data);
+};
+
+//get all users who are ready to donate blood
+
+export const getDonors = () => {
+  return privateAxios.get(`/userinfo/readyToDonate`).then((resp) => resp.data);
+};
+
+//get all users who are ready to donate blood and filter by blood group
+
+export const getDonorsByBloodGroup = (bloodGroup) => {
+  return privateAxios
+    .get(`/userinfo/readyToDonate/${bloodGroup}`)
+    .then((resp) => resp.data);
+};
+
+// Fetch user info by blood group, readiness to donate, and district
+export const getDonorsByBloodGroupAndDistrict = (bloodGroup, district) => {
+  return privateAxios
+    .get("/userinfo/search", {
+      params: {
+        bloodGroup: bloodGroup,
+        district: district,
+      },
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error(
+        "Error fetching user info by blood group, readiness to donate, and district:",
+        error
+      );
+      throw error;
+    });
+};
