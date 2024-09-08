@@ -124,6 +124,9 @@ function App() {
         {/* Appointment part */}
         <Route path="/appoint/*" element={<AppointMainPage />} />
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3675b8dd88aecc3ebcd2c12afefb91c261e5ddd4
 
         {/* Chat part */}
         <Route path="/chat/*" element={<ChatMainPage />} />
@@ -133,8 +136,11 @@ function App() {
 
         {/* Medication part */}
         <Route path="/medication/*" element={<MedicationMainPage />} />
+<<<<<<< HEAD
 =======
 >>>>>>> 428a0a05a238d9ea8e0cf0cbfb683779d1d1e8e6
+=======
+>>>>>>> 3675b8dd88aecc3ebcd2c12afefb91c261e5ddd4
       </Routes>
     </BrowserRouter>
   );
