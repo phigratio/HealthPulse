@@ -2,8 +2,8 @@ import React, { Fragment, useState } from "react";
 import { Form, FormGroup, Input, Button } from "reactstrap";
 import "../style/servicePage/AddVaccineItem.css"; // Adjust the path as neede
 import axios from "axios";
-import base_url from "../api/bootapi";
 
+const base_url = "http://localhost:5577";
 const AddVaccineItem = () => {
   const [formData, setFormData] = useState({
     title: "",
