@@ -11,10 +11,11 @@ import {
   Input,
 } from "reactstrap";
 import "../style/servicePage/AllVaccines.css";
-import base_url from "../api/bootapi";
 import axios from "axios";
 
-const AllVaccine = () => {
+const base_url = "http://localhost:5577";
+
+const AllVaccine = ({ userId }) => {
   const [vaccines, setVaccines] = useState([]);
   const [updateForm, setUpdateForm] = useState(false);
   const [currentVaccine, setCurrentVaccine] = useState(null);
@@ -23,6 +24,7 @@ const AllVaccine = () => {
     description: "",
   });
 
+  // Delete vaccine
   const handleDelete = (id) => {
     axios
       .delete(`${base_url}/vaccines/${id}`)
@@ -34,9 +36,10 @@ const AllVaccine = () => {
       });
   };
 
+  // Update vaccine
   const handleUpdate = () => {
     axios
-      .put(`${base_url}/vaccines/${currentVaccine.id}`, formData) // Send PUT request with vaccine ID and data
+      .put(`${base_url}/vaccines/${currentVaccine.id}`, formData)
       .then((response) => {
         console.log("Vaccine updated:", response.data);
         setVaccines(
@@ -46,30 +49,33 @@ const AllVaccine = () => {
               : vaccine
           )
         );
-        setUpdateForm(false); // Hide the update form
-        setCurrentVaccine(null); // Clear the current vaccine
+        setUpdateForm(false);
+        setCurrentVaccine(null);
       })
       .catch((error) => {
         console.error("Error updating vaccine:", error);
       });
   };
 
-  // Function to load AllVaccines
+  // Load all vaccines for the user from the server
   const getAllVaccinesFromServer = () => {
     axios
-      .get(`${base_url}/vaccines`)
+      .get(`${base_url}/users/${userId}/vaccines`)
       .then((resp) => {
-        setVaccines(resp.data); // Set the vaccines state
+        setVaccines(resp.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
   useEffect(() => {
-    getAllVaccinesFromServer();
-  }, []); // Adding [] as dependency array to fetch data only once
+    if (userId) {
+      getAllVaccinesFromServer();
+    }
+  }, [userId]); // Fetch vaccines when userId is available
 
+  // Show the update form with the selected vaccine's details
   const showUpdateForm = (vaccine) => {
     setCurrentVaccine(vaccine);
     setFormData({
@@ -79,6 +85,7 @@ const AllVaccine = () => {
     setUpdateForm(true);
   };
 
+  // Handle input changes in the update form
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -90,7 +97,7 @@ const AllVaccine = () => {
   return (
     <div className="vaccine-container">
       <h1>All Vaccines</h1>
-      <p>List of vaccines are as follows</p>
+      <p>List of vaccines are as follows:</p>
       {updateForm && (
         <div className="update-form">
           <h2>Update Vaccine</h2>
@@ -124,30 +131,26 @@ const AllVaccine = () => {
           </Form>
         </div>
       )}
-      {vaccines.length > 0
-        ? vaccines.map((vaccine) => (
-            <Card key={vaccine.id} className="vaccine-card">
-              <CardBody>
-                <CardTitle tag="h5">{vaccine.title}</CardTitle>
-                <CardText>{vaccine.description}</CardText>
-                <ButtonGroup>
-                  <Button
-                    color="danger"
-                    onClick={() => handleDelete(vaccine.id)}
-                  >
-                    Delete
-                  </Button>
-                  <Button
-                    color="primary"
-                    onClick={() => showUpdateForm(vaccine)}
-                  >
-                    Update
-                  </Button>
-                </ButtonGroup>
-              </CardBody>
-            </Card>
-          ))
-        : "No vaccines available"}
+      {vaccines.length > 0 ? (
+        vaccines.map((vaccine) => (
+          <Card key={vaccine.id} className="vaccine-card">
+            <CardBody>
+              <CardTitle tag="h5">{vaccine.title}</CardTitle>
+              <CardText>{vaccine.description}</CardText>
+              <ButtonGroup>
+                <Button color="danger" onClick={() => handleDelete(vaccine.id)}>
+                  Delete
+                </Button>
+                <Button color="primary" onClick={() => showUpdateForm(vaccine)}>
+                  Update
+                </Button>
+              </ButtonGroup>
+            </CardBody>
+          </Card>
+        ))
+      ) : (
+        <p>No vaccines available</p>
+      )}
     </div>
   );
 };

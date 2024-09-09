@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gradle-wrapper5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/RatingSection/gradle/wrapper/gradle-wrapper.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
