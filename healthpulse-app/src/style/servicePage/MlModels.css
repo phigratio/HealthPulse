@@ -1,0 +1,97 @@
+/* General Page Styling */
+body {
+  font-family: "Arial", sans-serif;
+  /* White text for better contrast */
+  margin: 0;
+  padding: 0;
+}
+
+/* Container styling */
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #1a5276; /* Lighter blue background for contrast */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+label {
+  color: #ffffff; /* White text for form labels */
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+  background-color: #f0f0f0; /* Light grey for input fields */
+}
+
+input[type="submit"],
+button {
+  background-color: #3498db; /* Blue button */
+  color: white;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Prediction Result Card Styling */
+.prediction-card {
+  background-color: #2e86c1; /* Bluish card background */
+  color: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.prediction-card h3 {
+  margin-bottom: 10px;
+  color: #f7f9f9; /* Light grey for heading */
+}
+
+.prediction-card p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.error-message {
+  color: #e74c3c; /* Red for error messages */
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  input,
+  select {
+    width: 100%;
+  }
+}
