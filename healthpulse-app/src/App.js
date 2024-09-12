@@ -60,6 +60,9 @@ import HealthTrackerMainPage from "./HealthTracker/HealthTrackerMainPage";
 
 //Medication part
 import MedicationMainPage from "./madication/MedicationMainPage";
+import MlModels from "./servicePage/MlModels";
+import Pet from "./servicePage/Pet";
+import QuizGame from "./servicePage/QuizGame";
 
 library.add(fas);
 function App() {
@@ -83,6 +86,7 @@ function App() {
         <Route path="/service/kids-corner" element={<KidsCorner />} />
         <Route path="/service/mentalhealth" element={<MentalHealth />} />
         <Route path="/service/food-suggestion" element={<FoodSuggestion />} />
+        <Route path="/service/pet" element={<Pet />} />
         <Route path="/service/newsapp" element={<NewsList />} />
         <Route path="/service/book-doctor" element={<BookDoctor />} />
         <Route path="/service/weatherapp" element={<Weather />} />
@@ -91,6 +95,9 @@ function App() {
           path="/service/prescription-analyzer"
           element={<PrescriptionAnalyzer />}
         />
+        <Route path="/service/ml-models" element={<MlModels />} />
+        <Route path="/service/quiz" element={<QuizGame />} />
+
         <Route path="/service/nearest-hospital" element={<MapHome />} />
 
         <Route path="/user/update-user" element={<UpdateUser />} />
@@ -124,7 +131,6 @@ function App() {
         {/* Appointment part */}
         <Route path="/appoint/*" element={<AppointMainPage />} />
 
-
         {/* Chat part */}
         <Route path="/chat/*" element={<ChatMainPage />} />
 
@@ -133,7 +139,6 @@ function App() {
 
         {/* Medication part */}
         <Route path="/medication/*" element={<MedicationMainPage />} />
-
       </Routes>
     </BrowserRouter>
   );
