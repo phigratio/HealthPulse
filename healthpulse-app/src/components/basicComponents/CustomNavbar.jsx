@@ -171,14 +171,11 @@ const CustomNavbar = () => {
                       </ReactLink>
                     </li>
                     <li className="cn-dropdown-divider"></li>
-                    {/* <li>
-                      <ReactLink
-                        className="cn-dropdown-item"
-                        to="/service/food-shop"
-                      >
-                        Food Shop
+                    <li>
+                      <ReactLink className="cn-dropdown-item" to="/medication">
+                        Medication Reminder
                       </ReactLink>
-                    </li> */}
+                    </li>
                   </ul>
                 </li>
               </>

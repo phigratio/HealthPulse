@@ -89,12 +89,13 @@ const data = [
     link: "/service/book-doctor",
   },
   {
-    name: "Health Articles",
-    overview: "Read articles written by our doctors.",
-    img: require("../../images/services/service5.png"),
+    name: "Medicine Reminder",
+    overview: "Set reminders for your medications.",
+    img: require("../../images/services/Reminder.png"),
     review:
-      "Stay informed with articles on various health topics written by our expert doctors.",
-    link: "/articles",
+      "Use our medicine reminder tool to help you remember to take your medications on time.",
+
+    link: "/medication",
   },
   {
     name: "Symptom Checker",

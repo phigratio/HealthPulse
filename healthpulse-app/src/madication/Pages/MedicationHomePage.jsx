@@ -1,13 +1,23 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import GetCurrentMedication from "../Components/GetCurrentMedication";
 import GetAllMedication from "../Components/GetAllMedication";
 import "../Styles/MedicationHomePage.css";
+import banner from "../../images/banner/Reminder.mp4"; 
 
 const MedicationHomePage = () => {
   const [selectedTab, setSelectedTab] = useState("current"); // default to current medications
+  const navigate = useNavigate(); // Initialize navigate
+
+  const handleAddMedicationClick = () => {
+    navigate("/medication/add"); // Navigate to the add medication page
+  };
 
   return (
     <div>
+      <div className="reminder-video-container">
+        <video src={banner} autoPlay loop muted></video>
+      </div>
       <h1>Medication Tracker</h1>
 
       {/* Buttons for selecting view */}
@@ -38,6 +48,11 @@ const MedicationHomePage = () => {
           <GetAllMedication />
         )}
       </div>
+
+      {/* Floating button */}
+      <button className="floatingButton" onClick={handleAddMedicationClick}>
+        +
+      </button>
     </div>
   );
 };

@@ -1,6 +1,5 @@
 .ad-details-page {
   font-family: "Arial", sans-serif;
-  /* background-color: #f4f4f4; */
   min-height: 100vh;
   padding: 20px;
   justify-content: center;
@@ -30,6 +29,66 @@
   margin-bottom: 20px;
 }
 
+.reviews-section {
+  margin-top: 20px;
+}
+
+.rating-summary {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.stars {
+  display: flex;
+  margin-right: 10px;
+}
+
+.star {
+  color: #f5c518;
+  font-size: 1.5rem;
+  margin-right: 2px;
+}
+
+.star.filled {
+  color: #f5c518;
+}
+
+.reviews-list {
+  padding-top: 10px;
+}
+
+.review-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  padding: 15px;
+  text-align: left;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.review-username {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.review-rating .star {
+  color: #f5c518;
+  font-size: 1.2rem;
+}
+
+.review-text {
+  font-size: 1rem;
+  color: #555;
+}
+
 .ad-details h2 {
   font-size: 1.5rem;
   color: #007bff;
@@ -48,7 +107,7 @@
 
 .book-now-button {
   padding: 10px 20px;
-  background-color: #28a745;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -56,7 +115,7 @@
 }
 
 .book-now-button:hover {
-  background-color: #218838;
+  background-color: #0056b3;
 }
 
 @media (max-width: 768px) {

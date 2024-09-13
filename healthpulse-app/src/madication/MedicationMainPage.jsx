@@ -4,6 +4,7 @@ import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 import MedicationHomePage from "./Pages/MedicationHomePage";
 import UpdateMedication from "./Components/UpdateMedication";
+import AddMedication from "./Components/AddMedication";
 
 const MedicationMainPage = () => {
   return (
@@ -14,6 +15,7 @@ const MedicationMainPage = () => {
           <Routes>
             <Route path="/" element={<MedicationHomePage />} />
             <Route path="/update/:id" element={<UpdateMedication />} />
+            <Route path="/add" element={<AddMedication />} />
           </Routes>
         </div>
       </Base>
