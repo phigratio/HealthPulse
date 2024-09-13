@@ -3,16 +3,6 @@
   background-color: #f9f9f9;
 }
 
-.result-appointment-header {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.result-appointment-header h1 {
-  font-size: 24px;
-  color: #333;
-}
-
 .result-appointment-list {
   display: flex;
   flex-direction: column;
@@ -40,11 +30,26 @@
   color: #555;
 }
 
-.result-appointment-item .status {
-  font-weight: bold;
+.result-appointment-rating {
+  display: flex;
+  align-items: center;
 }
 
-.result-appointment-item .book-button {
+.result-appointment-star-rating {
+  display: flex;
+  margin-right: 10px;
+}
+
+.result-appointment-star {
+  font-size: 1.5rem;
+  color: #ccc; /* Default star color */
+}
+
+.result-appointment-star.filled {
+  color: gold; /* Color for filled stars */
+}
+
+.result-appointment-book-button {
   background-color: #03cafc;
   color: #fff;
   border: none;
@@ -54,6 +59,6 @@
   text-align: center;
 }
 
-.result-appointment-item .book-button:hover {
+.result-appointment-book-button:hover {
   background-color: #028cc4;
 }

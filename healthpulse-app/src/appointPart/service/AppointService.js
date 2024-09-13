@@ -144,6 +144,31 @@ class AppointService {
         throw error;
       });
   }
+
+  // Method to add a review
+  addReview(reviewData) {
+    return privateAxios
+      .post(`/ad/reviews/add`, reviewData)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error("There was an error adding the review!", error);
+        throw error;
+      });
+  }
+
+  // Method to get reviews by doctor ID
+  getReviewsByDoctorId(doctorId) {
+    return myAxios
+      .get(`/ad/reviews/doctor/${doctorId}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(
+          "There was an error fetching reviews by doctor ID!",
+          error
+        );
+        throw error;
+      });
+  }
 }
 
 export default new AppointService();
