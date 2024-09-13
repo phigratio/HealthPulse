@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
-
+import RouterEcom from "./EcommerceMainFront/Routes/Router.jsx";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/user-routes/Dashboard";
@@ -139,6 +139,9 @@ function App() {
 
         {/* Medication part */}
         <Route path="/medication/*" element={<MedicationMainPage />} />
+
+        {/* EcommercePart*/}
+        <Route path="/ecommerce/*" element={<RouterEcom />} />
       </Routes>
     </BrowserRouter>
   );

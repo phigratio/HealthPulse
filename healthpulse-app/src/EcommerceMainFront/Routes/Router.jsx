@@ -10,31 +10,16 @@ import { Singup } from "../Pages/Singup";
 import { Protected } from "../Component/Protected";
 
 export const Router = () => {
-  const [isSignedIn, setIsSignedIn] = useState(
-    sessionStorage.getItem("token") || false
-  );
-
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<ProductDetails />} />
-        <Route
-          path="/cart"
-          element={
-            <Protected isSignedIn={isSignedIn}>
-              <Cart />
-            </Protected>
-          }
-        />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/singup" element={<Singup />} />
-        <Route path="/checkout" element={
-        <Protected isSignedIn={isSignedIn}>
-        <CheckOut />
-      </Protected>
-        } />
+        <Route path="/checkout" element={<CheckOut />} />
       </Routes>
     </>
   );
