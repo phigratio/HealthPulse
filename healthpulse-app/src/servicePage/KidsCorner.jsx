@@ -4,6 +4,7 @@ import "../style/servicePage/KidsCorner.css";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 import ImageAndPdfGenerator from "./ImageGenerator";
+import DrawingCanvas from "./DrawingCanvas";
 
 const KidsCorner = () => {
   return (
@@ -16,6 +17,7 @@ const KidsCorner = () => {
           </div>
           <div className="text-container">
             <ImageAndPdfGenerator />
+            <DrawingCanvas />
           </div>
         </div>
       </Base>

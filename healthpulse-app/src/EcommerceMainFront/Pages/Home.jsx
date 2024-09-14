@@ -1,31 +1,25 @@
-import React, { useEffect } from 'react'
-import { Header } from '../Component/Header'
-import { Hero } from '../Component/HomeComponent/Hero'
-import { ListProduct } from '../Component/HomeComponent/ListProduct'
-import { Footer } from '../Component/Footer'
-import { ToastContainer} from 'react-toastify';
+import React, { useEffect } from "react";
+import { Header } from "../Component/Header";
+import { Hero } from "../Component/HomeComponent/Hero";
+import { ListProduct } from "../Component/HomeComponent/ListProduct";
 
-
-
+import { ToastContainer } from "react-toastify";
 
 export const Home = () => {
-  
-  useEffect(() => { window.scrollTo(0, 0) 
-  }
-  , []);
-  
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
-  {/* 
+      {/* 
     - #HEADER
   */}
-  <Header />
-  {/* 
+      <Header />
+      {/* 
     - #ASIDE
   */}
-  {/* <aside className="aside">
+      {/* <aside className="aside">
     <div className="side-panel" data-side-panel="whishlist">
       <button
         className="panel-close-btn"
@@ -167,46 +161,43 @@ export const Home = () => {
       </a>
     </div>
   </aside> */}
-  <main>
-    <article>
-      {/* 
+      <main>
+        <article>
+          {/* 
   - #HERO
 */}
-     <Hero/>
-    
-      {/* 
+          <Hero />
+
+          {/* 
   - #PRODUCT
 */}
-      <ListProduct/>
-      
-    </article>
-  </main>
-  {/* 
+          <ListProduct />
+        </article>
+      </main>
+      {/* 
     - #FOOTER
   */}
-<Footer/>
-  {/* 
+
+      {/* 
     - #BACK TO TOP
   */}
-  <a
-    href="#top"
-    className="back-to-top"
-    aria-label="Back to Top"
-    data-back-top-btn=""
-  >
-    {/* <FontAwesomeIcon icon="fa-sharp fa-solid fa-chevrons-up" /> */}
-  <i className="fa-solid fa-chevrons-up"/>
-  {/* <ion-icon name="arrow-up-outline" /> */}
-  </a>
-  {/* 
+      <a
+        href="#top"
+        className="back-to-top"
+        aria-label="Back to Top"
+        data-back-top-btn=""
+      >
+        {/* <FontAwesomeIcon icon="fa-sharp fa-solid fa-chevrons-up" /> */}
+        <i className="fa-solid fa-chevrons-up" />
+        {/* <ion-icon name="arrow-up-outline" /> */}
+      </a>
+      {/* 
     - custom js link
   */}
-  {/* 
+      {/* 
     - ionicon link
   */}
       <ToastContainer />
-
-</>
-
-  )
-}
+    </>
+  );
+};
