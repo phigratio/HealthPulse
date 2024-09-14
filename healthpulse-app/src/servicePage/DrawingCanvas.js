@@ -1,4 +1,3 @@
-import "./DrawingCanvas.css";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 

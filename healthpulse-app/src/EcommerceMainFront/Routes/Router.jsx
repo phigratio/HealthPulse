@@ -5,11 +5,8 @@ import { ProductDetails } from "../Pages/ProductDetails";
 import { Shop } from "../Pages/Shop";
 import { Cart } from "../Pages/Cart";
 import { CheckOut } from "../Pages/CheckOut";
-import { Login } from "../Pages/Login";
-import { Singup } from "../Pages/Singup";
-import { Protected } from "../Component/Protected";
 
-export const Router = () => {
+const Router = () => {
   return (
     <>
       <Routes>
@@ -17,10 +14,10 @@ export const Router = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/singup" element={<Singup />} />
         <Route path="/checkout" element={<CheckOut />} />
       </Routes>
     </>
   );
 };
+
+export default Router;

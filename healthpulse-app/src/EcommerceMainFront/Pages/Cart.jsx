@@ -1,100 +1,92 @@
 import React, { useEffect, useState } from "react";
-import { Footer } from "../Component/Footer";
 import { Header } from "../Component/Header";
 import { Items } from "../Component/CartComponent/Items";
 
 export const Cart = () => {
-  useEffect(() => { window.scrollTo(0, 0) }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // const razorpay=useRazorpay();
-  
-      const [data, setdata] = useState();
-      const[item,setItem]=useState([]);
-      const [loading, setLoading] = useState(9);
-      const [totalAmount, setTotalAmount] = useState(0);
-      const[token,setToken]=useState(sessionStorage.getItem("token"));
 
+  const [data, setdata] = useState();
+  const [item, setItem] = useState([]);
+  const [loading, setLoading] = useState(9);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
 
-      const fatchCart = async () => {
-        // get cart item
-        console.log(token);
-        const res = await fetch("http://localhost:9090/cart/1", {headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer "+token
-          },
-        });
-        const data = await res.json();
-        setTotalAmount(data.totalAmount);
-        setItem(data.cartDetalis);
-      };
+  const fatchCart = async () => {
+    // get cart item
+    console.log(token);
+    const res = await fetch("http://localhost:9090/cart/1", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    const data = await res.json();
+    setTotalAmount(data.totalAmount);
+    setItem(data.cartDetalis);
+  };
 
-      useEffect(() => {
-        fatchCart();
+  useEffect(() => {
+    fatchCart();
+  }, [loading]);
 
-      }, [loading]);
+  const createOrder = async (e) => {
+    const res = await fetch(`http://localhost:9090/payment/${totalAmount}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    const da = await res.json();
+    setdata(da);
+    return da;
+  };
 
-      
+  const handlePayment = async () => {
+    const order = await createOrder();
+    const options = {
+      key: order.key,
+      amount: order.amount,
+      currency: order.currency,
+      name: "userName",
+      description: "Test Transaction",
+      image: "https://example.com/your_logo",
+      order_id: order.orderId,
+      handler: function (response) {
+        console.log(response);
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature);
+      },
+      prefill: {
+        name: "vivek",
+        email: "vivek@gmail.com",
+        contact: 7405999619,
+      },
+      notes: {
+        address: "ABC, Delhi",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
 
-      const createOrder = async (e) => {
-        const res = await fetch(`http://localhost:9090/payment/${totalAmount}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
-          },
-        });
-        const da = await res.json();
-        setdata(da);
-        return da;
-      }
+    const rzp1 = new window.Razorpay(options);
+    rzp1.on("payment.failed", function (response) {
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    });
 
-
-      const handlePayment = async () => {
-        const order = await createOrder();
-        const options = {
-          key: order.key,
-          amount: order.amount, 
-          currency: order.currency,
-          name: "userName",
-          description: "Test Transaction",
-          image: "https://example.com/your_logo",
-          order_id: order.orderId, 
-          handler: function (response) {
-            console.log(response);
-            alert(response.razorpay_payment_id);
-            alert(response.razorpay_order_id);
-            alert(response.razorpay_signature);
-          },
-          prefill: {
-            name: "vivek",
-            email: "vivek@gmail.com",
-            contact: 7405999619,
-          },
-          notes: {
-            address: "ABC, Delhi",
-          },
-          theme: {
-            color: "#3399cc",
-          },
-        };
-      
-        const rzp1 = new window.Razorpay(options);;
-        rzp1.on("payment.failed", function (response) {
-          alert(response.error.code);
-          alert(response.error.description);
-          alert(response.error.source);
-          alert(response.error.step);
-          alert(response.error.reason);
-          alert(response.error.metadata.order_id);
-          alert(response.error.metadata.payment_id);
-        });
-      
-        rzp1.open();
-      };
-     
-
-
-
-
+    rzp1.open();
+  };
 
   return (
     <>
@@ -127,18 +119,21 @@ export const Cart = () => {
                         </tr>
                       </thead>
                       <tbody>
-
-
-                    {item ?    item.map((elem,index) => {
-                          return (
-                            <>
-
-                              <Items
-                                key={index} prop={elem} setLoading={setLoading} />
+                        {item ? (
+                          item.map((elem, index) => {
+                            return (
+                              <>
+                                <Items
+                                  key={index}
+                                  prop={elem}
+                                  setLoading={setLoading}
+                                />
                               </>
-                          )})
-                        :<></>}
-
+                            );
+                          })
+                        ) : (
+                          <></>
+                        )}
                       </tbody>
                     </table>
                   </div>
@@ -173,7 +168,9 @@ export const Cart = () => {
                       </li>
                       <li className="d-flex justify-content-between py-3 border-bottom">
                         <strong className="text-muted">Total</strong>
-                        <h3 className="font-weight-bold">Rs {totalAmount +100}</h3>
+                        <h3 className="font-weight-bold">
+                          Rs {totalAmount + 100}
+                        </h3>
                       </li>
                     </ul>
                     <button
@@ -190,7 +187,6 @@ export const Cart = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
