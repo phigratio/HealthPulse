@@ -7,16 +7,57 @@ import {
   Label,
   Button,
   Container,
+  Modal,
+  ModalBody,
+  ModalHeader,
 } from "reactstrap";
 import { toast } from "react-toastify";
 import JoditEditor from "jodit-react";
 import PrescriptionService from "../service/PrescriptionService";
-import { getUser } from "../../service/user-service"; // user details can be fetched using this function only if send the user id
+import { getUser } from "../../service/user-service";
 import { getCurrentUserDetail } from "../../auth";
+import DrawingCanvas from "../../servicePage/DrawingCanvas";
+import { PenTool } from "lucide-react";
+
 import "./style/CreatePrescription.css";
 
 const CreatePrescription = () => {
   const editor = useRef(null);
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [activeField, setActiveField] = useState(null);
+  const [useCanvas, setUseCanvas] = useState(false);
+  const [extractedText, setExtractedText] = useState(""); // For showing the extracted text under canvas
+
+  const toggleModal = () => setModalOpen(!isModalOpen);
+
+  // Handle extracted text and insert it into the correct field
+  const handleExtractedText = (extractedText) => {
+    setExtractedText(extractedText); // Set the extracted text for display
+
+    // Insert into the appropriate field
+    if (activeField === "patientId") {
+      setPrescription((prev) => ({ ...prev, patientId: extractedText })); // Insert into patient ID
+    } else if (activeField === "prescription") {
+      if (editor.current && editor.current.jodit) {
+        const joditInstance = editor.current.jodit;
+        joditInstance.selection.insertHTML(extractedText); // Insert into editor
+        joditInstance.setEditorValue(joditInstance.getEditorValue()); // Ensure editor is updated
+
+        setPrescription((prev) => ({
+          ...prev,
+          prescription: joditInstance.getEditorValue(), // Sync with state
+        }));
+      }
+    }
+    toggleModal(); // Close the modal after insertion
+  };
+
+  // Function to open canvas modal for a specific field
+  const openDrawingCanvas = (field) => {
+    setActiveField(field);
+    toggleModal();
+  };
   const [content, setContent] =
     useState(`<div style="flex: 1 1 0%; margin-right: 10px; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: start; background-color: rgb(255, 255, 255);">
   <p style="margin: 5px 0;">
@@ -237,33 +278,53 @@ const CreatePrescription = () => {
                 id="doctorId"
                 name="doctorId"
                 value={prescription.doctorId}
-                readOnly // Makes the field unclickable
+                readOnly
               />
             </div>
-            <div className="my-3">
-              <Label for="patientId">Patient ID</Label>
-              <Input
-                type="text"
-                id="patientId"
-                placeholder="Enter Patient ID"
-                name="patientId"
-                value={prescription.patientId}
-                onChange={fieldChanged}
-              />
+            <div className="my-3 d-flex align-items-center">
+              <div className="flex-grow-1">
+                <Label for="patientId">Patient ID</Label>
+                <Input
+                  type="text"
+                  id="patientId"
+                  placeholder="Enter Patient ID"
+                  name="patientId"
+                  value={prescription.patientId}
+                  onChange={fieldChanged}
+                />
+              </div>
+              <Button
+                color="link"
+                className="ms-2 p-0"
+                onClick={() => openDrawingCanvas("patientId")}
+              >
+                <PenTool size={20} />
+              </Button>
             </div>
             <div className="my-3">
               <Label for="prescription">Prescription Details</Label>
-              <JoditEditor
-                ref={editor}
-                value={content}
-                onChange={(newContent) => {
-                  setContent(newContent);
-                  setPrescription({
-                    ...prescription,
-                    prescription: newContent,
-                  });
-                }}
-              />
+              <div className="d-flex align-items-start">
+                <div className="flex-grow-1">
+                  <JoditEditor
+                    ref={editor}
+                    value={content}
+                    onChange={(newContent) => {
+                      setContent(newContent);
+                      setPrescription({
+                        ...prescription,
+                        prescription: newContent,
+                      });
+                    }}
+                  />
+                </div>
+                <Button
+                  color="link"
+                  className="ms-2 p-0"
+                  onClick={() => openDrawingCanvas("prescription")}
+                >
+                  <PenTool size={20} />
+                </Button>
+              </div>
             </div>
             <Container className="text-center">
               <Button type="submit" color="primary">
@@ -281,6 +342,20 @@ const CreatePrescription = () => {
           </Form>
         </CardBody>
       </Card>
+
+      <Modal isOpen={isModalOpen} toggle={toggleModal} size="lg">
+        <ModalHeader toggle={toggleModal}>Handwriting Canvas</ModalHeader>
+        <ModalBody>
+          <DrawingCanvas onExtract={handleExtractedText} />
+          {extractedText && (
+            <div className="mt-3">
+              <h5>Extracted Text:</h5>
+              <p>{extractedText}</p>
+              console.log(extractedText);
+            </div>
+          )}
+        </ModalBody>
+      </Modal>
     </div>
   );
 };

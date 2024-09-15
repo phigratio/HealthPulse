@@ -2,6 +2,51 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { geminiKey } from "./apiKeys";
 import "../style/servicePage/quiz.css";
+import Lottie from "lottie-react";
+import Session from "../assets/Session.json";
+import Doctor from "../assets/Doctor.json";
+
+const SessionL = () => {
+  const wrapperStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+  };
+
+  const animationStyle = {
+    width: "100%",
+    height: "100%",
+  };
+
+  return (
+    <div style={wrapperStyle}>
+      <Lottie style={animationStyle} animationData={Session} />
+    </div>
+  );
+};
+
+const DoctorL = () => {
+  const wrapperStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+  };
+
+  const animationStyle = {
+    width: "100%",
+    height: "100%",
+  };
+
+  return (
+    <div style={wrapperStyle}>
+      <Lottie style={animationStyle} animationData={Doctor} />
+    </div>
+  );
+};
 
 const QuizGame = () => {
   const apiKeyGemini = geminiKey;
@@ -14,7 +59,7 @@ const QuizGame = () => {
   const [error, setError] = useState(null);
   const [topic, setTopic] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [answered, setAnswered] = useState(false); // Track if the current question has been answered
+  const [answered, setAnswered] = useState(false);
 
   const generateQuizFromGemini = async (
     topic = "random healthcare questions"
@@ -102,67 +147,76 @@ const QuizGame = () => {
     fetchQuiz();
   }, []);
 
-  if (isLoading) return <p className="loading">Loading quiz...</p>;
-  if (error) return <p className="error">{error}</p>;
-
   return (
-    <div className="quiz-container">
-      <h1>Healthcare Quiz Game</h1>
-      <input
-        type="text"
-        placeholder="Enter topic for quiz (leave blank for random)"
-        value={topic}
-        onChange={(e) => setTopic(e.target.value)}
-        className="input-field"
-      />
-      <button onClick={fetchQuiz} className="start-button">
-        Start New Quiz
-      </button>
+    <div style={{ display: "flex", width: "100%" }}>
+      <div style={{ width: "20%" }}>
+        <SessionL />
+      </div>
+      <div style={{ width: "60%" }} className="quiz-container">
+        <h1>Healthcare Quiz Game</h1>
+        <input
+          type="text"
+          placeholder="Enter topic for quiz (leave blank for random)"
+          value={topic}
+          onChange={(e) => setTopic(e.target.value)}
+          className="input-field"
+        />
+        <button onClick={fetchQuiz} className="start-button">
+          Start New Quiz
+        </button>
 
-      {!showResults && quiz.length > 0 && (
-        <div className="question-container">
-          <h2>
-            Question {currentQuestion + 1} of {quiz.length}
-          </h2>
-          <p className="question">{quiz[currentQuestion].question}</p>
-          <ul className="options-list">
-            {quiz[currentQuestion].options.map((option, index) => (
-              <li
-                key={index}
-                className={`option 
-                  ${answered && option === correctAnswer ? "correct" : ""} 
-                  ${
-                    answered &&
-                    option === selectedAnswer &&
-                    option !== correctAnswer
-                      ? "incorrect"
-                      : ""
-                  }`}
-                onClick={() => !answered && handleSelect(option)} // Disable selection after answering
-              >
-                {option}
-              </li>
-            ))}
-          </ul>
-          {answered && (
-            <button onClick={handleNext} className="next-button">
-              {currentQuestion === quiz.length - 1 ? "Finish" : "Next"}
+        {isLoading && <p className="loading">Loading quiz...</p>}
+        {error && <p className="error">{error}</p>}
+
+        {!showResults && quiz.length > 0 && (
+          <div className="question-container">
+            <h2>
+              Question {currentQuestion + 1} of {quiz.length}
+            </h2>
+            <p className="question">{quiz[currentQuestion].question}</p>
+            <ul className="options-list">
+              {quiz[currentQuestion].options.map((option, index) => (
+                <li
+                  key={index}
+                  className={`option ${
+                    answered && option === correctAnswer ? "correct" : ""
+                  } 
+                    ${
+                      answered &&
+                      option === selectedAnswer &&
+                      option !== correctAnswer
+                        ? "incorrect"
+                        : ""
+                    }`}
+                  onClick={() => !answered && handleSelect(option)}
+                >
+                  {option}
+                </li>
+              ))}
+            </ul>
+            {answered && (
+              <button onClick={handleNext} className="next-button">
+                {currentQuestion === quiz.length - 1 ? "Finish" : "Next"}
+              </button>
+            )}
+          </div>
+        )}
+
+        {showResults && (
+          <div className="results">
+            <h2>Quiz Results</h2>
+            <p>
+              You scored {score} out of {quiz.length}
+            </p>
+            <button onClick={handleRestart} className="restart-button">
+              Restart Quiz
             </button>
-          )}
-        </div>
-      )}
-
-      {showResults && (
-        <div className="results">
-          <h2>Quiz Results</h2>
-          <p>
-            You scored {score} out of {quiz.length}
-          </p>
-          <button onClick={handleRestart} className="restart-button">
-            Restart Quiz
-          </button>
-        </div>
-      )}
+          </div>
+        )}
+      </div>
+      <div style={{ width: "20%" }}>
+        <DoctorL />
+      </div>
     </div>
   );
 };
