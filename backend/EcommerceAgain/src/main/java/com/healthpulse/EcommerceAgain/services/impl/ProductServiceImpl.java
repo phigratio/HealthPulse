@@ -51,14 +51,30 @@ public class ProductServiceImpl implements ProductService {
 
 
     //Read All
+//    @Override
+//    public List<ProductDto> ReadAllProduct() {
+//        List<Product> all = this.productRepo.findAll();
+//
+//
+//        List<ProductDto> collect = all.stream().map(dto -> new ProductDto(dto.getProductId(), dto.getProductName(), dto.getDescription(), dto.getPrice(), dto.getWeight(), decompressBytes(dto.getImg()))).collect(Collectors.toList());
+//
+//        return collect;
+//    }
     @Override
     public List<ProductDto> ReadAllProduct() {
-        List<Product> all = this.productRepo.findAll();
+        List<Product> products = this.productRepo.findAll();
 
+        return products.stream()
+            .map(product -> {
+                ProductDto productDto = this.modelMapper.map(product, ProductDto.class);
 
-        List<ProductDto> collect = all.stream().map(dto -> new ProductDto(dto.getProductId(), dto.getProductName(), dto.getDescription(), dto.getPrice(), dto.getWeight(), decompressBytes(dto.getImg()))).collect(Collectors.toList());
-
-        return collect;
+                // Check if the image is not null before decompressing
+                if (product.getImg() != null) {
+                    productDto.setImg(decompressBytes(product.getImg()));
+                }
+                return productDto;
+            })
+            .collect(Collectors.toList());
     }
 
     //Delete
@@ -116,7 +132,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     // uncompress the image bytes before returning it to the angular application
+//    public static byte[] decompressBytes(byte[] data) {
+//        Inflater inflater = new Inflater();
+//        inflater.setInput(data);
+//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+//        byte[] buffer = new byte[1024];
+//        try {
+//            while (!inflater.finished()) {
+//                int count = inflater.inflate(buffer);
+//                outputStream.write(buffer, 0, count);
+//            }
+//            outputStream.close();
+//        } catch (IOException ioe) {
+//        } catch (DataFormatException e) {
+//        }
+//        return outputStream.toByteArray();
+//    }
     public static byte[] decompressBytes(byte[] data) {
+        if (data == null) {
+            return null; // Return null if the input is null
+        }
+        
         Inflater inflater = new Inflater();
         inflater.setInput(data);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
@@ -127,9 +163,10 @@ public class ProductServiceImpl implements ProductService {
                 outputStream.write(buffer, 0, count);
             }
             outputStream.close();
-        } catch (IOException ioe) {
-        } catch (DataFormatException e) {
+        } catch (IOException | DataFormatException e) {
+            e.printStackTrace();
         }
         return outputStream.toByteArray();
     }
+
 }

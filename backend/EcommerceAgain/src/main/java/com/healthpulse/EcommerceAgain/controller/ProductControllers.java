@@ -38,7 +38,7 @@ public class ProductControllers {
 
     //Get by Id
     @GetMapping("/{productid}")
-    public ResponseEntity<ProductDto> GetById(@PathVariable Integer productid){
+    public ResponseEntity<ProductDto> GetById(@PathVariable ("productid") Integer productid){
         ProductDto product = this.productService.ReadProduct(productid);
 
         return new ResponseEntity<>(product,HttpStatusCode.valueOf(200));
@@ -56,7 +56,7 @@ public class ProductControllers {
 
     //Delete Product
     @DeleteMapping(value = "/del/{ProductId}",produces = "application/json")
-    public ResponseEntity<ApiResponse> Delete(@PathVariable Integer ProductId){
+    public ResponseEntity<ApiResponse> Delete(@PathVariable ("Productid") Integer ProductId){
         this.productService.DeleteProduct(ProductId);
         return new ResponseEntity<ApiResponse>(new ApiResponse("Product deleted"),HttpStatusCode.valueOf(200));
     }
@@ -65,7 +65,7 @@ public class ProductControllers {
 
     //Update Product
     @PutMapping("/{ProductId}")
-    public ResponseEntity<ProductDto> UpdateProduct(@RequestParam MultiValueMap<String, String> formData, @RequestParam("img") MultipartFile file,@PathVariable Integer ProductId) throws IOException {
+    public ResponseEntity<ProductDto> UpdateProduct(@RequestParam MultiValueMap<String, String> formData, @RequestParam("img") MultipartFile file,@PathVariable ("Productid") Integer ProductId) throws IOException {
         ProductDto productDto = new ProductDto();
         productDto.setProductName(formData.getFirst("productname"));
         productDto.setDescription(formData.getFirst("description"));

@@ -37,7 +37,7 @@ export const ProductDetails = () => {
   };
   const handleCart = async () => {
     console.log(quantity);
-    const res = await fetch(`http://localhost:9090/cart/addproduct`, {
+    const res = await fetch(`http://localhost:8081/ecommerce/cart/addproduct`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,11 +56,14 @@ export const ProductDetails = () => {
     window.scrollTo(0, 0);
 
     const fatchData = async () => {
-      const response = await fetch(`http://localhost:9090/product/${id}`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      const response = await fetch(
+        `http://localhost:8081/ecommerce/product/${id}`
+        // {
+        //   headers: {
+        //     Authorization: "Bearer " + token,
+        //   },
+        // }
+      );
 
       const res = await response.json();
       setData(res);

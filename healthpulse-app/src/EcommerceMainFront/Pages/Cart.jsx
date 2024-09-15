@@ -17,7 +17,7 @@ export const Cart = () => {
   const fatchCart = async () => {
     // get cart item
     console.log(token);
-    const res = await fetch("http://localhost:9090/cart/1", {
+    const res = await fetch("http://localhost:8081/ecommerce/cart/1", {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
@@ -33,13 +33,16 @@ export const Cart = () => {
   }, [loading]);
 
   const createOrder = async (e) => {
-    const res = await fetch(`http://localhost:9090/payment/${totalAmount}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    });
+    const res = await fetch(
+      `http://localhost:8081/ecommerce/payment/${totalAmount}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
     const da = await res.json();
     setdata(da);
     return da;
