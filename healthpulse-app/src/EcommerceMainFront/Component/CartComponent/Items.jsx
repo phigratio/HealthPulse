@@ -1,16 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import axiosFetch from "../../Helper/Axios";
 
-export const Items = ({ prop ,setLoading}) => {
+export const Items = ({ prop, setLoading }) => {
   const [quantity, setQuantity] = useState(prop.quantity);
-  const[token,setToken]=useState(sessionStorage.getItem("token"));
-  
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
+
   const [item2, setItem2] = useState(prop.products);
 
   const onToast = () => {
-    toast.success('Item Removed!!', {
+    toast.success("Item Removed!!", {
       position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -19,32 +19,30 @@ export const Items = ({ prop ,setLoading}) => {
       draggable: true,
       progress: undefined,
       theme: "light",
-      });
-  }
+    });
+  };
   // console.log(quantity);
   const updateQuantity = async (q) => {
- 
     const res = await fetch(
-      `http://localhost:9090/cart/addproduct`,
+      `http://localhost:8081/ecommerce/cart/addproduct`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer "+token
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({
           productId: prop.products.productid,
           quantity: q,
         }),
       }
-
-      );
-    const temp= await res.json();
+    );
+    const temp = await res.json();
     // console.log(temp);
     setLoading(temp);
-    
+
     // setQuantity(temp.cartDetalis.quantity);
-};
+  };
 
   const handleQuantity = (e) => {
     e.preventDefault();
@@ -59,31 +57,27 @@ export const Items = ({ prop ,setLoading}) => {
   };
   const handlePlus = () => {
     if (quantity > 0) {
-      
       setQuantity(quantity + 1);
       updateQuantity(quantity + 1);
     }
   };
-  
-  const handleRemove = async () =>{
+
+  const handleRemove = async () => {
     //call delete api without body
-    const res = await  fetch(
-      `http://localhost:9090/cart/product/${prop.products.productid}`,
+    const res = await fetch(
+      `http://localhost:8081/ecommerce/cart/product/${prop.products.productid}`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer "+token
+          Authorization: "Bearer " + token,
         },
       }
-
-      );
-      const t=await res.json();
-      setLoading(t);
-      onToast();
-
-    
-  }
+    );
+    const t = await res.json();
+    setLoading(t);
+    onToast();
+  };
 
   return (
     <>
@@ -137,7 +131,7 @@ export const Items = ({ prop ,setLoading}) => {
                             <div className="qtyplus">+</div> */}
         </td>
         <td className="border-0 align-middle">
-          <a  className="text-dark" onClick={()=>handleRemove()}>
+          <a className="text-dark" onClick={() => handleRemove()}>
             <i className="fa fa-trash" />
           </a>
         </td>

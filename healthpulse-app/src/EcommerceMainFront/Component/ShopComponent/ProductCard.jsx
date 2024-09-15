@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 export const ProductCard = (props) => {
   const navigate = useNavigate();
 
-  const[token,setToken]=useState(sessionStorage.getItem("token"));
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
 
   const onToast = () => {
-    toast.success('Added to cart!', {
+    toast.success("Added to cart!", {
       position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -17,35 +17,36 @@ export const ProductCard = (props) => {
       draggable: true,
       progress: undefined,
       theme: "light",
-      });
-  }
+    });
+  };
   const handalClick = (id) => {
     navigate(`/product/${id}`);
   };
 
   const handalCart = async () => {
-    if(sessionStorage.getItem("token")===null){
+    if (sessionStorage.getItem("token") === null) {
       navigate("/login");
     }
-    const res = await fetch("http://localhost:9090/cart/addproduct", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
-      },
-      body: JSON.stringify({
-
-        productId: props.id,
-        quantity: 1,
-      }),
-    });
-    if(res.status===200){
+    const res = await fetch(
+      "http://localhost:8081/ecommerce/cart/addproduct",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({
+          productId: props.id,
+          quantity: 1,
+        }),
+      }
+    );
+    if (res.status === 200) {
       onToast();
       const data = await res.json();
-    }else{
+    } else {
       navigate("/login");
     }
-    
   };
   return (
     <>
@@ -88,7 +89,7 @@ export const ProductCard = (props) => {
             <a href="/product/1">{props.name}</a>
           </h3>
           <div className="price-wrapper">
-            <del className="del">Rs {props.price+100}</del>
+            <del className="del">Rs {props.price + 100}</del>
             <data className="price" value={85.0}>
               Rs {props.price}
             </data>
@@ -98,7 +99,6 @@ export const ProductCard = (props) => {
           </button>
         </div>
       </li>
-
     </>
   );
 };

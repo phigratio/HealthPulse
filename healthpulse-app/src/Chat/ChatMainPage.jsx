@@ -9,10 +9,9 @@ const ChatMainPage = () => {
   const [user, setUser] = useState();
 
   return (
-    <div>
-      <Background />
+    <div style={{ background: "rgb(40, 43, 54)" }}>
       <Base>
-        <div className="mt-12">
+        <div style={{ marginTop: "5rem" }}>
           <ChatsPage />
         </div>
       </Base>

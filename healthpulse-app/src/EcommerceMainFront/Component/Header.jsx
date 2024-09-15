@@ -1,39 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import * as Scroll from 'react-scroll';
+import * as Scroll from "react-scroll";
 
 // Or Access Link,Element,etc as follows
 let Link = Scroll.Link;
 
-
-
 export const Header = () => {
-  
-
   const [islogin, setislogin] = useState(sessionStorage.getItem("token"));
-  
+
   const navigate = useNavigate();
   const handalRedirect = () => {
     if (islogin) {
       navigate(`/cart`);
-   
     } else {
       navigate(`/login`);
-
     }
   };
 
   const handalLogout = () => {
     sessionStorage.removeItem("token");
-    setislogin(false)
+    setislogin(false);
     navigate(`/`);
   };
-
-  
-
-    
-
 
   return (
     <header className="header" data-header="">
@@ -61,7 +50,7 @@ export const Header = () => {
             </button>
             <ul className="navbar-list">
               <li>
-                <a href="/" className="navbar-link">
+                <a href="/ecommerce/" className="navbar-link">
                   Home
                 </a>
               </li>
@@ -81,7 +70,7 @@ export const Header = () => {
                 {/* <Link to="/shop" activeClass="active" className="navbar-link"  >
             Shop
               </Link> */}
-                <a href="/shop" className="navbar-link">
+                <a href="/ecommerce/shop" className="navbar-link">
                   Shop
                 </a>
               </li>
@@ -183,16 +172,19 @@ export const Header = () => {
                   </data>
                 </button>
               </>
-              
             )}
-           {islogin ? <button
-                  className="header-action-btn"
-                  aria-label="Open shopping cart"
-                  data-panel-btn="cart"
-                  onClick={() => handalLogout()}
-                >
-                 <ion-icon name="log-out-outline"></ion-icon>
-                </button>:<></>}
+            {islogin ? (
+              <button
+                className="header-action-btn"
+                aria-label="Open shopping cart"
+                data-panel-btn="cart"
+                onClick={() => handalLogout()}
+              >
+                <ion-icon name="log-out-outline"></ion-icon>
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

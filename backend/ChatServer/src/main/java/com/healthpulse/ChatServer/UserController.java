@@ -23,8 +23,8 @@ import com.google.gson.reflect.TypeToken;
 @RestController
 @RequestMapping("/chat")
 public class UserController {
-    private static String CHAT_ENGINE_PROJECT_ID = "d678a4f8-ec97-49ef-8d5f-fea787c409b1";
-    private static String CHAT_ENGINE_PRIVATE_KEY = "f720da90-9a8a-47be-859e-ce73002e9c34";
+    private static String CHAT_ENGINE_PROJECT_ID = "4dcb2df5-9316-4cba-aa5a-76711e034d8f";
+    private static String CHAT_ENGINE_PRIVATE_KEY = "8e91f608-b5f1-4d35-bf5b-1c9717724a1e";
 
 //    @CrossOrigin
     @RequestMapping(path = "/login", method = RequestMethod.POST)

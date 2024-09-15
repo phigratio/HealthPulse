@@ -179,3 +179,8 @@ export const getDonorsByBloodGroupAndDistrict = (bloodGroup, district) => {
       throw error;
     });
 };
+
+// New signup for the chat server
+export const signUpChatServer = (chatData) => {
+  return myAxios.post("/chat/signup", chatData);
+};
