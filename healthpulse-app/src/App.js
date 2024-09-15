@@ -28,7 +28,7 @@ import UpdateBlog from "./pages/UpdateBlog";
 import UpdateUser from "./pages/UpdateUser";
 import UpdatePersonalData from "./pages/UpdatePersonalData";
 import DonorList from "./pages/BloodDoner";
-
+import Quiz from "./servicePage/Quiz.jsx";
 import UpdateDoctorInfoPage from "./pages/UpdateDoctorInfoPage";
 
 import NewsList from "./servicePage/NewsList";
@@ -96,7 +96,7 @@ function App() {
           element={<PrescriptionAnalyzer />}
         />
         <Route path="/service/ml-models" element={<MlModels />} />
-        <Route path="/service/quiz" element={<QuizGame />} />
+        <Route path="/service/quiz" element={<Quiz />} />
 
         <Route path="/service/nearest-hospital" element={<MapHome />} />
 

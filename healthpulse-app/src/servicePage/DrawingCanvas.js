@@ -1,13 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 const apiKeyVision = "AIzaSyCj5hRY6tg826SELZMcacxPpiCZMuY-VJ4";
 
-const DrawingCanvas = () => {
+const DrawingCanvas = ({ onExtract }) => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [handwritingText, setHandwritingText] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
 
   useEffect(() => {
@@ -19,8 +18,6 @@ const DrawingCanvas = () => {
     context.lineCap = "round";
     context.strokeStyle = "black";
     context.lineWidth = 5;
-
-    // Fill the canvas with a white background
     context.fillStyle = "white";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -38,9 +35,7 @@ const DrawingCanvas = () => {
   };
 
   const draw = ({ nativeEvent }) => {
-    if (!isDrawing) {
-      return;
-    }
+    if (!isDrawing) return;
 
     const { offsetX, offsetY } = nativeEvent;
     contextRef.current.lineTo(offsetX, offsetY);
@@ -52,7 +47,6 @@ const DrawingCanvas = () => {
     contextRef.current.closePath();
     setIsDrawing(false);
   };
-
   const setToDraw = () => {
     const canvas = canvasRef.current;
     canvas.classList.remove("eraser-cursor");
@@ -74,17 +68,13 @@ const DrawingCanvas = () => {
   };
 
   const handleImageUpload = async () => {
-    if (isGenerating) {
-      return;
-    }
+    if (isGenerating) return;
 
     const base64Image = getBase64Image();
 
     try {
       setIsGenerating(true);
-      setHandwritingText(""); // Clear the previous text
 
-      // Google Cloud Vision API Request
       const visionResponse = await axios.post(
         `https://vision.googleapis.com/v1/images:annotate?key=${apiKeyVision}`,
         {
@@ -104,23 +94,15 @@ const DrawingCanvas = () => {
         }
       );
 
-      // Extract text from the API response
       const textAnnotations =
         visionResponse.data.responses[0]?.textAnnotations?.map(
           (annotation) => annotation.description
         ) || [];
 
-      // Combine the extracted text and limit it to half of its length
       const fullText = textAnnotations.join(" ");
-      const halfText = fullText.slice(0, Math.ceil(fullText.length / 2));
-
-      // Set the extracted text (half length)
-      setHandwritingText(halfText);
+      onExtract(fullText);
     } catch (error) {
-      console.error(
-        "Error detecting text:",
-        error.response ? error.response.data : error.message
-      );
+      console.error("Error detecting text:", error);
     } finally {
       setIsGenerating(false);
     }
@@ -128,7 +110,6 @@ const DrawingCanvas = () => {
 
   return (
     <div className="prescription-container">
-      <div className="prescription-heading">Prescription</div>
       <canvas
         className="canvas-container"
         ref={canvasRef}
@@ -144,12 +125,6 @@ const DrawingCanvas = () => {
           {isGenerating ? "Processing..." : "Extract Handwriting"}
         </button>
       </div>
-      {handwritingText && (
-        <div className="handwriting-result">
-          <h3>Extracted Text:</h3>
-          <p>{handwritingText}</p>
-        </div>
-      )}
     </div>
   );
 };

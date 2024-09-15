@@ -90,9 +90,9 @@ h1 {
 .loading,
 .error {
   text-align: center;
-  color: #721c24;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
+  color: #e8e8e8;
+  background-color: #759bbc;
+  border: 1px solid #3f7487;
   border-radius: 4px;
   padding: 10px;
   margin-top: 20px;
@@ -101,4 +101,44 @@ h1 {
 .next-button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+}
+
+.quiz-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.lottie-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 20%;
+}
+
+.quiz-container {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+  .lower-section-content {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .lottie-container,
+  .quiz-container {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
 }
