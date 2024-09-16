@@ -30,4 +30,6 @@ public interface UserService {
 	UserDto rejectDoctor(int doctorId);
 
 	List<UserDto> getPendingDoctorApprovals();
+
+	public String validateVerificationToken(String token) ;
 }

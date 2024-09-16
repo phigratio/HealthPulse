@@ -56,10 +56,14 @@ public class User implements UserDetails {
 	
 	private int age;
 	
-	private String mbile;
+	private String mobile;
 	
 	private String imageName;
-		
+
+	@Column(nullable = false)
+	private boolean enabled;
+
+	private String verificationToken;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role", referencedColumnName = "id"))
@@ -99,7 +103,7 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return enabled;
 	}
 
 	
