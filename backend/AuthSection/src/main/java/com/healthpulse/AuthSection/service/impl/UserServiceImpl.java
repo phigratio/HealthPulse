@@ -216,4 +216,16 @@ public class UserServiceImpl implements UserService {
 	            .collect(Collectors.toList());
 	}
 
+	@Override
+	public String validateVerificationToken(String token) {
+		User user = userRepo.findByVerificationToken(token).orElse(null);
+		if (user == null) {
+			return "invalid";
+		}
+
+		user.setEnabled(true);
+		userRepo.save(user);
+		return "valid";
+	}
+
 }

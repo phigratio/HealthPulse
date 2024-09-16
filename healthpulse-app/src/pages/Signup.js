@@ -298,15 +298,41 @@ const Signup = () => {
     };
 
     // Sign up to both servers
+    // Promise.all([
+    //   signUp(currentServerData, data.role), // Existing server
+    //   signUpChatServer(chatServerData), // Chat server
+    // ])
+    //   .then((responses) => {
+    //     console.log("User Registered Successfully on both servers");
+    //     toast.success("User Registered Successfully on both servers!");
+    //     resetData();
+    //     window.location.href = "/login";
+    //   })
+    //   .catch((err) => {
+    //     console.log("User Registration Failed on one or both servers");
+    //     setError({
+    //       error: err,
+    //       isError: true,
+    //     });
+    //     toast.error("User Registration Failed on one or both servers");
+    //   });
     Promise.all([
       signUp(currentServerData, data.role), // Existing server
       signUpChatServer(chatServerData), // Chat server
     ])
       .then((responses) => {
         console.log("User Registered Successfully on both servers");
-        toast.success("User Registered Successfully on both servers!");
+        toast.success("User Registered Successfully !!!");
+        toast.success(
+          "A varifivation mail send to your email. Please Verify your email to login !!!"
+        );
+
         resetData();
-        window.location.href = "/login";
+
+        // Delay the redirection by 5 seconds (5000 milliseconds)
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 6000);
       })
       .catch((err) => {
         console.log("User Registration Failed on one or both servers");

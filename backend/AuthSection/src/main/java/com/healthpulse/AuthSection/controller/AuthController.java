@@ -2,10 +2,13 @@ package com.healthpulse.AuthSection.controller;
 
 
 import java.security.Principal;
+
+import com.healthpulse.AuthSection.event.OnRegistrationCompleteEvent;
 import jakarta.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -47,6 +50,9 @@ public class AuthController {
     @Autowired
     private ModelMapper mapper;
 
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
+
     @PostMapping("/login")
     public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest request) throws Exception {
         this.authenticate(request.getUsername(), request.getPassword());
@@ -59,19 +65,61 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+//    private void authenticate(String username, String password) throws Exception {
+//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+//        try {
+//            this.authenticationManager.authenticate(authenticationToken);
+//        } catch (BadCredentialsException e) {
+//            throw new ApiException("Invalid username or password !!!");
+//        }
+//    }
+
     private void authenticate(String username, String password) throws Exception {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+        // Log to check the received username (which is the email)
+        System.out.println("Authenticating user with email: " + username);
+
+        // Fetch the user by email (username is email in this case)
+        User user = this.userRepo.findByEmail(username)
+                .orElseThrow(() -> new ApiException("User not found !!!"));
+
+        // Log to check if the user was found
+        System.out.println("User found: " + user.getEmail() + ", Enabled: " + user.isEnabled());
+
+        // Check if the user is enabled (i.e., email is verified)
+        if (!user.isEnabled()) {
+            // Log that the user has not verified their email
+            System.out.println("User email is not verified for: " + username);
+            throw new ApiException("Please Verify Your Email"); // Throw exception if not verified
+        }
+
+        // Log before proceeding with authentication
+        System.out.println("User is verified, proceeding with authentication.");
+
+        // Proceed with authentication as it was doing before
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(username, password);
+
         try {
             this.authenticationManager.authenticate(authenticationToken);
+            // Log if authentication is successful
+            System.out.println("Authentication successful for: " + username);
         } catch (BadCredentialsException e) {
-            throw new ApiException("Invalid username or password !!");
+            // Log if the authentication fails
+            System.out.println("Invalid credentials for: " + username);
+            throw new ApiException("Invalid username or password !!!");
         }
     }
+
 
     // register new user api
     @PostMapping("/register")
     public ResponseEntity<UserDto> registerUser(@Valid @RequestBody UserDto userDto, @RequestParam ("roleId") Integer roleId) {
         UserDto registeredUser = this.userService.registerNewUser(userDto, roleId);
+        // Convert UserDto to User entity using ModelMapper
+        User registeredUserEntity = mapper.map(registeredUser, User.class);
+
+        // Publish the registration complete event with the User entity
+        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registeredUserEntity));
         return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
     }
 
@@ -81,4 +129,18 @@ public class AuthController {
         User user = this.userRepo.findByEmail(principal.getName()).orElseThrow(() -> new ApiException("User not found !!"));
         return new ResponseEntity<>(this.mapper.map(user, UserDto.class), HttpStatus.OK);
     }
+
+    @GetMapping("/verify-email")
+    public ResponseEntity<String> verifyEmail(@RequestParam("token") String token) {
+        String result = userService.validateVerificationToken(token);
+        if (result.equals("valid")) {
+            return ResponseEntity.ok("Your account has been verified successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification token.");
+        }
+    }
+
+
+
+
 }
