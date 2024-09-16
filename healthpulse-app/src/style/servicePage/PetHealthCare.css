@@ -4,6 +4,7 @@
   align-items: flex-start;
   padding: 20px;
   min-height: 100vh;
+  background-color: #f0f0f0;
 }
 
 .left-column,
@@ -11,6 +12,9 @@
   width: 20%;
   background-color: #f5f5f5;
   padding: 10px;
+  display: flex;
+  justify-content: center; /* Center Lottie horizontally */
+  align-items: center; /* Center Lottie vertically */
 }
 
 .middle-column {
@@ -85,4 +89,8 @@
   max-width: 100%;
   height: auto;
   margin-top: 20px;
+}
+
+.image-container {
+  text-align: center;
 }

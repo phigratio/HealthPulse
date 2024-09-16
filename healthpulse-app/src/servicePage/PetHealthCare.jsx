@@ -1,7 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "../style/servicePage/PetHealthCare.css";
 import { geminiKey } from "./apiKeys";
+// Import your Lottie component here
+import BooksL from "../components/LottieComponents/Books";
+import QuizL from "../components/LottieComponents/Quiz";
 
 const PetHealthcare = () => {
   const apiKeyGemini = geminiKey; // Use your API Key here
@@ -13,7 +16,6 @@ const PetHealthcare = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Generic AI-based Gemini request handler
   const generateFromGemini = async (text) => {
     try {
       const response = await axios.post(
@@ -37,7 +39,6 @@ const PetHealthcare = () => {
     }
   };
 
-  // Handle food suggestions based on prompt
   const handleFoodSubmit = async (e) => {
     e.preventDefault();
     if (!prompt) return;
@@ -49,7 +50,6 @@ const PetHealthcare = () => {
     setIsLoading(false);
   };
 
-  // Handle symptom recognition based on prompt
   const handleSymptomSubmit = async (e) => {
     e.preventDefault();
     if (!prompt) return;
@@ -61,7 +61,6 @@ const PetHealthcare = () => {
     setIsLoading(false);
   };
 
-  // Handle exercise recommendations based on prompt
   const handleExerciseSubmit = async (e) => {
     e.preventDefault();
     if (!prompt) return;
@@ -75,24 +74,17 @@ const PetHealthcare = () => {
     setIsLoading(false);
   };
 
-  // Generate an image related to pet care based on prompt
   const handleImageGeneration = async () => {
     if (!prompt) return;
-
     setIsLoading(true);
     setError(null);
-
     try {
-      // Modify the prompt for generating calming images
       const modifiedPrompt = `a calming image for a pet with the following situation: ${prompt}`;
-
-      // Generate the image
       const imageResponse = await axios.post(
         "http://localhost:5555/generate-image",
         { prompt: modifiedPrompt },
         { responseType: "blob" }
       );
-
       if (imageResponse.status === 200) {
         const imageBlob = new Blob([imageResponse.data], { type: "image/png" });
         const imageUrl = URL.createObjectURL(imageBlob);
@@ -111,13 +103,12 @@ const PetHealthcare = () => {
   return (
     <div className="pet-healthcare-container">
       <div className="left-column">
-        {/* Placeholder for Lottie component or other future components */}
+        <QuizL /> {/* Left-side Lottie animation */}
       </div>
 
       <div className="middle-column">
         <h2 className="title">AI-Powered Pet Healthcare</h2>
 
-        {/* Input form */}
         <form className="prompt-form">
           <label htmlFor="promptInput">
             Describe your pet's symptoms, food needs, or exercise routine:
@@ -165,7 +156,6 @@ const PetHealthcare = () => {
         {isLoading && <div className="loading">Loading...</div>}
         {error && <div className="error">{error}</div>}
 
-        {/* Food Suggestions */}
         {foodSuggestions.length > 0 && (
           <div className="suggestions-container">
             <h4>Food Suggestions:</h4>
@@ -177,7 +167,6 @@ const PetHealthcare = () => {
           </div>
         )}
 
-        {/* Symptom Analysis */}
         {symptomAnalysis && (
           <div className="analysis-container">
             <h4>Symptom Recognition Result:</h4>
@@ -185,7 +174,6 @@ const PetHealthcare = () => {
           </div>
         )}
 
-        {/* Exercise Recommendations */}
         {exerciseRecommendations && (
           <div className="recommendations-container">
             <h4>Exercise Recommendations:</h4>
@@ -193,7 +181,6 @@ const PetHealthcare = () => {
           </div>
         )}
 
-        {/* Generated Image */}
         {imageUrl && (
           <div className="image-container">
             <h4>Generated Calming Pet Image:</h4>
@@ -203,7 +190,7 @@ const PetHealthcare = () => {
       </div>
 
       <div className="right-column">
-        {/* Placeholder for Lottie component or other future components */}
+        <BooksL /> {/* Right-side Lottie animation */}
       </div>
     </div>
   );
