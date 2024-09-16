@@ -11,13 +11,13 @@ body {
   transition: 2s ease;
   position: relative;
   margin: 2px;
-  background: #e1f5fb; /* Default background color */
+  background: #ffffff; /* box color */
 }
 
 .colorBox:hover {
-  background: #146077; /* Hover background color */
+  background: #000; /* Hover box color */
   transition-duration: 0.05s;
-} 
+}
 
 /* Background animation container styles */
 .bgAnimation {
@@ -29,7 +29,7 @@ body {
   display: grid;
   grid-template-columns: repeat(20, 1fr); /* Grid columns for animation */
   grid-template-rows: repeat(20, 1fr); /* Grid rows for animation */
-  background: #ddf2f8; /* Background color */
+  background: #f3f2f2; /* box mergin color */
   filter: saturate(2); /* Saturation effect */
   overflow: hidden; /* Hide overflow */
 }
@@ -41,7 +41,7 @@ body {
   left: 0;
   width: 100%;
   height: 60px; /* Height of the animated element */
-  background: #0cbeff; /* Background color */
+  background: #c6d9e4; /* Tide color */
   filter: blur(60px); /* Blur effect */
   animation: animBack 6s linear infinite; /* Animation definition */
 }
