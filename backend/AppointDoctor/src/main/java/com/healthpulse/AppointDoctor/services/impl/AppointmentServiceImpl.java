@@ -112,6 +112,15 @@ public class AppointmentServiceImpl implements AppointmentService {
                                           "BOOKED".equals(appointment.getStatus()));
     }
 
+    @Override
+    public AppointmentData startMeeting(Long appointmentId, String videoCallUrl) {
+        AppointmentData appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid appointment ID"));
+
+        appointment.startMeeting(videoCallUrl);  // Set the video call URL and ensure the appointment is booked
+        return appointmentRepository.save(appointment);  // Save the updated appointment data
+    }
+
     
     
 }

@@ -14,6 +14,7 @@ import FindBooking from "./patient/FindBooking";
 import CreatePrescription from "./doctor/CreatePrescription";
 import UserPrescriptions from "./patient/UserPrescriptions";
 import PatientHistory from "./doctor/PatientHistory";
+import MyVideoChat from "./components/MyVideoChat";
 const AppointMainPage = () => {
   return (
     <div>
@@ -45,6 +46,7 @@ const AppointMainPage = () => {
               element={<UserPrescriptions />}
             />
             <Route path="/patient-history" element={<PatientHistory />} />
+            <Route path="/video-chat" element={<MyVideoChat />} />
           </Routes>
         </div>
       </Base>

@@ -16,6 +16,10 @@ import { toast } from "react-toastify";
 import { BASE_URL } from "../service/helper";
 import { isLoggedIn } from "../auth";
 import { getUser } from "../service/user-service";
+import axios from "axios";
+import { geminiKey } from "../servicePage/apiKeys";
+
+const apiKeyGemini = geminiKey;
 
 const PostPage = () => {
   const { postId } = useParams();
@@ -24,6 +28,8 @@ const PostPage = () => {
   const [comment, setComment] = useState({
     content: "",
   });
+  const [aiResponse, setAiResponse] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Load post of postId
@@ -82,6 +88,37 @@ const PostPage = () => {
       });
   };
 
+  const handleLearnMoreAI = async () => {
+    setLoading(true);
+    const prompt = `Check the accuracy and provide more information for the following content : "${post.content}".`;
+
+    try {
+      const response = await axios.post(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKeyGemini}`,
+        {
+          contents: [
+            {
+              parts: [
+                {
+                  text: prompt,
+                },
+              ],
+            },
+          ],
+        }
+      );
+
+      setAiResponse(
+        response.data.candidates[0].content.parts[0].text || "No result found"
+      );
+    } catch (error) {
+      console.error("Error fetching AI response:", error);
+      toast.error("Error in fetching AI response");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Base>
       <Container className="mt-4">
@@ -91,12 +128,6 @@ const PostPage = () => {
             <Card className="mt-3 ps-2 border-0 shadow-sm">
               {post && (
                 <CardBody>
-                  {/* <CardText>
-                    Posted By{" "}
-                    <b>{user ? user.name.toUpperCase() : "Loading..."}</b> on{" "}
-                    <b>{printDate(post.addedDate)}</b>
-                  </CardText> */}
-
                   <CardText>
                     Posted By{" "}
                     <b>
@@ -144,6 +175,69 @@ const PostPage = () => {
                   ></CardText>
                 </CardBody>
               )}
+            </Card>
+            <Card className="mt-4 border-0">
+              <CardBody>
+                <Button
+                  color="primary"
+                  onClick={handleLearnMoreAI}
+                  disabled={loading}
+                >
+                  {loading ? "Analyzing..." : "Learn More from AI"}
+                </Button>
+
+                {aiResponse && (
+                  <CardText className="mt-4">
+                    <h5>AI Response:</h5>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: aiResponse
+                          .replace(
+                            /\*\*Accuracy:\*\*/g,
+                            '<b style="font-size: 1.2em;">Accuracy:</b>'
+                          )
+                          .replace(
+                            /\*\*Additional Information:\*\*/g,
+                            '<b style="font-size: 1.2em;">Additional Information:</b>'
+                          )
+                          .replace(
+                            /\*\*Type 1 Diabetes:\*\*/g,
+                            '<b style="font-size: 1.1em;">Type 1 Diabetes:</b>'
+                          )
+                          .replace(
+                            /\*\*Type 2 Diabetes:\*\*/g,
+                            '<b style="font-size: 1.1em;">Type 2 Diabetes:</b>'
+                          )
+                          .replace(
+                            /\*\*Elevated Blood Sugar:\*\*/g,
+                            '<b style="font-size: 1.1em;">Elevated Blood Sugar:</b>'
+                          )
+                          .replace(
+                            /\*\*Blood Sugar Threshold:\*\*/g,
+                            '<b style="font-size: 1.1em;">Blood Sugar Threshold:</b>'
+                          )
+                          .replace(
+                            /\*\*Diabetic Ketoacidosis:\*\*/g,
+                            '<b style="font-size: 1.1em;">Diabetic Ketoacidosis:</b>'
+                          )
+                          .replace(
+                            /\*\*Importance of Monitoring:\*\*/g,
+                            '<b style="font-size: 1.1em;">Importance of Monitoring:</b>'
+                          )
+                          .replace(
+                            /\*\*Different Medications:\*\*/g,
+                            '<b style="font-size: 1.1em;">Different Medications:</b>'
+                          )
+                          .replace(
+                            /\*\*Professional Guidance:\*\*/g,
+                            '<b style="font-size: 1.1em;">Professional Guidance:</b>'
+                          ),
+                      }}
+                      style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}
+                    />
+                  </CardText>
+                )}
+              </CardBody>
             </Card>
           </Col>
         </Row>

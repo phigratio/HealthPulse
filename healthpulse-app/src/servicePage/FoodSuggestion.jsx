@@ -80,7 +80,7 @@ const FoodSuggestion = () => {
     setIsLoading(true);
     try {
       const imageResponse = await axios.post(
-        "http://localhost:5555/generate-image",
+        "http://localhost:8095/generate-image",
         { prompt: `Generate an image of the dish: ${modifiedPrompt}` },
         { responseType: "blob" }
       );
