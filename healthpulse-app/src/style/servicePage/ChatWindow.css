@@ -1,5 +1,5 @@
 /* General ChatWindow Styling */
-.chat-window {
+.chatbot-window {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -7,8 +7,8 @@
   margin: 0 auto;
   background: linear-gradient(
     135deg,
-    #2c3e50,
-    #4a90e2
+    #3d5a80,
+    #98c1d9
   ); /* Gradient from dark navy to soft blue */
   border-radius: 10px;
   padding: 20px;
@@ -19,10 +19,10 @@
 .header {
   background: linear-gradient(
     135deg,
-    #4a90e2,
-    #3b5998
+    #3d5a80,
+    #98c1d9
   ); /* Gradient for the header */
-  color: white;
+  color: #e0fbfc;
   padding: 20px;
   text-align: center;
   border-radius: 10px 10px 0 0; /* Rounded top corners */
@@ -40,7 +40,7 @@
 }
 
 /* Chat Container */
-.chat-container {
+.chatbot-container {
   flex-grow: 1;
   overflow-y: auto;
   margin-bottom: 10px;
@@ -57,14 +57,14 @@
 }
 
 .message.user {
-  background-color: #e1f5fe; /* Light blue background for user messages */
+  background-color: #e0fbfc;
   float: right;
   text-align: right;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .message.ai {
-  background-color: #ffffff; /* White background for AI messages */
+  background-color: #e0fbfc; /* White background for AI messages */
   float: left;
   text-align: left;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -93,8 +93,8 @@
 /* Text-to-Speech Button Styling */
 .TextToSpeechButton {
   margin-top: 10px;
-  background-color: #4a90e2; /* Match with theme color */
-  color: white;
+  background-color: #3d5a80; /* Match with theme color */
+  color: #e0fbfc;
   border: none;
   border-radius: 50%;
   width: 36px;
@@ -107,9 +107,9 @@
 }
 
 .TextToSpeechButton:hover {
-  background-color: #3a7bd5; /* Hover effect */
+  background-color: #3d5a80; /* Hover effect */
 }
 
 .TextToSpeechButton:active {
-  background-color: #2a6ac5; /* Active state */
+  background-color: #98c1d9; /* Active state */
 }

@@ -9,7 +9,7 @@
 }
 
 /* Lottie animation containers */
-.lottie-container {
+.mental-lottie-container {
   width: 20%;
   position: sticky;
   top: 120px;
@@ -21,7 +21,7 @@
   max-width: 60%;
   margin: 0 2rem;
   padding: 40px;
-  background: linear-gradient(135deg, #e0f7fa, #b3e5fc);
+  background: linear-gradient(135deg, #e0fbfc, #98c1d9);
   border-radius: 10px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
@@ -31,15 +31,16 @@
 }
 
 /* Grid for issue buttons */
-.issues-grid {
+.mental-issues-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 1rem;
 }
 
 /* Issue button styles */
-.issue-button {
-  background-color: #f1f1f1;
+.mental-issue-button {
+  background-color: #e0fbfc;
+  color: #293241;
   border: none;
   border-radius: 4px;
   padding: 0.5rem 1rem;
@@ -52,28 +53,28 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-.issue-button:hover {
-  background-color: #e0e0e0;
+.mental-issue-button:hover {
+  background-color: #e0fbfc;
 }
 
-.issue-button.selected {
-  background-color: #007bff;
-  color: white;
+.mental-issue-button.selected {
+  background-color: #3d5a80;
+  color: #e0fbfc;
 }
 
-.issue-button.selected:hover {
-  background-color: #0056b3;
+.mental-issue-button.selected:hover {
+  background-color: #3d5a80;
 }
 
 /* Custom issue input styles */
-.custom-issue {
+.mental-custom-issue {
   display: flex;
   align-items: center;
   margin-top: 1rem;
 }
 
-.add-button {
-  background-color: #4a90e2;
+.mental-add-button {
+  background-color: #3d5a80;
   border: none;
   border-radius: 10%;
   color: rgb(255, 255, 255);
@@ -87,25 +88,25 @@
   transition: background-color 0.3s;
 }
 
-.custom-issue input {
+.mental-custom-issue input {
   flex-grow: 1;
   margin-right: 0.5rem;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid #e0fbfc;
   border-radius: 4px;
   font-size: 16px;
 }
 
-.custom-issue input:focus {
+.mental-custom-issue input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #3d5a80;
 }
 
 /* Generate button styles */
-.generate-button {
+.mental-generate-button {
   margin-top: 1rem;
-  background-color: #007bff;
-  color: white;
+  background-color: #3d5a80;
+  color: #e0fbfc;
   border: none;
   border-radius: 4px;
   padding: 0.5rem 1rem;
@@ -117,15 +118,15 @@
   transition: background-color 0.3s;
 }
 
-.generate-button:hover {
-  background-color: #0056b3;
+.mental-generate-button:hover {
+  background-color: #98c1d9;
 }
 
 /* Recommendation styles */
-.recommendation {
+.mental-recommendation {
   margin-top: 1rem;
   padding: 1rem;
-  background-color: #f1f1f1;
+  background-color: #e0fbfc;
   border-radius: 4px;
 }
 
@@ -136,7 +137,7 @@
     margin-top: 80px; /* Slightly reduced margin for smaller screens */
   }
 
-  .lottie-container {
+  .mental-lottie-container {
     width: 100%;
     max-width: 300px;
     margin-bottom: 2rem;

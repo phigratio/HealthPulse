@@ -98,59 +98,77 @@ const data = [
     link: "/medication",
   },
   {
-    name: "Symptom Checker",
-    overview: "Check your symptoms online.",
-    img: require("../../images/services/service6.png"),
+    name: "Pet",
+    overview: "Check Your Pet health using AI.",
+    img: require("../../images/services/Pets.jpg"),
     review:
-      "Use our symptom checker tool to get an idea of what might be ailing you.",
-    link: "/symptom-checker",
+      "Use our Ai tools to get your pet health in a good condition and ailing your pet.",
+    link: "/service/pet",
   },
   {
     name: "Mental Health Support",
     overview: "Access mental health resources.",
-    img: require("../../images/services/service7.png"),
+    img: require("../../images/services/MentalHealth.jpg"),
     review:
       "Find mental health resources and support to help you manage your well-being.",
-    link: "/mental-health",
+    link: "/service/mentalhealth",
   },
   {
-    name: "Nutrition Advice",
+    name: "Food Suggestion",
     overview: "Get personalized nutrition advice.",
-    img: require("../../images/services/service8.png"),
+    img: require("../../images/services/Food.jpg"),
     review:
       "Receive personalized nutrition advice to help you maintain a healthy diet.",
-    link: "/nutrition",
+    link: "/service/food-suggestion",
   },
   {
-    name: "Fitness Plans",
-    overview: "Access customized fitness plans.",
-    img: require("../../images/services/service9.png"),
+    name: "Weather Ai Assistant",
+    overview: "Access AI Assistance for health based on weather.",
+    img: require("../../images/services/Weather.jpg"),
     review:
-      "Get customized fitness plans tailored to your health goals and needs.",
-    link: "/fitness-plans",
+      "Get Ai assistance tailored to your health goals and needs based on wether.",
+    link: "/service/weatherapp",
   },
   {
-    name: "Vaccination Schedules",
+    name: "Health Quiz",
     overview: "Check recommended vaccination schedules.",
-    img: require("../../images/services/service10.png"),
+    img: require("../../images/services/Health.jpg"),
     review:
       "Keep track of recommended vaccinations and schedules for you and your family.",
-    link: "/vaccinations",
+    link: "/service/quiz",
   },
   {
-    name: "Health Monitoring",
-    overview: "Monitor your health metrics.",
-    img: require("../../images/services/service11.png"),
-    review: "Use our tools to monitor and track your health metrics over time.",
-    link: "/health-monitoring",
-  },
-  {
-    name: "Emergency Services",
-    overview: "Get quick access to emergency services.",
-    img: require("../../images/services/service12.png"),
+    name: "Health News",
+    overview: "Monitor your health based on recent updates.",
+    img: require("../../images/services/News.jpg"),
     review:
-      "Find quick access to emergency services and support in case of urgent health issues.",
-    link: "/emergency-services",
+      "Help to view recent news highlights and get updated with recent health updates.",
+    link: "/service/newsapp",
+  },
+  {
+    name: "Nearest Hospital",
+    overview: "Get quick access to nearest hospital.",
+    img: require("../../images/services/Map.jpg"),
+    review:
+      "Find quick access to hospital services and support in case of urgent health issues.",
+    link: "/service/nearest-hospital",
+  },
+  {
+    name: "MachineLearning Models",
+    overview: "Get Assistance of trained models.",
+    img: require("../../images/services/MlModel.jpg"),
+    review:
+      "Get Machine Learning Models trained to recognize diseases with maximum accuracy rates.",
+    link: "/service/ml-models",
+  },
+  {
+    name: "Health Quiz Game",
+    overview:
+      "Play a health quiz game to obtain health knowledge in an entertaining game",
+    img: require("../../images/services/Quiz.jpg"),
+    review:
+      "Receive personalized nutrition advice to help you maintain a healthy diet.",
+    link: "/service/quiz",
   },
 ];
 

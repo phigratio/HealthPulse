@@ -12,7 +12,7 @@
 }
 
 /* Lottie containers on left and right */
-.lottie-container {
+.food-lottie-container {
   flex: 0 1 20%;
   display: flex;
   justify-content: center;
@@ -25,7 +25,7 @@
   flex: 1 1 60%; /* Allow it to take up to 60% of space but flexible */
   padding: 20px;
   box-sizing: border-box;
-  background: linear-gradient(135deg, #e0f7fa, #b3e5fc);
+  background: linear-gradient(135deg, #e0fbfc, #98c1d9);
   border-radius: 10px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
@@ -33,7 +33,7 @@
 }
 
 /* Grid for preferences buttons */
-.preferences-grid {
+.food-preferences-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -41,99 +41,99 @@
 }
 
 /* Individual preference buttons */
-.preference-button {
-  background-color: #cce7ff;
-  border: 2px solid #70a1ff;
-  color: #2c3e50;
+.food-preference-button {
+  background-color: #e0fbfc;
+  border: 2px solid #98c1d9;
+  color: #293241;
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 }
 
-.preference-button:hover {
-  background-color: #a1c4fd;
+.food-preference-button:hover {
+  background-color: #98c1d9;
   transform: scale(1.05);
 }
 
-.preference-button.selected {
-  background-color: #70a1ff;
-  color: white;
+.food-preference-button.selected {
+  background-color: #3d5a80;
+  color: #e0fbfc;
 }
 
 /* Custom preference input and button */
-.custom-preference {
+.food-custom-preference {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
 }
 
-.custom-preference input {
+.food-custom-preference input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #70a1ff;
+  border: 1px solid #3d5a80;
   border-radius: 5px;
-  background-color: #eef6fc;
-  color: #2c3e50;
+  background-color: #e0fbfc;
+  color: #293241;
 }
 
-.custom-preference button {
+.food-custom-preference button {
   padding: 10px 15px;
-  background-color: #70a1ff;
-  color: white;
+  background-color: #3d5a80;
+  color: #e0fbfc;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 }
 
-.custom-preference button:hover {
-  background-color: #a1c4fd;
+.food-custom-preference button:hover {
+  background-color: #98c1d9;
   transform: scale(1.05);
 }
 
 /* Disease input field */
-.disease-input {
+.food-disease-input {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.disease-input input {
+.food-disease-input input {
   flex: 1;
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #ccc;
+  border: 2px solid #e0fbfc;
   border-radius: 4px;
 }
 
-.recording-buttons-container {
+.food-recording-buttons-container {
   margin-left: 10px;
 }
 
-.recording-button {
-  background-color: #f0f0f0;
-  border: 2px solid #ccc;
+.food-recording-button {
+  background-color: #98c1d9;
+  border: 2px solid #e0fbfc;
   border-radius: 50%;
   padding: 10px;
   cursor: pointer;
   font-size: 16px;
 }
 
-.recording-button.start {
-  color: #1d2590;
+.food-recording-button.start {
+  color: #3d5a80;
 }
 
-.recording-button.stop {
-  color: #9e195e;
+.food-recording-button.stop {
+  color: #ee6c4d;
 }
 
 /* Generate button styling */
-.generate-button {
+.food-generate-button {
   width: 100%;
   padding: 15px;
-  background-color: #70a1ff;
-  color: white;
+  background-color: #98c1d9;
+  color: #e0fbfc;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -141,30 +141,30 @@
   margin-bottom: 20px;
 }
 
-.generate-button:hover {
-  background-color: #a1c4fd;
+.food-generate-button:hover {
+  background-color: #98c1d9;
   transform: scale(1.05);
 }
 
 /* Suggestion section styling */
-.suggestion {
+.food-suggestion {
   margin-top: 20px;
 }
 
-.suggestion h3 {
-  color: #2c3e50;
+.food-suggestion h3 {
+  color: #293241;
   margin-bottom: 10px;
 }
 
-.suggestion p {
-  background-color: #eef6fc;
+.food-suggestion p {
+  background-color: #e0fbfc;
   padding: 15px;
   border-radius: 5px;
-  color: #2c3e50;
+  color: #293241;
 }
 
 /* Base component */
-.Base {
+.food-Base {
   display: flex;
   align-items: center;
   justify-content: center;

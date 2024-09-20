@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../style/servicePage/MentalHealth.css";
-import DoctorL from "../components/LottieComponents/Doctor";
 import MentalHealthL from "../components/LottieComponents/MentalHealth";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
@@ -103,16 +102,16 @@ const Mentalhealth = () => {
       <Background />
       <Base>
         <div className="mental-health-page">
-          <div className="lottie-container">
+          <div className="mental-lottie-container">
             <PurpleBriefCaseL />
           </div>
           <div className="mental-health-container">
             <h2>Select Mental Health Issues</h2>
-            <div className="issues-grid">
+            <div className="mental-issues-grid">
               {mentalHealthIssues.map((issue) => (
                 <button
                   key={issue}
-                  className={`issue-button ${
+                  className={`mental-issue-button ${
                     selectedIssues.includes(issue) ? "selected" : ""
                   }`}
                   onClick={() => handleIssueClick(issue)}
@@ -121,22 +120,25 @@ const Mentalhealth = () => {
                 </button>
               ))}
             </div>
-            <div className="custom-issue">
+            <div className="mental-custom-issue">
               <input
                 type="text"
                 value={customIssue}
                 onChange={(e) => setCustomIssue(e.target.value)}
                 placeholder="Add custom issue"
-                className="custom-issue-input" // Add class for styling
+                className="mental-custom-issue-input" // Add class for styling
               />
-              <button onClick={handleCustomIssueAdd} className="add-button">
+              <button
+                onClick={handleCustomIssueAdd}
+                className="mental-add-button"
+              >
                 Add
               </button>
               <SpeechToTextApp onTranscriptUpdate={setCustomIssue} />{" "}
               {/* Speech-to-Text Button */}
             </div>
             <button
-              className="generate-button"
+              className="mental-generate-button"
               onClick={generateRecommendation}
               disabled={isLoading} // Disable button during loading
             >
@@ -159,7 +161,7 @@ const Mentalhealth = () => {
             {error && <p className="error-message">{error}</p>}
           </div>
 
-          <div className="lottie-container">
+          <div className="mental-lottie-container">
             <MentalHealthL />
           </div>
         </div>

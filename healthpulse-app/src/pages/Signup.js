@@ -226,14 +226,6 @@ const Signup = () => {
     document.title = "Signup";
   }, []);
 
-  // Auto-generate username based on first and last name
-  // useEffect(() => {
-  //   setData({
-  //     ...data,
-  //     username: `${data.first_name}_${data.last_name}`.toLowerCase(),
-  //   });
-  // }, [data.first_name, data.last_name]);
-
   useEffect(() => {
     const capitalizeWords = (str) => {
       return str.replace(
@@ -350,13 +342,13 @@ const Signup = () => {
       <Base>
         <div className="signup-page">
           <div className="signup-container">
-            <div className="lottie-container">
+            <div className="signup-lottie-container">
               <KitBoxL />
             </div>
             <div className="signup-form">
               <h3 className="signup-header">Fill Information to Register</h3>
               <form onSubmit={submitForm}>
-                <div className="form-group">
+                <div className="signup-form-group">
                   <label>First Name:</label>
                   <input
                     type="text"
@@ -366,7 +358,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="signup-form-group">
                   <label>Last Name:</label>
                   <input
                     type="text"
@@ -376,12 +368,12 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="signup-form-group">
                   <label>Username:</label>
                   <input type="text" value={data.username} disabled />
                 </div>
 
-                <div className="form-group">
+                <div className="signup-form-group">
                   <label>Email:</label>
                   <input
                     type="email"
@@ -391,7 +383,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="signup-form-group">
                   <label>Password:</label>
                   <input
                     type="password"
@@ -401,7 +393,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="signup-form-group">
                   <label>About:</label>
                   <textarea
                     placeholder="Write about yourself"
@@ -411,7 +403,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="signup-form-group">
                   <label htmlFor="role">Role:</label>
                   <select
                     id="role"
@@ -424,13 +416,13 @@ const Signup = () => {
                   </select>
                 </div>
 
-                <div className="button-container">
+                <div className="signup-button-container">
                   <button type="submit" className="signup-button">
                     Register
                   </button>
                   <button
                     type="button"
-                    className="reset-button"
+                    className="signup-reset-button"
                     onClick={resetData}
                   >
                     Reset
@@ -438,7 +430,7 @@ const Signup = () => {
                 </div>
               </form>
             </div>
-            <div className="lottie-container">
+            <div className="signup-lottie-container">
               <RegisterL />
             </div>
           </div>

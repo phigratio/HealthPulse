@@ -3,15 +3,14 @@ import { useNavigate } from "react-router-dom";
 import userContext from "../context/userContext";
 import { login, addUserInfo, getUserInfo } from "../service/user-service";
 import { doLogin } from "../auth";
-import KitBoxL from "../components/LottieComponents/KitBox"; // Left Lottie Component
 import LoginL from "../components/LottieComponents/Login"; // Right Lottie Component
 import "../style/login.css"; // Import custom styles for login card
 
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 
-import { ToastContainer, toast } from "react-toastify";
-import KitBox from "../components/LottieComponents/KitBox";
+import { toast } from "react-toastify";
+
 import MentalHealthL from "../components/LottieComponents/MentalHealth";
 
 const Login = () => {
@@ -122,7 +121,7 @@ const Login = () => {
               <h3>Fill Information to Log In</h3>
 
               <form onSubmit={handleFormSubmit}>
-                <div className="form-group">
+                <div className="login-form-group">
                   <label htmlFor="username">Email: </label>
                   <input
                     type="username"
@@ -133,7 +132,7 @@ const Login = () => {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="login-form-group">
                   <label htmlFor="password">Password: </label>
                   <input
                     type="password"
@@ -144,12 +143,12 @@ const Login = () => {
                   />
                 </div>
 
-                <div className="button-container">
+                <div className="login-button-container">
                   <button className="login-button" type="submit">
                     Log In
                   </button>
                   <button
-                    className="reset-button"
+                    className="login-reset-button"
                     type="button"
                     onClick={handleReset}
                   >

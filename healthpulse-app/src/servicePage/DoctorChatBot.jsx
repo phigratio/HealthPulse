@@ -19,14 +19,14 @@ const DoctorChatBot = () => {
             <video src={banner} autoPlay loop muted></video>
           </div>
 
-          <div className="chat-layout">
-            <div className="lottie-container">
+          <div className="chatbot-layout">
+            <div className="chatbot-lottie-container">
               <PreventionL />
             </div>
-            <div className="chat-container">
+            <div className="chatbot-container">
               <ChatWindow />
             </div>
-            <div className="lottie-container">
+            <div className="chatbot-lottie-container">
               <BacteriaL />
             </div>
           </div>
