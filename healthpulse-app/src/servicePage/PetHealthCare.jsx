@@ -81,7 +81,7 @@ const PetHealthcare = () => {
     try {
       const modifiedPrompt = `a calming image for a pet with the following situation: ${prompt}`;
       const imageResponse = await axios.post(
-        "http://localhost:5555/generate-image",
+        "http://localhost:8095/generate-image",
         { prompt: modifiedPrompt },
         { responseType: "blob" }
       );
