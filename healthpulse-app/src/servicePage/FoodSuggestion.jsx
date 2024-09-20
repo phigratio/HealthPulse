@@ -9,6 +9,7 @@ import DoctorL from "../components/LottieComponents/Doctor";
 import { geminiKey } from "./apiKeys";
 import SpeechToTextApp from "./SpeechToTextButton";
 import TextToSpeechButton from "./TextToSpeechButton";
+import banner from "../images/banner/Food.mp4";
 
 const apiKeyGemini = geminiKey;
 
@@ -111,6 +112,9 @@ const FoodSuggestion = () => {
     <div>
       <Background />
       <Base>
+        <div className="video-container">
+          <video src={banner} autoPlay loop muted></video>
+        </div>
         <div className="food-suggestion-container">
           <div className="food-lottie-container">
             <FoodL />

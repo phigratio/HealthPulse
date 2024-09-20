@@ -1,5 +1,5 @@
 import React from "react";
-import banner from "../images/banner/kidsCorner.mp4";
+import banner from "../images/banner/MlModel.mp4";
 import "../style/servicePage/KidsCorner.css";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";

@@ -6,7 +6,7 @@ import ReactAnimatedWeather from "react-animated-weather";
 import "../style/servicePage/Weather.css";
 import TextToSpeechButton from "./TextToSpeechButton"; // Make sure you have this component
 
-import banner from "../images/banner/kidsCorner.mp4";
+import banner from "../images/banner/Weahter.mp4";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 import HeartRate from "../components/LottieComponents/HeartRate";

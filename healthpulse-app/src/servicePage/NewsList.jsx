@@ -4,7 +4,7 @@ import useNewsData from "../hooks/useNewsData";
 import CustomPagination from "./CustomPagination.js";
 import "../style/servicePage/NewsList.css"; // Updated CSS
 
-import banner from "../images/banner/kidsCorner.mp4";
+import banner from "../images/banner/News.mp4";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
 

@@ -8,6 +8,7 @@ import PurpleBriefCaseL from "../components/LottieComponents/PurpleBriefCase";
 import { geminiKey } from "./apiKeys";
 import TextToSpeechButton from "./TextToSpeechButton";
 import SpeechToTextApp from "./SpeechToTextButton";
+import banner from "../images/banner/MentalHealth.mp4";
 
 const apiKeyGemini = geminiKey;
 
@@ -101,6 +102,9 @@ const Mentalhealth = () => {
     <div>
       <Background />
       <Base>
+        <div className="video-container">
+          <video src={banner} autoPlay loop muted></video>
+        </div>
         <div className="mental-health-page">
           <div className="mental-lottie-container">
             <PurpleBriefCaseL />
