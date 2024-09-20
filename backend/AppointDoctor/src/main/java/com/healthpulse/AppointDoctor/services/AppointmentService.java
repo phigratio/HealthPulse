@@ -40,4 +40,7 @@ public interface AppointmentService {
     
  // Method to check if a user has an appointment with a doctor
     boolean hasAppointment(int userId, int doctorId);
+
+    // Method to start a meeting by setting the video call URL
+    AppointmentData startMeeting(Long appointmentId, String videoCallUrl);
 }

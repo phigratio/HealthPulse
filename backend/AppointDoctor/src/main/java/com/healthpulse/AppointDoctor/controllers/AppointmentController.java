@@ -104,8 +104,17 @@ public class AppointmentController {
         return ResponseEntity.ok(appointments);
     }
 
-    
-    
-    
-    
+    @PostMapping("/{appointmentId}/start-meeting")
+    public ResponseEntity<AppointmentData> startMeeting(
+            @PathVariable("appointmentId") Long appointmentId,
+            @RequestParam("videoCallUrl") String videoCallUrl) {
+        AppointmentData appointment = appointmentService.startMeeting(appointmentId, videoCallUrl);
+        return ResponseEntity.ok(appointment);
+    }
+
+
+
+
+
+
 }
