@@ -4,7 +4,7 @@ import "../style/servicePage/PrescriptionAnalyzer.css";
 import TextToSpeechButton from "./TextToSpeechButton";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
-import banner from "../images/banner/kidsCorner.mp4";
+import banner from "../images/banner/Prescription.mp4";
 import VirusL from "../components/LottieComponents/Virus";
 import HeartL from "../components/LottieComponents/Heart";
 import { geminiKey, visionApi } from "./apiKeys";
