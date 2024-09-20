@@ -490,8 +490,8 @@ const HealthCalculator = () => {
             disabled={generatingAnswer}
             className="mt-3"
             style={{
-              backgroundColor: "#003366", // Navy blue color
-              borderColor: "#003366",
+              backgroundColor: "#3d5a80", // Navy blue color
+              borderColor: "#3d5a80",
               fontSize: "18px", // Make the button a bit bigger
               padding: "12px 24px", // Adjust padding to make it bigger
             }}

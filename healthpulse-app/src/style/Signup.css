@@ -15,7 +15,7 @@
   width: 80%;
 }
 
-.lottie-container {
+.signup-lottie-container {
   flex-basis: 20%;
   text-align: center;
 }
@@ -32,46 +32,46 @@
   color: #2c3e50;
 }
 
-.form-group {
+.signup-form-group {
   margin-bottom: 15px;
 }
 
-.form-group label {
+.signup-form-group label {
   display: block;
   margin-bottom: 5px;
-  color: #5a7d9a;
+  color: #98c1d9;
 }
 
-.form-group input,
-.form-group textarea,
-.form-group select {
+.signup-form-group input,
+.signup-form-group textarea,
+.signup-form-group select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #70a1ff;
+  border: 1px solid #3d5a80;
   border-radius: 5px;
-  background-color: #eef6fc;
-  color: #2c3e50;
+  background-color: #e0fbfc;
+  color: #293241;
 }
 
 .invalid {
   border-color: #ff6b6b; /* Red border for invalid inputs */
 }
 
-.form-error {
+.signup-form-error {
   color: #ff6b6b;
   font-size: 0.875rem;
 }
 
-.button-container {
+.signup-button-container {
   display: flex;
   justify-content: space-between;
 }
 
 .signup-button,
-.reset-button {
+.signup-reset-button {
   padding: 10px 20px;
-  background: linear-gradient(135deg, #a1c4fd, #70a1ff);
-  color: #fff;
+  background: linear-gradient(135deg, #e0fbfc, #98c1d9);
+  color: #293241;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -79,8 +79,8 @@
 }
 
 .signup-button:hover,
-.reset-button:hover {
-  background: linear-gradient(135deg, #7fb3ff, #a1c4fd);
+.signup-reset-button:hover {
+  background: linear-gradient(135deg, #98c1d9, #e0fbfc);
 }
 
 /* Responsive Design */
@@ -90,7 +90,7 @@
     align-items: center;
   }
 
-  .lottie-container {
+  .signup-lottie-container {
     flex-basis: 100%;
   }
 

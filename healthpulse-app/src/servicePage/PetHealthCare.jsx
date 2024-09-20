@@ -102,14 +102,14 @@ const PetHealthcare = () => {
 
   return (
     <div className="pet-healthcare-container">
-      <div className="left-column">
+      <div className="pet-left-column">
         <QuizL /> {/* Left-side Lottie animation */}
       </div>
 
-      <div className="middle-column">
-        <h2 className="title">AI-Powered Pet Healthcare</h2>
+      <div className="pet-middle-column">
+        <h2 className="pet-title">AI-Powered Pet Healthcare</h2>
 
-        <form className="prompt-form">
+        <form className="pet-prompt-form">
           <label htmlFor="promptInput">
             Describe your pet's symptoms, food needs, or exercise routine:
           </label>
@@ -119,33 +119,33 @@ const PetHealthcare = () => {
             placeholder="e.g., My dog is limping, high-protein food for my puppy"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            className="input-field"
+            className="pet-input-field"
           />
-          <div className="button-group">
+          <div className="pet-button-group">
             <button
               type="button"
-              className="submit-button"
+              className="pet-submit-button"
               onClick={handleFoodSubmit}
             >
               Food Suggestions
             </button>
             <button
               type="button"
-              className="submit-button"
+              className="pet-submit-button"
               onClick={handleSymptomSubmit}
             >
               Symptom Recognition
             </button>
             <button
               type="button"
-              className="submit-button"
+              className="pet-submit-button"
               onClick={handleExerciseSubmit}
             >
               Exercise Recommendations
             </button>
             <button
               type="button"
-              className="submit-button"
+              className="pet-submit-button"
               onClick={handleImageGeneration}
             >
               Generate Calming Image
@@ -153,11 +153,11 @@ const PetHealthcare = () => {
           </div>
         </form>
 
-        {isLoading && <div className="loading">Loading...</div>}
-        {error && <div className="error">{error}</div>}
+        {isLoading && <div className="pet-loading">Loading...</div>}
+        {error && <div className="pet-error">{error}</div>}
 
         {foodSuggestions.length > 0 && (
-          <div className="suggestions-container">
+          <div className="pet-suggestions-container">
             <h4>Food Suggestions:</h4>
             <ul>
               {foodSuggestions.map((suggestion, index) => (
@@ -168,28 +168,32 @@ const PetHealthcare = () => {
         )}
 
         {symptomAnalysis && (
-          <div className="analysis-container">
+          <div className="pet-analysis-container">
             <h4>Symptom Recognition Result:</h4>
             <p>{symptomAnalysis}</p>
           </div>
         )}
 
         {exerciseRecommendations && (
-          <div className="recommendations-container">
+          <div className="pet-recommendations-container">
             <h4>Exercise Recommendations:</h4>
             <p>{exerciseRecommendations}</p>
           </div>
         )}
 
         {imageUrl && (
-          <div className="image-container">
+          <div className="pet-image-container">
             <h4>Generated Calming Pet Image:</h4>
-            <img src={imageUrl} alt="Generated" className="generated-image" />
+            <img
+              src={imageUrl}
+              alt="Generated"
+              className="pet-generated-image"
+            />
           </div>
         )}
       </div>
 
-      <div className="right-column">
+      <div className="pet-right-column">
         <BooksL /> {/* Right-side Lottie animation */}
       </div>
     </div>

@@ -4,60 +4,56 @@
   align-items: flex-start;
   padding: 20px;
   min-height: 100vh;
-  background-color: #f0f0f0;
 }
 
-.left-column,
-.right-column {
+.pet-left-column,
+.pet-right-column {
   width: 20%;
-  background-color: #f5f5f5;
   padding: 10px;
   display: flex;
   justify-content: center; /* Center Lottie horizontally */
   align-items: center; /* Center Lottie vertically */
 }
 
-.middle-column {
+.pet-middle-column {
   width: 60%;
   padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.title {
+.pet-title {
   text-align: center;
   margin-bottom: 20px;
   font-size: 1.8rem;
-  color: #333;
+  color: #293241;
 }
 
-.prompt-form {
+.pet-prompt-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
 }
 
-.input-field {
+.pet-input-field {
   padding: 10px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #e0fbfc;
   border-radius: 5px;
   width: 100%;
 }
 
-.button-group {
+.pet-button-group {
   display: flex;
   justify-content: space-between;
   gap: 10px;
 }
 
-.submit-button {
+.pet-submit-button {
   padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  background-color: #3d5a80;
+  color: #e0fbfc;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
@@ -65,32 +61,32 @@
   flex: 1;
 }
 
-.submit-button:hover {
-  background-color: #0056b3;
+.pet-submit-button:hover {
+  background-color: #98c1d9;
 }
 
-.loading {
+.pet-loading {
   text-align: center;
   font-size: 1.2rem;
 }
 
-.error {
-  color: red;
+.pet-error {
+  color: #ee6c4d;
   margin-top: 10px;
 }
 
-.suggestions-container,
-.analysis-container,
-.recommendations-container {
+.pet-suggestions-container,
+.pet-analysis-container,
+.pet-recommendations-container {
   margin-top: 20px;
 }
 
-.generated-image {
+.pet-generated-image {
   max-width: 100%;
   height: auto;
   margin-top: 20px;
 }
 
-.image-container {
+.pet-image-container {
   text-align: center;
 }

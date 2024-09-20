@@ -100,9 +100,9 @@ const ChatWindow = () => {
 
   // Render Function
   return (
-    <div className="chat-window">
+    <div className="chatbot-window">
       <Header />
-      <div className="chat-container" ref={chatContainerRef}>
+      <div className="chatbot-container" ref={chatContainerRef}>
         {messages.map((message, index) => (
           <div
             key={index}

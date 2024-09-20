@@ -112,16 +112,16 @@ const FoodSuggestion = () => {
       <Background />
       <Base>
         <div className="food-suggestion-container">
-          <div className="lottie-container">
+          <div className="food-lottie-container">
             <FoodL />
           </div>
           <div className="food-suggestion-content">
             <h2>Select Food Preferences</h2>
-            <div className="preferences-grid">
+            <div className="food-preferences-grid">
               {foodPreferences.map((preference) => (
                 <button
                   key={preference}
-                  className={`preference-button ${
+                  className={`food-preference-button ${
                     selectedPreferences.includes(preference) ? "selected" : ""
                   }`}
                   onClick={() => handlePreferenceClick(preference)}
@@ -130,7 +130,7 @@ const FoodSuggestion = () => {
                 </button>
               ))}
             </div>
-            <div className="custom-preference">
+            <div className="food-custom-preference">
               <input
                 type="text"
                 value={customPreference}
@@ -140,7 +140,7 @@ const FoodSuggestion = () => {
               <button onClick={handleCustomPreferenceAdd}>Add</button>
               <SpeechToTextApp onTranscriptUpdate={handleCustomUpdate} />
             </div>
-            <div className="disease-input">
+            <div className="food-disease-input">
               <input
                 type="text"
                 value={disease}
@@ -150,26 +150,29 @@ const FoodSuggestion = () => {
               <SpeechToTextApp onTranscriptUpdate={handleTranscriptUpdate} />
             </div>
 
-            <button className="generate-button" onClick={generateSuggestion}>
+            <button
+              className="food-generate-button"
+              onClick={generateSuggestion}
+            >
               Generate Food Suggestion
             </button>
             {suggestion && (
-              <div className="suggestion">
+              <div className="food-suggestion">
                 <h3>Suggested Dish:</h3>
                 <p>{suggestion}</p>
                 <TextToSpeechButton text={suggestion} />
               </div>
             )}
             {imageUrl && (
-              <div className="image-preview">
+              <div className="food-image-preview">
                 <h3>Image of Suggested Dish:</h3>
                 <img src={imageUrl} alt="Generated Food" />
               </div>
             )}
-            {error && <p className="error-message">{error}</p>}
+            {error && <p className="food-error-message">{error}</p>}
             {isLoading && <p>Loading image...</p>}
           </div>
-          <div className="lottie-container">
+          <div className="food-lottie-container">
             <DoctorL />
           </div>
         </div>
