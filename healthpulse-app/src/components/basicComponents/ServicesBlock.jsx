@@ -165,7 +165,7 @@ const data = [
     name: "Health Quiz Game",
     overview:
       "Play a health quiz game to obtain health knowledge in an entertaining game",
-    img: require("../../images/services/Quiz.jpg"),
+    img: require("../../images/services/Health.jpg"),
     review:
       "Receive personalized nutrition advice to help you maintain a healthy diet.",
     link: "/service/quiz",

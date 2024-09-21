@@ -2,6 +2,7 @@ package com.healthpulse.AuthSection.controller;
 
 import java.util.List;
 
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -76,7 +77,7 @@ public class DoctorController {
     
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/approve/{doctorId}")
-    public ResponseEntity<UserDto> approveDoctor(@PathVariable ("doctorId") int doctorId) {
+    public ResponseEntity<UserDto> approveDoctor(@PathVariable ("doctorId") int doctorId) throws MessagingException {
         UserDto updatedUser = userService.approveDoctor(doctorId);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
