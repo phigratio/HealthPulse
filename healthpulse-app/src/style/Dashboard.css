@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #007bff;
+  background-color: #98c1d9;
   color: white;
   border-radius: 50%;
   width: 60px;
@@ -17,5 +17,5 @@
 }
 
 .dashboard-floating-button:hover {
-  background-color: #0056b3;
+  background-color: #3d5a80;
 }

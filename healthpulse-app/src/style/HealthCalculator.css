@@ -3,7 +3,6 @@
   text-align: center;
   margin-top: 20px;
   margin-bottom: 30px;
-  font-family: "Mukta", sans-serif;
   font-weight: 500;
 }
 
@@ -12,7 +11,7 @@
 }
 
 .is-invalid {
-  border: 1px solid red;
+  border: 1px solid #ee6c4d;
 }
 
 button {

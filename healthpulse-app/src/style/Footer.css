@@ -1,6 +1,6 @@
 .footer {
-  background-color: #2e4493;
-  color: #e5f3fa;
+  background-color: #98c1d9;
+  color: #e0fbfc;
   font-size: 0.875rem;
   margin-top: 4rem;
   padding-top: 4rem;
@@ -21,7 +21,7 @@
 .footer-list a {
   display: block;
   margin-bottom: 0.5rem;
-  color: #e5f3fa;
+  color: #e0fbfc;
   text-decoration: none;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .social-links a {
-  color: #e5e7eb; /* text-slate-200 */
+  color: #e0fbfc; /* text-slate-200 */
 }
 
 .social-links a:hover {

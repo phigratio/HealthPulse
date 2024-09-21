@@ -15,7 +15,7 @@ body {
 }
 
 .colorBox:hover {
-  background: #000; /* Hover box color */
+  background: #293241; /* Hover box color */
   transition-duration: 0.05s;
 }
 
@@ -41,7 +41,7 @@ body {
   left: 0;
   width: 100%;
   height: 60px; /* Height of the animated element */
-  background: #c6d9e4; /* Tide color */
+  background: #e0fbfc; /* Tide color */
   filter: blur(60px); /* Blur effect */
   animation: animBack 6s linear infinite; /* Animation definition */
 }
