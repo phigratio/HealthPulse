@@ -92,26 +92,37 @@ public class MedicationService {
     
 
     // Send email reminder with improved theme and content
-    private void sendEmailReminder(String email, String medicationName, LocalTime time, String dosage, String instructions) throws MessagingException {
+    private void sendEmailReminder(String email, String name,  String medicationName, LocalTime time, String dosage, String instructions) throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
         helper.setTo(email);
         helper.setSubject("Important: Medication Reminder");
         
         // Improved HTML template for email
-        String emailContent = "<html><body style='font-family: Arial, sans-serif;'>"
-                + "<h1 style='color: #1E90FF;'>HealthPulse: Medication Reminder</h1>"
-                + "<p style='font-size: 16px;'>Dear User,</p>"
-                + "<p style='font-size: 16px;'>This is a reminder to take your medication:</p>"
-                + "<ul style='font-size: 16px;'>"
-                + "<li><b>Medication:</b> " + medicationName + "</li>"
-                + "<li><b>Time:</b> " + time + "</li>"
-                + "<li><b>Dosage:</b> " + dosage + "</li>"
-                + "<li><b>Instructions:</b> " + (instructions != null ? instructions : "No specific instructions.") + "</li>"
+        String emailContent = "<html>"
+                + "<body style='font-family: Arial, sans-serif; background-color: #f4f9ff; padding: 20px;'>"
+                + "<div style='max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>"
+                + "<div style='text-align: center;'>"
+                + "<h1 style='color: #1E90FF; text-align: center; font-size: 24px; margin-bottom: 10px;'>HealthPulse: Medication Reminder</h1>"
+                + "</div>"
+                + "<p style='font-size: 18px; color: #333333; text-align: center;'>Dear " + name + ",</p>"
+                + "<hr style='border: 0; height: 1px; background-color: #1E90FF;' />"
+                + "<p style='font-size: 16px; color: #333333; line-height: 1.6;'>This is a reminder to take your medication:</p>"
+                + "<ul style='font-size: 16px; color: #333333; line-height: 1.6;'>"
+                + "<li><strong>Medication:</strong> " + medicationName + "</li>"
+                + "<li><strong>Time:</strong> " + time + "</li>"
+                + "<li><strong>Dosage:</strong> " + dosage + "</li>"
+                + "<li><strong>Instructions:</strong> " + (instructions != null ? instructions : "No specific instructions.") + "</li>"
                 + "</ul>"
-                + "<p style='font-size: 16px;'>Please take your medication as prescribed. If you have any questions, don't hesitate to contact your doctor.</p>"
-                + "<p style='font-size: 16px;'>Regards,<br><b>HealthPulse Team</b></p>"
-                + "</body></html>";
+                + "<div style='text-align: center; margin: 20px 0;'>"
+                + "</div>"
+                + "<p style='font-size: 16px; color: #333333;'>Please take your medication as prescribed. If you have any questions, don't hesitate to contact your doctor.</p>"
+                + "<p style='font-size: 16px; color: #333333;'>Best regards,<br><strong>HealthPulse Team</strong></p>"
+                + "<div style='text-align: center; margin-top: 20px;'>"
+                + "</div>"
+                + "</div>"
+                + "</body>"
+                + "</html>";
 
         helper.setText(emailContent, true);
         mailSender.send(mimeMessage);
@@ -140,7 +151,7 @@ public class MedicationService {
                         if (Boolean.FALSE.equals(medication.getReminderSent())) {
                             User user = userService.getUserById(medication.getUserId());
                             try {
-                                sendEmailReminder(user.getEmail(), medication.getName(), time, medication.getDosage(), medication.getInstructions());
+                                sendEmailReminder(user.getEmail(),user.getName(), medication.getName(), time, medication.getDosage(), medication.getInstructions());
                                 medication.setReminderSent(true);
                                 medicationRepository.save(medication);
                             } catch (MessagingException e) {

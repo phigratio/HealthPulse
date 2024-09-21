@@ -125,45 +125,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                                           "BOOKED".equals(appointment.getStatus()));
     }
 
-//    @Override
-//    public AppointmentData startMeeting(Long appointmentId, String videoCallUrl) {
-//        AppointmentData appointment = appointmentRepository.findById(appointmentId)
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid appointment ID"));
-//
-//        appointment.startMeeting(videoCallUrl);  // Set the video call URL and ensure the appointment is booked
-//
-//        //Trigger the sendEmail() function
-//
-//
-//
-//        return appointmentRepository.save(appointment);  // Save the updated appointment data
-//    }
 
-
-    // Send Email when a meeting stars
-
-//    private void sendEmail (String Email , String url) throws MessageException {
-//        MimeMailMessage mimeMessage = mailSender.createMimeMessage();
-//        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-//        helper.setTo(email);
-//        helper.setSubject("Important: Your Doctor Is waiting for you!!!");
-//
-//        String emailContent = "<html><body style='font-family: Arial, sans-serif;'>"
-//                + "<h1 style='color: #1E90FF;'>HealthPulse: Appointment Reminder</h1>"
-//                + "<p style='font-size: 16px;'>Dear User,</p>"
-//                + "<p style='font-size: 16px;'>This is a reminder to take your appointment. Your doctor is in meeting room!!!</p>"
-//
-//                + "<h3 style='color: #FF0000;'>Join now..</h3>"
-//
-//                + "<p style='font-size: 16px;'> Link:" + url + "</p>"
-//                + "<p style='font-size: 16px;'>Regards,<br><b>HealthPulse Team</b></p>"
-//                + "</body></html>";
-//
-//        helper.setText(emailContent, true);
-//
-//        mailSender.send(mimeMessage);
-//
-//    }
 
 
     @Override
@@ -180,10 +142,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         // Step 4: Extract the user email
         String email = patient.getEmail();
+        String name = patient.getName();
 
         // Step 5: Send the email notification with the video call URL
         try {
-            sendEmail(email, videoCallUrl);
+            sendEmailJoinMeeting(email, name,  videoCallUrl);
         } catch (Exception e) {
             throw new RuntimeException("Failed to send email", e);
         }
@@ -192,8 +155,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
-    // Method to send an email notification to the user
-    private void sendEmail(String email, String url) throws Exception {
+
+    // Method to send an email notification to the user for joining meeting
+    private void sendEmailJoinMeeting(String email, String name, String url) throws Exception {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
@@ -202,23 +166,23 @@ public class AppointmentServiceImpl implements AppointmentService {
         helper.setSubject("Your Doctor is Waiting - HealthPulse Meeting Invitation");
 
         // Email template content with a professional medical theme
-        String emailContent = "<html><body style='font-family: Arial, sans-serif; background-color: #f4f7f8; padding: 20px;'>"
-                + "<div style='max-width: 600px; margin: auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>"
-                + "<h2 style='color: #0056b3; text-align: center;'>Your Doctor is Waiting</h2>"
-                + "<p style='font-size: 16px; color: #333;'>Dear Valued Patient,</p>"
-                + "<p style='font-size: 16px; color: #333;'>Your virtual consultation is about to begin. Please click the link below to join the meeting with your doctor.</p>"
-                + "<div style='text-align: center; margin: 20px 0;'>"
-                + "<a href='" + url + "' style='background-color: #0056b3; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Join Meeting</a>"
+        String emailContent = "<html><body style='font-family: Arial, sans-serif; background-color: #e4ebf1; padding: 20px;'>"
+                + "<div style='max-width: 600px; margin: auto; background-color: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);'>"
+                + "<h2 style='color: #3ca6a6; text-align: center;'>Your Doctor is Waiting</h2>"
+                + "<p style='font-size: 16px; color: #333;'>Dear " + name + ",</p>"
+                + "<p style='font-size: 16px; color: #333;'>Your virtual consultation is about to begin. Please click the button below to join the meeting with your doctor.</p>"
+                + "<div style='text-align: center; margin: 30px 0;'>"
+                + "<a href='" + url + "' style='background-color: #3ca6a6; color: #fff; padding: 12px 24px; text-decoration: none; font-size: 16px; border-radius: 6px;'>Join Meeting</a>"
                 + "</div>"
-                + "<p style='font-size: 16px; color: #333;'>Meeting Link: <a href='" + url + "' style='color: #0056b3;'>" + url + "</a></p>"
+                + "<p style='font-size: 16px; color: #333;'>Meeting Link: <a href='" + url + "' style='color: #3ca6a6;'>" + url + "</a></p>"
                 + "<p style='font-size: 16px; color: #333;'>If you have any questions or need assistance, feel free to contact us.</p>"
                 + "<p style='font-size: 16px; color: #333;'>Best regards,</p>"
                 + "<p style='font-size: 16px; color: #333;'><strong>HealthPulse Team</strong></p>"
                 + "<div style='text-align: center; margin-top: 20px;'>"
-                + "<img src='https://your-logo-url.com/logo.png' alt='HealthPulse Logo' style='height: 50px;' />"
                 + "</div>"
                 + "</div>"
                 + "</body></html>";
+
 
         // Set the HTML content and send the email
         helper.setText(emailContent, true);

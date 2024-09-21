@@ -1,3 +1,5 @@
+//This is the compoonent that is used to draw on the canvas and extract the text from the image
+
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
