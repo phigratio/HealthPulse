@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../style/servicePage/PetHealthCare.css";
 import { geminiKey } from "./apiKeys";
-// Import your Lottie component here
 import BooksL from "../components/LottieComponents/Books";
 import QuizL from "../components/LottieComponents/Quiz";
+import SpeechToTextApp from "./SpeechToTextButton"; // Import speech-to-text
+import TextToSpeechButton from "./TextToSpeechButton"; // Import text-to-speech
 
 const PetHealthcare = () => {
-  const apiKeyGemini = geminiKey; // Use your API Key here
+  const apiKeyGemini = geminiKey;
   const [foodSuggestions, setFoodSuggestions] = useState([]);
   const [symptomAnalysis, setSymptomAnalysis] = useState("");
   const [exerciseRecommendations, setExerciseRecommendations] = useState("");
@@ -21,15 +22,7 @@ const PetHealthcare = () => {
       const response = await axios.post(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKeyGemini}`,
         {
-          contents: [
-            {
-              parts: [
-                {
-                  text: text,
-                },
-              ],
-            },
-          ],
+          contents: [{ parts: [{ text }] }],
         }
       );
       return response.data.candidates[0].content.parts[0].text;
@@ -39,38 +32,31 @@ const PetHealthcare = () => {
     }
   };
 
-  const handleFoodSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (type) => {
     if (!prompt) return;
     setIsLoading(true);
     setError(null);
-    const foodPrompt = `Suggest healthy food options for a pet based on this input: ${prompt}`;
-    const foodSuggestionsResponse = await generateFromGemini(foodPrompt);
-    setFoodSuggestions([foodSuggestionsResponse]);
-    setIsLoading(false);
-  };
 
-  const handleSymptomSubmit = async (e) => {
-    e.preventDefault();
-    if (!prompt) return;
-    setIsLoading(true);
-    setError(null);
-    const symptomPrompt = `Analyze these symptoms for a pet and suggest possible issues and remedies: ${prompt}`;
-    const symptomAnalysisResponse = await generateFromGemini(symptomPrompt);
-    setSymptomAnalysis(symptomAnalysisResponse);
-    setIsLoading(false);
-  };
-
-  const handleExerciseSubmit = async (e) => {
-    e.preventDefault();
-    if (!prompt) return;
-    setIsLoading(true);
-    setError(null);
-    const exercisePrompt = `Recommend exercise routines and activities for a pet based on this input: ${prompt}`;
-    const exerciseRecommendationsResponse = await generateFromGemini(
-      exercisePrompt
-    );
-    setExerciseRecommendations(exerciseRecommendationsResponse);
+    let queryPrompt = "";
+    switch (type) {
+      case "food":
+        queryPrompt = `Answer in one paragraph.Suggest healthy food options for a pet based on this input: ${prompt}`;
+        const foodResponse = await generateFromGemini(queryPrompt);
+        setFoodSuggestions([foodResponse]);
+        break;
+      case "symptom":
+        queryPrompt = `Answer in one paragraph.Analyze these symptoms for a pet and suggest possible issues and remedies: ${prompt}`;
+        const symptomResponse = await generateFromGemini(queryPrompt);
+        setSymptomAnalysis(symptomResponse);
+        break;
+      case "exercise":
+        queryPrompt = `Answer in one paragraph.Recommend exercise routines and activities for a pet based on this input: ${prompt}`;
+        const exerciseResponse = await generateFromGemini(queryPrompt);
+        setExerciseRecommendations(exerciseResponse);
+        break;
+      default:
+        break;
+    }
     setIsLoading(false);
   };
 
@@ -100,6 +86,10 @@ const PetHealthcare = () => {
     }
   };
 
+  const handleTranscriptUpdate = (transcript) => {
+    setPrompt(transcript);
+  };
+
   return (
     <div className="pet-healthcare-container">
       <div className="pet-left-column">
@@ -113,33 +103,36 @@ const PetHealthcare = () => {
           <label htmlFor="promptInput">
             Describe your pet's symptoms, food needs, or exercise routine:
           </label>
-          <input
-            type="text"
-            id="promptInput"
-            placeholder="e.g., My dog is limping, high-protein food for my puppy"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            className="pet-input-field"
-          />
+          <div className="pet-buttons">
+            <input
+              type="text"
+              id="promptInput"
+              placeholder="e.g., My dog is limping, high-protein food for my puppy"
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              className="pet-input-field"
+            />{" "}
+            <SpeechToTextApp onTranscriptUpdate={handleTranscriptUpdate} />/
+          </div>
           <div className="pet-button-group">
             <button
               type="button"
               className="pet-submit-button"
-              onClick={handleFoodSubmit}
+              onClick={() => handleSubmit("food")}
             >
               Food Suggestions
             </button>
             <button
               type="button"
               className="pet-submit-button"
-              onClick={handleSymptomSubmit}
+              onClick={() => handleSubmit("symptom")}
             >
               Symptom Recognition
             </button>
             <button
               type="button"
               className="pet-submit-button"
-              onClick={handleExerciseSubmit}
+              onClick={() => handleSubmit("exercise")}
             >
               Exercise Recommendations
             </button>
@@ -161,7 +154,10 @@ const PetHealthcare = () => {
             <h4>Food Suggestions:</h4>
             <ul>
               {foodSuggestions.map((suggestion, index) => (
-                <li key={index}>{suggestion}</li>
+                <li key={index}>
+                  {suggestion}
+                  <TextToSpeechButton text={suggestion} />
+                </li>
               ))}
             </ul>
           </div>
@@ -170,14 +166,19 @@ const PetHealthcare = () => {
         {symptomAnalysis && (
           <div className="pet-analysis-container">
             <h4>Symptom Recognition Result:</h4>
-            <p>{symptomAnalysis}</p>
+            <p>
+              {symptomAnalysis} <TextToSpeechButton text={symptomAnalysis} />
+            </p>
           </div>
         )}
 
         {exerciseRecommendations && (
           <div className="pet-recommendations-container">
             <h4>Exercise Recommendations:</h4>
-            <p>{exerciseRecommendations}</p>
+            <p>
+              {exerciseRecommendations}{" "}
+              <TextToSpeechButton text={exerciseRecommendations} />
+            </p>
           </div>
         )}
 

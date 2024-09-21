@@ -7,14 +7,14 @@
 
 h1 {
   text-align: center;
-  color: #333;
+  color: #293241;
 }
 
 .input-field {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #e5fbfc;
   border-radius: 4px;
 }
 
@@ -24,8 +24,8 @@ h1 {
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
-  color: white;
+  background-color: #98c1d9;
+  color: #e5fbfc;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -36,7 +36,7 @@ h1 {
 .start-button:hover,
 .next-button:hover,
 .restart-button:hover {
-  background-color: #0056b3;
+  background-color: #98c1d9;
 }
 
 .question-container {
@@ -54,8 +54,8 @@ h1 {
 }
 
 .option {
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
+  background-color: #e0fbfc;
+  border: 1px solid #ee6c4d;
   border-radius: 4px;
   padding: 10px;
   margin-bottom: 10px;
@@ -65,21 +65,21 @@ h1 {
 
 .option.correct {
   background-color: #28a745; /* Green for correct answers */
-  color: white;
+  color: #e0fbfc;
 }
 
 .option.incorrect {
-  background-color: #dc3545; /* Red for incorrect answers */
-  color: white;
+  background-color: #ee6c4d; /* Red for incorrect answers */
+  color: #e0fbfc;
 }
 
 .option:hover {
-  background-color: #e2e6ea;
+  background-color: #98c1d9;
 }
 
 .option.selected {
-  background-color: #007bff;
-  color: white;
+  background-color: #3d5a80;
+  color: #e0fbfc;
 }
 
 .results {
@@ -91,8 +91,8 @@ h1 {
 .error {
   text-align: center;
   color: #e8e8e8;
-  background-color: #759bbc;
-  border: 1px solid #3f7487;
+  background-color: #98c1d9;
+  border: 1px solid #3d5a80;
   border-radius: 4px;
   padding: 10px;
   margin-top: 20px;

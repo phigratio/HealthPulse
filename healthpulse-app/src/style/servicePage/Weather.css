@@ -1,61 +1,81 @@
-.weather-container {
+.weather-content-container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  color: #ffffff; /* Pure white color */
+  width: 100%;
+  padding: 20px; /* Dark navy background */
+  color: #e0fbfc; /* Pure white color */
+}
+
+.weather-middle-side {
+  flex-basis: 60%; /* Adjust this to control the size of the middle content */
+  margin-right: 0; /* Ensures it's right aligned */
+}
+
+.weather-left-side,
+.weather-right-side {
+  flex-basis: 20%; /* Shrinks left and right containers */
 }
 
 .weather-card,
-.health-card {
-  background: #2c2c5c; /* Dark navy bluish */
+.weather-health-card {
+  background: #3d5a80; /* Dark navy bluish */
   padding: 20px;
   margin: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 60%;
   text-align: center;
-  color: #ffffff; /* Pure white color */
+  color: #e0fbfc; /* Pure white color */
 }
 
-.city-info {
+.weather-city-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #ffffff; /* Pure white color */
+  color: #e0fbfc; /* Pure white color */
 }
 
-.title h2,
-.title h3 {
+.weather-title h2,
+.weather-title h3 {
   margin: 5px 0;
-  color: #ffffff; /* Pure white color */
+  color: #e0fbfc; /* Pure white color */
 }
 
-.mb-icon {
+.weather-mb-icon {
   margin: 20px 0;
 }
 
-.date-time {
+.weather-date-time {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #ffffff; /* Pure white color */
+  color: #e0fbfc; /* Pure white color */
 }
 
-.temperature p {
+.weather-temperature p {
   font-size: 2rem;
   font-weight: bold;
-  color: #ffffff; /* Pure white color */
+  color: #e0fbfc; /* Pure white color */
 }
 
-.health-card h3 {
+.weather-health-card h3 {
   margin-bottom: 10px;
-  color: #ffffff; /* Pure white color */
+  color: #e0fbfc; /* Pure white color */
 }
 
-.loading-container {
+.weather-loading-container {
   text-align: center;
   margin-top: 20%;
-  color: #ffffff; /* Pure white color */
+  color: #e0fbfc; /* Pure white color */
+}
+
+.weather-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Aligns content vertically in the middle */
+  align-items: center; /* Aligns content horizontally in the center */
+  width: 100%; /* Makes sure it takes up the full width of the middle section */
+  /* Optional: Adds a subtle background */
+  border-radius: 10px; /* Smooths corners for aesthetic */
 }

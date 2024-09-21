@@ -26,8 +26,8 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
+  background-color: #e0fbfc;
+  border: 1px solid #ee6c4d;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -58,25 +58,25 @@
 
 .news-card-text {
   font-size: 0.9rem;
-  color: #666;
+  color: #293241;
   margin-bottom: 10px;
 }
 
 .news-card-date {
   font-size: 0.8rem;
-  color: #999;
+  color: #293241;
   margin-bottom: 10px;
 }
 
 .news-card-link {
   font-size: 0.9rem;
-  color: #007bff;
+  color: #98c1d9;
   text-decoration: none;
   font-weight: bold;
 }
 
 .news-card-link:hover {
-  color: #0056b3;
+  color: #3d5a80;
   text-decoration: underline;
 }
 

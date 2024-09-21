@@ -50,6 +50,12 @@
   gap: 10px;
 }
 
+.pet-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .pet-submit-button {
   padding: 10px 20px;
   background-color: #3d5a80;

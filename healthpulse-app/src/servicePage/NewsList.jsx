@@ -39,7 +39,7 @@ const NewsList = () => {
         </div>
         <Container fluid className="news-container">
           <Row>
-            <Col xs={12} className="text-center">
+            <Col xs={12} className="news-text-center">
               <h3 className="news-heading">Health News</h3>
             </Col>
           </Row>
