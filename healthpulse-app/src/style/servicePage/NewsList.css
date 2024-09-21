@@ -80,13 +80,13 @@
   text-decoration: underline;
 }
 
-.row {
+.news-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
-.col {
+.news-col {
   display: flex;
   justify-content: center;
   align-items: center;

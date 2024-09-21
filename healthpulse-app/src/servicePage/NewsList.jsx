@@ -38,14 +38,20 @@ const NewsList = () => {
           <video src={banner} autoPlay loop muted className="banner-video" />
         </div>
         <Container fluid className="news-container">
-          <Row>
+          <Row className="news-row">
             <Col xs={12} className="news-text-center">
               <h3 className="news-heading">Health News</h3>
             </Col>
           </Row>
-          <Row>
+          <Row className="news-row">
             {currentArticles.map((article) => (
-              <Col xs={12} md={6} lg={4} key={article.url} className="mb-4">
+              <Col
+                xs={12}
+                md={6}
+                lg={4}
+                key={article.url}
+                className="mb-4 news-col"
+              >
                 <Card className="news-card">
                   <Card.Img
                     src={article.image}

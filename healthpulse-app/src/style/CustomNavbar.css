@@ -1,6 +1,6 @@
 /* General Styles */
 .cn-custom-navbar {
-  background-color: #ace2fc !important;
+  background-color: #e0fbfc !important;
   padding: 0.5rem 1rem !important;
   width: 100% !important;
 }
@@ -78,7 +78,7 @@
 }
 
 .cn-nav-link-light:hover {
-  color: #5f61f0 !important;
+  color: #98c1d9 !important;
 }
 
 .cn-navbar-user-image-container {
@@ -148,7 +148,7 @@
     flex-direction: column !important;
     align-items: flex-start !important;
     width: 100% !important;
-    background-color: #ace2fc !important; /* Background for mobile dropdown */
+    background-color: #98c1d9 !important; /* Background for mobile dropdown */
   }
 
   .cn-navbar-menu.open {

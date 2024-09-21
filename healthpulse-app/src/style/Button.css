@@ -1,6 +1,6 @@
 /* Existing Button styles */
 .button {
-  background-color: #11a2d7;  /* Initial background color matching the theme */
+  background-color: #98c1d9; /* Initial background color matching the theme */
   color: white; /* Text color */
   font-size: 1.125rem; /* Text size (18px) */
   padding: 0.75rem 1.5rem; /* Padding for top/bottom and left/right */
@@ -15,14 +15,14 @@
 
 /* Hover effect */
 .button:hover {
-  background-color: #0d8ab8; /* Darker blue on hover */
+  background-color: #3d5a80; /* Darker blue on hover */
   transform: translateY(-2px); /* Slight upward movement for 3D effect */
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
 }
 
 /* Active effect */
 .button:active {
-  background-color: #0a7396; /* Even darker blue on active */
+  background-color: #98c1d9; /* Even darker blue on active */
   transform: translateY(0); /* Reset transform */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Reset shadow */
 }
@@ -35,7 +35,7 @@
 
 /* Specific reset button styles for AddPost component */
 .reset-button {
-  background-color: red;
+  background-color: #ee6c4d;
   color: white;
 }
 

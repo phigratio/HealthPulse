@@ -7,7 +7,7 @@
 .animated-number {
   font-size: 2rem;
   font-weight: bold;
-  color: #333;
+  color: #293241;
   text-align: center;
   margin-top: 20px;
 }
@@ -19,14 +19,14 @@
   justify-content: center;
   margin-bottom: 20px;
   padding: 15px;
-  background-color: #f8f9fa; /* Light background color for the filter section */
+  background-color: #e0fbfc; /* Light background color for the filter section */
   border-radius: 8px;
 }
 
 .filter-section select,
 .filter-section button {
   padding: 8px 12px;
-  border: 1px solid #ced4da;
+  border: 1px solid #98c1d9;
   border-radius: 5px;
   font-size: 16px;
   outline: none;
@@ -34,14 +34,14 @@
 }
 
 .filter-section button {
-  background-color: #007bff; /* Button background color */
+  background-color: #3d5a80; /* Button background color */
   color: white;
   border: none;
   transition: background-color 0.3s;
 }
 
 .filter-section button:hover {
-  background-color: #0056b3; /* Darker button color on hover */
+  background-color: #293241; /* Darker button color on hover */
 }
 .donor-grid {
   display: grid;
@@ -51,7 +51,7 @@
 }
 
 .donor-card {
-  border: 1px solid #ddd;
+  border: 1px solid #e0fbfc;
   border-radius: 8px;
   padding: 20px;
   text-align: center;
@@ -61,10 +61,10 @@
 
 .donor-card h3 {
   margin-top: 0;
-  color: #333;
+  color: #293241;
 }
 
 .donor-card p {
   margin: 8px 0;
-  color: #666;
+  color: #293241;
 }
