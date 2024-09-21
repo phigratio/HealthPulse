@@ -5,7 +5,7 @@ import {
   AiFillTwitterCircle,
   AiFillYoutube,
 } from "react-icons/ai";
-import { Container, Row, Col } from "reactstrap";
+import { Container } from "reactstrap";
 import "../../style/Footer.css"; // Custom CSS file
 
 const FooterList = ({ children }) => (
@@ -16,8 +16,8 @@ const Footer = () => {
   return (
     <footer className="footer">
       <Container>
-        <Row>
-          <Col md="4">
+        <div className="footer-row">
+          <div className="footer-column">
             <FooterList>
               <h3 className="footer-heading">Service Categories</h3>
               <a href="#">Vaccine Corner</a>
@@ -27,8 +27,8 @@ const Footer = () => {
               <a href="#">Teli-Medicine</a>
               <a href="#">Medicine Corner</a>
             </FooterList>
-          </Col>
-          <Col md="4">
+          </div>
+          <div className="footer-column">
             <FooterList>
               <h3 className="footer-heading">Patients Service</h3>
               <a href="#">Contact Us</a>
@@ -36,8 +36,8 @@ const Footer = () => {
               <a href="#">HealthCare Update</a>
               <a href="#">FAQs</a>
             </FooterList>
-          </Col>
-          <Col md="4">
+          </div>
+          <div className="footer-column">
             <div className="about-us">
               <h3 className="footer-heading">About Us</h3>
               <p>
@@ -53,8 +53,8 @@ const Footer = () => {
                 reserved.
               </p>
             </div>
-          </Col>
-          <Col md="4">
+          </div>
+          <div className="footer-column">
             <FooterList>
               <h3 className="footer-heading">Follow Us</h3>
               <div className="social-links">
@@ -72,8 +72,8 @@ const Footer = () => {
                 </a>
               </div>
             </FooterList>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Container>
     </footer>
   );

@@ -1,11 +1,31 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main content area before the footer */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full height of the viewport */
+}
+
+.main-content {
+  flex: 1; /* Fills remaining space between header and footer */
+}
+
 .footer {
-  background-color: #98c1d9;
+  background-color: #3d5a80;
   color: #e0fbfc;
   font-size: 0.875rem;
-  margin-top: 4rem;
   padding-top: 4rem;
   padding-bottom: 2rem;
+  width: 100%;
   z-index: 100;
+  position: relative;
+  bottom: 0;
 }
 
 .footer-heading {
@@ -35,13 +55,29 @@
 
 .social-links {
   display: flex;
+  justify-content: center; /* Centers icons horizontally */
   gap: 0.5rem; /* Space between icons */
+  margin-top: 1rem; /* Add some spacing from the heading */
 }
 
 .social-links a {
-  color: #e0fbfc; /* text-slate-200 */
+  color: #e0fbfc; /* Icon color */
+  font-size: 1.5rem; /* Adjust icon size as needed */
 }
 
 .social-links a:hover {
   color: #ffffff; /* Hover color */
+}
+
+/* Add Flexbox to ensure proper alignment */
+.footer-row {
+  display: flex;
+  flex-wrap: wrap; /* Ensure it wraps on smaller screens */
+  justify-content: space-between; /* Space between columns */
+}
+
+.footer-column {
+  flex: 1; /* Equal width for all columns */
+  padding: 10px;
+  min-width: 250px; /* Ensures column doesn't get too small on mobile */
 }
