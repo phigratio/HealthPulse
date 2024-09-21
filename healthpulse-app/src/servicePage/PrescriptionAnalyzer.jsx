@@ -117,27 +117,27 @@ const PrescriptionAnalyzer = () => {
             <video src={banner} autoPlay loop muted></video>
           </div>
 
-          <div className="content-container">
-            <div className="left-side">
+          <div className="pres-content-container">
+            <div className="pres-left-side">
               <VirusL />
             </div>
-            <div className="middle-side">
-              <div className="image-analyzer-container">
-                <h1 className="heading">Prescription Analyzer</h1>
+            <div className="pres-middle-side">
+              <div className="pres-image-analyzer-container">
+                <h1 className="pres-heading">Prescription Analyzer</h1>
                 <form onSubmit={handleSubmit}>
-                  <div className="button-group">
+                  <div className="pres-button-group">
                     <input
                       type="file"
                       onChange={handleFileChange}
                       id="fileInput"
-                      className="file-input"
+                      className="pres-file-input"
                     />
-                    <label htmlFor="fileInput" className="btn">
+                    <label htmlFor="fileInput" className="pres-btn">
                       Choose Prescription
                     </label>
                     <button
                       type="submit"
-                      className="btn"
+                      className="pres-btn"
                       disabled={isGenerating}
                     >
                       {isGenerating ? "Processing..." : "Process Prescription"}
@@ -146,14 +146,14 @@ const PrescriptionAnalyzer = () => {
                 </form>
 
                 {visionText && !loading && (
-                  <div className="card">
+                  <div className="pres-card">
                     <h2>Extracted Text By AI</h2>
                     <p>{visionText}</p>
                     <TextToSpeechButton text={visionText} />
                   </div>
                 )}
                 {result && !loading && (
-                  <div className="card">
+                  <div className="pres-card">
                     <h2>Medicines Usecases By AI</h2>
                     <p>{result}</p>
                     <TextToSpeechButton text={result} />
@@ -161,7 +161,7 @@ const PrescriptionAnalyzer = () => {
                 )}
               </div>
             </div>
-            <div className="right-side">
+            <div className="pres-right-side">
               <HeartL />
             </div>
           </div>

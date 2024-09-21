@@ -8,7 +8,7 @@
 
 .hospital-card {
   aspect-ratio: 1 / 1;
-  background: linear-gradient(135deg, #e0f7fa, #4fc3f7);
+  background: linear-gradient(135deg, #e0fbfc, #98c1d9);
   border-radius: 8px;
   padding: 25px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -27,11 +27,11 @@
 .hospital-card h2 {
   margin: 0;
   font-size: 1.2em;
-  color: #1a237e;
+  color: #293241;
 }
 
 .hospital-card p {
   margin: 15px 0 0;
   font-size: 0.9em;
-  color: #0d47a1;
+  color: #3d5a80;
 }

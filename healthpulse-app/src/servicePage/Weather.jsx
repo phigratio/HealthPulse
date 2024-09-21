@@ -205,20 +205,20 @@ class Weather extends React.Component {
             </div>
             <React.Fragment>
               {this.state.temperatureC ? (
-                <div className="content-container">
-                  <div className="left-side">
+                <div className="weather-content-container">
+                  <div className="weather-left-side">
                     <Briefcase /> {/* Positioned top-left */}
                   </div>
-                  <div className="middle-side">
+                  <div className="weather-middle-side">
                     <div className="weather-container">
                       {/* Current Weather Card */}
                       <div className="weather-card">
-                        <div className="city-info">
-                          <div className="title">
+                        <div className="weather-city-info">
+                          <div className="weather-title">
                             <h2>{this.state.city}</h2>
                             <h3>{this.state.country}</h3>
                           </div>
-                          <div className="mb-icon">
+                          <div className="weather-mb-icon">
                             <ReactAnimatedWeather
                               icon={this.state.icon}
                               color={defaults.color}
@@ -227,21 +227,21 @@ class Weather extends React.Component {
                             />
                             <p>{this.state.main}</p>
                           </div>
-                          <div className="date-time">
-                            <div className="dmy">
+                          <div className="weather-date-time">
+                            <div className="weather-dmy">
                               <div id="txt"></div>
-                              <div className="current-time">
+                              <div className="weather-current-time">
                                 <Clock
                                   format="HH:mm:ss"
                                   interval={1000}
                                   ticking={true}
                                 />
                               </div>
-                              <div className="current-date">
+                              <div className="weather-current-date">
                                 {dateBuilder(new Date())}
                               </div>
                             </div>
-                            <div className="temperature">
+                            <div className="weather-temperature">
                               <p>
                                 {this.state.temperatureC}°<span>C</span>
                               </p>
@@ -251,7 +251,7 @@ class Weather extends React.Component {
                       </div>
 
                       {/* Health Recommendation Card */}
-                      <div className="health-card">
+                      <div className="weather-health-card">
                         <h3>Health Recommendation</h3>
                         <p>{this.state.healthRecommendation}</p>
                         <TextToSpeechButton
@@ -260,13 +260,13 @@ class Weather extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className="right-side">
+                  <div className="weather-right-side">
                     <DoctorImg /> {/* Positioned bottom-right */}
                   </div>
                 </div>
               ) : (
                 <React.Fragment>
-                  <div className="loading-container">
+                  <div className="weather-loading-container">
                     <h3
                       style={{
                         color: "white",

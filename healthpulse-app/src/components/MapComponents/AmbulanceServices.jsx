@@ -16,7 +16,7 @@ const AmbulanceServiceCard = ({ name, phoneNumber, imageUrl, price }) => (
 );
 
 const AmbulanceServices = ({ calculatedCost }) => {
-  const basePrice = 100; // Base price for ambulance service
+  const basePrice = 0; // Base price for ambulance service
 
   const services = [
     {
