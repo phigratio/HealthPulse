@@ -39,7 +39,12 @@ const SkinDiseasePrediction = () => {
         <button type="submit">Predict</button>
       </form>
       {error && <p className="error">{error}</p>}
-      {prediction && <p className="result">Prediction: {prediction}</p>}
+      {prediction && (
+        <div className="prediction-result">
+          <h3>Prediction Result:</h3>
+          <p className="prediction-text">{prediction}</p>
+        </div>
+      )}
     </div>
   );
 };
