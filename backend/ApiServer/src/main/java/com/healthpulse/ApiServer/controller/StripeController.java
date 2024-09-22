@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/stripe")
+@RequestMapping("/apiserver/stripe")
 public class StripeController {
 
     private final StripeService stripeService;

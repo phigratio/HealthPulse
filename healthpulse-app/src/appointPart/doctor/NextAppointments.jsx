@@ -58,6 +58,7 @@ const NextAppointments = () => {
             user.id
           );
           setAppointmentResults(response); // Set the fetched appointments in state
+          console.log("Next appointments:", response);
         }
       } catch (error) {
         console.error("Error fetching next appointments:", error);

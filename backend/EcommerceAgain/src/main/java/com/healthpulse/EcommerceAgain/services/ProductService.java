@@ -2,31 +2,29 @@ package com.healthpulse.EcommerceAgain.services;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 
 import com.healthpulse.EcommerceAgain.payload.ProductDto;
 
-@Service
+
 public interface ProductService {
 
-    //create
-    ProductDto CreateProduct(ProductDto productDto);
+    ProductDto createProduct(ProductDto productDto);
 
-    //read
-    ProductDto ReadProduct(Integer ProductId);
+    ProductDto getProductById(Integer productId);
 
+    List<ProductDto> getAllProducts();
 
-    //readAll
-    List<ProductDto> ReadAllProduct();
+    ProductDto updateProduct(ProductDto productDto, Integer productId);
 
+    void deleteProduct(Integer productId);
 
-    //delete
-    void DeleteProduct(Integer productId);
+    List<ProductDto> searchByChemicalName(String chemicalName);
 
+    List<ProductDto> searchByCompanyName(String companyName);
 
-    //update
-    ProductDto UpdateProduct(ProductDto productDto,Integer ProductId);
+    List<ProductDto> filterByPriceRange(Float minPrice, Float maxPrice);
 
+    List<String> getDistinctCompanyNames();
 
-
+    List<String> getDistinctChemicalNames();
 }

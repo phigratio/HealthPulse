@@ -20,17 +20,24 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ProductId;
+    private int productId;
+
     @Column
-    private String ProductName;
+    private String productName;
 
-    private String Description;
-    private Float Price;
-    private Float Weight;
+    private String description;
+    private Float price;
+    private Float discountPrice;
+    private String chemicalName;
+    private String companyName;
+
+    @OneToMany(mappedBy = "product") // correct relationship mapping
+    private List<Power> power;
+
+    private Float weight;
+    private int quantity;
+
     @Column(length = 65555)
-    private byte[] Img;
-
-    @OneToMany(mappedBy = "products")
-    private List<CartDetalis> list;
-
+    private byte[] img;
 }
+
