@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import axiosFetch from "../../Helper/Axios";
+import "./Items.css"; // Importing the CSS file
 
 export const Items = ({ prop, setLoading }) => {
   const [quantity, setQuantity] = useState(prop.quantity);
@@ -21,27 +22,21 @@ export const Items = ({ prop, setLoading }) => {
       theme: "light",
     });
   };
-  // console.log(quantity);
-  const updateQuantity = async (q) => {
-    const res = await fetch(
-      `http://localhost:8081/ecommerce/cart/addproduct`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify({
-          productId: prop.products.productid,
-          quantity: q,
-        }),
-      }
-    );
-    const temp = await res.json();
-    // console.log(temp);
-    setLoading(temp);
 
-    // setQuantity(temp.cartDetalis.quantity);
+  const updateQuantity = async (q) => {
+    const res = await fetch(`http://localhost:8081/ecommerce/cart/addproduct`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        productId: prop.products.productid,
+        quantity: q,
+      }),
+    });
+    const temp = await res.json();
+    setLoading(temp);
   };
 
   const handleQuantity = (e) => {
@@ -49,12 +44,14 @@ export const Items = ({ prop, setLoading }) => {
     setQuantity(e.target.value);
     updateQuantity();
   };
+
   const handleMinus = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
       updateQuantity(quantity - 1);
     }
   };
+
   const handlePlus = () => {
     if (quantity > 0) {
       setQuantity(quantity + 1);
@@ -63,7 +60,6 @@ export const Items = ({ prop, setLoading }) => {
   };
 
   const handleRemove = async () => {
-    //call delete api without body
     const res = await fetch(
       `http://localhost:8081/ecommerce/cart/product/${prop.products.productid}`,
       {
@@ -111,8 +107,6 @@ export const Items = ({ prop, setLoading }) => {
             <button className="qtyminus1" onClick={() => handleMinus()}>
               -
             </button>
-
-            {/* <form  className="display-flex"> */}
             <input
               type="text"
               name="quantity"
@@ -120,15 +114,10 @@ export const Items = ({ prop, setLoading }) => {
               value={quantity}
               className="qty1"
             />
-            {/* </form> */}
             <button className="qtyplus1" onClick={() => handlePlus()}>
               +
             </button>
           </div>
-          {/* <div className="qtyminus">-</div>
-                            <i class="fa-light fa-plus"/>
-                            <strong>3</strong>
-                            <div className="qtyplus">+</div> */}
         </td>
         <td className="border-0 align-middle">
           <a className="text-dark" onClick={() => handleRemove()}>

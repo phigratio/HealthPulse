@@ -1,0 +1,80 @@
+/* Section styling */
+.section {
+  padding: 50px 0;
+  background-color: #e0fbfc;
+}
+
+.section-subtitle {
+  color: #98c1d9;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  color: #293241;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Filter list styling */
+.filter-list {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  padding: 0;
+  list-style: none;
+}
+
+.filter-btn {
+  background-color: #3d5a80;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-btn.active {
+  background-color: #ee6c4d;
+}
+
+.filter-btn img {
+  margin-right: 10px;
+}
+
+.filter-text {
+  color: white;
+  font-size: 1rem;
+}
+
+/* Grid list styling */
+.grid-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+/* Product card styling */
+.product-card {
+  background-color: #fff;
+  border: 1px solid #98c1d9;
+  padding: 20px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}

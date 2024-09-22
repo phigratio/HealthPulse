@@ -1,0 +1,74 @@
+/* General styling for the table row */
+tr {
+  border-bottom: 2px solid #3d5a80;
+}
+
+/* Product image styling */
+.p-2 img {
+  border: 2px solid #98c1d9;
+  padding: 5px;
+}
+
+/* Product name styling */
+.ml-3 h5 a {
+  color: #293241;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Category text styling */
+.text-muted {
+  color: #98c1d9 !important;
+}
+
+/* Price styling */
+strong {
+  color: #ee6c4d;
+  font-size: 1.2rem;
+}
+
+/* Quantity container */
+.qty2 {
+  display: flex;
+  align-items: center;
+}
+
+/* Minus button */
+.qtyminus1 {
+  background-color: #98c1d9;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+/* Plus button */
+.qtyplus1 {
+  background-color: #98c1d9;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+/* Quantity input */
+.qty1 {
+  width: 50px;
+  text-align: center;
+  border: 1px solid #293241;
+  border-radius: 4px;
+  padding: 5px;
+  color: #3d5a80;
+}
+
+/* Remove icon styling */
+.fa-trash {
+  color: #ee6c4d;
+  cursor: pointer;
+}
