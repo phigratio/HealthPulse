@@ -1,0 +1,33 @@
+.product-details {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.product-details-image {
+  width: 100%;
+  height: auto;
+}
+
+.product-details-name {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.product-details-description {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.product-details-price,
+.product-details-company,
+.product-details-chemical {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: red;
+}

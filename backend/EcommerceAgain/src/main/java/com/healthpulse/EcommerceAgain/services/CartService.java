@@ -1,27 +1,14 @@
-//package com.healthpulse.EcommerceAgain.services;
-//
-//import org.springframework.stereotype.Service;
-//
-//import com.healthpulse.EcommerceAgain.payload.CartDto;
-//import com.healthpulse.EcommerceAgain.payload.CartHelp;
-//
-//@Service
-//public interface CartService {
-//
-//    //Create
-//    CartDto CreateCart(CartHelp cartHelp);
-//
-//    //add Product To Cart
-//    CartDto addProductToCart(CartHelp cartHelp);
-//
-//    //Get
-//    CartDto GetCart(String userEmail);
-//
-//    //delete product
-//
-//    void RemoveById(Integer ProductId,String userEmail);
-//
-//    //delete
-//
-//
-//}
+package com.healthpulse.EcommerceAgain.services;
+
+import com.healthpulse.EcommerceAgain.payload.CartDto;
+
+public interface CartService {
+
+    CartDto addProductToCart(int cartId, int productId, int quantity);
+
+    CartDto removeProductFromCart(int cartId, int productId);
+
+    CartDto getCartById(int cartId);
+
+    void clearCart(int cartId);
+}
