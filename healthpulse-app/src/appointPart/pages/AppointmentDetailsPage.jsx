@@ -2,42 +2,147 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { loadStripe } from "@stripe/stripe-js";
+import {
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
 import AppointService from "../service/AppointService";
 import { getUser, getUserData } from "../../service/user-service";
 import "./style/AppointmentDetailsPage.css";
-import { FaStar } from "react-icons/fa"; // Import star icon
+import { FaStar } from "react-icons/fa";
+
+// Load Stripe with your public key
+const stripePromise = loadStripe(
+  "pk_test_51PLlWk04ex3Ui1JlZAO8ZRN2sBG7k7Oqag4GFBPKZGmL5T5tLF9OVwTBtsPbeZiJ2uyh5vtz63KnerVuGujmGFf0004JWFWuMp"
+);
+
+// Main Stripe Payment Form Component
+const StripePaymentForm = ({ amount, onSuccess }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    const cardElement = elements.getElement(CardElement);
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: cardElement,
+    });
+
+    if (error) {
+      console.error(error);
+      setIsLoading(false);
+      return;
+    }
+
+    // Create the PaymentIntent
+    const response = await fetch(
+      "http://localhost:8081/apiserver/stripe/charge",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: parseFloat(amount) * 100, // Convert to cents
+        }),
+      }
+    );
+
+    const result = await response.json();
+
+    if (result.error) {
+      console.error("Payment failed:", result.error);
+      setIsLoading(false);
+      return;
+    }
+
+    const { clientSecret } = result;
+
+    const confirmResult = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: paymentMethod.id,
+    });
+
+    if (confirmResult.error) {
+      console.error("Payment failed:", confirmResult.error.message);
+    } else if (
+      confirmResult.paymentIntent &&
+      confirmResult.paymentIntent.status === "succeeded"
+    ) {
+      console.log("Payment successful!");
+      onSuccess();
+    }
+
+    setIsLoading(false);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="payment-form">
+        <div className="form-group">
+          <label>Consultation Fee</label>
+          <input
+            type="number"
+            value={amount}
+            readOnly
+            style={{ backgroundColor: "#f0f0f0" }} // Read-only styling
+          />
+        </div>
+        <div className="form-group">
+          <CardElement
+            style={{
+              padding: "10px",
+              border: "1px solid #E5E7EB",
+              borderRadius: "8px",
+            }}
+          />
+        </div>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Processing..." : "Pay Now"}
+        </button>
+      </div>
+    </form>
+  );
+};
 
 const AppointmentDetailsPage = () => {
-  const { appointmentId } = useParams(); // Extract the appointment ID from the URL
-  const [appointment, setAppointment] = useState(null); // State to hold the appointment details
-  const [doctorDetails, setDoctorDetails] = useState({}); // State to hold the doctor's details
-  const [reviews, setReviews] = useState([]); // State to hold the reviews
-  const [users, setUsers] = useState({}); // State to hold user details
-  const navigate = useNavigate(); // Hook to programmatically navigate
+  const { appointmentId } = useParams();
+  const [appointment, setAppointment] = useState(null);
+  const [doctorDetails, setDoctorDetails] = useState({});
+  const [reviews, setReviews] = useState([]);
+  const [users, setUsers] = useState({});
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAppointmentAndDoctor = async () => {
       try {
-        // Fetch the appointment details
         const appointmentData = await AppointService.getAppointmentById(
           appointmentId
         );
         setAppointment(appointmentData);
 
-        // Fetch the doctor details if doctorId is available
         if (appointmentData.doctorId) {
           const doctor = await getUser(appointmentData.doctorId);
           setDoctorDetails(doctor);
 
-          // Fetch reviews for the doctor
           const reviewsData = await AppointService.getReviewsByDoctorId(
             appointmentData.doctorId
           );
           setReviews(reviewsData || []);
 
-          // Fetch user details for each review
           const userIds = reviewsData.map((review) => review.userId);
-          const uniqueUserIds = [...new Set(userIds)]; // Remove duplicate userIds
+          const uniqueUserIds = [...new Set(userIds)];
 
           const userPromises = uniqueUserIds.map((id) => getUser(id));
           const usersData = await Promise.all(userPromises);
@@ -51,14 +156,19 @@ const AppointmentDetailsPage = () => {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-        setDoctorDetails({ name: "Unknown Doctor" }); // Fallback if there's an error
+        setDoctorDetails({ name: "Unknown Doctor" });
       }
     };
 
     fetchAppointmentAndDoctor();
   }, [appointmentId]);
 
-  const bookAppointment = async () => {
+  const handleBookNow = () => {
+    // Hide reviews and show the payment form
+    setShowPaymentForm(true);
+  };
+
+  const handlePaymentSuccess = async () => {
     const user = getUserData();
     if (!user) {
       console.error("User not found");
@@ -68,8 +178,8 @@ const AppointmentDetailsPage = () => {
     try {
       await AppointService.bookAppointment(appointmentId, user.id);
       toast.success("Appointment booked successfully!");
+      setPaymentSuccess(true);
 
-      // Delay navigation by 3 seconds
       setTimeout(() => {
         navigate("/appoint");
       }, 3000);
@@ -79,7 +189,6 @@ const AppointmentDetailsPage = () => {
     }
   };
 
-  // Function to calculate average rating
   const calculateAverageRating = (reviews = []) => {
     if (reviews.length === 0) return { avg: 0, count: 0 };
     const total = reviews.reduce((sum, review) => sum + review.rating, 0);
@@ -90,7 +199,7 @@ const AppointmentDetailsPage = () => {
   };
 
   if (!appointment) {
-    return <div>Loading...</div>; // Display a loading message until the data is fetched
+    return <div>Loading...</div>;
   }
 
   const { avg, count } = calculateAverageRating(reviews);
@@ -107,22 +216,32 @@ const AppointmentDetailsPage = () => {
           <p>Appointment Time: {appointment.appointmentTime}</p>
           <p>Status: {appointment.status}</p>
           <p>Consultation Fee: ${appointment.consultationFee}</p>
-          {appointment.status === "AVAILABLE" && (
-            <button onClick={bookAppointment} className="book-now-button">
+          {appointment.status === "AVAILABLE" && !showPaymentForm && (
+            <button onClick={handleBookNow} className="book-now-button">
               Book Now
             </button>
           )}
-          <div className="reviews-section">
-            <h3>Doctor Reviews</h3>
-            <div className="rating-summary">
-              <p>Average Rating: {avg} / 5</p>
-              <div className="stars">
-                {
-                  // Display the star rating, filling stars up to the average rating and empty stars for the rest
-                  [...Array(5)].map((_, index) => {
-                    const filledStars = Math.floor(avg); // Number of full stars
+
+          {/* Show Stripe Payment Form if "Book Now" clicked */}
+          {showPaymentForm && (
+            <Elements stripe={stripePromise}>
+              <StripePaymentForm
+                amount={appointment.consultationFee}
+                onSuccess={handlePaymentSuccess}
+              />
+            </Elements>
+          )}
+
+          {!showPaymentForm && (
+            <div className="reviews-section">
+              <h3>Doctor Reviews</h3>
+              <div className="rating-summary">
+                <p>Average Rating: {avg} / 5</p>
+                <div className="stars">
+                  {[...Array(5)].map((_, index) => {
+                    const filledStars = Math.floor(avg);
                     const isHalfStar =
-                      avg - filledStars > 0 && index === filledStars; // Check for half-star
+                      avg - filledStars > 0 && index === filledStars;
 
                     return (
                       <FaStar
@@ -132,40 +251,42 @@ const AppointmentDetailsPage = () => {
                         } ${isHalfStar ? "half-filled" : ""}`}
                       />
                     );
-                  })
-                }
+                  })}
+                </div>
+
+                <p>({count} reviews)</p>
               </div>
 
-              <p>({count} reviews)</p>
-            </div>
-            <div className="reviews-list">
-              {reviews.length > 0 ? (
-                reviews.map((review) => (
-                  <div key={review.id} className="review-card">
-                    <div className="review-header">
-                      <p className="review-username">
-                        <strong>User Name:</strong>{" "}
-                        {users[review.userId]?.name || "Unknown User"}
-                      </p>
-                      <div className="review-rating">
-                        {[...Array(review.rating)].map((_, index) => (
-                          <FaStar key={index} className="star filled" />
-                        ))}
+              <div className="reviews-list">
+                {reviews.length > 0 ? (
+                  reviews.map((review) => (
+                    <div key={review.id} className="review-card">
+                      <div className="review-header">
+                        <p className="review-username">
+                          <strong>User Name:</strong>{" "}
+                          {users[review.userId]?.name || "Unknown User"}
+                        </p>
+                        <div className="review-rating">
+                          {[...Array(review.rating)].map((_, index) => (
+                            <FaStar key={index} className="star filled" />
+                          ))}
+                        </div>
                       </div>
+                      <p className="review-text">
+                        <strong>Review:</strong> {review.reviewText}
+                      </p>
                     </div>
-                    <p className="review-text">
-                      <strong>Review:</strong> {review.reviewText}
-                    </p>
-                  </div>
-                ))
-              ) : (
-                <p>No reviews available.</p>
-              )}
+                  ))
+                ) : (
+                  <p>No reviews available.</p>
+                )}
+              </div>
             </div>
-          </div>
+          )}
+
+          <ToastContainer />
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };
