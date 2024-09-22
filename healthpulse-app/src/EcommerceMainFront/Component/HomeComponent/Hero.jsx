@@ -1,10 +1,9 @@
-import React from "react";
-import "./Hero.css"; // Import the CSS file
+import React from 'react'
 
 export const Hero = () => {
   return (
     <>
-      <section className="hero">
+     <section className="hero">
         <div className="container">
           <div className="hero-content">
             <p className="hero-subtitle">25% off all products.</p>
@@ -33,5 +32,5 @@ export const Hero = () => {
         </div>
       </section>
     </>
-  );
-};
+  )
+}

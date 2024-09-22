@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { ProductCard } from "../ShopComponent/ProductCard";
 import axiosFetch from "../../Helper/Axios";
-import "./ListProduct.css"; // Import the CSS file
 
 export const ListProduct = () => {
   const [token, setToken] = useState(sessionStorage.getItem("token"));
-  const [data, setData] = useState([]);
 
+  const [data, setData] = useState([]);
   const fatchData = async () => {
     const response = await axiosFetch({
       url: "product/",
       method: "GET",
     });
+
+    // const
     console.log(response.data);
     setData(response.data);
   };

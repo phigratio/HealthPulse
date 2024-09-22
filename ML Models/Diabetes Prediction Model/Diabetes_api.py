@@ -23,8 +23,6 @@ import cv2
 import os
 from tensorflow.keras.applications import VGG19
 from fastapi.middleware.cors import CORSMiddleware
-import pandas as pd
-import json
 
 app=FastAPI()
 
@@ -229,54 +227,3 @@ async def predict_skin_disease(file: UploadFile = File(...)):
 
     except Exception as e:
         return {"error": str(e)}
-    
-
-
-# Load pre-trained model and symptom data
-model = joblib.load("symptom.joblib")
-df1 = pd.read_csv("Symptom-severity.csv")  # Load the symptom severity dataset
-discrp = pd.read_csv("symptom_Description.csv")  # Symptom description dataset
-ektra7at = pd.read_csv("symptom_precaution.csv")  # Precaution dataset
-
-# Create FastAPI app instance
-app = FastAPI()
-
-# Define request body structure using Pydantic
-class SymptomInput(BaseModel):
-    symptoms: list
-
-# Utility function for symptom to weight mapping
-def get_symptom_weights(symptoms_list):
-    symptoms = np.array(df1["Symptom"])
-    weights = np.array(df1["weight"])
-    psymptoms = []
-    
-    for symptom in symptoms_list:
-        for i in range(len(symptoms)):
-            if symptom == symptoms[i]:
-                psymptoms.append(weights[i])
-                break
-        else:
-            psymptoms.append(0)  # Assign weight 0 if symptom not found
-    return np.array(psymptoms).reshape(1, -1)
-
-# API route for model prediction
-@app.post("/symptom_predict")
-def predict_disease(symptom_input: SymptomInput):
-    symptoms_list = symptom_input.symptoms
-    # Convert symptoms to weights
-    input_data = get_symptom_weights(symptoms_list)
-    
-    # Make prediction
-    prediction = model.predict(input_data)[0]
-    
-    # Get disease description and precautions
-    description = discrp[discrp['Disease'] == prediction].values[0][1]
-    precautions = ektra7at[ektra7at['Disease'] == prediction].iloc[:, 1:].values[0].tolist()
-    
-    return {
-        "disease": prediction,
-        "description": description,
-        "precautions": precautions
-    }
-

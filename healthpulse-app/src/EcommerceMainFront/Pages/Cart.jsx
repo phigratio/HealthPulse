@@ -65,12 +65,12 @@ export const Cart = () => {
         alert(response.razorpay_signature);
       },
       prefill: {
-        name: "muqtadir",
-        email: "muqtadir.mujahid02@gmail.com",
-        contact: 12929292,
+        name: "vivek",
+        email: "vivek@gmail.com",
+        contact: 7405999619,
       },
       notes: {
-        address: "ABC, Dhaka",
+        address: "ABC, Delhi",
       },
       theme: {
         color: "#3399cc",

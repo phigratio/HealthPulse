@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "./ProductCard.css"; // Import the CSS file
 
 export const ProductCard = (props) => {
   const navigate = useNavigate();
@@ -28,17 +27,20 @@ export const ProductCard = (props) => {
     if (sessionStorage.getItem("token") === null) {
       navigate("/login");
     }
-    const res = await fetch("http://localhost:8081/ecommerce/cart/addproduct", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify({
-        productId: props.id,
-        quantity: 1,
-      }),
-    });
+    const res = await fetch(
+      "http://localhost:8081/ecommerce/cart/addproduct",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({
+          productId: props.id,
+          quantity: 1,
+        }),
+      }
+    );
     if (res.status === 200) {
       onToast();
       const data = await res.json();

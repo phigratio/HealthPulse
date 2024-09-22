@@ -1,3 +1,17 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main content area before the footer */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full height of the viewport */
+}
+
 .main-content {
   flex: 1; /* Fills remaining space between header and footer */
 }
