@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
-import RouterEcom from "./EcommerceMainFront/Routes/Router.jsx";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/user-routes/Dashboard";
@@ -60,6 +59,10 @@ import HealthTrackerMainPage from "./HealthTracker/HealthTrackerMainPage";
 
 //Medication part
 import MedicationMainPage from "./madication/MedicationMainPage";
+
+//Ecommerce part
+import EcommerceMainPage from "./Ecommerce/EcommerceMainPage.jsx";
+
 import MlModels from "./servicePage/MlModels";
 import Pet from "./servicePage/Pet";
 import QuizGame from "./servicePage/QuizGame";
@@ -140,7 +143,7 @@ function App() {
         <Route path="/medication/*" element={<MedicationMainPage />} />
 
         {/* EcommercePart*/}
-        <Route path="/ecommerce/*" element={<RouterEcom />} />
+        <Route path="/ecommerce/*" element={<EcommerceMainPage />} />
       </Routes>
     </BrowserRouter>
   );

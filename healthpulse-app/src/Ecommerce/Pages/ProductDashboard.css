@@ -1,0 +1,42 @@
+.ecom-home {
+  font-family: Arial, sans-serif;
+}
+
+.ecom-header-banner {
+  position: relative;
+  color: white;
+}
+
+.ecom-header-image-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.ecom-header-image {
+  width: 100%;
+  height: auto;
+}
+
+.ecom-overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.ecom-filter-section {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.ecom-filter-section label {
+  margin-right: 10px;
+}
+
+.ecom-product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
