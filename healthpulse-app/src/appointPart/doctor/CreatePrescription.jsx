@@ -1,3 +1,5 @@
+//This is the page where the doctor can create a prescription for the patient
+
 import React, { useEffect, useState, useRef } from "react";
 import {
   Card,
@@ -293,13 +295,13 @@ const CreatePrescription = () => {
                   onChange={fieldChanged}
                 />
               </div>
-              <Button
+              {/* <Button
                 color="link"
                 className="ms-2 p-0"
                 onClick={() => openDrawingCanvas("patientId")}
               >
                 <PenTool size={20} />
-              </Button>
+              </Button> */}
             </div>
             <div className="my-3">
               <Label for="prescription">Prescription Details</Label>
@@ -317,13 +319,13 @@ const CreatePrescription = () => {
                     }}
                   />
                 </div>
-                <Button
+                {/* <Button
                   color="link"
                   className="ms-2 p-0"
                   onClick={() => openDrawingCanvas("prescription")}
                 >
                   <PenTool size={20} />
-                </Button>
+                </Button> */}
               </div>
             </div>
             <Container className="text-center">

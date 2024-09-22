@@ -1,5 +1,6 @@
 package com.healthpulse.AuthSection.service.impl;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,11 @@ import com.healthpulse.AuthSection.repository.DoctorInfoRepo;
 import com.healthpulse.AuthSection.repository.RoleRepo;
 import com.healthpulse.AuthSection.repository.UserRepo;
 import com.healthpulse.AuthSection.service.UserService;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 import jakarta.transaction.Transactional;
 
@@ -38,6 +44,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private DoctorInfoRepo doctorInfoRepo;
+
+	@Autowired
+	private JavaMailSender mailSender;
 
 
 	@Override
@@ -181,7 +190,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	@Transactional
-	public UserDto approveDoctor(int userId) {
+	public UserDto approveDoctor(int userId) throws MessagingException {
 	    DoctorInfo doctorInfo = doctorInfoRepo.findByUser_Id(userId)
 	            .orElseThrow(() -> new ResourceNotFoundException("DoctorInfo", "userId", userId));
 	    doctorInfo.approve();
@@ -189,6 +198,7 @@ public class UserServiceImpl implements UserService {
 
 	    // Return the updated User with DoctorInfo
 	    User user = doctorInfo.getUser();
+		sendEmailDoctorConfirmation(user.getEmail(), user.getName());
 	    return userToDto(user);
 	}
 
@@ -227,5 +237,53 @@ public class UserServiceImpl implements UserService {
 		userRepo.save(user);
 		return "valid";
 	}
+
+
+	// Send email reminder with improved theme and content
+	private void sendEmailDoctorConfirmation(String email, String name) throws MessagingException {
+		MimeMessage mimeMessage = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+		helper.setTo(email);
+		helper.setSubject("Welcome! You are a Registered Doctor at Health Pulse");
+
+		// Improved HTML template with blue health-sector theme
+		String emailContent = "<html>"
+				+ "<body style='font-family: Arial, sans-serif; background-color: #f4f9ff; padding: 20px;'>"
+				+ "<div style='max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>"
+				+ "<div style='text-align: center;'>"
+				+ "</div>"
+				+ "<h1 style='color: #1E90FF; text-align: center; font-size: 24px; margin-bottom: 10px;'>Welcome, Dr. " + name + "!</h1>"
+				+ "<p style='font-size: 18px; color: #333333; text-align: center;'>"
+				+ "We are thrilled to have you as part of the Health Pulse team."
+				+ "</p>"
+				+ "<hr style='border: 0; height: 1px; background-color: #1E90FF;' />"
+				+ "<p style='font-size: 16px; color: #333333; line-height: 1.6;'>"
+				+ "As a registered doctor on Health Pulse, you now have access to several exciting features:"
+				+ "</p>"
+				+ "<ul style='font-size: 16px; color: #333333; line-height: 1.6;'>"
+				+ "<li>Add and manage blogs to share your expertise with patients and peers.</li>"
+				+ "<li>Schedule and manage appointments with ease.</li>"
+				+ "<li>Access various tools to grow your medical practice.</li>"
+				+ "</ul>"
+				+ "<div style='text-align: center; margin: 20px 0;'>"
+				+ "</div>"
+				+ "<p style='font-size: 16px; color: #333333;'>"
+				+ "We are confident that your journey with Health Pulse will be rewarding. If you need assistance, feel free to reach out to our support team."
+				+ "</p>"
+				+ "<p style='font-size: 16px; color: #333333;'>"
+				+ "Best regards,<br><strong>Health Pulse Team</strong>"
+				+ "</p>"
+				+ "<div style='text-align: center; margin-top: 20px;'>"
+				+ "</div>"
+				+ "</div>"
+				+ "</body>"
+				+ "</html>";
+
+		helper.setText(emailContent, true);
+		mailSender.send(mimeMessage);
+	}
+
+
+
 
 }

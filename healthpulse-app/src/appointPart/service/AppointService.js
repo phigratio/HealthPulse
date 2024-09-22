@@ -169,6 +169,21 @@ class AppointService {
         throw error;
       });
   }
+
+  // Method to start a meeting for an appointment (requires authentication)
+  startMeeting(appointmentId, videoCallUrl) {
+    return privateAxios
+      .post(
+        `/ad/appointments/${appointmentId}/start-meeting?videoCallUrl=${encodeURIComponent(
+          videoCallUrl
+        )}`
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error("There was an error starting the meeting!", error);
+        throw error;
+      });
+  }
 }
 
 export default new AppointService();

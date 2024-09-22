@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../style/servicePage/MlModels.css";
+import { getUserInfo, getUserData } from "../service/user-service";
 
 const HeartDiseasePrediction = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,23 @@ const HeartDiseasePrediction = () => {
     thal: 0,
   });
   const [prediction, setPrediction] = useState(null);
+
+  // Fetch user age from previous data
+  useEffect(() => {
+    const user = getUserData();
+    if (user && user.id) {
+      getUserInfo(user.id)
+        .then((userInfo) => {
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            age: userInfo.age !== undefined ? userInfo.age : 0,
+          }));
+        })
+        .catch((err) => {
+          console.error("Error fetching user info:", err);
+        });
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -44,88 +62,128 @@ const HeartDiseasePrediction = () => {
     <div className="api-container">
       <h2>Heart Disease Prediction</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="age">Age:</label>
         <input
           type="number"
           name="age"
-          placeholder="Age"
-          onChange={handleChange}
+          placeholder="Enter your age"
+          value={formData.age}
+          readOnly
         />
-        <input
-          type="number"
-          name="sex"
-          placeholder="Sex"
-          onChange={handleChange}
-        />
+
+        <label htmlFor="sex">Sex:</label>
+        <select name="sex" onChange={handleChange} required>
+          <option value="">Select Sex</option>
+          <option value="0">Female</option>
+          <option value="1">Male</option>
+        </select>
+
+        <label htmlFor="cp">Chest Pain Type:</label>
         <input
           type="number"
           name="cp"
-          placeholder="Chest Pain Type"
+          placeholder="Enter chest pain type (0-3)"
           onChange={handleChange}
+          required
         />
+
+        <label htmlFor="trestbps">Resting Blood Pressure:</label>
         <input
           type="number"
           name="trestbps"
-          placeholder="Resting Blood Pressure"
+          placeholder="Enter resting blood pressure"
           onChange={handleChange}
+          required
         />
+
+        <label htmlFor="chol">Cholesterol:</label>
         <input
           type="number"
           name="chol"
-          placeholder="Cholesterol"
+          placeholder="Enter cholesterol level"
           onChange={handleChange}
+          required
         />
+
+        <label htmlFor="fbs">Fasting Blood Sugar:</label>
         <input
           type="number"
           name="fbs"
-          placeholder="Fasting Blood Sugar"
+          placeholder="Enter fasting blood sugar mmol/L"
           onChange={handleChange}
+          required
         />
+
+        <label htmlFor="restecg">Rest ECG:</label>
         <input
           type="number"
           name="restecg"
-          placeholder="Rest ECG"
+          placeholder="Enter resting ECG result (0-2)"
           onChange={handleChange}
+          required
         />
+
+        <label htmlFor="thalach">Max Heart Rate Achieved:</label>
         <input
           type="number"
           name="thalach"
-          placeholder="Max Heart Rate Achieved"
+          placeholder="Enter max heart rate"
           onChange={handleChange}
+          required
         />
-        <input
-          type="number"
-          name="exang"
-          placeholder="Exercise Induced Angina"
-          onChange={handleChange}
-        />
+
+        <label htmlFor="exang">Exercise Induced Angina:</label>
+        <select name="exang" onChange={handleChange} required>
+          <option value="">Select Option</option>
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+
+        <label htmlFor="oldpeak">Oldpeak:</label>
         <input
           type="number"
           name="oldpeak"
-          placeholder="Oldpeak"
+          placeholder="Enter oldpeak"
           step="0.1"
           onChange={handleChange}
+          required
         />
+
+        <label htmlFor="slope">Slope:</label>
         <input
           type="number"
           name="slope"
-          placeholder="Slope"
+          placeholder="Enter slope value (0-2)"
           onChange={handleChange}
+          required
         />
+
+        <label htmlFor="ca">CA:</label>
         <input
           type="number"
           name="ca"
-          placeholder="CA"
+          placeholder="Enter number of major vessels (0-3)"
           onChange={handleChange}
+          required
         />
+
+        <label htmlFor="thal">Thal:</label>
         <input
           type="number"
           name="thal"
-          placeholder="Thal"
+          placeholder="Enter thalassemia (1-3)"
           onChange={handleChange}
+          required
         />
+
         <button type="submit">Predict</button>
       </form>
-      {prediction && <p>Prediction: {prediction}</p>}
+      {prediction && (
+        <div className="prediction-result">
+          <h3>Prediction Result:</h3>
+          <p className="prediction-text">{prediction}</p>
+        </div>
+      )}
     </div>
   );
 };

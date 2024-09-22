@@ -78,7 +78,7 @@ const Mentalhealth = () => {
 
       // Generate the image
       const imageResponse = await axios.post(
-        "http://localhost:5555/generate-image",
+        "http://localhost:8095/generate-image",
         { prompt: modifiedPrompt },
         { responseType: "blob" }
       );

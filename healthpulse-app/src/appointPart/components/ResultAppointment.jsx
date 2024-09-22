@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../../service/user-service";
+import { getUser, getUserData } from "../../service/user-service";
 import AppointService from "../service/AppointService";
 import "./style/ResultAppointment.css";
-import { FaStar } from "react-icons/fa"; // Import star icon
+import { FaStar } from "react-icons/fa";
 
 const ResultAppointment = ({ appointmentResults }) => {
   const navigate = useNavigate();
   const [doctorNames, setDoctorNames] = useState({});
   const [doctorReviews, setDoctorReviews] = useState({});
+  const [loading, setLoading] = useState(true);
+  const currentUser = getUserData();
 
-  // Function to format the date for backend
   const formatDateForBackend = (date) => {
     const utcDate = new Date(
       Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
     );
-    return utcDate.toISOString().split("T")[0]; // Get the date part only (YYYY-MM-DD)
+    return utcDate.toISOString().split("T")[0];
   };
 
-  // Function to extract the time part from the appointment time
   const formatTime = (dateTime) => {
     const timePart = new Date(dateTime).toLocaleTimeString("en-US", {
       hour12: false,
@@ -26,7 +26,6 @@ const ResultAppointment = ({ appointmentResults }) => {
     return timePart;
   };
 
-  // Function to calculate average rating
   const calculateAverageRating = (reviews = []) => {
     if (reviews.length === 0) return { avg: 0, count: 0 };
     const total = reviews.reduce((sum, review) => sum + review.rating, 0);
@@ -38,29 +37,38 @@ const ResultAppointment = ({ appointmentResults }) => {
 
   useEffect(() => {
     const fetchDoctorData = async () => {
-      const names = {};
-      const reviews = {};
-      for (const appointment of appointmentResults) {
-        try {
-          const doctor = await getUser(appointment.doctorId);
-          names[appointment.doctorId] = doctor.name;
+      setLoading(true);
+      try {
+        const names = {};
+        const reviews = {};
 
-          // Fetch reviews for each doctor
-          const reviewsData = await AppointService.getReviewsByDoctorId(
-            appointment.doctorId
-          );
-          reviews[appointment.doctorId] = reviewsData || [];
-        } catch (error) {
-          console.error(
-            `Error fetching data for doctor with ID ${appointment.doctorId}:`,
-            error
-          );
-          names[appointment.doctorId] = "Unknown Doctor"; // Fallback if there's an error
-          reviews[appointment.doctorId] = [];
-        }
+        const fetchPromises = appointmentResults.map(async (appointment) => {
+          try {
+            const doctor = await getUser(appointment.doctorId);
+            names[appointment.doctorId] = doctor.name;
+
+            const reviewsData = await AppointService.getReviewsByDoctorId(
+              appointment.doctorId
+            );
+            reviews[appointment.doctorId] = reviewsData || [];
+          } catch (error) {
+            console.error(
+              `Error fetching data for doctor with ID ${appointment.doctorId}:`,
+              error
+            );
+            names[appointment.doctorId] = "Unknown Doctor";
+            reviews[appointment.doctorId] = [];
+          }
+        });
+
+        await Promise.all(fetchPromises);
+        setDoctorNames(names);
+        setDoctorReviews(reviews);
+      } catch (error) {
+        console.error("Error fetching doctor data", error);
+      } finally {
+        setLoading(false);
       }
-      setDoctorNames(names);
-      setDoctorReviews(reviews);
     };
 
     if (appointmentResults && appointmentResults.length > 0) {
@@ -72,14 +80,25 @@ const ResultAppointment = ({ appointmentResults }) => {
     navigate(`/appoint/details/${appointmentId}`);
   };
 
+  const handleJoinMeeting = (videoCallUrl) => {
+    window.open(videoCallUrl, "_blank"); // Open the video call URL in a new tab
+  };
+
+  const handleStartMeeting = (appointmentId) => {
+    navigate(`/appoint/video-chat?appointmentId=${appointmentId}`);
+  };
+
   return (
     <section className="result-appointment-container">
-      {appointmentResults && appointmentResults.length > 0 ? (
+      {loading ? (
+        <p>Loading appointments...</p>
+      ) : appointmentResults && appointmentResults.length > 0 ? (
         <div className="result-appointment-list">
           {appointmentResults.map((appointment) => {
             const { avg, count } = calculateAverageRating(
               doctorReviews[appointment.doctorId]
             );
+
             return (
               <div key={appointment.id} className="result-appointment-item">
                 <div className="result-appointment-details">
@@ -105,7 +124,7 @@ const ResultAppointment = ({ appointmentResults }) => {
                         <FaStar
                           key={index}
                           className={`result-appointment-star ${
-                            index < avg ? "filled" : ""
+                            index < Math.floor(avg) ? "filled" : ""
                           }`}
                         />
                       ))}
@@ -129,6 +148,29 @@ const ResultAppointment = ({ appointmentResults }) => {
                     See Details
                   </button>
                 )}
+
+                {appointment.status === "BOOKED" &&
+                  appointment.doctorId === currentUser.id && (
+                    <button
+                      className="result-appointment-start-meeting-button"
+                      onClick={() => handleStartMeeting(appointment.id)}
+                    >
+                      Start Meeting
+                    </button>
+                  )}
+
+                {appointment.status === "BOOKED" &&
+                  appointment.patientId === currentUser.id &&
+                  appointment.videoCallUrl && ( // Ensure videoCallUrl is truthy
+                    <button
+                      className="result-appointment-start-meeting-button"
+                      onClick={() =>
+                        handleJoinMeeting(appointment.videoCallUrl)
+                      }
+                    >
+                      Join Meeting
+                    </button>
+                  )}
               </div>
             );
           })}

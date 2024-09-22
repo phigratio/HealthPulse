@@ -5,6 +5,7 @@ import java.util.List;
 import com.healthpulse.AuthSection.payloads.DoctorInfoDto;
 import com.healthpulse.AuthSection.payloads.UserDto;
 
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 
 public interface UserService {
@@ -24,7 +25,7 @@ public interface UserService {
 	void deleteUser(Integer userId);
 	
 	@Transactional
-	UserDto approveDoctor(int doctorId);
+	UserDto approveDoctor(int doctorId) throws MessagingException;
 
 	@Transactional
 	UserDto rejectDoctor(int doctorId);
