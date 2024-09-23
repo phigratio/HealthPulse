@@ -30,6 +30,8 @@ import DonorList from "./pages/BloodDoner";
 import Quiz from "./servicePage/Quiz.jsx";
 import UpdateDoctorInfoPage from "./pages/UpdateDoctorInfoPage";
 
+import Background from "./components/basicComponents/Background.jsx";
+
 import NewsList from "./servicePage/NewsList";
 import Weather from "./servicePage/Weather";
 import PrescriptionAnalyzer from "./servicePage/PrescriptionAnalyzer";
@@ -78,6 +80,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
         <Route path="/blogs" element={<Blogs />} />
+        <Route path="/background" element={<Background />} />
 
         <Route path="/landing" element={<Landing />} />
 
