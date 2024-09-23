@@ -86,7 +86,7 @@ const data = [
     overview: "Get your prescriptions refilled online.",
     img: require("../../images/services/service4.png"),
     review: "Easily request prescription refills through our online platform.",
-    link: "/service/book-doctor",
+    link: "/appoint",
   },
   {
     name: "Medicine Reminder",

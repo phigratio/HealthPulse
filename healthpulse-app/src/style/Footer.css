@@ -54,8 +54,7 @@ body {
 }
 
 .social-links {
-  display: flex;
-  justify-content: center; /* Centers icons horizontally */
+  display: flex; /* Centers icons horizontally */
   gap: 0.5rem; /* Space between icons */
   margin-top: 1rem; /* Add some spacing from the heading */
 }

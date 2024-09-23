@@ -13,7 +13,7 @@ const PetHealthcare = () => {
   const [symptomAnalysis, setSymptomAnalysis] = useState("");
   const [exerciseRecommendations, setExerciseRecommendations] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState(""); // The main prompt state
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -86,10 +86,6 @@ const PetHealthcare = () => {
     }
   };
 
-  const handleTranscriptUpdate = (transcript) => {
-    setPrompt(transcript);
-  };
-
   return (
     <div className="pet-healthcare-container">
       <div className="pet-left-column">
@@ -111,9 +107,12 @@ const PetHealthcare = () => {
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               className="pet-input-field"
-            />{" "}
-            <SpeechToTextApp onTranscriptUpdate={handleTranscriptUpdate} />/
+            />
+
+            {/* Speech-to-Text Button integration */}
+            <SpeechToTextApp onTranscriptUpdate={setPrompt} />
           </div>
+
           <div className="pet-button-group">
             <button
               type="button"

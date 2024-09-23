@@ -335,6 +335,18 @@ const HealthCalculator = () => {
 
     setGeneratingAnswer(false);
   };
+  const formatAiResponse = (response) => {
+    return response.split("\n").map((line, index) => {
+      if (line.startsWith("## ")) {
+        return <h4 key={index}>{line.replace("## ", "")}</h4>;
+      } else if (line.startsWith("**")) {
+        return <strong key={index}>{line.replace(/\*\*/g, "")}</strong>;
+      } else if (line.startsWith("* ")) {
+        return <li key={index}>{line.replace("* ", "")}</li>;
+      }
+      return <p key={index}>{line}</p>;
+    });
+  };
 
   return (
     <div>
@@ -548,9 +560,8 @@ const HealthCalculator = () => {
                 backgroundColor: "#f8f9fa",
               }}
             >
-              <p>{answer}</p>
-              <TextToSpeechButton text={answer} />{" "}
-              {/* Add TextToSpeechButton */}
+              {formatAiResponse(answer)}
+              <TextToSpeechButton text={answer} />
             </div>
           )}
         </div>
