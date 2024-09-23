@@ -45,7 +45,7 @@ const Mentalhealth = () => {
   };
 
   const generateRecommendation = async () => {
-    const prompt = `Please provide in a single paragraph no matter how long it is. Provide sleep cycle recommendations and tips to avoid the following mental health issues: ${selectedIssues.join(
+    const prompt = `Generate 1000 lines paragraph.Please provide in a single paragraph no matter how long it is. Provide sleep cycle recommendations and tips to avoid the following mental health issues: ${selectedIssues.join(
       ", "
     )}`;
 

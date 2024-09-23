@@ -279,11 +279,15 @@ const ProductDetails = () => {
             </p>
 
             {/* Learn More from AI Button */}
-            <button onClick={handleLearnMoreAI} disabled={loadingAi}>
+            <button
+              className="product-button"
+              onClick={handleLearnMoreAI}
+              disabled={loadingAi}
+            >
               {loadingAi ? "Analyzing..." : "Learn More from AI"}
             </button>
 
-            <button className="" style={{ marginLeft: "2px" }}>
+            <button className="product-button" style={{ marginLeft: "2px" }}>
               Add to Cart
             </button>
 
@@ -299,7 +303,10 @@ const ProductDetails = () => {
                   )}
                 </div>
                 {aiResponse.length > 500 && (
-                  <button onClick={handleToggleResponse}>
+                  <button
+                    className="product-button"
+                    onClick={handleToggleResponse}
+                  >
                     {showFullResponse ? "Show Less" : "Show More"}
                   </button>
                 )}

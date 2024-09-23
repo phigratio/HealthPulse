@@ -131,6 +131,12 @@
 .cn-dropdown-menu .cn-dropdown-item:hover {
   background-color: #98c1d9 !important;
 }
+.cn-custom-navbar {
+  background-color: #e0fbfc !important;
+  padding: 0.5rem 1rem !important;
+  width: 100% !important;
+  border-bottom: 1px solid #3d5a80 !important; /* Added bottom border */
+}
 
 .cn-dropdown-menu .cn-dropdown-divider {
   height: 1px !important;

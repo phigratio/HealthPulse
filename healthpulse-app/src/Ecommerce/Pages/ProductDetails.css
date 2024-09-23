@@ -41,7 +41,7 @@
   color: #ee6c4d;
 }
 
-button {
+.product-button {
   background-color: #3d5a80;
   color: #e0fbfc;
   padding: 10px 20px;
@@ -64,7 +64,3 @@ button:hover {
   border-radius: 8px;
   color: #293241;
 }
-
-
-
-

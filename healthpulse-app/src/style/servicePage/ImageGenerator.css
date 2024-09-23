@@ -11,7 +11,13 @@
   min-height: 100vh;
 }
 
-.pdf-left-column,
+.pdf-left-column {
+  flex: 20% 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .pdf-right-column {
   flex: 0 0 20%;
   display: flex;
