@@ -1,23 +1,25 @@
+/* Ecommerce Dashboard Page Css */
+
 .ecom-home {
   font-family: Arial, sans-serif;
 }
 
-.ecom-header-banner {
+.cb-header-banner {
   position: relative;
-  color: white;
+  color: #ffffff;
 }
 
-.ecom-header-image-container {
+.cb-header-image-container {
   width: 100%;
   overflow: hidden;
 }
 
-.ecom-header-image {
+.cb-header-image {
   width: 100%;
   height: auto;
 }
 
-.ecom-overlay-content {
+.cb-overlay-content {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -25,14 +27,35 @@
   text-align: center;
 }
 
+.cb-phegon-color {
+  color: #3d5a80;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .ecom-filter-section {
   display: flex;
   justify-content: space-around;
   margin: 20px 0;
+  background-color: #98c1d9;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .ecom-filter-section label {
   margin-right: 10px;
+  font-weight: bold;
+  color: #293241;
+}
+
+select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #3d5a80;
+  background-color: #e0fbfc;
+  color: #293241;
 }
 
 .ecom-product-list {

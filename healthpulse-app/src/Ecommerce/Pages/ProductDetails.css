@@ -1,23 +1,31 @@
+/* Product Details Page CSS */
+
 .product-details {
   padding: 20px;
   max-width: 600px;
   margin: 0 auto;
   text-align: center;
+  background-color: #e0fbfc;
+  border: 1px solid #98c1d9;
+  border-radius: 8px;
 }
 
 .product-details-image {
   width: 100%;
   height: auto;
+  border-radius: 4px;
 }
 
 .product-details-name {
   font-size: 24px;
   margin: 10px 0;
+  color: #3d5a80;
 }
 
 .product-details-description {
   font-size: 16px;
   margin: 10px 0;
+  color: #666;
 }
 
 .product-details-price,
@@ -25,9 +33,38 @@
 .product-details-chemical {
   font-size: 18px;
   margin: 5px 0;
+  color: #293241;
 }
 
 .original-price {
   text-decoration: line-through;
-  color: red;
+  color: #ee6c4d;
 }
+
+button {
+  background-color: #3d5a80;
+  color: #e0fbfc;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #293241;
+}
+
+.ai-response {
+  background-color: #f1f5f8;
+  border: 1px solid #3d5a80;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  color: #293241;
+}
+
+
+
+

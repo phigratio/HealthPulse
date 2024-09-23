@@ -92,7 +92,7 @@ public class MedicationService {
     
 
     // Send email reminder with improved theme and content
-    private void sendEmailReminder(String email, String name,  String medicationName, LocalTime time, String dosage, String instructions) throws MessagingException {
+    private void sendEmailReminder(String email, String name,  String medicationName, LocalTime time, String dosage, String instructions, String unit) throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
         helper.setTo(email);
@@ -111,7 +111,7 @@ public class MedicationService {
                 + "<ul style='font-size: 16px; color: #333333; line-height: 1.6;'>"
                 + "<li><strong>Medication:</strong> " + medicationName + "</li>"
                 + "<li><strong>Time:</strong> " + time + "</li>"
-                + "<li><strong>Dosage:</strong> " + dosage + "</li>"
+                + "<li><strong>Dosage:</strong> " + dosage + " " + unit +"</li>"
                 + "<li><strong>Instructions:</strong> " + (instructions != null ? instructions : "No specific instructions.") + "</li>"
                 + "</ul>"
                 + "<div style='text-align: center; margin: 20px 0;'>"
@@ -151,7 +151,7 @@ public class MedicationService {
                         if (Boolean.FALSE.equals(medication.getReminderSent())) {
                             User user = userService.getUserById(medication.getUserId());
                             try {
-                                sendEmailReminder(user.getEmail(),user.getName(), medication.getName(), time, medication.getDosage(), medication.getInstructions());
+                                sendEmailReminder(user.getEmail(),user.getName(), medication.getName(), time, medication.getDosage(), medication.getInstructions(), medication.getUnit());
                                 medication.setReminderSent(true);
                                 medicationRepository.save(medication);
                             } catch (MessagingException e) {
