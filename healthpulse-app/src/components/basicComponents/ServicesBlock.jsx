@@ -130,12 +130,11 @@ const data = [
     link: "/service/weatherapp",
   },
   {
-    name: "Health Quiz",
-    overview: "Check recommended vaccination schedules.",
-    img: require("../../images/services/Health.jpg"),
-    review:
-      "Keep track of recommended vaccinations and schedules for you and your family.",
-    link: "/service/quiz",
+    name: "Prescription Analyzer",
+    overview: "Check the prescription written by doctor and analyse the data .",
+    img: require("../../images/services/Prescription.jpg"),
+    review: ".",
+    link: "/service/prescription-analyzer",
   },
   {
     name: "Health News",
