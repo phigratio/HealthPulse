@@ -17,6 +17,9 @@ import banner from "../images/banner/healthCalculator.mp4";
 import axios from "axios";
 import TextToSpeechButton from "./TextToSpeechButton";
 import { getUserInfo } from "../service/user-service";
+import { geminiKey } from "./apiKeys";
+
+const YOUR_API_KEY = geminiKey;
 
 const HealthCalculator = () => {
   const [weight, setWeight] = useState("");
@@ -316,7 +319,7 @@ const HealthCalculator = () => {
 
     try {
       const response = await axios({
-        url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=YOUR_API_KEY`,
+        url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${YOUR_API_KEY}`,
         method: "post",
         data: {
           contents: [{ parts: [{ text: question }] }],

@@ -31,7 +31,7 @@
 .cn-brand-text {
   font-size: 1.25rem !important;
   font-weight: 500 !important;
-  color: #000000 !important;
+  color: #293241 !important;
 }
 
 .cn-navbar-toggler {
@@ -43,7 +43,7 @@
 
 .cn-navbar-toggler-icon {
   font-size: 24px !important;
-  color: #000000 !important;
+  color: #293241 !important;
 }
 
 .cn-navbar-menu {
@@ -73,7 +73,7 @@
 
 .cn-nav-link-light {
   font-weight: 300 !important;
-  color: #000000 !important;
+  color: #293241 !important;
   text-decoration: none !important;
 }
 
@@ -102,9 +102,10 @@
 .cn-dropdown-toggle {
   background: none !important;
   border: none !important;
-  color: #000000 !important;
+  color: #293241 !important;
   font-weight: 300 !important;
   cursor: pointer !important;
+  font-size: 14px !important; /* Adjusted font size */
 }
 
 .cn-dropdown-menu {
@@ -112,7 +113,7 @@
   position: absolute !important;
   top: 100% !important;
   left: 0 !important;
-  background-color: #fff !important;
+  background-color: #e0fbfc !important;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
   border-radius: 4px !important;
   z-index: 1000 !important;
@@ -121,19 +122,20 @@
 
 .cn-dropdown-menu .cn-dropdown-item {
   padding: 8px 16px !important;
-  color: #000000 !important;
+  color: #293241 !important;
   text-decoration: none !important;
   display: block !important;
+  font-size: 14px !important; /* Adjusted font size */
 }
 
 .cn-dropdown-menu .cn-dropdown-item:hover {
-  background-color: #f8f9fa !important;
+  background-color: #98c1d9 !important;
 }
 
 .cn-dropdown-menu .cn-dropdown-divider {
   height: 1px !important;
   margin: 0.5rem 0 !important;
-  background-color: #e9ecef !important;
+  background-color: #3d5a80 !important;
 }
 
 .cn-nav-item.dropdown:hover .cn-dropdown-menu {

@@ -63,10 +63,6 @@ const CustomNavbar = () => {
           </ReactLink>
         </div>
 
-        {/* <button className="cn-navbar-toggler" onClick={toggleMenu}>
-          <span className="cn-navbar-toggler-icon">&#9776;</span>
-        </button> */}
-
         <nav className={`cn-navbar-menu ${isOpen ? "open" : ""}`}>
           <ul className="cn-navbar-nav">
             <li className="cn-nav-item">
@@ -80,32 +76,136 @@ const CustomNavbar = () => {
               </ReactLink>
             </li>
             <li className="cn-nav-item">
+              <ReactLink className="cn-nav-link-light" to="/appoint">
+                Doctor
+              </ReactLink>
+            </li>
+            <li className="cn-nav-item">
               <ReactLink className="cn-nav-link-light" to="/cabin-booking">
                 Cabin
               </ReactLink>
             </li>
             <li className="cn-nav-item">
-              <ReactLink className="cn-nav-link-light" to="/appoint">
-                Doctor
+              <ReactLink className="cn-nav-link-light" to="/ecommerce">
+                Ecommerce
               </ReactLink>
             </li>
 
-            <li className="cn-nav-item">
-              <ReactLink className="cn-nav-link-light" to="/donors">
-                Blood Donors
-              </ReactLink>
+            <li className="cn-nav-item dropdown">
+              <button className="cn-dropdown-toggle">Services</button>
+              <ul className="cn-dropdown-menu">
+                <li>
+                  <ReactLink
+                    className="cn-dropdown-item"
+                    to="/service/doctor-chat-bot"
+                  >
+                    Doctor Chat Bot
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink
+                    className="cn-dropdown-item"
+                    to="/service/health-calculator"
+                  >
+                    Health Calculator
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink
+                    className="cn-dropdown-item"
+                    to="/service/kids-corner"
+                  >
+                    Kids Corner
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink
+                    className="cn-dropdown-item"
+                    to="/service/book-doctor"
+                  >
+                    Book Doctor
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink className="cn-dropdown-item" to="/donors">
+                    Blood Donors
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink className="cn-dropdown-item" to="/medication">
+                    Medication Reminder
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink className="cn-dropdown-item" to="/tracker">
+                    Health Tracker
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink
+                    className="cn-dropdown-item"
+                    to="/service/prescription-analyzer"
+                  >
+                    Prescription Analayzer
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink
+                    className="cn-dropdown-item"
+                    to="/service/nearest-hospital"
+                  >
+                    Nearest Hospital
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink
+                    className="cn-dropdown-item"
+                    to="/service/ml-models"
+                  >
+                    Disease Recognition Ai
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink
+                    className="cn-dropdown-item"
+                    to="/service/weatherapp"
+                  >
+                    Weather App
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink className="cn-dropdown-item" to="/service/newsapp">
+                    Health News
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink
+                    className="cn-dropdown-item"
+                    to="/service/mentalhealth"
+                  >
+                    Mental Health Ai
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink
+                    className="cn-dropdown-item"
+                    to="/service/food-suggestion"
+                  >
+                    Food Suggestion
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink className="cn-dropdown-item" to="/service/pet">
+                    Pet Health
+                  </ReactLink>
+                </li>
+                <li>
+                  <ReactLink className="cn-dropdown-item" to="/service/quiz">
+                    Health Quiz Game
+                  </ReactLink>
+                </li>
+              </ul>
             </li>
-
-            <li className="cn-nav-item">
-              <ReactLink className="cn-nav-link-light" to="/tracker">
-                Health Tracker
-              </ReactLink>
-            </li>
-            {/* <li className="cn-nav-item">
-              <ReactLink className="cn-nav-link-light" to="/food">
-                Food Shop
-              </ReactLink>
-            </li> */}
 
             {login && isDoctor && (
               <li className="cn-nav-item">
@@ -133,50 +233,6 @@ const CustomNavbar = () => {
                   >
                     Log Out
                   </ReactLink>
-                </li>
-
-                <li className="cn-nav-item dropdown">
-                  <button className="cn-dropdown-toggle">Services</button>
-                  <ul className="cn-dropdown-menu">
-                    <li>
-                      <ReactLink
-                        className="cn-dropdown-item"
-                        to="/service/doctor-chat-bot"
-                      >
-                        Doctor Chat Bot
-                      </ReactLink>
-                    </li>
-                    <li>
-                      <ReactLink
-                        className="cn-dropdown-item"
-                        to="/service/health-calculator"
-                      >
-                        Health Calculator
-                      </ReactLink>
-                    </li>
-                    <li>
-                      <ReactLink
-                        className="cn-dropdown-item"
-                        to="/service/kids-corner"
-                      >
-                        Kids Corner
-                      </ReactLink>
-                    </li>
-                    <li>
-                      <ReactLink
-                        className="cn-dropdown-item"
-                        to="/service/book-doctor"
-                      >
-                        Book Doctor
-                      </ReactLink>
-                    </li>
-                    <li className="cn-dropdown-divider"></li>
-                    <li>
-                      <ReactLink className="cn-dropdown-item" to="/medication">
-                        Medication Reminder
-                      </ReactLink>
-                    </li>
-                  </ul>
                 </li>
               </>
             ) : (
