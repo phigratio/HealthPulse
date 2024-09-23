@@ -1,26 +1,24 @@
 /* Target the carousel control icons directly and apply custom styles */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  background-color: #293241; /* Semi-transparent black background */
   border-radius: 50%; /* Make it circular */
   width: 3rem; /* Adjust size */
   height: 3rem; /* Adjust size */
 }
-.carousel-indicators [data-bs-target]{
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius:100% ;
-    width: 1rem;
-    height: 1rem;
-
-
+.carousel-indicators [data-bs-target] {
+  background-color: #293241;
+  border-radius: 100%;
+  width: 1rem;
+  height: 1rem;
 }
 
-.customCar{
+.customCar {
   /* decrase the size of the carousel */
   width: 100%;
   margin: auto;
   border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px 0 #293241;
   overflow: hidden;
   border-bottom-left-radius: 50% 10%;
   border-bottom-right-radius: 50% 10%;

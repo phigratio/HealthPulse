@@ -1,12 +1,12 @@
 import "../../style/Carousel.css";
 
 import React, { useState } from "react";
-import img1 from "../../images/carousel/banner1.png";
-import img2 from "../../images/carousel/banner2.png";
-import img3 from "../../images/carousel/banner3.png";
-import img4 from "../../images/carousel/banner4.png";
-import img5 from "../../images/carousel/banner5.png";
-import img6 from "../../images/carousel/banner6.png";
+import img1 from "../../images/carousel/banner1.jpg";
+import img2 from "../../images/carousel/banner2.jpg";
+import img3 from "../../images/carousel/banner3.jpg";
+import img4 from "../../images/carousel/banner4.jpg";
+import img5 from "../../images/carousel/banner5.jpg";
+
 import {
   Carousel,
   CarouselItem,
@@ -18,39 +18,27 @@ import {
 const items = [
   {
     src: img1,
-    altText: "Slide 1",
-    caption: "Slide 1",
     key: 1,
   },
   {
     src: img2,
-    altText: "Slide 2",
-    caption: "Slide 2",
+
     key: 2,
   },
   {
     src: img3,
-    altText: "Slide 3",
-    caption: "Slide 3",
+
     key: 3,
   },
   {
     src: img4,
-    altText: "Slide 4",
-    caption: "Slide 4",
+
     key: 4,
   },
   {
     src: img5,
-    altText: "Slide 5",
-    caption: "Slide 5",
+
     key: 5,
-  },
-  {
-    src: img6,
-    altText: "Slide 6",
-    caption: "Slide 6",
-    key: 6,
   },
 ];
 
