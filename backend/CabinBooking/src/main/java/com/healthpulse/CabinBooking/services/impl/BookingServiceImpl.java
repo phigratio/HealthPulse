@@ -2,8 +2,12 @@ package com.healthpulse.CabinBooking.services.impl;
 
 import java.util.List;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.healthpulse.CabinBooking.dto.BookingDTO;
@@ -31,11 +35,13 @@ public class BookingServiceImpl implements BookingService {
     private RoomService roomService;
     @Autowired
     private RoomRepository roomRepository;
-//    @Autowired
-//    private UserRepository userRepository;
-    
+
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
 
 
     @Override
@@ -65,6 +71,11 @@ public class BookingServiceImpl implements BookingService {
             String bookingConfirmationCode = Utils.generateRandomConfirmationCode(10);
             bookingRequest.setBookingConfirmationCode(bookingConfirmationCode);
             bookingRepository.save(bookingRequest);
+
+            // Send email notification to user
+            sendBookingEmail(user.getEmail(), user.getName(), bookingConfirmationCode, roomId);
+
+
             response.setStatusCode(200);
             response.setMessage("successful");
             response.setBookingConfirmationCode(bookingConfirmationCode);
@@ -79,6 +90,31 @@ public class BookingServiceImpl implements BookingService {
 
         }
         return response;
+    }
+
+    // Method to send an email with booking details
+    private void sendBookingEmail(String email, String name, String bookingConfirmationCode, Long roomNumber) throws MessagingException {
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+        helper.setTo(email);
+        helper.setSubject("Booking Confirmation - HealthPulse");
+
+        // Email content in HTML format
+        String emailContent = "<html>"
+                + "<body style='font-family: Arial, sans-serif; background-color: #f4f9ff; padding: 20px;'>"
+                + "<div style='max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>"
+                + "<h1 style='color: #1E90FF; text-align: center;'>Booking Confirmation</h1>"
+                + "<p>Dear " + name + ",</p>"
+                + "<p>Thank you for booking with HealthPulse. Your room number is <strong>" + roomNumber + "</strong>.</p>"
+                + "<p>Your booking confirmation code is <strong>" + bookingConfirmationCode + "</strong>.</p>"
+                + "<p>Please keep this email for your records. If you have any questions, feel free to contact us.</p>"
+                + "<p>Best regards,<br><strong>HealthPulse Team</strong></p>"
+                + "</div>"
+                + "</body>"
+                + "</html>";
+
+        helper.setText(emailContent, true); // Set HTML content
+        mailSender.send(mimeMessage);
     }
 
 
