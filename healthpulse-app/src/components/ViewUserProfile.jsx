@@ -90,6 +90,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
   };
 
   return (
+    <div className="mt-28">
     <Card
       className="mt-24 border-0 rounded-4"
       style={{
@@ -405,6 +406,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
         )}
       </CardBody>
     </Card>
+    </div>
   );
 };
 
