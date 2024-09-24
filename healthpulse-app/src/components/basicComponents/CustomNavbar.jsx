@@ -85,6 +85,7 @@ const CustomNavbar = () => {
                 Cabin
               </ReactLink>
             </li>
+
             <li className="cn-nav-item">
               <ReactLink className="cn-nav-link-light" to="/ecommerce">
                 Ecommerce
@@ -233,11 +234,18 @@ const CustomNavbar = () => {
                 </li>
               </>
             ) : (
-              <li className="cn-nav-item">
-                <ReactLink className="cn-nav-link-light" to="/login">
-                  Log In
-                </ReactLink>
-              </li>
+              <ul className="cn-navbar-nav">
+                <li className="cn-nav-item">
+                  <ReactLink className="cn-nav-link-light" to="/login">
+                    Log In
+                  </ReactLink>
+                </li>
+                <li className="cn-nav-item">
+                  <ReactLink className="cn-nav-link-light" to="/signup">
+                    Sign Up
+                  </ReactLink>
+                </li>
+              </ul>
             )}
           </ul>
         </nav>
