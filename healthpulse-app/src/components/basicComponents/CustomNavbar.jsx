@@ -160,7 +160,7 @@ const CustomNavbar = () => {
                     className="cn-dropdown-item"
                     to="/service/ml-models"
                   >
-                    Disease Recognition Ai
+                    Disease Recognition AI
                   </ReactLink>
                 </li>
                 <li>
@@ -168,7 +168,7 @@ const CustomNavbar = () => {
                     className="cn-dropdown-item"
                     to="/service/weatherapp"
                   >
-                    Weather App
+                    Weather AI
                   </ReactLink>
                 </li>
                 <li>
@@ -181,7 +181,7 @@ const CustomNavbar = () => {
                     className="cn-dropdown-item"
                     to="/service/mentalhealth"
                   >
-                    Mental Health Ai
+                    Mental Health AI
                   </ReactLink>
                 </li>
                 <li>

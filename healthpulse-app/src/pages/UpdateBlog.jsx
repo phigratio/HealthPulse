@@ -43,9 +43,9 @@ function UpdateBlog() {
   }, [blogId]);
 
   useEffect(() => {
-    if (post && object.user.data.id !== post.user.id) {
+    if (post && object.user.data.id !== parseInt(post.userId)) {
       toast.error("This is not your post!");
-      navigate("/");
+      navigate("/user/dashboard");
     }
   }, [post, object.user.data.id, navigate]);
 

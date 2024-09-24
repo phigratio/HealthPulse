@@ -310,7 +310,7 @@ const HealthCalculator = () => {
     )?.value;
 
     // Construct the prompt with the calculated health index values
-    const question = `Give me health updates and suggestions based on the following values: 
+    const question = `Answer in one single long paragraph of 500 words.Give me health updates and suggestions based on the following values: 
     My BMI is ${bmiValue}, my body fat percentage is ${bodyFatPercentage}%, 
     my daily caloric needs are ${caloricNeeds} calories, my ideal weight is ${idealWeight} kg, 
     I need to drink ${waterIntake} liters of water daily, my protein needs are ${proteinNeeds} grams, 
