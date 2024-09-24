@@ -85,6 +85,7 @@ const CustomNavbar = () => {
                 Cabin
               </ReactLink>
             </li>
+
             <li className="cn-nav-item">
               <ReactLink className="cn-nav-link-light" to="/ecommerce">
                 Ecommerce
@@ -159,7 +160,7 @@ const CustomNavbar = () => {
                     className="cn-dropdown-item"
                     to="/service/ml-models"
                   >
-                    Disease Recognition Ai
+                    Disease Recognition AI
                   </ReactLink>
                 </li>
                 <li>
@@ -167,7 +168,7 @@ const CustomNavbar = () => {
                     className="cn-dropdown-item"
                     to="/service/weatherapp"
                   >
-                    Weather App
+                    Weather AI
                   </ReactLink>
                 </li>
                 <li>
@@ -180,7 +181,7 @@ const CustomNavbar = () => {
                     className="cn-dropdown-item"
                     to="/service/mentalhealth"
                   >
-                    Mental Health Ai
+                    Mental Health AI
                   </ReactLink>
                 </li>
                 <li>
@@ -233,11 +234,18 @@ const CustomNavbar = () => {
                 </li>
               </>
             ) : (
-              <li className="cn-nav-item">
-                <ReactLink className="cn-nav-link-light" to="/login">
-                  Log In
-                </ReactLink>
-              </li>
+              <ul className="cn-navbar-nav">
+                <li className="cn-nav-item">
+                  <ReactLink className="cn-nav-link-light" to="/login">
+                    Log In
+                  </ReactLink>
+                </li>
+                <li className="cn-nav-item">
+                  <ReactLink className="cn-nav-link-light" to="/signup">
+                    Sign Up
+                  </ReactLink>
+                </li>
+              </ul>
             )}
           </ul>
         </nav>

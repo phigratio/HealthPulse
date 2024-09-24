@@ -1,11 +1,11 @@
 /* Product Card Page CSS */
 
 .custom-product-card {
-  border: 1px solid #ccc;
+  border: 1px solid #293241;
   padding: 16px;
   border-radius: 8px;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #e0fbfc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
 }
@@ -39,14 +39,14 @@
 .product-company,
 .product-chemical {
   font-size: 0.9em;
-  color: #666;
+  color: #293241;
 }
 
 button {
   margin-top: 10px;
   padding: 10px 20px;
   background-color: #3d5a80;
-  color: #ffffff;
+  color: #e0fbfc;
   border: none;
   border-radius: 4px;
   cursor: pointer;

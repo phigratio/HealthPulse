@@ -1,5 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Ensure react-router-dom is installed
+import { useNavigate } from "react-router-dom";
+import "./style/ProductCard.css";
+// Ensure react-router-dom is installed
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate(); // Hook to navigate programmatically
