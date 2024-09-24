@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   Button,
   Card,
@@ -7,15 +7,19 @@ import {
   CardText,
   Col,
   Container,
-  Input,
   Row,
+  Input,
 } from "reactstrap";
 import Base from "../components/Base";
-import { createComment, loadPost } from "../service/post-service";
+import {
+  createComment,
+  loadPost,
+  deletePostService,
+} from "../service/post-service";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../service/helper";
 import { isLoggedIn } from "../auth";
-import { getUser } from "../service/user-service";
+import { getUserData } from "../service/user-service";
 import axios from "axios";
 import { geminiKey } from "../servicePage/apiKeys";
 
@@ -24,36 +28,35 @@ const apiKeyGemini = geminiKey;
 const PostPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
-  const [user, setUser] = useState(null);
-  const [comment, setComment] = useState({
-    content: "",
-  });
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isOwner, setIsOwner] = useState(false); // Ownership flag
+  const [comment, setComment] = useState({ content: "" });
   const [aiResponse, setAiResponse] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
-    // Load post of postId
+    const loggedInUser = getUserData();
+    console.log("Logged in user:", loggedInUser); // Debug line
+    if (loggedInUser) {
+      setCurrentUser(loggedInUser);
+    }
+
     loadPost(postId)
       .then((data) => {
-        console.log(data);
         setPost(data);
+        console.log("Post user ID:", data.userId); // Debug line
 
-        // Fetch user data by userId
-        return getUser(data.userId);
-      })
-      .then((userData) => {
-        console.log(userData);
-        setUser(userData);
+        if (loggedInUser && parseInt(data.userId) === loggedInUser.id) {
+          setIsOwner(true);
+        } else {
+          setIsOwner(false);
+        }
       })
       .catch((error) => {
-        console.log(error);
-        toast.error("Error in loading post or user data");
+        toast.error("Error in loading post");
       });
   }, [postId]);
-
-  const printDate = (numbers) => {
-    return new Date(numbers).toLocaleDateString();
-  };
 
   const submitPost = () => {
     if (!isLoggedIn()) {
@@ -67,30 +70,36 @@ const PostPage = () => {
     }
 
     createComment(comment, post.postId)
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         toast.success("Comment added!");
-
-        // Refresh the page
         window.location.reload();
-
-        setPost({
-          ...post,
-          comments: [...post.comments, data.data],
-        });
-        setComment({
-          content: "",
-        });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         toast.error("Error in adding comment");
       });
   };
 
+  // Redirect to update page when update button is clicked
+  const handleUpdatePost = () => {
+    navigate(`/user/update-blog/${postId}`);
+  };
+
+  const handleDeletePost = () => {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      deletePostService(postId)
+        .then(() => {
+          toast.success("Post deleted successfully!");
+          navigate("/user/dashboard"); // Redirect to home after deletion
+        })
+        .catch((error) => {
+          toast.error("Error deleting the post. Please try again.");
+        });
+    }
+  };
+
   const handleLearnMoreAI = async () => {
     setLoading(true);
-    const prompt = `Check the accuracy and provide more information for the following content : "${post.content}".`;
+    const prompt = ` Give me a detailed analysis in a 500 word paragraph without any formetting. Check the accuracy and provide more information for the following content: "${post.content}". Give me a detailed analysis in a 500 word paragraph without any formetting.`;
 
     try {
       const response = await axios.post(
@@ -112,7 +121,6 @@ const PostPage = () => {
         response.data.candidates[0].content.parts[0].text || "No result found"
       );
     } catch (error) {
-      console.error("Error fetching AI response:", error);
       toast.error("Error in fetching AI response");
     } finally {
       setLoading(false);
@@ -126,7 +134,7 @@ const PostPage = () => {
         <Row>
           <Col md={{ size: 12 }}>
             <Card className="mt-3 ps-2 border-0 shadow-sm">
-              {post && (
+              {post ? (
                 <CardBody>
                   <CardText>
                     Posted By{" "}
@@ -135,45 +143,53 @@ const PostPage = () => {
                         to={`/user/my-profile/${post.userId}`}
                         style={{ textDecoration: "none" }}
                       >
-                        {user ? user.name.toUpperCase() : "Loading..."}
+                        {post.user
+                          ? post.user.name.toUpperCase()
+                          : "Loading..."}
                       </Link>
                     </b>{" "}
-                    on <b>{printDate(post.addedDate)}</b>
+                    on <b>{new Date(post.addedDate).toLocaleDateString()}</b>
                   </CardText>
 
-                  <CardText>
-                    <span className="text-muted">
-                      {post.category.categoryTitle}
-                    </span>
-                  </CardText>
-
-                  <div
-                    className="divder"
-                    style={{
-                      width: "100%",
-                      height: "1px",
-                      background: "#e2e2e2",
-                    }}
-                  ></div>
-
-                  <CardText className="mt-3">
+                  <div className="mt-3">
                     <h1>{post.title}</h1>
-                  </CardText>
-                  <div
-                    className="image-container mt-4 shadow"
-                    style={{ maxWidth: "50%" }}
-                  >
-                    <img
-                      className="img-fluid"
-                      src={BASE_URL + "/api/post/image/" + post.imageName}
-                      alt=""
+                    <div
+                      className="image-container mt-4 shadow"
+                      style={{ maxWidth: "50%" }}
+                    >
+                      <img
+                        className="img-fluid"
+                        src={BASE_URL + "/api/post/image/" + post.imageName}
+                        alt="Post"
+                      />
+                    </div>
+                    <CardText
+                      className="mt-5"
+                      dangerouslySetInnerHTML={{ __html: post.content }}
                     />
                   </div>
-                  <CardText
-                    className="mt-5"
-                    dangerouslySetInnerHTML={{ __html: post.content }}
-                  ></CardText>
+
+                  {isOwner ? (
+                    <div>
+                      <div className="mt-4">
+                        <Button color="warning" onClick={handleUpdatePost}>
+                          Update Post
+                        </Button>{" "}
+                        <Button color="danger" onClick={handleDeletePost}>
+                          Delete Post
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <span className="text-muted">
+                        You are not the owner of this post.
+                      </span>
+                    </div>
+                  )}
                 </CardBody>
+              ) : (
+                <div>Loading...</div>
               )}
             </Card>
             <Card className="mt-4 border-0">
@@ -191,47 +207,7 @@ const PostPage = () => {
                     <h5>AI Response:</h5>
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: aiResponse
-                          .replace(
-                            /\*\*Accuracy:\*\*/g,
-                            '<b style="font-size: 1.2em;">Accuracy:</b>'
-                          )
-                          .replace(
-                            /\*\*Additional Information:\*\*/g,
-                            '<b style="font-size: 1.2em;">Additional Information:</b>'
-                          )
-                          .replace(
-                            /\*\*Type 1 Diabetes:\*\*/g,
-                            '<b style="font-size: 1.1em;">Type 1 Diabetes:</b>'
-                          )
-                          .replace(
-                            /\*\*Type 2 Diabetes:\*\*/g,
-                            '<b style="font-size: 1.1em;">Type 2 Diabetes:</b>'
-                          )
-                          .replace(
-                            /\*\*Elevated Blood Sugar:\*\*/g,
-                            '<b style="font-size: 1.1em;">Elevated Blood Sugar:</b>'
-                          )
-                          .replace(
-                            /\*\*Blood Sugar Threshold:\*\*/g,
-                            '<b style="font-size: 1.1em;">Blood Sugar Threshold:</b>'
-                          )
-                          .replace(
-                            /\*\*Diabetic Ketoacidosis:\*\*/g,
-                            '<b style="font-size: 1.1em;">Diabetic Ketoacidosis:</b>'
-                          )
-                          .replace(
-                            /\*\*Importance of Monitoring:\*\*/g,
-                            '<b style="font-size: 1.1em;">Importance of Monitoring:</b>'
-                          )
-                          .replace(
-                            /\*\*Different Medications:\*\*/g,
-                            '<b style="font-size: 1.1em;">Different Medications:</b>'
-                          )
-                          .replace(
-                            /\*\*Professional Guidance:\*\*/g,
-                            '<b style="font-size: 1.1em;">Professional Guidance:</b>'
-                          ),
+                        __html: aiResponse,
                       }}
                       style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}
                     />
