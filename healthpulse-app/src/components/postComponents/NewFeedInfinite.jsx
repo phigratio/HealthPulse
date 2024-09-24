@@ -80,7 +80,7 @@ const NewFeed = () => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid mt-24">
       <Row className="justify-content-center">
         <Col md={{ size: 12 }} className="mx-auto">
           <div className="blog-count-container">

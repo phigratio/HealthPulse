@@ -71,7 +71,7 @@ function Categories() {
                 <CategorySideMenu />
               </Col>
               <Col md={10}>
-                <div className="blog-count-container">
+                <div className="blog-count-container mt-24">
                   <h1 className="blog-count">
                     Blogs Count&nbsp;
                     <span className="count-number">{count}</span>
