@@ -80,13 +80,6 @@ Ensure you have the following installed on your machine:
    npm install
    ```
 
-   #Microservice running serial :
-      1. Setion Registry
-      2. Config Server
-      3. Api GateWay
-      4. Auth Server
-      5. Others as you want ...
-
 4. Set up environment variables:
 
    - Create a `.env` file to store your API keys and configurations.
@@ -110,6 +103,13 @@ Ensure you have the following installed on your machine:
    ```bash
    cd microservice_name
    ```
+
+   #Microservice running serial :
+      1. Setion Registry
+      2. Config Server
+      3. Api GateWay
+      4. Auth Server
+      5. Others as you want ...
   
 
 2. Set up the database:
