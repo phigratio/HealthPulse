@@ -80,11 +80,18 @@ Ensure you have the following installed on your machine:
    npm install
    ```
 
-3. Set up environment variables:
+   #Microservice running serial :
+      1. Setion Registry
+      2. Config Server
+      3. Api GateWay
+      4. Auth Server
+      5. Others as you want ...
+
+4. Set up environment variables:
 
    - Create a `.env` file to store your API keys and configurations.
 
-4. Start the React application:
+5. Start the React application:
    ```bash
    npm start
    ```
@@ -97,6 +104,13 @@ Ensure you have the following installed on your machine:
    ```bash
    cd backend
    ```
+2. navigate to the microservices folder:
+
+   
+   ```bash
+   cd microservice_name
+   ```
+  
 
 2. Set up the database:
 
