@@ -45,6 +45,28 @@
 - **Spring Security** - For securing the API.
 - **MySQL** - Database (replace with the database of your choice).
 - **Gradle** - Build tool.
+- **Eureka** - Service discovery.
+- **Zuul/Netflix API Gateway** - API Gateway for routing.
+- **Spring Cloud Config** - Externalized configuration for microservices.
+- **Ribbon** - Load balancing between microservices.
+
+## Microservice Architecture
+
+**HealthPulse** follows a microservice architecture to separate concerns, allowing each feature to scale independently and be managed autonomously. The system is distributed into several microservices that communicate via REST APIs.
+
+### Microservices Included
+
+1. **Service Registry (Eureka Server)**: Manages service discovery and allows the microservices to register and locate each other.
+2. **API Gateway (Zuul/Gateway)**: Routes requests to appropriate microservices and handles authentication.
+3. **Auth Server**: Handles user authentication and JWT token issuance.
+4. **User Service**: Manages user registration, login, and profile management.
+5. **Doctor Service**: Handles doctor-specific functionality, including profiles and appointment management.
+6. **Post Service**: Manages doctor blogs and user comments.
+7. **Booking Service**: Manages appointments and cabin bookings.
+8. **Rating Service**: Handles ratings for doctors and services.
+9. **Config Server**: Provides centralized configuration for all microservices.
+
+Each service is designed to be independently deployable and scalable based on traffic and usage patterns.
 
 ## Getting Started
 
@@ -97,7 +119,7 @@ Ensure you have the following installed on your machine:
    ```bash
    cd backend
    ```
-2. navigate to the microservices folder:
+2. Navigate to the microservices folder:
 
    
    ```bash
