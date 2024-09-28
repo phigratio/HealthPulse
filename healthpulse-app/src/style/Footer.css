@@ -5,11 +5,10 @@ body {
   padding: 0;
 }
 
-/* Main content area before the footer */
 #root {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Full height of the viewport */
+  min-height: 100vh; /* Ensures the root element covers the full viewport height */
 }
 
 .main-content {
@@ -23,9 +22,7 @@ body {
   padding-top: 4rem;
   padding-bottom: 2rem;
   width: 100%;
-  z-index: 100;
-  position: relative;
-  bottom: 0;
+  position: relative; /* Ensures the footer remains in normal document flow */
 }
 
 .footer-heading {
@@ -68,7 +65,7 @@ body {
   color: #ffffff; /* Hover color */
 }
 
-/* Add Flexbox to ensure proper alignment */
+/* Flexbox layout for footer columns */
 .footer-row {
   display: flex;
   flex-wrap: wrap; /* Ensure it wraps on smaller screens */
@@ -76,7 +73,7 @@ body {
 }
 
 .footer-column {
-  flex: 1; /* Equal width for all columns */
+  flex: 1;
   padding: 10px;
   min-width: 250px; /* Ensures column doesn't get too small on mobile */
 }
