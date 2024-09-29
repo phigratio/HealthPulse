@@ -80,7 +80,7 @@ const PrescriptionAnalyzer = () => {
                 {
                   parts: [
                     {
-                      text: `This text probably contains some medicine names. Can you guess the names and provide when these medicines are used?Please answer in one single paragraph containing all the information The text is ${combinedText}.Please provide necessary information of the medicines if possible`,
+                      text: `Give answer in 500 words.This text probably contains some medicine names. Can you guess the names and provide when these medicines are used?Please answer in one single paragraph containing all the information The text is ${combinedText}.Please provide necessary information of the medicines if possible.Dont give any formatting just give clean paragraph. `,
                     },
                   ],
                 },

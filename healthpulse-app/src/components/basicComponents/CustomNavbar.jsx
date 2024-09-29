@@ -92,8 +92,8 @@ const CustomNavbar = () => {
               </ReactLink>
             </li>
 
-            <li className="cn-nav-item dropdown">
-              <button className="cn-dropdown-toggle">Services</button>
+            <li className="cn-nav-item dropdown ">
+              <button className="cn-dropdown-toggle services-text">Services</button>
               <ul className="cn-dropdown-menu">
                 <li>
                   <ReactLink

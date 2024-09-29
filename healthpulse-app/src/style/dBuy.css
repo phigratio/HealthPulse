@@ -1,4 +1,4 @@
-Style for the container holding the form form {
+/* Style for the container holding the form form {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
@@ -6,23 +6,23 @@ Style for the container holding the form form {
   border-radius: 10px;
   background-color: #e0fbfc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+} */
 
 /* Style for each form element */
-form div {
+/* form div {
   margin-bottom: 15px;
-}
+} */
 
 /* Label styling */
-form label {
+/* form label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
   color: #293241;
-}
+} */
 
 /* Input field styling */
-form input[type="text"],
+/* form input[type="text"],
 form input[type="number"] {
   width: 100%;
   padding: 10px;
@@ -30,10 +30,10 @@ form input[type="number"] {
   border-radius: 5px;
   box-sizing: border-box;
   font-size: 16px;
-}
+} */
 
 /* Button styling */
-form button[type="submit"] {
+/* form button[type="submit"] {
   width: 100%;
   padding: 10px;
   background-color: #3d5a80;
@@ -51,12 +51,12 @@ form button[type="submit"]:hover {
 form button[disabled] {
   background-color: #e0fbfc;
   cursor: not-allowed;
-}
+} */
 
 /* Additional styles for better visuals */
-body {
+/* body {
   font-family: Arial, sans-serif;
   background-color: #e0fbfc;
   margin: 0;
   padding: 0;
-}
+} */

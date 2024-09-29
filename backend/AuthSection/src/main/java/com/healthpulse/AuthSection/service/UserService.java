@@ -33,4 +33,8 @@ public interface UserService {
 	List<UserDto> getPendingDoctorApprovals();
 
 	public String validateVerificationToken(String token) ;
+
+	String forgotPassword(String email);
+
+	String resetPassword(String token , String newPassword);
 }

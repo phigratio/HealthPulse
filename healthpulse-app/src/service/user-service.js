@@ -184,3 +184,26 @@ export const getDonorsByBloodGroupAndDistrict = (bloodGroup, district) => {
 export const signUpChatServer = (chatData) => {
   return myAxios.post("/chat/signup", chatData);
 };
+
+
+// Forgot Password
+export const forgotPassword = (email) => {
+  return myAxios
+    .post(`/auth/forgot-password/${email}`)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error("Error occurred while sending password reset link", error);
+      throw error;
+    });
+};
+
+// Reset Password
+export const resetPassword = (token, newPassword) => {
+  return myAxios
+    .post(`/auth/reset-password/${token}/${newPassword}`)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error("Error occurred while resetting password", error);
+      throw error;
+    });
+};

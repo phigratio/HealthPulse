@@ -16,11 +16,7 @@ const ServicesBlock = () => {
         <h1 className="text-[#09A2D6] font-sans text-5xl font-bold">
           We Provide Best Services
         </h1>
-        <p className="font-sans text-lg mt-4">
-          Cras dictum sit amet mi id varius. Sed mauris eros, fermentum eget
-          risus vel, imperdiet suscipit diam. Sed mollis orci eget magna
-          consectetur viverra.
-        </p>
+        <p className="font-sans text-lg mt-4"></p>
         <div className="grid-container rounded-xl">
           {data.map((d, index) => (
             <div key={index} className="flip-card-container">

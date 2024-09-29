@@ -19,9 +19,10 @@ import {
 import { toast } from "react-toastify";
 import { BASE_URL } from "../service/helper";
 import { isLoggedIn } from "../auth";
-import { getUserData } from "../service/user-service";
+import { getUserData, getUser } from "../service/user-service";
 import axios from "axios";
 import { geminiKey } from "../servicePage/apiKeys";
+import Background from "../components/basicComponents/Background";
 
 const apiKeyGemini = geminiKey;
 
@@ -29,34 +30,43 @@ const PostPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [blogOwner, setBlogOwner] = useState(null);
   const [isOwner, setIsOwner] = useState(false); // Ownership flag
   const [comment, setComment] = useState({ content: "" });
   const [aiResponse, setAiResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); // Initialize useNavigate
 
-  useEffect(() => {
-    const loggedInUser = getUserData();
-    console.log("Logged in user:", loggedInUser); // Debug line
-    if (loggedInUser) {
-      setCurrentUser(loggedInUser);
+useEffect(() => {
+  const fetchPostAndOwner = async () => {
+    try {
+      const loggedInUser = getUserData();
+      console.log("Logged in user:", loggedInUser); // Debug line
+
+      if (loggedInUser) {
+        setCurrentUser(loggedInUser);
+      }
+
+      const data = await loadPost(postId);
+      setPost(data);
+      console.log("Post user ID:", data.userId); // Debug line
+
+      const owner = await getUser(data.userId);
+      setBlogOwner(owner);
+      console.log("Blog owner:", owner); // Debug line
+
+      if (loggedInUser && parseInt(data.userId) === loggedInUser.id) {
+        setIsOwner(true);
+      } else {
+        setIsOwner(false);
+      }
+    } catch (error) {
+      toast.error("Error in loading post");
     }
+  };
 
-    loadPost(postId)
-      .then((data) => {
-        setPost(data);
-        console.log("Post user ID:", data.userId); // Debug line
-
-        if (loggedInUser && parseInt(data.userId) === loggedInUser.id) {
-          setIsOwner(true);
-        } else {
-          setIsOwner(false);
-        }
-      })
-      .catch((error) => {
-        toast.error("Error in loading post");
-      });
-  }, [postId]);
+  fetchPostAndOwner();
+}, [postId]);
 
   const submitPost = () => {
     if (!isLoggedIn()) {
@@ -128,128 +138,134 @@ const PostPage = () => {
   };
 
   return (
-    <Base>
-      <Container className="mt-4">
-        <Link to="/">Home</Link> / {post && <Link to="">{post.title}</Link>}
-        <Row>
-          <Col md={{ size: 12 }}>
-            <Card className="mt-3 ps-2 border-0 shadow-sm">
-              {post ? (
-                <CardBody>
-                  <CardText>
-                    Posted By{" "}
-                    <b>
-                      <Link
-                        to={`/user/my-profile/${post.userId}`}
-                        style={{ textDecoration: "none" }}
-                      >
-                        {post.user
-                          ? post.user.name.toUpperCase()
-                          : "Loading..."}
-                      </Link>
-                    </b>{" "}
-                    on <b>{new Date(post.addedDate).toLocaleDateString()}</b>
-                  </CardText>
+    <div>
+      <Background />
+      <Base>
+        <Container className="mt-4">
+          <Link to="/">Home</Link> / {post && <Link to="">{post.title}</Link>}
+          <Row>
+            <Col md={{ size: 12 }}>
+              <Card className="mt-3 ps-2 border-0 shadow-sm">
+                {post ? (
+                  <CardBody>
+                    <CardText>
+                      Posted By{" "}
+                      <b>
+                        <Link
+                          to={`/user/my-profile/${post.userId}`}
+                          style={{ textDecoration: "none" }}
+                        >
+                          {blogOwner
+                            ? blogOwner.name.toUpperCase()
+                            : "Loading..."}
+                        </Link>
+                      </b>{" "}
+                      on <b>{new Date(post.addedDate).toLocaleDateString()}</b>
+                    </CardText>
 
-                  <div className="mt-3">
-                    <h1>{post.title}</h1>
-                    <div
-                      className="image-container mt-4 shadow"
-                      style={{ maxWidth: "50%" }}
-                    >
-                      <img
-                        className="img-fluid"
-                        src={BASE_URL + "/api/post/image/" + post.imageName}
-                        alt="Post"
+                    <div className="mt-3">
+                      <h1>{post.title}</h1>
+                      <div
+                        className="image-container mt-4 shadow"
+                        style={{ maxWidth: "50%" }}
+                      >
+                        <img
+                          className="img-fluid"
+                          src={BASE_URL + "/api/post/image/" + post.imageName}
+                          alt="Post"
+                        />
+                      </div>
+                      <CardText
+                        className="mt-5"
+                        dangerouslySetInnerHTML={{ __html: post.content }}
                       />
                     </div>
-                    <CardText
-                      className="mt-5"
-                      dangerouslySetInnerHTML={{ __html: post.content }}
-                    />
-                  </div>
 
-                  {isOwner ? (
-                    <div>
-                      <div className="mt-4">
-                        <Button color="warning" onClick={handleUpdatePost}>
-                          Update Post
-                        </Button>{" "}
-                        <Button color="danger" onClick={handleDeletePost}>
-                          Delete Post
-                        </Button>
+                    {isOwner ? (
+                      <div>
+                        <div className="mt-4">
+                          <Button color="warning" onClick={handleUpdatePost}>
+                            Update Post
+                          </Button>{" "}
+                          <Button color="danger" onClick={handleDeletePost}>
+                            Delete Post
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  ) : (
-                    <div>
-                      <span className="text-muted">
-                        You are not the owner of this post.
-                      </span>
-                    </div>
+                    ) : (
+                      <div>
+                        <span className="text-muted">
+                          You are not the owner of this post.
+                        </span>
+                      </div>
+                    )}
+                  </CardBody>
+                ) : (
+                  <div>Loading...</div>
+                )}
+              </Card>
+              <Card className="mt-4 border-0">
+                <CardBody>
+                  <Button
+                    color="primary"
+                    onClick={handleLearnMoreAI}
+                    disabled={loading}
+                  >
+                    {loading ? "Analyzing..." : "Learn More from AI"}
+                  </Button>
+
+                  {aiResponse && (
+                    <CardText className="mt-4">
+                      <h5>AI Response:</h5>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: aiResponse,
+                        }}
+                        style={{
+                          whiteSpace: "pre-wrap",
+                          wordWrap: "break-word",
+                        }}
+                      />
+                    </CardText>
                   )}
                 </CardBody>
-              ) : (
-                <div>Loading...</div>
-              )}
-            </Card>
-            <Card className="mt-4 border-0">
-              <CardBody>
-                <Button
-                  color="primary"
-                  onClick={handleLearnMoreAI}
-                  disabled={loading}
-                >
-                  {loading ? "Analyzing..." : "Learn More from AI"}
-                </Button>
+              </Card>
+            </Col>
+          </Row>
+          <Row className="my-4">
+            <Col md={{ size: 9, offset: 1 }}>
+              <h3>Comments ({post ? post.comments.length : 0})</h3>
 
-                {aiResponse && (
-                  <CardText className="mt-4">
-                    <h5>AI Response:</h5>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: aiResponse,
-                      }}
-                      style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}
-                    />
-                  </CardText>
-                )}
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-        <Row className="my-4">
-          <Col md={{ size: 9, offset: 1 }}>
-            <h3>Comments ({post ? post.comments.length : 0})</h3>
+              {post &&
+                post.comments &&
+                post.comments.map((c, index) => (
+                  <Card className="mt-4 border-0" key={index}>
+                    <CardBody>
+                      <CardText>{c.content}</CardText>
+                    </CardBody>
+                  </Card>
+                ))}
 
-            {post &&
-              post.comments &&
-              post.comments.map((c, index) => (
-                <Card className="mt-4 border-0" key={index}>
-                  <CardBody>
-                    <CardText>{c.content}</CardText>
-                  </CardBody>
-                </Card>
-              ))}
-
-            <Card className="mt-4 border-0">
-              <CardBody>
-                <Input
-                  type="textarea"
-                  placeholder="Enter comment here"
-                  value={comment.content}
-                  onChange={(event) =>
-                    setComment({ content: event.target.value })
-                  }
-                />
-                <Button onClick={submitPost} className="mt-2" color="primary">
-                  Submit
-                </Button>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </Base>
+              <Card className="mt-4 border-0">
+                <CardBody>
+                  <Input
+                    type="textarea"
+                    placeholder="Enter comment here"
+                    value={comment.content}
+                    onChange={(event) =>
+                      setComment({ content: event.target.value })
+                    }
+                  />
+                  <Button onClick={submitPost} className="mt-2" color="primary">
+                    Submit
+                  </Button>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </Base>
+    </div>
   );
 };
 

@@ -26,8 +26,12 @@ const ProductCard = ({ product }) => {
       )}
       <p className="product-company">Company: {product.companyName}</p>
       <p className="product-chemical">Chemical: {product.chemicalName}</p>
-      <button onClick={handleSeeDetails}>See Details</button> {/* New button */}
-      <button>Add to Cart</button> {/* Existing button */}
+      <button className="prod-button" onClick={handleSeeDetails}>
+        See Details
+      </button>{" "}
+      {/* New button */}
+      <button className="prod-button">Add to Cart</button>{" "}
+      {/* Existing button */}
     </div>
   );
 };

@@ -1,7 +1,12 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import userContext from "../context/userContext";
-import { login, addUserInfo, getUserInfo } from "../service/user-service";
+import {
+  login,
+  addUserInfo,
+  getUserInfo,
+  forgotPassword,
+} from "../service/user-service";
 import { doLogin } from "../auth";
 import LoginL from "../components/LottieComponents/Login"; // Right Lottie Component
 import "../style/login.css"; // Import custom styles for login card
@@ -105,6 +110,24 @@ const Login = () => {
       });
   };
 
+  const handleForgotPassword = () => {
+    if (!loginDetail.username.trim()) {
+      toast.error("Please enter your email!");
+      return;
+    }
+    console.log("Email sent to:" + loginDetail.username.trim());
+
+    forgotPassword(loginDetail.username)
+      .then((response) => {
+        toast.success("Password reset email sent to your email !!!");
+      })
+      .catch((error) => {
+        toast.error(
+          error.response?.data?.message || "Error sending reset email!"
+        );
+      });
+  };
+
   return (
     <div>
       <Background />
@@ -141,6 +164,17 @@ const Login = () => {
                     value={loginDetail.password}
                     onChange={(e) => handleChange(e, "password")}
                   />
+                </div>
+
+                <div className="forgot-password-container">
+                  <button
+                    type="button"
+                    className="forgot-password-link"
+                    onClick={handleForgotPassword}
+                    // disabled={!loginDetail.username.trim()}
+                  >
+                    Forgot Password?
+                  </button>
                 </div>
 
                 <div className="login-button-container">
