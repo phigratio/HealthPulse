@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import ResetPassword from "./pages/ResetPassword.jsx";
 import Dashboard from "./pages/user-routes/Dashboard";
 import ProfileInfo from "./pages/user-routes/ProfileInfo";
 import About from "./pages/About";
@@ -78,6 +79,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/about" element={<About />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/background" element={<Background />} />

@@ -148,6 +148,12 @@
   display: block !important;
 }
 
+.services-text {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #293241 !important;
+}
+
 /* Mobile Styles */
 @media (max-width: 768px) {
   .cn-navbar-menu {

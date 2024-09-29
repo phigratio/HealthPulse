@@ -1,5 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Ensure react-router-dom is installed
+import { useNavigate } from "react-router-dom";
+import "./style/ProductCard.css";
+// Ensure react-router-dom is installed
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate(); // Hook to navigate programmatically
@@ -24,8 +26,12 @@ const ProductCard = ({ product }) => {
       )}
       <p className="product-company">Company: {product.companyName}</p>
       <p className="product-chemical">Chemical: {product.chemicalName}</p>
-      <button onClick={handleSeeDetails}>See Details</button> {/* New button */}
-      <button>Add to Cart</button> {/* Existing button */}
+      <button className="prod-button" onClick={handleSeeDetails}>
+        See Details
+      </button>{" "}
+      {/* New button */}
+      <button className="prod-button">Add to Cart</button>{" "}
+      {/* Existing button */}
     </div>
   );
 };

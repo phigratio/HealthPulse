@@ -20,7 +20,7 @@ const Footer = () => {
           <div className="footer-column">
             <FooterList>
               <h3 className="footer-heading">Service Categories</h3>
-              <a href="#">Vaccine Corner</a>
+              <a href="#">Doctor Chatbot</a>
               <a href="#">Daily Health</a>
               <a href="#">BMI and Fitness</a>
               <a href="#">Seasonal Health</a>

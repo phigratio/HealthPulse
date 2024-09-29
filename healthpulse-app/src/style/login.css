@@ -100,3 +100,12 @@
 .login-reset-button {
   margin-left: 10px;
 }
+
+.forgot-password-link {
+  margin-bottom: 10px;
+  color: #293241;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}

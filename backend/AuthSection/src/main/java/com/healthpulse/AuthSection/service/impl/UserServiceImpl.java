@@ -2,8 +2,10 @@ package com.healthpulse.AuthSection.service.impl;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.healthpulse.AuthSection.exception.ApiException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -236,6 +238,83 @@ public class UserServiceImpl implements UserService {
 		user.setEnabled(true);
 		userRepo.save(user);
 		return "valid";
+	}
+
+	@Override
+	public String forgotPassword(String email) {
+		User user = userRepo.findByEmail(email)
+				.orElseThrow(() -> new ResourceNotFoundException("User", "email"));
+		if (user == null) {
+			return "You are not registered yet";
+		}
+		else{
+			String token = UUID.randomUUID().toString();
+			user.setVerificationToken(token);
+			userRepo.save(user);
+
+			try {
+				forgotPasswordEmail(email, token);
+			} catch (MessagingException e) {
+				return "Failed to send reset password email";
+			}
+
+			return "A email is sent to your email address";
+		}
+	}
+
+	@Override
+	public String resetPassword(String token, String newPassword) {
+		User user = userRepo.findByVerificationToken(token).orElseThrow(() -> new ApiException("Invalid or expired reset token."));
+
+		if (user == null) {
+			return "You are not valid user to reset password";
+		}
+		else{
+			user.setPassword(this.passwordEncoder.encode(newPassword));
+			String newToken = UUID.randomUUID().toString();
+			user.setVerificationToken(newToken);
+			userRepo.save(user);
+			return "Your new password is set properly!!!";
+		}
+
+	}
+
+	// Send forgot password email to the user
+	private void forgotPasswordEmail(String email, String token) throws MessagingException {
+		User user = userRepo.findByEmail(email).orElse(null);
+
+		// Generate a password reset URL using the token
+		String resetUrl = "http://localhost:3000/reset-password?token=" + token;
+
+		MimeMessage mimeMessage = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+		helper.setTo(email);
+		helper.setSubject("Reset Your Password - Health Pulse");
+
+		// HTML content for password reset email
+		String emailContent = "<html>"
+				+ "<body style='font-family: Arial, sans-serif; background-color: #f4f9ff; padding: 20px;'>"
+				+ "<div style='max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>"
+				+ "<h2 style='color: #1E90FF; text-align: center;'>Forgot Your Password?</h2>"
+				+ "<p style='font-size: 16px; color: #333333; line-height: 1.6;'>"
+				+ "No worries, we’ve got you covered! You can reset your password by clicking the button below."
+				+ "</p>"
+				+ "<div style='text-align: center; margin: 20px 0;'>"
+				+ "<a href='" + resetUrl + "' style='background-color: #1E90FF; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;'>"
+				+ "Reset Password</a>"
+				+ "</div>"
+				+ "<p style='font-size: 16px; color: #333333;'>"
+				+ "If you did not request this password reset, please ignore this email. This link will expire in 24 hours."
+				+ "</p>"
+				+ "<p style='font-size: 16px; color: #333333;'>"
+				+ "Best regards,<br><strong>Health Pulse Team</strong>"
+				+ "</p>"
+				+ "</div>"
+				+ "</body>"
+				+ "</html>";
+
+		helper.setText(emailContent, true);
+		mailSender.send(mimeMessage);
 	}
 
 

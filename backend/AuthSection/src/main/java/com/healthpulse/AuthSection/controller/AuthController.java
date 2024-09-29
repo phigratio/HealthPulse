@@ -4,6 +4,9 @@ package com.healthpulse.AuthSection.controller;
 import java.security.Principal;
 
 import com.healthpulse.AuthSection.event.OnRegistrationCompleteEvent;
+import com.healthpulse.AuthSection.exception.ResourceNotFoundException;
+import com.healthpulse.AuthSection.payloads.ApiResponse;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -65,14 +68,7 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-//    private void authenticate(String username, String password) throws Exception {
-//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-//        try {
-//            this.authenticationManager.authenticate(authenticationToken);
-//        } catch (BadCredentialsException e) {
-//            throw new ApiException("Invalid username or password !!!");
-//        }
-//    }
+
 
     private void authenticate(String username, String password) throws Exception {
         // Log to check the received username (which is the email)
@@ -139,6 +135,51 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification token.");
         }
     }
+
+//    @PostMapping("/forgot-password/{email}")
+//    public ResponseEntity<ApiResponse> forgotPassword(@PathVariable("email") String email) {
+//        try {
+//            userService.forgotPassword(email);
+//            return new ResponseEntity<>(new ApiResponse("Password reset link sent successfully", true), HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(new ApiResponse("Error occurred while sending password reset link", false), HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+//
+//    @PostMapping("/reset-password/{token}/{newPass}")
+//    public ResponseEntity<ApiResponse> resetPassword(@PathVariable("token") String token, @PathVariable("newPass" ) String newPass) {
+//        try{
+//            userService.resetPassword(token, newPass);
+//            return new ResponseEntity<>(new ApiResponse("Password changed successfully", true), HttpStatus.OK);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
+    @PostMapping("/forgot-password/{email}")
+    public ResponseEntity<ApiResponse> forgotPassword(@PathVariable("email") String email) throws MessagingException {
+        try {
+            userService.forgotPassword(email);
+            return new ResponseEntity<>(new ApiResponse("Password reset link sent to your email. ", true), HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(new ApiResponse("User with given email not found", false), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse("An unexpected error occurred", false), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/reset-password/{token}/{newPass}")
+    public ResponseEntity<ApiResponse> resetPassword(@PathVariable("token") String token, @PathVariable("newPass") String newPass) {
+        try {
+            userService.resetPassword(token, newPass);
+            return new ResponseEntity<>(new ApiResponse("Password changed successfully !!!", true), HttpStatus.OK);
+        } catch (ApiException e) {
+            return new ResponseEntity<>(new ApiResponse("Invalid or expired token !!!", false), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse("An unexpected error occurred !!!", false), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 
 
