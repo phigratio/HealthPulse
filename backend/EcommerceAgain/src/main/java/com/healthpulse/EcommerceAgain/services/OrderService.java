@@ -6,9 +6,7 @@ import java.util.List;
 
 public interface OrderService {
 
-    OrderDto placeOrder(int cartId);
+    List<OrderDto> getOrdersByUserId(int userId);
 
-    OrderDto getOrderById(int orderId);
-
-    List<OrderDto> getAllOrders();
+    OrderDto placeOrder(int userId);
 }

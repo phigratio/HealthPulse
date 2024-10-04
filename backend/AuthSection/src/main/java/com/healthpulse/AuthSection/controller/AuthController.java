@@ -136,25 +136,6 @@ public class AuthController {
         }
     }
 
-//    @PostMapping("/forgot-password/{email}")
-//    public ResponseEntity<ApiResponse> forgotPassword(@PathVariable("email") String email) {
-//        try {
-//            userService.forgotPassword(email);
-//            return new ResponseEntity<>(new ApiResponse("Password reset link sent successfully", true), HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(new ApiResponse("Error occurred while sending password reset link", false), HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-//
-//    @PostMapping("/reset-password/{token}/{newPass}")
-//    public ResponseEntity<ApiResponse> resetPassword(@PathVariable("token") String token, @PathVariable("newPass" ) String newPass) {
-//        try{
-//            userService.resetPassword(token, newPass);
-//            return new ResponseEntity<>(new ApiResponse("Password changed successfully", true), HttpStatus.OK);
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
     @PostMapping("/forgot-password/{email}")
     public ResponseEntity<ApiResponse> forgotPassword(@PathVariable("email") String email) throws MessagingException {

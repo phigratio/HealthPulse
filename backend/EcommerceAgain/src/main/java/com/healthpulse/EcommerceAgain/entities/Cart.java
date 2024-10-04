@@ -7,18 +7,17 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartId;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private int userId;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
     private List<CartItem> cartItems;
-
-    private Float totalPrice;
-
-    // Add user/customer details if needed
 }
