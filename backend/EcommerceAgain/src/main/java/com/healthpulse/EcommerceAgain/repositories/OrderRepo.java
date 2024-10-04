@@ -1,10 +1,14 @@
 package com.healthpulse.EcommerceAgain.repositories;
 
+import com.healthpulse.EcommerceAgain.entities.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.healthpulse.EcommerceAgain.entities.Order;
+
+import java.util.List;
+import java.util.Optional;
+
 
 @Repository
 public interface OrderRepo extends JpaRepository<Order, Integer> {
-    // Add any custom query methods if necessary
+    Optional<List<Order>> findByUserId(int userId);
 }

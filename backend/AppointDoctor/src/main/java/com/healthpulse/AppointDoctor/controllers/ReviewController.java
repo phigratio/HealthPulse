@@ -1,10 +1,14 @@
 package com.healthpulse.AppointDoctor.controllers;
 
+import com.healthpulse.AppointDoctor.utils.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.healthpulse.AppointDoctor.entities.Review;
 import com.healthpulse.AppointDoctor.services.ReviewService;
+
 
 import java.util.List;
 
@@ -22,6 +26,9 @@ public class ReviewController {
     @PostMapping("/add")
     public ResponseEntity<Review> addReview(@RequestBody Review review) {
         try {
+            if (!JwtUtil.isAdmin()) {
+                return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+            }
             Review addedReview = reviewService.addReview(review);
             return ResponseEntity.ok(addedReview);
         } catch (IllegalStateException e) {
@@ -31,7 +38,15 @@ public class ReviewController {
 
     @GetMapping("/doctor/{doctorId}")
     public ResponseEntity<List<Review>> getReviewsByDoctorId(@PathVariable("doctorId") int doctorId) {
+
+
         List<Review> reviews = reviewService.findReviewsByDoctorId(doctorId);
         return ResponseEntity.ok(reviews);
     }
+
+
+
+
+
+
 }

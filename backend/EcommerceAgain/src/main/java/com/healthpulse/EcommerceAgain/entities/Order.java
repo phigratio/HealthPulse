@@ -3,25 +3,24 @@ package com.healthpulse.EcommerceAgain.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Data
+@Table(name = "orders")
+@NoArgsConstructor
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private int userId;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
     private List<OrderItem> orderItems;
 
-    private LocalDateTime orderDate;
-    private Float totalPrice;
-    private String status; // e.g., "Pending", "Shipped", "Delivered"
-
-    // Customer details can also be included here
+    private String status;
+    private float totalPrice;
 }

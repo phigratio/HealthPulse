@@ -55,7 +55,7 @@ public class UserController {
 	}
 
 	// PUT- update user
-    @PreAuthorize("hasRole('ADMIN')")
+
 	@PutMapping("/{userId}")
 	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable("userId") Integer uid) {
 		UserDto updatedUser = this.userService.updateUser(userDto, uid);
@@ -158,12 +158,6 @@ public class UserController {
         UserDto updatedUser = this.userService.updateUser(userDto, userId);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
-
-
-
-
-
-
 
 
 }
