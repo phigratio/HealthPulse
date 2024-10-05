@@ -75,6 +75,7 @@ public class JwtTokenHelper {
                     .map(Role::getName)
                     .collect(Collectors.toList());
             claims.put("roles", roles); // Add roles to claims
+            claims.put("userId", user.getId());
         }
 
         return doGenerateToken(claims, userDetails.getUsername());

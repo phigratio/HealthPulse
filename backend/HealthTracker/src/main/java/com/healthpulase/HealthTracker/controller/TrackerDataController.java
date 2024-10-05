@@ -2,6 +2,7 @@ package com.healthpulase.HealthTracker.controller;
 
 import com.healthpulase.HealthTracker.dto.TrackerDataDTO;
 import com.healthpulase.HealthTracker.service.TrackerDataService;
+import com.healthpulase.HealthTracker.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,9 @@ public class TrackerDataController {
 
     @PostMapping
     public ResponseEntity<TrackerDataDTO> addTrackerData(@RequestBody TrackerDataDTO trackerDataDTO) {
+        if (!JwtUtil.isCurrentUser(trackerDataDTO.getUserId())) {
+            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+        }
         TrackerDataDTO savedData = trackerDataService.addTrackerData(trackerDataDTO);
         return ResponseEntity.ok(savedData);
     }
@@ -30,6 +34,9 @@ public class TrackerDataController {
     
     @PutMapping
     public ResponseEntity<TrackerDataDTO> updateTrackerData(@RequestBody TrackerDataDTO trackerDataDTO) {
+        if (!JwtUtil.isCurrentUser(trackerDataDTO.getUserId())) {
+            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+        }
         TrackerDataDTO updatedData = trackerDataService.updateTrackerData(trackerDataDTO);
         return ResponseEntity.ok(updatedData);
     }
@@ -44,12 +51,16 @@ public class TrackerDataController {
 
     @GetMapping("/{id}")
     public ResponseEntity<TrackerDataDTO> getTrackerDataById(@PathVariable ("id") long id) {
+
         TrackerDataDTO trackerData = trackerDataService.getTrackerDataById(id);
         return ResponseEntity.ok(trackerData);
     }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<TrackerDataDTO>> getTrackerDataByUserId(@PathVariable ("userId") int userId) {
+        if (!JwtUtil.isCurrentUser(userId)) {
+            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+        }
         List<TrackerDataDTO> trackerDataList = trackerDataService.getTrackerDataByUserId(userId);
         return ResponseEntity.ok(trackerDataList);
     }
@@ -65,6 +76,9 @@ public class TrackerDataController {
     public ResponseEntity<List<TrackerDataDTO>> getTrackerDataByUserIdAndDate(
             @PathVariable ("userId") int userId, 
             @PathVariable ("date") String date) {
+        if (!JwtUtil.isCurrentUser(userId)) {
+            return ResponseEntity.status(403).body(null);
+        }
         LocalDate localDate = LocalDate.parse(date);
         List<TrackerDataDTO> trackerDataList = trackerDataService.getTrackerDataByUserIdAndDate(userId, localDate);
         return ResponseEntity.ok(trackerDataList);
@@ -72,18 +86,27 @@ public class TrackerDataController {
     
     @GetMapping("/user/{userId}/last7days")
     public ResponseEntity<List<TrackerDataDTO>> getTrackerDataLast7Days(@PathVariable("userId") int userId) {
+        if (!JwtUtil.isCurrentUser(userId)) {
+            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+        }
         List<TrackerDataDTO> trackerDataList = trackerDataService.getTrackerDataLast7Days(userId);
         return ResponseEntity.ok(trackerDataList);
     }
 
     @GetMapping("/user/{userId}/last30days")
     public ResponseEntity<List<TrackerDataDTO>> getTrackerDataLast30Days(@PathVariable("userId") int userId) {
+        if (!JwtUtil.isCurrentUser(userId)) {
+            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+        }
         List<TrackerDataDTO> trackerDataList = trackerDataService.getTrackerDataLast30Days(userId);
         return ResponseEntity.ok(trackerDataList);
     }
 
     @GetMapping("/user/{userId}/last365days")
     public ResponseEntity<List<TrackerDataDTO>> getTrackerDataLast365Days(@PathVariable("userId") int userId) {
+        if (!JwtUtil.isCurrentUser(userId)) {
+            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+        }
         List<TrackerDataDTO> trackerDataList = trackerDataService.getTrackerDataLast365Days(userId);
         return ResponseEntity.ok(trackerDataList);
     }

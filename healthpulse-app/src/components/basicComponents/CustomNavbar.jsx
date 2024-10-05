@@ -6,6 +6,7 @@ import "../../style/CustomNavbar.css";
 import { getCurrentUserDetail, isLoggedIn, doLogout } from "../../auth";
 import userContext from "../../context/userContext";
 import { BASE_URL } from "../../service/helper";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const CustomNavbar = () => {
   const userContextData = useContext(userContext);
@@ -88,12 +89,14 @@ const CustomNavbar = () => {
 
             <li className="cn-nav-item">
               <ReactLink className="cn-nav-link-light" to="/ecommerce">
-                Ecommerce
+                Medicine Shop
               </ReactLink>
             </li>
 
             <li className="cn-nav-item dropdown ">
-              <button className="cn-dropdown-toggle services-text">Services</button>
+              <button className="cn-dropdown-toggle services-text">
+                Services
+              </button>
               <ul className="cn-dropdown-menu">
                 <li>
                   <ReactLink
@@ -223,6 +226,14 @@ const CustomNavbar = () => {
 
             {login ? (
               <>
+                <li className="cn-nav-item">
+                  <ReactLink className="cn-nav-link-light" to="/notifications">
+                    <i className="fas fa-bell"></i>{" "}
+                    {/* Font Awesome notification icon */}
+                    <span className="notification-badge"></span>{" "}
+                    {/* Example badge for notifications */}
+                  </ReactLink>
+                </li>
                 <li className="cn-nav-item">
                   <ReactLink
                     onClick={logout}

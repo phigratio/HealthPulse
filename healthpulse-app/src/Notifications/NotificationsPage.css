@@ -1,0 +1,52 @@
+.notifications-page {
+  padding: 20px;
+}
+
+.notifications-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notification-item {
+  position: relative; /* Enable absolute positioning inside the card */
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-header h4 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.notification-header small {
+  color: gray;
+  font-size: 12px;
+}
+
+/* Delete button styles */
+.delete-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #888; /* Lighter color for the trash icon */
+}
+
+.delete-button i {
+  font-size: 18px;
+}
+
+.delete-button:hover {
+  color: #555; /* Darker on hover */
+}

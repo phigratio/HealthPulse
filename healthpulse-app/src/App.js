@@ -30,6 +30,7 @@ import UpdatePersonalData from "./pages/UpdatePersonalData";
 import DonorList from "./pages/BloodDoner";
 import Quiz from "./servicePage/Quiz.jsx";
 import UpdateDoctorInfoPage from "./pages/UpdateDoctorInfoPage";
+import Notification from "./Notifications/Notification.jsx";
 
 import Background from "./components/basicComponents/Background.jsx";
 
@@ -149,6 +150,9 @@ function App() {
 
         {/* EcommercePart*/}
         <Route path="/ecommerce/*" element={<EcommerceMainPage />} />
+
+        {/* Notification part */}
+        <Route path="/notifications" element={<Notification />} />
       </Routes>
     </BrowserRouter>
   );

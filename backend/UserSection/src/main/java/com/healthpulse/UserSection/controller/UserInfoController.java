@@ -5,6 +5,7 @@ import com.healthpulse.UserSection.service.UserInfoService;
 
 import java.util.List;
 
+import com.healthpulse.UserSection.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,9 @@ public class UserInfoController {
 
     @PostMapping("/{userId}")
     public ResponseEntity<UserInfoDTO> addUserInfo(@PathVariable ("userId") int userId, @RequestBody UserInfoDTO userInfoDTO) {
+        if (!JwtUtil.isCurrentUser(userId)) {
+            return ResponseEntity.status(403).body(null);
+        }
         userInfoDTO.setUserId(userId); // Set the userId from the URL to the DTO
         UserInfoDTO createdUserInfo = userInfoService.addUserInfo(userInfoDTO);
         return ResponseEntity.ok(createdUserInfo);
@@ -25,6 +29,9 @@ public class UserInfoController {
 
     @PutMapping("/{userId}")
     public ResponseEntity<UserInfoDTO> updateUserInfo(@PathVariable ("userId") int userId, @RequestBody UserInfoDTO userInfoDTO) {
+        if (!JwtUtil.isCurrentUser(userId)) {
+            return ResponseEntity.status(403).body(null);
+        }
         UserInfoDTO updatedUserInfo = userInfoService.updateUserInfo(userId, userInfoDTO);
         if (updatedUserInfo != null) {
             return ResponseEntity.ok(updatedUserInfo);
@@ -45,6 +52,9 @@ public class UserInfoController {
 
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUserInfoByUserId(@PathVariable ("userId") int userId) {
+        if (!JwtUtil.isCurrentUser(userId)) {
+            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+        }
         userInfoService.deleteUserInfoByUserId(userId);
         return ResponseEntity.noContent().build();
     }

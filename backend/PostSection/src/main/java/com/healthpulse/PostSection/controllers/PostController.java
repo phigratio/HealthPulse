@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import com.healthpulse.PostSection.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,9 @@ public class PostController {
 	@PostMapping("/user/{userId}/category/{categoryId}/posts")
 	public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto, @PathVariable ("userId") String userId,
 			@PathVariable  ("categoryId") String categoryId) {
+		if (!JwtUtil.isDoctor()) {
+			return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+		}
 		PostDto createPost = this.postService.createPost(postDto, userId, categoryId);
 		return new ResponseEntity<PostDto>(createPost, HttpStatus.CREATED);
 	}
@@ -97,6 +101,8 @@ public class PostController {
 	// delete post
 	@DeleteMapping("/posts/{postId}")
 	public ApiResponse deletePost(@PathVariable ("postId") Integer postId) {
+
+
 		this.postService.deletePost(postId);
 		return new ApiResponse("Post is successfully deleted !!", true);
 	}
@@ -105,6 +111,9 @@ public class PostController {
 
 	@PutMapping("/posts/{postId}")
 	public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable ("postId") Integer postId) {
+		if (!JwtUtil.isDoctor()) {
+			return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+		}
 
 		PostDto updatePost = this.postService.updatePost(postDto, postId);
 		return new ResponseEntity<PostDto>(updatePost, HttpStatus.OK);
