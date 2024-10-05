@@ -1,3 +1,5 @@
 /.metadata/
 __pycache__/
 *.pyc
+
+/backend/
