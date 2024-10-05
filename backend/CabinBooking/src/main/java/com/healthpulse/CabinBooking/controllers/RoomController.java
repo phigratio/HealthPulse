@@ -1,6 +1,7 @@
 package com.healthpulse.CabinBooking.controllers;
 
 
+import com.healthpulse.CabinBooking.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -49,7 +50,9 @@ public class RoomController {
             @RequestParam(value = "roomPrice", required = false) BigDecimal roomPrice,
             @RequestParam(value = "roomDescription", required = false) String roomDescription
     ) {
-    	
+        if (!JwtUtil.isAdmin()) {
+            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+        }
     	if(photo == null) {
     		Response response = new Response();
     		response.setStatusCode(400);
@@ -168,6 +171,9 @@ public class RoomController {
                                                @RequestParam(value = "roomDescription", required = false) String roomDescription
 
     ) {
+        if (!JwtUtil.isAdmin()) {
+            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+        }
         Response response = roomService.updateRoom(roomId, hospital, address, roomDescription, roomType, roomPrice, photo);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
@@ -175,6 +181,9 @@ public class RoomController {
     @DeleteMapping("/delete/{roomId}")
 //    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> deleteRoom(@PathVariable ("roomId") Long roomId) {
+        if (!JwtUtil.isAdmin()) {
+            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+        }
         Response response = roomService.deleteRoom(roomId);
         return ResponseEntity.status(response.getStatusCode()).body(response);
 

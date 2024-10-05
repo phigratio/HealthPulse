@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.healthpulse.PostSection.util.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,9 @@ public class CategoryController {
 
 	@PostMapping("/")
 	public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto cateogDto) {
+		if (!JwtUtil.isAdmin()) {
+			return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+		}
 		CategoryDto createCategory = this.categoryService.createCategory(cateogDto);
 		return new ResponseEntity<CategoryDto>(createCategory, HttpStatus.CREATED);
 	}
@@ -40,6 +44,9 @@ public class CategoryController {
 	@PutMapping("/{catId}")
 	public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto,
 			@PathVariable ("catId") String catId) {
+		if (!JwtUtil.isAdmin()) {
+			return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+		}
 		CategoryDto updatedCategory = this.categoryService.updateCategory(categoryDto, catId);
 		return new ResponseEntity<CategoryDto>(updatedCategory, HttpStatus.OK);
 	}
@@ -48,6 +55,9 @@ public class CategoryController {
 
 	@DeleteMapping("/{catId}")
 	public ResponseEntity<ApiResponse> deleteCategory(@PathVariable ("catId") String catId) {
+		if (!JwtUtil.isAdmin()) {
+			return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+		}
 		this.categoryService.deleteCategory(catId);
 		return new ResponseEntity<ApiResponse>(new ApiResponse("category is deleted successfully !!", true),
 				HttpStatus.OK);

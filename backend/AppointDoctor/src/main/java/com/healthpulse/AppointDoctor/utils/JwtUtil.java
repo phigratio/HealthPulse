@@ -64,4 +64,11 @@ public class JwtUtil {
         List<String> roles = claims.get("roles", List.class);
         return roles != null && roles.contains("ROLE_USER");
     }
+
+    // Check if the current user ID matches the provided ID
+    public static boolean isCurrentUser(int id) {
+        Claims claims = getClaimsFromRequest();
+        Integer userId = claims.get("userId", Integer.class);
+        return userId != null && userId.equals(id);
+    }
 }

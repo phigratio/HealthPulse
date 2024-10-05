@@ -2,7 +2,9 @@ package com.healthpulse.ReminderService.controllers;
 
 import com.healthpulse.ReminderService.entities.Medication;
 import com.healthpulse.ReminderService.services.MedicationService;
+import com.healthpulse.ReminderService.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

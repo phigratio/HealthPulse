@@ -3,6 +3,7 @@ package com.healthpulse.AppointDoctor.controllers;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.healthpulse.AppointDoctor.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,9 @@ public class AppointmentController {
     // Endpoint to create a new appointment
     @PostMapping("/create")
     public ResponseEntity<AppointmentData> createAppointment(@RequestBody AppointmentData appointmentData) {
+        if (!JwtUtil.isCurrentUser(appointmentData.getDoctorId())) {
+            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+        }
         AppointmentData createdAppointment = appointmentService.createAppointment(appointmentData);
         return ResponseEntity.ok(createdAppointment);
     }
@@ -66,6 +70,9 @@ public class AppointmentController {
     public ResponseEntity<AppointmentData> bookAppointment(
             @PathVariable ("appointmentId")  Long appointmentId, 
             @RequestParam("userId") int userId) {
+        if (!JwtUtil.isCurrentUser(userId)) {
+            return ResponseEntity.status(403).body(null);
+        }
         AppointmentData bookedAppointment = appointmentService.bookAppointment(appointmentId, userId);
         return ResponseEntity.ok(bookedAppointment);
     }
@@ -83,6 +90,9 @@ public class AppointmentController {
     public ResponseEntity<AppointmentData> cancelBooking(
             @PathVariable ("appointmentId")  Long appointmentId, 
             @RequestParam("userId") int userId) {
+        if (!JwtUtil.isCurrentUser(userId)) {
+            return ResponseEntity.status(403).body(null);
+        }
         AppointmentData cancelledAppointment = appointmentService.cancelBooking(appointmentId, userId);
         return ResponseEntity.ok(cancelledAppointment);
     }
@@ -111,10 +121,4 @@ public class AppointmentController {
         AppointmentData appointment = appointmentService.startMeeting(appointmentId, videoCallUrl);
         return ResponseEntity.ok(appointment);
     }
-
-
-
-
-
-
 }

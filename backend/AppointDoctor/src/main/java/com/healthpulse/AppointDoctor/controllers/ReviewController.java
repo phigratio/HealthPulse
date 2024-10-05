@@ -26,7 +26,7 @@ public class ReviewController {
     @PostMapping("/add")
     public ResponseEntity<Review> addReview(@RequestBody Review review) {
         try {
-            if (!JwtUtil.isAdmin()) {
+            if (!JwtUtil.isCurrentUser(review.getUserId())) {
                 return ResponseEntity.status(403).body(null);  // Forbidden if not admin
             }
             Review addedReview = reviewService.addReview(review);
@@ -43,10 +43,4 @@ public class ReviewController {
         List<Review> reviews = reviewService.findReviewsByDoctorId(doctorId);
         return ResponseEntity.ok(reviews);
     }
-
-
-
-
-
-
 }
