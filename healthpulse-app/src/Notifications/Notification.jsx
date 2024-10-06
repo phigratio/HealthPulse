@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Base from "../components/Base";
 import Background from "../components/basicComponents/Background";
 import {
@@ -8,14 +9,20 @@ import {
 import { getUserData } from "../service/user-service"; // Import getUserData function
 import "./NotificationsPage.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"; // Import font awesome for icons
-
+import { isLoggedIn } from "../auth";
 const Notification = () => {
+  const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null); // Set userId dynamically
 
   useEffect(() => {
+    // Check if user is not logged in
+    if (!isLoggedIn()) {
+      navigate("/login");
+    }
+
     // Retrieve user data
     const userData = getUserData();
     if (userData) {
