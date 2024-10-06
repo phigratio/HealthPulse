@@ -38,6 +38,7 @@ const HealthCalculator = () => {
   const [activityLevel, setActivityLevel] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState("");
+
   const [userInfo, setUserInfo] = useState({
     address: "",
     district: "",

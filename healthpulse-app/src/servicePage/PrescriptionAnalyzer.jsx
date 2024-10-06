@@ -10,13 +10,22 @@ import HeartL from "../components/LottieComponents/Heart";
 import { geminiKey, visionApi } from "./apiKeys";
 
 const PrescriptionAnalyzer = () => {
+  const [previewURL, setPreviewURL] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [result, setResult] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [visionText, setVisionText] = useState("");
 
   const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
+    const file = event.target.files[0];
+    setSelectedFile(file);
+
+    // Generate a preview URL
+    if (file) {
+      setPreviewURL(URL.createObjectURL(file));
+    } else {
+      setPreviewURL(null); // Reset the preview if no file is selected
+    }
   };
 
   const apiKeyVision = visionApi;
@@ -144,6 +153,13 @@ const PrescriptionAnalyzer = () => {
                     </button>
                   </div>
                 </form>
+
+                {/* Image Preview */}
+                {previewURL && (
+                  <div className="pres-image-preview">
+                    <img src={previewURL} alt="Prescription Preview" />
+                  </div>
+                )}
 
                 {visionText && !loading && (
                   <div className="pres-card">
