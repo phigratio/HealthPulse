@@ -2,6 +2,9 @@ package com.healthpulse.CabinBooking.services.impl;
 
 import java.util.List;
 
+import com.healthpulse.CabinBooking.clients.NotificationClient;
+import com.healthpulse.CabinBooking.entities.Notification;
+import com.healthpulse.CabinBooking.utils.JwtUtil;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +44,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private NotificationClient notificationClient;
 
 
 
@@ -89,6 +95,13 @@ public class BookingServiceImpl implements BookingService {
             response.setMessage("Error Saving a booking: " + e.getMessage());
 
         }
+
+        Notification noti = new Notification();
+        noti.setUserId(Math.toIntExact(userId));
+        noti.setData("You have booked a room successfully with code  " + bookingRequest.getBookingConfirmationCode());
+        notificationClient.createNotification(noti);
+
+
         return response;
     }
 

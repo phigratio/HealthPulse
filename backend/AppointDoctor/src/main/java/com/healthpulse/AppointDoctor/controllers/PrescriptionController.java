@@ -2,6 +2,8 @@ package com.healthpulse.AppointDoctor.controllers;
 
 import java.util.List;
 
+import com.healthpulse.AppointDoctor.clients.NotificationClient;
+import com.healthpulse.AppointDoctor.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,10 @@ public class PrescriptionController {
     @Autowired
     private PrescriptionService prescriptionService;
 
+    @Autowired
+    private NotificationClient notificationClient;
+
+
     @PostMapping
     public ResponseEntity<Prescription> createPrescription(@RequestBody Prescription prescription) {
         Prescription createdPrescription = prescriptionService.createPrescription(prescription);
@@ -25,6 +31,9 @@ public class PrescriptionController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Prescription> updatePrescription(@PathVariable ("id") Long id, @RequestBody Prescription prescription) {
+        if (!JwtUtil.isDoctor()) {
+            return ResponseEntity.status(403).body(null);
+        }
         Prescription updatedPrescription = prescriptionService.updatePrescription(id, prescription);
         if (updatedPrescription != null) {
             return ResponseEntity.ok(updatedPrescription);
@@ -40,7 +49,9 @@ public class PrescriptionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Prescription> getPrescriptionById(@PathVariable ("id") Long id) {
+
         Prescription prescription = prescriptionService.getPrescriptionById(id);
+
         if (prescription != null) {
             return ResponseEntity.ok(prescription);
         }

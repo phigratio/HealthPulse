@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.healthpulse.CabinBooking.clients.NotificationClient;
+import com.healthpulse.CabinBooking.entities.Notification;
+import com.healthpulse.CabinBooking.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
@@ -33,6 +36,9 @@ public class RoomServiceImpl implements RoomService {
 	    
 	    @Autowired
 	    private FileService fileService;
+
+		@Autowired
+		private NotificationClient notificationClient;
 	    
 	    @Value("${project.image}")
 		private String path;
@@ -61,6 +67,13 @@ public class RoomServiceImpl implements RoomService {
 	            response.setStatusCode(500);
 	            response.setMessage("Error saving a room " + e.getMessage());
 	        }
+
+			Notification noti = new Notification();
+			noti.setUserId(JwtUtil.getCurrentUserId());
+			noti.setData("New cabin added...");
+			notificationClient.createNotification(noti);
+
+
 	        return response;
 	    }
 
@@ -111,7 +124,13 @@ public class RoomServiceImpl implements RoomService {
 	            response.setStatusCode(500);
 	            response.setMessage("Error saving a room " + e.getMessage());
 	        }
-	        return response;
+
+			Notification noti = new Notification();
+			noti.setUserId(JwtUtil.getCurrentUserId());
+			noti.setData("An cabin deleted...");
+			notificationClient.createNotification(noti);
+
+			return response;
 	    }
 
 	    @Override
@@ -146,7 +165,13 @@ public class RoomServiceImpl implements RoomService {
 	            response.setStatusCode(500);
 	            response.setMessage("Error saving a room " + e.getMessage());
 	        }
-	        return response;
+
+			Notification noti = new Notification();
+			noti.setUserId(JwtUtil.getCurrentUserId());
+			noti.setData("A cabin updated...");
+			notificationClient.createNotification(noti);
+
+			return response;
 	    }
 
 	    @Override

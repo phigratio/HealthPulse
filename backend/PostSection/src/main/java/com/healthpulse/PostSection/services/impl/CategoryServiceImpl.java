@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.healthpulse.PostSection.clients.NotificationClient;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Autowired
 	private ModelMapper modelMapper;
+
+	@Autowired
+	private NotificationClient notificationClient;
 
 	@Override
 	public CategoryDto createCategory(CategoryDto categoryDto) {

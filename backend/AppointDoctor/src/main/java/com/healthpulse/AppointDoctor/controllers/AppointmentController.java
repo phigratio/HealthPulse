@@ -28,7 +28,7 @@ public class AppointmentController {
     @PostMapping("/create")
     public ResponseEntity<AppointmentData> createAppointment(@RequestBody AppointmentData appointmentData) {
         if (!JwtUtil.isCurrentUser(appointmentData.getDoctorId())) {
-            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+            return ResponseEntity.status(403).body(null);
         }
         AppointmentData createdAppointment = appointmentService.createAppointment(appointmentData);
         return ResponseEntity.ok(createdAppointment);

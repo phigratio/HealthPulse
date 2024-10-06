@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.healthpulse.PostSection.clients.NotificationClient;
+import com.healthpulse.PostSection.entities.Notification;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,10 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private CategoryRepo categoryRepo;
 
+
+    @Autowired
+    private NotificationClient notificationClient;
+
     @Override
     public PostDto createPost(PostDto postDto, String userId, String categoryId) {
 
@@ -53,6 +59,11 @@ public class PostServiceImpl implements PostService {
         post.setCategory(category);
 
         Post newPost = this.postRepo.save(post);
+
+        Notification noti = new Notification();
+        noti.setUserId(Integer.parseInt(userId));
+        noti.setData("Your post uploaded...");
+        notificationClient.createNotification(noti);
 
         return this.modelMapper.map(newPost, PostDto.class);
     }
@@ -72,6 +83,12 @@ public class PostServiceImpl implements PostService {
 
 
         Post updatedPost = this.postRepo.save(post);
+
+        Notification noti = new Notification();
+        noti.setUserId(Integer.parseInt(postDto.getUserId()));
+        noti.setData("Your post updated...");
+        notificationClient.createNotification(noti);
+
         return this.modelMapper.map(updatedPost, PostDto.class);
     }
 
@@ -82,6 +99,11 @@ public class PostServiceImpl implements PostService {
                 .orElseThrow(() -> new ResourceNotFoundException("Post ", "post id", postId));
 
         this.postRepo.delete(post);
+
+        Notification noti = new Notification();
+        noti.setUserId(Integer.parseInt(post.getUserId()));
+        noti.setData("Your post updated...");
+        notificationClient.createNotification(noti);
 
     }
 

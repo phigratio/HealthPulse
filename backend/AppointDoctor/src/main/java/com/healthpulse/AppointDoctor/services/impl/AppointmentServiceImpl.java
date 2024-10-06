@@ -2,9 +2,12 @@ package com.healthpulse.AppointDoctor.services.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.healthpulse.AppointDoctor.clients.NotificationClient;
+import com.healthpulse.AppointDoctor.entities.Notification;
 import com.healthpulse.AppointDoctor.services.UserService;
 import com.healthpulse.AppointDoctor.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
 
+
+    @Autowired
+    private NotificationClient notificationClient;
+
     @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository) {
         this.appointmentRepository = appointmentRepository;
@@ -37,6 +44,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public AppointmentData createAppointment(AppointmentData appointmentData) {
+        Notification noti = new Notification();
+        noti.setUserId(appointmentData.getDoctorId());
+        noti.setData("Your new appointment has created");
+        notificationClient.createNotification(noti);
         return appointmentRepository.save(appointmentData);
     }
     
@@ -84,6 +95,17 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid appointment ID"));
 
         appointment.bookAppointment(userId);
+
+        Notification noti = new Notification();
+        noti.setUserId(userId);
+        noti.setData("Booking appointment successful");
+        notificationClient.createNotification(noti);
+
+        Notification noti2 = new Notification();
+        noti2.setUserId(appointment.getDoctorId());
+        noti2.setData("Your appointment has booked. Appointment date: " + appointment.getAppointmentDate() + " time: " + appointment.getAppointmentTime().format(DateTimeFormatter.ofPattern("hh:mm a")));
+
+        notificationClient.createNotification(noti2);
         return appointmentRepository.save(appointment);
     }
 
@@ -98,6 +120,15 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         appointment.setStatus("AVAILABLE");
         appointment.setPatientId(0); // Reset patient ID
+
+        Notification noti = new Notification();
+        noti.setUserId(userId);
+        noti.setData("Canceled booking appointment successful");
+        notificationClient.createNotification(noti);
+
+        Notification noti2 = new Notification();
+        noti2.setUserId(appointment.getDoctorId());
+        noti2.setData("Your appointment has canceled. Appointment date: " + appointment.getAppointmentDate() + " time: " + appointment.getAppointmentTime().format(DateTimeFormatter.ofPattern("hh:mm a")));
         return appointmentRepository.save(appointment);
     }
     
@@ -139,6 +170,14 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         // Step 3: Fetch user details using the patient ID from the appointment
         User patient = userService.getUserById(appointment.getPatientId());
+
+        Notification noti = new Notification();
+
+        noti.setUserId(patient.getId());
+        noti.setData("Your virtual consultation is about to begin. ");
+
+        notificationClient.createNotification(noti);
+
 
         // Step 4: Extract the user email
         String email = patient.getEmail();
