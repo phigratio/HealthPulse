@@ -46,10 +46,7 @@ function Navbar() {
         </li>
         {userId && (
           <li>
-            <NavLink
-              to={`/appoint/user-prescriptions/${userId}`}
-              activeclassname="active"
-            >
+            <NavLink to={`/ecommerce/mycart`} activeclassname="active">
               Cart
             </NavLink>
           </li>
