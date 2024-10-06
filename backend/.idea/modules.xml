@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SectionRegistry/src/main/main.iml" filepath="$PROJECT_DIR$/SectionRegistry/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PostSection/src/main/main1.iml" filepath="$PROJECT_DIR$/PostSection/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ConfigServer/src/main/main10.iml" filepath="$PROJECT_DIR$/ConfigServer/src/main/main10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChatServer/src/main/main11.iml" filepath="$PROJECT_DIR$/ChatServer/src/main/main11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ReminderService/src/main/main12.iml" filepath="$PROJECT_DIR$/ReminderService/src/main/main12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RatingSection/src/main/main13.iml" filepath="$PROJECT_DIR$/RatingSection/src/main/main13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CabinBooking/src/main/main14.iml" filepath="$PROJECT_DIR$/CabinBooking/src/main/main14.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CabinSection/src/main/main2.iml" filepath="$PROJECT_DIR$/CabinSection/src/main/main2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AppointDoctor/src/main/main3.iml" filepath="$PROJECT_DIR$/AppointDoctor/src/main/main3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ecommerce/src/main/main4.iml" filepath="$PROJECT_DIR$/Ecommerce/src/main/main4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ApiGateway/src/main/main5.iml" filepath="$PROJECT_DIR$/ApiGateway/src/main/main5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UserSection/src/main/main6.iml" filepath="$PROJECT_DIR$/UserSection/src/main/main6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AuthSection/src/main/main7.iml" filepath="$PROJECT_DIR$/AuthSection/src/main/main7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChatSection/src/main/main8.iml" filepath="$PROJECT_DIR$/ChatSection/src/main/main8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HealthTracker/src/main/main9.iml" filepath="$PROJECT_DIR$/HealthTracker/src/main/main9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HealthTracker/src/test/test.iml" filepath="$PROJECT_DIR$/HealthTracker/src/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChatSection/src/test/test1.iml" filepath="$PROJECT_DIR$/ChatSection/src/test/test1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ApiGateway/src/test/test10.iml" filepath="$PROJECT_DIR$/ApiGateway/src/test/test10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CabinSection/src/test/test11.iml" filepath="$PROJECT_DIR$/CabinSection/src/test/test11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ConfigServer/src/test/test12.iml" filepath="$PROJECT_DIR$/ConfigServer/src/test/test12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AuthSection/src/test/test13.iml" filepath="$PROJECT_DIR$/AuthSection/src/test/test13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UserSection/src/test/test14.iml" filepath="$PROJECT_DIR$/UserSection/src/test/test14.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChatServer/src/test/test2.iml" filepath="$PROJECT_DIR$/ChatServer/src/test/test2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RatingSection/src/test/test3.iml" filepath="$PROJECT_DIR$/RatingSection/src/test/test3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AppointDoctor/src/test/test4.iml" filepath="$PROJECT_DIR$/AppointDoctor/src/test/test4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SectionRegistry/src/test/test5.iml" filepath="$PROJECT_DIR$/SectionRegistry/src/test/test5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ecommerce/src/test/test6.iml" filepath="$PROJECT_DIR$/Ecommerce/src/test/test6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CabinBooking/src/test/test7.iml" filepath="$PROJECT_DIR$/CabinBooking/src/test/test7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ReminderService/src/test/test8.iml" filepath="$PROJECT_DIR$/ReminderService/src/test/test8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PostSection/src/test/test9.iml" filepath="$PROJECT_DIR$/PostSection/src/test/test9.iml" />
+    </modules>
+  </component>
+</project>
