@@ -1,5 +1,7 @@
 package com.healthpulse.PostSection.services.impl;
 
+import com.healthpulse.PostSection.clients.NotificationClient;
+import com.healthpulse.PostSection.entities.Notification;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class CommentServiceImpl implements CommentService {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Autowired
+	private NotificationClient notificationClient;
+
 	@Override
 	public CommentDto createComment(CommentDto commentDto, Integer postId) {
 
@@ -35,6 +40,11 @@ public class CommentServiceImpl implements CommentService {
 		comment.setPost(post);
 
 		Comment savedComment = this.commentRepo.save(comment);
+
+		Notification noti = new Notification();
+		noti.setUserId(Integer.parseInt(post.getUserId()));
+		noti.setData("New comment added to your post.");
+		notificationClient.createNotification(noti);
 
 		return this.modelMapper.map(savedComment, CommentDto.class);
 	}

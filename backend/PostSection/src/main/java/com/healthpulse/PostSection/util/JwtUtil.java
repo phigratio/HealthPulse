@@ -44,6 +44,13 @@ public class JwtUtil {
         return getClaimsFromToken(token);
     }
 
+    // Get the current user ID from claims
+    public static Integer getCurrentUserId() {
+        Claims claims = getClaimsFromRequest();
+        return claims.get("userId", Integer.class);
+    }
+
+
     // Check if the user is an admin
     public static boolean isAdmin() {
         Claims claims = getClaimsFromRequest();

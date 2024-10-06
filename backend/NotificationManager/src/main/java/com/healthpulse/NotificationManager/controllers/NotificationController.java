@@ -46,7 +46,7 @@ public class NotificationController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Notification>> getNotificationsByUserId(@PathVariable int userId) {
-        if (!JwtUtil.isCurrentUser(userId) || !JwtUtil.isAdmin()) {
+        if (!JwtUtil.isCurrentUser(userId) && !JwtUtil.isAdmin()) {
             return ResponseEntity.status(403).body(null); // Forbidden if not user himself or admin
         }
         List<Notification> notifications = notificationService.getNotificationsByUserId(userId);

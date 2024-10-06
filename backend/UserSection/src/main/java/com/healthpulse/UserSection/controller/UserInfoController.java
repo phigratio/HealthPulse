@@ -42,7 +42,19 @@ public class UserInfoController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<UserInfoDTO> getUserInfoByUserId(@PathVariable ("userId") int userId) {
+
         UserInfoDTO userInfoDTO = userInfoService.getUserInfoByUserId(userId);
+        if (!JwtUtil.isCurrentUser(userId)) {
+            UserInfoDTO shereableUserInfoDTO = new UserInfoDTO();
+            shereableUserInfoDTO.setBloodGroup(userInfoDTO.getBloodGroup());
+            shereableUserInfoDTO.setAge(userInfoDTO.getAge());
+            shereableUserInfoDTO.setGender(userInfoDTO.getGender());
+            shereableUserInfoDTO.setPhoneNumber(userInfoDTO.getPhoneNumber());
+            shereableUserInfoDTO.setDistrict(userInfoDTO.getDistrict());
+            return ResponseEntity.ok(shereableUserInfoDTO);
+        }
+
+
         if (userInfoDTO != null) {
             return ResponseEntity.ok(userInfoDTO);
         } else {
@@ -53,7 +65,7 @@ public class UserInfoController {
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUserInfoByUserId(@PathVariable ("userId") int userId) {
         if (!JwtUtil.isCurrentUser(userId)) {
-            return ResponseEntity.status(403).body(null);  // Forbidden if not admin
+            return ResponseEntity.status(403).body(null);
         }
         userInfoService.deleteUserInfoByUserId(userId);
         return ResponseEntity.noContent().build();

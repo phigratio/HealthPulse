@@ -1,9 +1,12 @@
 package com.healthpulase.HealthTracker.service.impl;
 
+import com.healthpulase.HealthTracker.clients.NotificationClient;
 import com.healthpulase.HealthTracker.dto.TrackerDataDTO;
+import com.healthpulase.HealthTracker.entities.Notification;
 import com.healthpulase.HealthTracker.entities.TrackerData;
 import com.healthpulase.HealthTracker.repository.TrackerDataRepository;
 import com.healthpulase.HealthTracker.service.TrackerDataService;
+import com.healthpulase.HealthTracker.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +22,21 @@ public class TrackerDataServiceImpl implements TrackerDataService {
     @Autowired
     private TrackerDataRepository trackerDataRepository;
 
+    @Autowired
+    private NotificationClient notificationClient;
+
     @Override
     public TrackerDataDTO addTrackerData(TrackerDataDTO trackerDataDTO) {
+
         TrackerData trackerData = mapToEntity(trackerDataDTO);
         TrackerData savedTrackerData = trackerDataRepository.save(trackerData);
+
+        Notification noti = new Notification();
+        noti.setUserId(trackerData.getUserId());
+        noti.setData("Your tracker data has been added.");
+        notificationClient.createNotification(noti);
+
+
         return mapToDTO(savedTrackerData);
     }
 
@@ -69,6 +83,12 @@ public class TrackerDataServiceImpl implements TrackerDataService {
 
         // Save the updated or new entity to the repository
         TrackerData updatedData = trackerDataRepository.save(existingData);
+
+        Notification noti = new Notification();
+        noti.setUserId(updatedData.getUserId());
+        noti.setData("Your tracker data has been added.");
+        notificationClient.createNotification(noti);
+
         return mapToDTO(updatedData);
     }
 

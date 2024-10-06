@@ -1,6 +1,8 @@
 package com.healthpulse.ReminderService.services;
 
+import com.healthpulse.ReminderService.clients.NotificationClient;
 import com.healthpulse.ReminderService.entities.Medication;
+import com.healthpulse.ReminderService.entities.Notification;
 import com.healthpulse.ReminderService.entities.User;
 import com.healthpulse.ReminderService.repositories.MedicationRepository;
 
@@ -31,9 +33,20 @@ public class MedicationService {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Autowired
+    private NotificationClient notificationClient;
+
     // Add a medication
     public Medication addMedication(Medication medication) {
+
         medication.setReminderSent(false); // Initialize as false
+
+        Notification noti = new Notification();
+        noti.setUserId(medication.getUserId());
+        noti.setData("Your new medication added with "+medication.getName());
+        notificationClient.createNotification(noti);
+
+
         return medicationRepository.save(medication);
     }
     
@@ -72,6 +85,9 @@ public class MedicationService {
  // Delete a medication
     @Transactional
     public void deleteMedication(Long id) {
+
+
+
         medicationRepository.deleteById(id);
     }
     

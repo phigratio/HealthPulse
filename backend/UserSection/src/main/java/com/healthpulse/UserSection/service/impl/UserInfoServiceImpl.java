@@ -1,6 +1,8 @@
 package com.healthpulse.UserSection.service.impl;
 
+import com.healthpulse.UserSection.clients.NotificationClient;
 import com.healthpulse.UserSection.dto.UserInfoDTO;
+import com.healthpulse.UserSection.entities.Notification;
 import com.healthpulse.UserSection.entities.UserInfo;
 import com.healthpulse.UserSection.repositories.UserInfoRepository;
 import com.healthpulse.UserSection.service.UserInfoService;
@@ -17,6 +19,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     private UserInfoRepository userInfoRepository;
 
+    @Autowired
+    private NotificationClient notificationClient;
+
     @Override
     public UserInfoDTO addUserInfo(UserInfoDTO userInfoDTO) {
     	if (userInfoDTO.getReadyToDonateBlood() == null || userInfoDTO.getReadyToDonateBlood().isEmpty()) {
@@ -25,6 +30,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         UserInfo userInfo = convertToEntity(userInfoDTO);
         UserInfo savedUserInfo = userInfoRepository.save(userInfo);
+
+        Notification noti = new Notification();
+        noti.setUserId(savedUserInfo.getUserId());
+        noti.setData("Your user personal details initialized. ");
+        notificationClient.createNotification(noti);
         return convertToDTO(savedUserInfo);
     }
 
@@ -35,6 +45,12 @@ public class UserInfoServiceImpl implements UserInfoService {
             UserInfo userInfo = optionalUserInfo.get();
             updateUserInfoFromDTO(userInfo, userInfoDTO);
             UserInfo updatedUserInfo = userInfoRepository.save(userInfo);
+
+            Notification noti = new Notification();
+            noti.setUserId(userId);
+            noti.setData("Your user personal details initialized. ");
+            notificationClient.createNotification(noti);
+
             return convertToDTO(updatedUserInfo);
         }
         return null; // Or throw a custom exception

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import com.healthpulse.AppointDoctor.clients.NotificationClient;
+import com.healthpulse.AppointDoctor.entities.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +19,21 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Autowired
     private PrescriptionRepository prescriptionRepository;
 
+    @Autowired
+    private NotificationClient notificationClient;
+
     @Override
     public Prescription createPrescription(Prescription prescription) {
         // Set the creatingTime to the current time if not set
         if (prescription.getCreatingTime() == null) {
             prescription.setCreatingTime(LocalDateTime.now());
         }
+
+        Notification noti = new Notification();
+        noti.setUserId(prescription.getPatientId());
+        noti.setData("New prescription added...");
+        notificationClient.createNotification(noti);
+
         return prescriptionRepository.save(prescription);
     }
 
