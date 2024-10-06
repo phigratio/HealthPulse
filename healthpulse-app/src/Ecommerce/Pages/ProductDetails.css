@@ -2,7 +2,8 @@
 
 .product-details {
   padding: 20px;
-  max-width: 600px;
+  width: 100%;
+  /* max-width: 800px; */
   margin: 0 auto;
   text-align: center;
   background-color: #e0fbfc;

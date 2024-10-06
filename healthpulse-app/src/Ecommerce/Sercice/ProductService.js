@@ -150,6 +150,67 @@ class ProductService {
         throw error;
       });
   }
+
+  // Method to fetch the cart by user ID
+  getCartByUserId(userId) {
+    return privateAxios
+      .get(`/ecommerce/cart/${userId}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error("There was an error fetching the cart!", error);
+        throw error;
+      });
+  }
+
+  // Method to add a product to the cart
+  addProductToCart(userId, productId, quantity) {
+    return privateAxios
+      .post(`/ecommerce/cart/${userId}/add/${productId}/${quantity}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(
+          "There was an error adding the product to the cart!",
+          error
+        );
+        throw error;
+      });
+  }
+
+  // Method to delete a single cart item
+  deleteCartItem(userId, cartItemId) {
+    return privateAxios
+      .delete(`/ecommerce/cart/${userId}/remove/${cartItemId}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error("There was an error deleting the cart item!", error);
+        throw error;
+      });
+  }
+
+  // Method to update the quantity of a cart item (increase or decrease)
+  updateCartItemQuantity(userId, cartItemId, quantity) {
+    return privateAxios
+      .put(`/ecommerce/cart/${userId}/update/${cartItemId}/${quantity}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(
+          "There was an error updating the cart item quantity!",
+          error
+        );
+        throw error;
+      });
+  }
+
+  // Method to clear the entire cart
+  clearCart(userId) {
+    return privateAxios
+      .delete(`/ecommerce/cart/${userId}/clear`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error("There was an error clearing the cart!", error);
+        throw error;
+      });
+  }
 }
 
 export default new ProductService();
