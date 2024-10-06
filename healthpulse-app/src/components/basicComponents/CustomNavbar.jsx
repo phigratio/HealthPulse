@@ -88,7 +88,7 @@ const CustomNavbar = () => {
 
             <li className="cn-nav-item">
               <ReactLink className="cn-nav-link-light" to="/ecommerce">
-                Ecommerce
+                Medicine Shop
               </ReactLink>
             </li>
 

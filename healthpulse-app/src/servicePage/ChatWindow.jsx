@@ -16,9 +16,11 @@ const Header = () => {
   return (
     <div className="header">
       <h1 id="chat-header">
-        <b style={{ marginLeft: 5 }}>Chatbot</b>
+        <b style={{ marginLeft: 5 }}>HealthPulse AI Assistant</b>
       </h1>
-      <small>Healthpulse Chat AI to help your daily queries</small>
+      <small>
+        Your personal health assistant - Ask any health-related questions
+      </small>
     </div>
   );
 };
@@ -27,7 +29,15 @@ const Header = () => {
 const ChatWindow = () => {
   const chatContainerRef = useRef(null);
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    {
+      text: "Welcome to HealthPulse chatbot. I can help you with health-related questions. What would you like to know? Always consult a doctor for professional advice.",
+      sender: "ai",
+      timestamp: new Date(),
+      textForSpeech:
+        "Welcome to HealthPulse chatbot. I can help you with health-related questions. What would you like to know? Always consult a doctor for professional advice.",
+    },
+  ]);
 
   // Auto-scroll effect
   useEffect(() => {
@@ -36,16 +46,9 @@ const ChatWindow = () => {
 
   // Text Formatting Function
   const formatResponse = (text) => {
-    // Remove ** from the text
     let formattedText = text.replace(/\*\*/g, "");
-
-    // Split the text into paragraphs
     let paragraphs = formattedText.split("\n\n");
-
-    // Trim each paragraph and filter out empty ones
     paragraphs = paragraphs.map((p) => p.trim()).filter((p) => p.length > 0);
-
-    // Join paragraphs back into a single string
     return paragraphs.join("\n\n");
   };
 
@@ -55,26 +58,59 @@ const ChatWindow = () => {
     return doc.body.textContent || "";
   };
 
+  // Function to check if query is health-related
+  const isHealthRelated = async (query) => {
+    try {
+      const checkPrompt = `Determine if the following query is health-related. Only respond with 'true' or 'false'. Query: ${query}`;
+      const result = await model.generateContent(checkPrompt);
+      const response = result.response.text().toLowerCase().trim();
+      return response === "true";
+    } catch (error) {
+      console.error("Error checking health relevance:", error);
+      return false;
+    }
+  };
+
   // Message Sending Function
   const sendMessage = async (inputText) => {
-    if (!inputText) {
-      return;
-    }
+    if (!inputText) return;
 
+    // Add user message
     setMessages((prevMessages) => [
       ...prevMessages,
       {
         text: inputText,
         sender: "user",
         timestamp: new Date(),
-        textForSpeech: inputText, // Add textForSpeech for user messages
+        textForSpeech: inputText,
       },
     ]);
 
     setLoading(true);
 
     try {
-      const result = await model.generateContent(inputText);
+      // Check if the query is health-related
+      const healthRelated = await isHealthRelated(inputText);
+
+      if (!healthRelated) {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          {
+            text: "I apologize, but I can only answer health-related questions. Please feel free to ask any health, medical, wellness, or fitness questions.",
+            sender: "ai",
+            timestamp: new Date(),
+            textForSpeech:
+              "I apologize, but I can only answer health-related questions. Please feel free to ask any health, medical, wellness, or fitness questions.",
+          },
+        ]);
+        setLoading(false);
+        return;
+      }
+
+      // If health-related, proceed with the enhanced health-specific prompt
+      const healthPrompt = `As a health assistant, please provide accurate and helpful information about the following health-related query: ${inputText}. Remember to provide general information and advise consulting healthcare professionals for specific medical advice.`;
+
+      const result = await model.generateContent(healthPrompt);
       const text = result.response.text();
 
       const isCode = text.includes("```");
@@ -87,14 +123,23 @@ const ChatWindow = () => {
           sender: "ai",
           timestamp: new Date(),
           isCode,
-          textForSpeech: stripHtmlTags(formattedText), // Add stripped text for speech synthesis
+          textForSpeech: stripHtmlTags(formattedText),
         },
       ]);
-
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
       console.error("generateContent error: ", error);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          text: "I apologize, but I encountered an error processing your request. Please try again.",
+          sender: "ai",
+          timestamp: new Date(),
+          textForSpeech:
+            "I apologize, but I encountered an error processing your request. Please try again.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -120,7 +165,6 @@ const ChatWindow = () => {
                     <p>{paragraph}</p>
                   </div>
                 ))}
-                {/* TextToSpeechButton should appear once after the entire message */}
                 <TextToSpeechButton text={message.textForSpeech} />
                 <span
                   className={`time ${
@@ -136,7 +180,11 @@ const ChatWindow = () => {
           </div>
         ))}
       </div>
-      <InputBox sendMessage={sendMessage} loading={loading} />
+      <InputBox
+        sendMessage={sendMessage}
+        loading={loading}
+        placeholder="Ask your health-related question..."
+      />
     </div>
   );
 };
