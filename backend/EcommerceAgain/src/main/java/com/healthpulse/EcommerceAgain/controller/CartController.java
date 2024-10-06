@@ -27,9 +27,25 @@ public class CartController {
         return ResponseEntity.ok(updatedCart);
     }
 
+    @PutMapping("/{userId}/update/{cartItemId}/{quantity}")
+    public ResponseEntity<CartDto> updateCartItemQuantity(@PathVariable("userId") int userId,
+                                                          @PathVariable("cartItemId") int cartItemId,
+                                                          @PathVariable("quantity") int quantity) {
+        CartDto updatedCart = cartService.updateCartItemQuantity(userId, cartItemId, quantity);
+        return ResponseEntity.ok(updatedCart);
+    }
+
+    @DeleteMapping("/{userId}/remove/{cartItemId}")
+    public ResponseEntity<Void> deleteCartItem(@PathVariable("userId") int userId,
+                                               @PathVariable("cartItemId") int cartItemId) {
+        cartService.deleteCartItem(userId, cartItemId);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{userId}/clear")
     public ResponseEntity<Void> clearCart(@PathVariable ("userId") int userId) {
         cartService.clearCart(userId);
         return ResponseEntity.noContent().build();
     }
 }
+
