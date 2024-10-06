@@ -32,6 +32,33 @@
   overflow-y: auto; /* Ensure content doesn't overflow vertically */
 }
 
+.food-nation-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.food-nation-button {
+  background-color: #e0fbfc;
+  border: 2px solid #98c1d9;
+  color: #293241;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.food-nation-button.selected {
+  background-color: #3d5a80;
+  color: #e0fbfc;
+}
+
+.food-nation-button:hover {
+  background-color: #98c1d9;
+  transform: scale(1.05);
+}
+
 /* Grid for preferences buttons */
 .food-preferences-grid {
   display: flex;
@@ -49,6 +76,29 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Hide the original file input */
+input[type="file"] {
+  display: none;
+}
+
+/* Custom button for file upload */
+.custom-file-upload {
+  padding: 10px 20px;
+  border: 2px solid #3d5a80;
+  border-radius: 5px;
+  background-color: #3d5a80;
+  color: #e0fbfc;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Button hover effect */
+.custom-file-upload:hover {
+  background-color: #98c1d9;
+  transform: scale(1.05);
 }
 
 .food-preference-button:hover {

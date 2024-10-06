@@ -16,8 +16,9 @@ import { getCurrentUserDetail } from "../auth";
 import banner from "../images/banner/healthCalculator.mp4";
 import axios from "axios";
 import TextToSpeechButton from "./TextToSpeechButton";
-import { getUserInfo } from "../service/user-service";
+import { getUserInfo, updateUserInfo } from "../service/user-service";
 import { geminiKey } from "./apiKeys";
+import { toast } from "react-toastify";
 
 const YOUR_API_KEY = geminiKey;
 
@@ -38,23 +39,18 @@ const HealthCalculator = () => {
   const [results, setResults] = useState([]);
   const [error, setError] = useState("");
 
+  const [userInfo, setUserInfo] = useState({
+    address: "",
+    district: "",
+    phoneNumber: "",
+    bloodGroup: "",
+    readyToDonateBlood: "",
+    geneticDisease: "",
+    chronicDisease: "",
+    allergies: "",
+  });
   const [generatingAnswer, setGeneratingAnswer] = useState(false);
   const [answer, setAnswer] = useState("");
-  // useEffect(() => {
-  //   const user = getUserInfo(getCurrentUserDetail().id);
-  //   console.log("Fetched user id in health calculator:", getCurrentUserDetail().id);
-  //   console.log("Fetched user details:", user); // Debugging line to check user details
-
-  //   if (user) {
-  //     setWeight(user.weight > 0 ? user.weight : "");
-  //     setHeightCm(user.height > 0 ? user.height : "");
-  //     setAge(user.age > 0 ? user.age : "");
-  //     setGender(user.gender ? user.gender : "");
-  //     setWaist(user.waist > 0 ? user.waist : "");
-  //     setHip(user.hip > 0 ? user.hip : "");
-  //     setActivityLevel(user.activityLevel ? user.activityLevel : "");
-  //   }
-  // }, []);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -82,6 +78,80 @@ const HealthCalculator = () => {
     fetchUserInfo();
   }, []);
 
+  const handleUpdateUserHealth = () => {
+    const updatedUserInfo = {
+      ...userInfo,
+      height:
+        heightUnit === "cm"
+          ? heightCm
+          : convertHeightToCm(heightFeet, heightInches),
+      weight: convertWeightToKg(weight, weightUnit),
+      age: age,
+      gender: gender,
+      waist: convertLengthToCm(waist, waistUnit),
+      hip: convertLengthToCm(hip, hipUnit),
+    };
+
+    results.forEach((result) => {
+      switch (result.label) {
+        case "BMI":
+          updatedUserInfo.bmi = result.value;
+          break;
+        case "Body Fat Percentage":
+          updatedUserInfo.bodyFatPercentage = result.value;
+          break;
+        case "Waist to Hip Ratio":
+          updatedUserInfo.waistToHipRatio = result.value;
+          break;
+        case "Daily Caloric Needs":
+          updatedUserInfo.calorieNeeds = result.value;
+          break;
+        case "Ideal Weight":
+          updatedUserInfo.idealWeight = result.value;
+          break;
+        case "Daily Water Intake (L)":
+          updatedUserInfo.waterIntake = result.value;
+          break;
+        case "Body Surface Area (BSA)":
+          updatedUserInfo.bsa = result.value;
+          break;
+        case "Protein Needs":
+          updatedUserInfo.proteinNeeds = result.value;
+          break;
+        case "Carbohydrate Needs":
+          updatedUserInfo.carbNeeds = result.value;
+          break;
+        case "Fat Needs":
+          updatedUserInfo.fatNeeds = result.value;
+          break;
+        case "Muscle Mass Needs":
+          updatedUserInfo.muscleMassNeeds = result.value;
+          break;
+        case "Bone Density Needs":
+          updatedUserInfo.boneDensityNeeds = result.value;
+          break;
+        case "Metabolic Age":
+          updatedUserInfo.metabolicAge = result.value;
+          break;
+        case "Visceral Fat Needs":
+          updatedUserInfo.visceralFatNeeds = result.value;
+          break;
+        case "Body Water Needs":
+          updatedUserInfo.bodyWaterNeeds = result.value;
+          break;
+      }
+    });
+
+    const userDetails = getCurrentUserDetail();
+    updateUserInfo(updatedUserInfo, userDetails.id)
+      .then(() => {
+        toast.success("Health information updated successfully");
+      })
+      .catch((error) => {
+        console.error("Error updating health information:", error);
+        toast.error("Error updating health information");
+      });
+  };
   const convertWeightToKg = (weight, unit) =>
     unit === "lb" ? weight / 2.20462 : weight;
   const convertHeightToCm = (feet, inches) => feet * 30.48 + inches * 2.54;
@@ -520,13 +590,78 @@ const HealthCalculator = () => {
               {results.length > 0 && (
                 <div className="results mt-4">
                   <h4>Results</h4>
-                  <ul>
-                    {results.map((result, index) => (
-                      <li key={index}>
-                        {result.label}: {result.value}
-                      </li>
-                    ))}
-                  </ul>
+                  <table
+                    style={{
+                      width: "100%",
+                      borderCollapse: "collapse",
+                      margin: "20px 0",
+                      fontSize: "18px",
+                      textAlign: "left",
+                    }}
+                  >
+                    <thead>
+                      <tr style={{ backgroundColor: "#3d5a80", color: "#fff" }}>
+                        <th
+                          style={{
+                            border: "1px solid #3d5a80",
+                            padding: "12px",
+                          }}
+                        >
+                          Metric
+                        </th>
+                        <th
+                          style={{
+                            border: "1px solid #3d5a80",
+                            padding: "12px",
+                          }}
+                        >
+                          Value
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {results.map((result, index) => (
+                        <tr
+                          key={index}
+                          style={{
+                            backgroundColor:
+                              index % 2 === 0 ? "#edf2f8" : "#cfe0e8",
+                            color: "#000",
+                          }}
+                        >
+                          <td
+                            style={{
+                              border: "1px solid #3d5a80",
+                              padding: "12px",
+                            }}
+                          >
+                            {result.label}
+                          </td>
+                          <td
+                            style={{
+                              border: "1px solid #3d5a80",
+                              padding: "12px",
+                            }}
+                          >
+                            {result.value}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <Button
+                    color="success"
+                    onClick={handleUpdateUserHealth}
+                    style={{
+                      backgroundColor: "#28a745",
+                      borderColor: "#28a745",
+                      fontSize: "18px",
+                      padding: "12px 24px",
+                      marginTop: "20px",
+                    }}
+                  >
+                    Update Health Profile
+                  </Button>
                 </div>
               )}
             </Col>
@@ -543,6 +678,7 @@ const HealthCalculator = () => {
               borderColor: "#3d5a80",
               fontSize: "18px", // Make the button a bit bigger
               padding: "12px 24px", // Adjust padding to make it bigger
+              marginBottom: "10px",
             }}
           >
             Give Me Suggestion

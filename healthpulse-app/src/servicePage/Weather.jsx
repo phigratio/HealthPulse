@@ -5,7 +5,8 @@ import Clock from "react-live-clock";
 import ReactAnimatedWeather from "react-animated-weather";
 import "../style/servicePage/Weather.css";
 import TextToSpeechButton from "./TextToSpeechButton"; // Make sure you have this component
-
+import { getUserInfo } from "../service/user-service";
+import { getCurrentUserDetail } from "../auth";
 import banner from "../images/banner/Weahter.mp4";
 import Background from "../components/basicComponents/Background";
 import Base from "../components/Base";
@@ -15,6 +16,7 @@ import DoctorImg from "../components/LottieComponents/Doctor";
 const base = "https://api.openweathermap.org/data/2.5/";
 const GeminiKey = geminiKey;
 const key = weatherKey;
+
 const dateBuilder = (d) => {
   let months = [
     "January",
@@ -87,6 +89,30 @@ class Weather extends React.Component {
       alert("Geolocation not available");
     }
 
+    // Fetch user details (age, weight, bmi)
+    const fetchUserInfo = async () => {
+      try {
+        const userId = getCurrentUserDetail().id;
+        const user = await getUserInfo(userId);
+
+        if (user) {
+          const userAge = user.age > 0 ? user.age : "";
+          const userWeight = user.weight > 0 ? user.weight : "";
+          const userBMI = user.bmi ? user.bmi : ""; // Assuming BMI is available
+
+          this.setState({
+            userAge,
+            userWeight,
+            userBMI,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+        this.setState({ errorMsg: "Failed to fetch user information." });
+      }
+    };
+
+    fetchUserInfo();
     this.timerID = setInterval(
       () => this.getWeather(this.state.lat, this.state.lon),
       600000
@@ -163,8 +189,14 @@ class Weather extends React.Component {
     }
   };
 
-  fetchHealthRecommendation = async (weatherCondition, temperature) => {
-    const combinedText = `Weather is ${weatherCondition} with temperature ${temperature}°C.`;
+  fetchHealthRecommendation = async (
+    weatherCondition,
+    temperature,
+    age,
+    weight,
+    bmi
+  ) => {
+    const combinedText = `Weather is ${weatherCondition} with temperature ${temperature}°C. User details: Age: ${age}, Weight: ${weight}kg, BMI: ${bmi}.`;
 
     try {
       const response = await axios.post(
@@ -174,7 +206,7 @@ class Weather extends React.Component {
             {
               parts: [
                 {
-                  text: ` Give me health tips based on this weather: ${combinedText} .Try to ans in one single paragraph and within 500 words`,
+                  text: ` Give me health tips based on this weather: ${combinedText}. Try to answer in one paragraph within 500 words.`,
                 },
               ],
             },

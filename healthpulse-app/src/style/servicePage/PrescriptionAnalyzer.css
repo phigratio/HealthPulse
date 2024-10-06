@@ -115,3 +115,21 @@
   color: #293241;
   line-height: 1.6;
 }
+
+.pres-image-preview {
+  margin: 20px;
+  margin-left: 160px;
+  text-align: center;
+  justify-content: center; /* Centers the image horizontally */
+  align-items: center; /* Optional, centers vertically if needed */
+}
+
+.pres-image-preview img {
+  width: 300px; /* Adjust the size as needed */
+  height: 400px; /* Make it a square */
+  object-fit: cover; /* Ensure the image fits well */
+  border: 2px solid #00bfff; /* Add a bluish border */
+  border-radius: 10px;
+  justify-content: center; /* Centers the image horizontally */
+  align-items: center; /* Optional, centers vertically if needed */
+}

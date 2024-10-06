@@ -2,6 +2,9 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.8'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'com.palantir.docker' version '0.35.0'
+	id 'com.palantir.docker-compose' version '0.35.0'
+
 }
 
 group = 'com.healthpulse'
@@ -43,13 +46,11 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
-    implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
-    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
-    
-	
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+	implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
 }
 
 dependencyManagement {
@@ -61,3 +62,15 @@ dependencyManagement {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+docker {
+	name "${project.group}/auth-section:${project.version}"
+	dockerfile file('Dockerfile')
+	files bootJar.outputs.files
+	buildArgs(['JAR_FILE': bootJar.archiveFileName.get()])
+}
+
+tasks.named('docker') {
+	dependsOn bootJar
+}
+

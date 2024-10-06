@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../style/servicePage/MentalHealth.css";
 import MentalHealthL from "../components/LottieComponents/MentalHealth";
@@ -9,6 +9,8 @@ import { geminiKey } from "./apiKeys";
 import TextToSpeechButton from "./TextToSpeechButton";
 import SpeechToTextApp from "./SpeechToTextButton";
 import banner from "../images/banner/MentalHealth.mp4";
+import { getUserInfo } from "../service/user-service";
+import { getCurrentUserDetail } from "../auth";
 
 const apiKeyGemini = geminiKey;
 
@@ -19,6 +21,33 @@ const Mentalhealth = () => {
   const [imageUrl, setImageUrl] = useState(""); // For storing the generated image URL
   const [error, setError] = useState(""); // For handling image generation error
   const [isLoading, setIsLoading] = useState(false); // For loading state
+
+  const [age, setAge] = useState("");
+  const [weight, setWeight] = useState("");
+  const [bmi, setBmi] = useState("");
+  const [diseases, setDiseases] = useState([]);
+
+  // Fetch user info when component mounts
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const userId = getCurrentUserDetail().id;
+        const user = await getUserInfo(userId);
+
+        if (user) {
+          setAge(user.age || "");
+          setWeight(user.weight || "");
+          setBmi(user.bmi || "");
+          setDiseases(user.diseases || []);
+        }
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+        setError("Failed to fetch user information.");
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
 
   const mentalHealthIssues = [
     "Anxiety",
@@ -45,9 +74,11 @@ const Mentalhealth = () => {
   };
 
   const generateRecommendation = async () => {
-    const prompt = `Generate 1000 lines paragraph.Please provide in a single paragraph no matter how long it is. Provide sleep cycle recommendations and tips to avoid the following mental health issues: ${selectedIssues.join(
+    const prompt = `Generate 1000 lines paragraph.Dont give any asterisk inside the response. Provide sleep cycle recommendations and tips to avoid the following mental health issues: ${selectedIssues.join(
       ", "
-    )}`;
+    )}. User details: Age: ${age}, Weight: ${weight}kg, BMI: ${bmi}, Diseases: ${diseases.join(
+      ", "
+    )}.`;
 
     try {
       // Set loading state
@@ -78,7 +109,7 @@ const Mentalhealth = () => {
 
       // Generate the image
       const imageResponse = await axios.post(
-        "http://localhost:8095/generate-image",
+        "http://localhost:8095/generate-image", // Adjust endpoint as needed
         { prompt: modifiedPrompt },
         { responseType: "blob" }
       );
