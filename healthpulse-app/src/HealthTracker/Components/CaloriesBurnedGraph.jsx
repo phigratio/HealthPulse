@@ -20,6 +20,7 @@ import {
 import "../Styles/Graph.css";
 import { geminiKey } from "../../servicePage/apiKeys";
 import axios from "axios";
+import TextToSpeechButton from "../../servicePage/TextToSpeechButton";
 
 const apiKeyGemini = geminiKey;
 
@@ -156,7 +157,10 @@ const CaloriesBurnedGraph = () => {
           {isLoadingInsight ? (
             <p>Generating personalized insights...</p>
           ) : (
-            <p>{aiInsight}</p>
+            <div className="insight-container">
+              <p>{aiInsight}</p>
+              <TextToSpeechButton text={aiInsight} />
+            </div>
           )}
         </div>
       </div>

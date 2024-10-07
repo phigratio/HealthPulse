@@ -133,17 +133,28 @@ const PrescriptionAnalyzer = () => {
             <div className="pres-middle-side">
               <div className="pres-image-analyzer-container">
                 <h1 className="pres-heading">Prescription Analyzer</h1>
-                <form onSubmit={handleSubmit}>
-                  <div className="pres-button-group">
-                    <input
-                      type="file"
-                      onChange={handleFileChange}
-                      id="fileInput"
-                      className="pres-file-input"
-                    />
-                    <label htmlFor="fileInput" className="pres-btn">
-                      Choose Prescription
-                    </label>
+                <div className="pres-button-group-top">
+                  <input
+                    type="file"
+                    onChange={handleFileChange}
+                    id="fileInput"
+                    className="pres-file-input"
+                  />
+                  <label htmlFor="fileInput" className="pres-btn">
+                    Choose Prescription
+                  </label>
+                </div>
+
+                {/* Image Preview */}
+                {previewURL && (
+                  <div className="pres-image-preview">
+                    <img src={previewURL} alt="Prescription Preview" />
+                  </div>
+                )}
+
+                {/* Show Process Prescription button only after the preview */}
+                {selectedFile && (
+                  <div className="pres-button-group-bottom">
                     <button
                       type="submit"
                       className="pres-btn"
@@ -151,13 +162,6 @@ const PrescriptionAnalyzer = () => {
                     >
                       {isGenerating ? "Processing..." : "Process Prescription"}
                     </button>
-                  </div>
-                </form>
-
-                {/* Image Preview */}
-                {previewURL && (
-                  <div className="pres-image-preview">
-                    <img src={previewURL} alt="Prescription Preview" />
                   </div>
                 )}
 

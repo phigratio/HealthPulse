@@ -37,6 +37,7 @@ const HospitalList = ({ hospitals, onHospitalClick }) => {
 
   return (
     <div className="hospital-list">
+      <h2>Nearest Hospitals</h2>
       {hospitals.map((hospital) => (
         <div
           key={hospital.place_id}
