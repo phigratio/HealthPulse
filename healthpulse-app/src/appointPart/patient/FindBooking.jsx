@@ -37,16 +37,22 @@ import React, { useState, useEffect } from "react";
 import AppointService from "../service/AppointService"; // Import the default AppointService
 import { getUserData } from "../../service/user-service";
 import ResultAppointment from "../components/ResultAppointment";
+import { useNavigate } from "react-router-dom";
+import { isLoggedIn } from "../../auth";
 
 const FindBooking = () => {
   const [bookingResults, setBookingResults] = useState([]);
   const [user, setUser] = useState(null); // Initialize user in state
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch the user data once when the component is mounted
+    if (!isLoggedIn()) {
+      navigate("/login");
+    }
     const userData = getUserData();
     setUser(userData);
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const fetchBookings = async () => {

@@ -7,13 +7,15 @@ import { getCurrentUserDetail, isLoggedIn, doLogout } from "../../auth";
 import userContext from "../../context/userContext";
 import { BASE_URL } from "../../service/helper";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import NotificationPanel from "../../Notifications/Notification";
 
 const CustomNavbar = () => {
   const userContextData = useContext(userContext);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [login, setLogin] = useState(false);
-  const [user, setUser] = useState(null); // Initialize as null
+  const [user, setUser] = useState(null);
+  const [isNotificationPanelOpen, setIsNotificationPanelOpen] = useState(false); // Initialize as null
 
   useEffect(() => {
     setLogin(isLoggedIn());
@@ -227,12 +229,18 @@ const CustomNavbar = () => {
             {login ? (
               <>
                 <li className="cn-nav-item">
-                  <ReactLink className="cn-nav-link-light" to="/notifications">
+                  <button
+                    onClick={() =>
+                      setIsNotificationPanelOpen(!isNotificationPanelOpen)
+                    }
+                    className="p-2 hover:bg-gray-100 rounded-full"
+                  >
                     <i className="fas fa-bell"></i>{" "}
-                    {/* Font Awesome notification icon */}
-                    <span className="notification-badge"></span>{" "}
-                    {/* Example badge for notifications */}
-                  </ReactLink>
+                  </button>
+                  <NotificationPanel
+                    isOpen={isNotificationPanelOpen}
+                    onClose={() => setIsNotificationPanelOpen(false)}
+                  />
                 </li>
                 <li className="cn-nav-item">
                   <ReactLink
