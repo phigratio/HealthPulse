@@ -133,7 +133,7 @@ export const addUserInfo = (userInfo, userId) => {
     .then((response) => response.data);
 };
 
-//get user info
+//get user personal info
 
 export const getUserInfo = (userId) => {
   return privateAxios.get(`/userinfo/${userId}`).then((resp) => resp.data);

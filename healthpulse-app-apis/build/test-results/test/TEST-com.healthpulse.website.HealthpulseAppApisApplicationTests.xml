@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.healthpulse.website.HealthpulseAppApisApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-07-12T17:58:38" hostname="MDs-MacBook-Air-2.local" time="0.34">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.healthpulse.website.HealthpulseAppApisApplicationTests" time="0.34"/>
+  <system-out><![CDATA[23:58:35.554 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.healthpulse.website.HealthpulseAppApisApplicationTests]: HealthpulseAppApisApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:58:35.601 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.healthpulse.website.HealthpulseAppApisApplication for test class com.healthpulse.website.HealthpulseAppApisApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.1)
+
+2024-07-12T23:58:35.772+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] c.h.w.HealthpulseAppApisApplicationTests : Starting HealthpulseAppApisApplicationTests using Java 21.0.2 with PID 7354 (started by md.saidurrahmansagor in /Users/md.saidurrahmansagor/Documents/HealthPulse/healthpulse-app-apis)
+2024-07-12T23:58:35.773+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] c.h.w.HealthpulseAppApisApplicationTests : The following 1 profile is active: "dev"
+2024-07-12T23:58:36.091+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-12T23:58:36.130+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 10 JPA repository interfaces.
+2024-07-12T23:58:36.390+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-12T23:58:36.411+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-12T23:58:36.427+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-12T23:58:36.547+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-12T23:58:36.558+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-12T23:58:36.800+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7434ee13
+2024-07-12T23:58:36.801+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-12T23:58:36.835+06:00  WARN 7354 --- [healthpulse-app-apis] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-07-12T23:58:36.835+06:00  WARN 7354 --- [healthpulse-app-apis] [    Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-07-12T23:58:37.359+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table medicine_categories modify column description mediumtext not null
+Hibernate: alter table medicine_categories modify column title mediumtext not null
+Hibernate: alter table medicines modify column description mediumtext
+Hibernate: alter table medicines modify column medicine_name mediumtext not null
+Hibernate: alter table posts modify column content longtext
+2024-07-12T23:58:37.512+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-12T23:58:37.696+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name daoAuthenticationProvider
+2024-07-12T23:58:37.696+06:00  WARN 7354 --- [healthpulse-app-apis] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-07-12T23:58:37.751+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-12T23:58:38.006+06:00  WARN 7354 --- [healthpulse-app-apis] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-12T23:58:38.151+06:00 DEBUG 7354 --- [healthpulse-app-apis] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-07-12T23:58:38.337+06:00  INFO 7354 --- [healthpulse-app-apis] [    Test worker] c.h.w.HealthpulseAppApisApplicationTests : Started HealthpulseAppApisApplicationTests in 2.664 seconds (process running for 3.196)
+Hibernate: select r1_0.id,r1_0.name from role r1_0 where r1_0.id=?
+Hibernate: select r1_0.id,r1_0.name from role r1_0 where r1_0.id=?
+Hibernate: select r1_0.id,r1_0.name from role r1_0 where r1_0.id=?
+ROLE_ADMIN
+ROLE_NORMAL
+ROLE_DOCTOR
+]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/md.saidurrahmansagor/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.17/e3c251a39dc90badaf71c83427ba46840f219d8d/byte-buddy-agent-1.14.17.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

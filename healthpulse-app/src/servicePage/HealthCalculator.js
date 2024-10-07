@@ -325,23 +325,78 @@ const HealthCalculator = () => {
       );
       const bodyWaterNeeds = calculateBodyWaterNeeds(weightInKg);
 
+      // setResults([
+      //   { label: "BMI", value: bmiValue },
+      //   { label: "Body Fat Percentage", value: bodyFatPercentage },
+      //   { label: "Waist to Hip Ratio", value: waistToHipRatio?.ratio },
+      //   { label: "Waist to Hip Ratio Risk", value: waistToHipRatio?.risk },
+      //   { label: "Daily Caloric Needs", value: caloricNeeds },
+      //   { label: "Ideal Weight", value: idealWeight },
+      //   { label: "Daily Water Intake (L)", value: waterIntake },
+      //   { label: "Body Surface Area (BSA)", value: bsa },
+      //   { label: "Protein Needs", value: proteinNeeds },
+      //   { label: "Carbohydrate Needs", value: carbNeeds },
+      //   { label: "Fat Needs", value: fatNeeds },
+      //   { label: "Muscle Mass Needs", value: muscleMassNeeds },
+      //   { label: "Bone Density Needs", value: boneDensityNeeds },
+      //   { label: "Metabolic Age", value: metabolicAge },
+      //   { label: "Visceral Fat Needs", value: visceralFatNeeds },
+      //   { label: "Body Water Needs", value: bodyWaterNeeds },
+      // ]);
+
       setResults([
-        { label: "BMI", value: bmiValue },
-        { label: "Body Fat Percentage", value: bodyFatPercentage },
-        { label: "Waist to Hip Ratio", value: waistToHipRatio?.ratio },
-        { label: "Waist to Hip Ratio Risk", value: waistToHipRatio?.risk },
-        { label: "Daily Caloric Needs", value: caloricNeeds },
-        { label: "Ideal Weight", value: idealWeight },
-        { label: "Daily Water Intake (L)", value: waterIntake },
-        { label: "Body Surface Area (BSA)", value: bsa },
-        { label: "Protein Needs", value: proteinNeeds },
-        { label: "Carbohydrate Needs", value: carbNeeds },
-        { label: "Fat Needs", value: fatNeeds },
-        { label: "Muscle Mass Needs", value: muscleMassNeeds },
-        { label: "Bone Density Needs", value: boneDensityNeeds },
-        { label: "Metabolic Age", value: metabolicAge },
-        { label: "Visceral Fat Needs", value: visceralFatNeeds },
-        { label: "Body Water Needs", value: bodyWaterNeeds },
+        { label: "BMI", value: isNaN(bmiValue) ? 0 : bmiValue },
+        {
+          label: "Body Fat Percentage",
+          value: isNaN(bodyFatPercentage) ? 0 : bodyFatPercentage,
+        },
+        {
+          label: "Waist to Hip Ratio",
+          value: isNaN(waistToHipRatio?.ratio) ? 0 : waistToHipRatio?.ratio,
+        },
+        {
+          label: "Waist to Hip Ratio Risk",
+          value: isNaN(waistToHipRatio?.risk) ? 0 : waistToHipRatio?.risk,
+        },
+        {
+          label: "Daily Caloric Needs",
+          value: isNaN(caloricNeeds) ? 0 : caloricNeeds,
+        },
+        { label: "Ideal Weight", value: isNaN(idealWeight) ? 0 : idealWeight },
+        {
+          label: "Daily Water Intake (L)",
+          value: isNaN(waterIntake) ? 0 : waterIntake,
+        },
+        { label: "Body Surface Area (BSA)", value: isNaN(bsa) ? 0 : bsa },
+        {
+          label: "Protein Needs",
+          value: isNaN(proteinNeeds) ? 0 : proteinNeeds,
+        },
+        {
+          label: "Carbohydrate Needs",
+          value: isNaN(carbNeeds) ? 0 : carbNeeds,
+        },
+        { label: "Fat Needs", value: isNaN(fatNeeds) ? 0 : fatNeeds },
+        {
+          label: "Muscle Mass Needs",
+          value: isNaN(muscleMassNeeds) ? 0 : muscleMassNeeds,
+        },
+        {
+          label: "Bone Density Needs",
+          value: isNaN(boneDensityNeeds) ? 0 : boneDensityNeeds,
+        },
+        {
+          label: "Metabolic Age",
+          value: isNaN(metabolicAge) ? 0 : metabolicAge,
+        },
+        {
+          label: "Visceral Fat Needs",
+          value: isNaN(visceralFatNeeds) ? 0 : visceralFatNeeds,
+        },
+        {
+          label: "Body Water Needs",
+          value: isNaN(bodyWaterNeeds) ? 0 : bodyWaterNeeds,
+        },
       ]);
     } else {
       setError("Please fill out all required fields with valid values.");
