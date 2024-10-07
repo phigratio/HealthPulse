@@ -18,7 +18,8 @@
 }
 
 .notification-header {
-  background-color: #98c1d9; /* Darker navy blue */
+  background-color: #3d5a80; /* Darker navy blue */
+  color: #98c1d9;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -73,11 +74,11 @@
 
 .notification-list li p {
   margin-top: 4px;
-  color: #e0fbfc; /* Lighter gray for the text */
+  color: #293241; /* Lighter gray for the text */
 }
 
 .notification-list li small {
-  color: #e0fbfc; /* Even lighter gray for the timestamp */
+  color: #293241; /* Even lighter gray for the timestamp */
 }
 
 .notification-list li button {
@@ -96,5 +97,5 @@
 .error-message,
 .no-notifications-message {
   padding: 16px;
-  color: #e0fbfc; /* Lighter gray */
+  color: #293241; /* Lighter gray */
 }

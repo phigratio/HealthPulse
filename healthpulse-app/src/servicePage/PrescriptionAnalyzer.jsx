@@ -159,6 +159,7 @@ const PrescriptionAnalyzer = () => {
                       type="submit"
                       className="pres-btn"
                       disabled={isGenerating}
+                      onClick={handleSubmit}
                     >
                       {isGenerating ? "Processing..." : "Process Prescription"}
                     </button>
