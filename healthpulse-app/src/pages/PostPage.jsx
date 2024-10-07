@@ -37,36 +37,36 @@ const PostPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); // Initialize useNavigate
 
-useEffect(() => {
-  const fetchPostAndOwner = async () => {
-    try {
-      const loggedInUser = getUserData();
-      console.log("Logged in user:", loggedInUser); // Debug line
+  useEffect(() => {
+    const fetchPostAndOwner = async () => {
+      try {
+        const loggedInUser = getUserData();
+        console.log("Logged in user:", loggedInUser); // Debug line
 
-      if (loggedInUser) {
-        setCurrentUser(loggedInUser);
+        if (loggedInUser) {
+          setCurrentUser(loggedInUser);
+        }
+
+        const data = await loadPost(postId);
+        setPost(data);
+        console.log("Post user ID:", data.userId); // Debug line
+
+        const owner = await getUser(data.userId);
+        setBlogOwner(owner);
+        console.log("Blog owner:", owner); // Debug line
+
+        if (loggedInUser && parseInt(data.userId) === loggedInUser.id) {
+          setIsOwner(true);
+        } else {
+          setIsOwner(false);
+        }
+      } catch (error) {
+        toast.error("Error in loading post");
       }
+    };
 
-      const data = await loadPost(postId);
-      setPost(data);
-      console.log("Post user ID:", data.userId); // Debug line
-
-      const owner = await getUser(data.userId);
-      setBlogOwner(owner);
-      console.log("Blog owner:", owner); // Debug line
-
-      if (loggedInUser && parseInt(data.userId) === loggedInUser.id) {
-        setIsOwner(true);
-      } else {
-        setIsOwner(false);
-      }
-    } catch (error) {
-      toast.error("Error in loading post");
-    }
-  };
-
-  fetchPostAndOwner();
-}, [postId]);
+    fetchPostAndOwner();
+  }, [postId]);
 
   const submitPost = () => {
     if (!isLoggedIn()) {
@@ -180,7 +180,6 @@ useEffect(() => {
                         dangerouslySetInnerHTML={{ __html: post.content }}
                       />
                     </div>
-
                     {isOwner ? (
                       <div>
                         <div className="mt-4">
