@@ -229,6 +229,15 @@ const CustomNavbar = () => {
             {login ? (
               <>
                 <li className="cn-nav-item">
+                  <ReactLink
+                    onClick={logout}
+                    className="cn-nav-link-light"
+                    to="/"
+                  >
+                    Log Out
+                  </ReactLink>
+                </li>
+                <li className="cn-nav-item">
                   <button
                     onClick={() =>
                       setIsNotificationPanelOpen(!isNotificationPanelOpen)
@@ -241,15 +250,6 @@ const CustomNavbar = () => {
                     isOpen={isNotificationPanelOpen}
                     onClose={() => setIsNotificationPanelOpen(false)}
                   />
-                </li>
-                <li className="cn-nav-item">
-                  <ReactLink
-                    onClick={logout}
-                    className="cn-nav-link-light"
-                    to="/"
-                  >
-                    Log Out
-                  </ReactLink>
                 </li>
               </>
             ) : (

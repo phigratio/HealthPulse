@@ -110,6 +110,102 @@
 
 // export default Notification;
 
+// import React, { useEffect, useState } from "react";
+// import {
+//   getNotificationsByUserId,
+//   deleteNotification,
+// } from "./Service/NotificationService";
+// import { getUserData } from "../service/user-service";
+// import { X } from "lucide-react";
+// import "./NotificationsPage.css";
+
+// const NotificationPanel = ({ isOpen, onClose }) => {
+//   const [notifications, setNotifications] = useState([]);
+//   const [error, setError] = useState(null);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     if (isOpen) {
+//       const userData = getUserData();
+//       if (userData) {
+//         getNotificationsByUserId(userData.id)
+//           .then((data) => {
+//             setNotifications(data);
+//             setLoading(false);
+//           })
+//           .catch((err) => {
+//             console.error("Error fetching notifications:", err);
+//             setError("Failed to load notifications.");
+//             setLoading(false);
+//           });
+//       }
+//     }
+//   }, [isOpen]);
+
+//   const handleDelete = (id) => {
+//     deleteNotification(id)
+//       .then(() => {
+//         setNotifications(
+//           notifications.filter((notification) => notification.id !== id)
+//         );
+//       })
+//       .catch((err) => {
+//         console.error("Error deleting notification:", err);
+//         setError("Failed to delete notification.");
+//       });
+//   };
+
+//   return (
+//     <div
+//       className={`fixed inset-y-0 right-0 w-[30%] bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+//         isOpen ? "translate-x-0" : "translate-x-full"
+//       }`}
+//     >
+//       <div className="h-full flex flex-col">
+//         {/* Header - Fixed */}
+//         <div className="p-4 border-b flex justify-between items-center">
+//           <h2 className="text-xl font-semibold">Notifications</h2>
+//           <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded">
+//             <X className="h-6 w-6" />
+//           </button>
+//         </div>
+
+//         {/* Content - Scrollable */}
+//         <div className="flex-1 overflow-y-auto">
+//           {loading && <p className="p-4">Loading notifications...</p>}
+//           {error && <p className="p-4 text-red-500">{error}</p>}
+//           {!loading && !error && notifications.length === 0 && (
+//             <p className="p-4">No notifications available</p>
+//           )}
+//           <ul className="divide-y">
+//             {notifications.map((notification) => (
+//               <li key={notification.id} className="p-4 hover:bg-gray-50">
+//                 <div className="flex justify-between">
+//                   <h4 className="font-medium">{notification.title}</h4>
+//                   <button
+//                     onClick={() => handleDelete(notification.id)}
+//                     className="text-red-500 hover:text-red-700"
+//                   >
+//                     <X className="h-4 w-4" />
+//                   </button>
+//                 </div>
+//                 <p className="mt-1 text-sm text-gray-600">
+//                   {notification.data}
+//                 </p>
+//                 <small className="text-gray-400">
+//                   {new Date(notification.createdAt).toLocaleString()}
+//                 </small>
+//               </li>
+//             ))}
+//           </ul>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default NotificationPanel;
+
 import React, { useEffect, useState } from "react";
 import {
   getNotificationsByUserId,
@@ -117,6 +213,7 @@ import {
 } from "./Service/NotificationService";
 import { getUserData } from "../service/user-service";
 import { X } from "lucide-react";
+import "./NotificationsPage.css";
 
 const NotificationPanel = ({ isOpen, onClose }) => {
   const [notifications, setNotifications] = useState([]);
@@ -155,43 +252,38 @@ const NotificationPanel = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div
-      className={`fixed inset-y-0 right-0 w-[30%] bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
-        isOpen ? "translate-x-0" : "translate-x-full"
-      }`}
-    >
+    <div className={`notification-panel ${isOpen ? "open" : ""}`}>
       <div className="h-full flex flex-col">
-        {/* Header - Fixed */}
-        <div className="p-4 border-b flex justify-between items-center">
-          <h2 className="text-xl font-semibold">Notifications</h2>
-          <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded">
+        {/* Header */}
+        <div className="notification-header">
+          <h2>Notifications</h2>
+          <button onClick={onClose}>
             <X className="h-6 w-6" />
           </button>
         </div>
 
-        {/* Content - Scrollable */}
-        <div className="flex-1 overflow-y-auto">
-          {loading && <p className="p-4">Loading notifications...</p>}
-          {error && <p className="p-4 text-red-500">{error}</p>}
-          {!loading && !error && notifications.length === 0 && (
-            <p className="p-4">No notifications available</p>
+        {/* Content */}
+        <div className="notification-content">
+          {loading && (
+            <p className="loading-message">Loading notifications...</p>
           )}
-          <ul className="divide-y">
+          {error && <p className="error-message">{error}</p>}
+          {!loading && !error && notifications.length === 0 && (
+            <p className="no-notifications-message">
+              No notifications available
+            </p>
+          )}
+          <ul className="notification-list">
             {notifications.map((notification) => (
-              <li key={notification.id} className="p-4 hover:bg-gray-50">
+              <li key={notification.id}>
                 <div className="flex justify-between">
-                  <h4 className="font-medium">{notification.title}</h4>
-                  <button
-                    onClick={() => handleDelete(notification.id)}
-                    className="text-red-500 hover:text-red-700"
-                  >
+                  <h4>{notification.title}</h4>
+                  <button onClick={() => handleDelete(notification.id)}>
                     <X className="h-4 w-4" />
                   </button>
                 </div>
-                <p className="mt-1 text-sm text-gray-600">
-                  {notification.data}
-                </p>
-                <small className="text-gray-400">
+                <p>{notification.data}</p>
+                <small>
                   {new Date(notification.createdAt).toLocaleString()}
                 </small>
               </li>
