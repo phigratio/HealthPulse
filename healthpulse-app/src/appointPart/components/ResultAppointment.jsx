@@ -117,20 +117,6 @@ const ResultAppointment = ({ appointmentResults }) => {
                   </p>
                   <p>Time: {formatTime(appointment.appointmentTime)}</p>
                   <p>Consultation Fee: {appointment.consultationFee} BDT</p>
-                  <p className="result-appointment-rating">
-                    Average Rating:{" "}
-                    <span className="result-appointment-star-rating">
-                      {[...Array(5)].map((_, index) => (
-                        <FaStar
-                          key={index}
-                          className={`result-appointment-star ${
-                            index < Math.floor(avg) ? "filled" : ""
-                          }`}
-                        />
-                      ))}
-                    </span>{" "}
-                    ({count} reviews)
-                  </p>
                 </div>
 
                 {appointment.status === "AVAILABLE" ? (

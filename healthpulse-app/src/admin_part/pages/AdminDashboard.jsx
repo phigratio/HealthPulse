@@ -29,7 +29,15 @@ const AdminDashboard = () => {
         >
           Manage Cabin
         </button>
-        <button className="cb-admin-button" onClick={() => navigate("/admin")}>
+        <button
+          className="cb-admin-button"
+          onClick={() =>
+            window.open(
+              "https://chatengine.io/projects/e9453cd6-dc1a-43bd-ab27-13ae48e57050#users",
+              "_blank"
+            )
+          }
+        >
           Manage Users
         </button>
         <button

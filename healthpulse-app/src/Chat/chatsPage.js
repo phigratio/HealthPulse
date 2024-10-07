@@ -19,7 +19,7 @@ const ChatsPage = () => {
     // </div>
     <div style={{ height: "100vh", width: "100vw" }}>
       <PrettyChatWindow
-        projectId="056a5531-6af2-40ef-95ef-428e9bd2ec5e"
+        projectId="e9453cd6-dc1a-43bd-ab27-13ae48e57050"
         username={getCurrentUserDetail().name}
         secret={secret}
         style={{ height: "100%" }}

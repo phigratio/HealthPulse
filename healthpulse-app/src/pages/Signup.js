@@ -211,7 +211,6 @@ const Signup = () => {
                     onChange={(e) => handleChange(e, "role")}
                     value={data.role}
                   >
-                    <option value="501">Admin</option>
                     <option value="502">User</option>
                     <option value="503">Doctor</option>
                   </select>

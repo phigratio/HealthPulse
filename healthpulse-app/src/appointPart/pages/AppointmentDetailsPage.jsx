@@ -12,7 +12,6 @@ import {
 import AppointService from "../service/AppointService";
 import { getUser, getUserData } from "../../service/user-service";
 import "./style/AppointmentDetailsPage.css";
-import { FaStar } from "react-icons/fa";
 
 // Load Stripe with your public key
 const stripePromise = loadStripe(
@@ -94,7 +93,7 @@ const StripePaymentForm = ({ amount, onSuccess }) => {
             type="number"
             value={amount}
             readOnly
-            style={{ backgroundColor: "#f0f0f0" }} // Read-only styling
+            style={{ backgroundColor: "#f0f0f0" }}
           />
         </div>
         <div className="form-group">
@@ -118,8 +117,6 @@ const AppointmentDetailsPage = () => {
   const { appointmentId } = useParams();
   const [appointment, setAppointment] = useState(null);
   const [doctorDetails, setDoctorDetails] = useState({});
-  const [reviews, setReviews] = useState([]);
-  const [users, setUsers] = useState({});
   const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const navigate = useNavigate();
@@ -135,24 +132,6 @@ const AppointmentDetailsPage = () => {
         if (appointmentData.doctorId) {
           const doctor = await getUser(appointmentData.doctorId);
           setDoctorDetails(doctor);
-
-          const reviewsData = await AppointService.getReviewsByDoctorId(
-            appointmentData.doctorId
-          );
-          setReviews(reviewsData || []);
-
-          const userIds = reviewsData.map((review) => review.userId);
-          const uniqueUserIds = [...new Set(userIds)];
-
-          const userPromises = uniqueUserIds.map((id) => getUser(id));
-          const usersData = await Promise.all(userPromises);
-
-          const usersMap = usersData.reduce((acc, user) => {
-            acc[user.id] = user;
-            return acc;
-          }, {});
-
-          setUsers(usersMap);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -164,7 +143,6 @@ const AppointmentDetailsPage = () => {
   }, [appointmentId]);
 
   const handleBookNow = () => {
-    // Hide reviews and show the payment form
     setShowPaymentForm(true);
   };
 
@@ -189,20 +167,9 @@ const AppointmentDetailsPage = () => {
     }
   };
 
-  const calculateAverageRating = (reviews = []) => {
-    if (reviews.length === 0) return { avg: 0, count: 0 };
-    const total = reviews.reduce((sum, review) => sum + review.rating, 0);
-    return {
-      avg: parseFloat((total / reviews.length).toFixed(1)),
-      count: reviews.length,
-    };
-  };
-
   if (!appointment) {
     return <div>Loading...</div>;
   }
-
-  const { avg, count } = calculateAverageRating(reviews);
 
   return (
     <div className="ad-details-page">
@@ -215,14 +182,13 @@ const AppointmentDetailsPage = () => {
           <p>Appointment Date: {appointment.appointmentDate}</p>
           <p>Appointment Time: {appointment.appointmentTime}</p>
           <p>Status: {appointment.status}</p>
-          <p>Consultation Fee: ${appointment.consultationFee}</p>
+          <p>Consultation Fee: BDT {appointment.consultationFee}</p>
           {appointment.status === "AVAILABLE" && !showPaymentForm && (
             <button onClick={handleBookNow} className="book-now-button">
               Book Now
             </button>
           )}
 
-          {/* Show Stripe Payment Form if "Book Now" clicked */}
           {showPaymentForm && (
             <Elements stripe={stripePromise}>
               <StripePaymentForm
@@ -230,58 +196,6 @@ const AppointmentDetailsPage = () => {
                 onSuccess={handlePaymentSuccess}
               />
             </Elements>
-          )}
-
-          {!showPaymentForm && (
-            <div className="reviews-section">
-              <h3>Doctor Reviews</h3>
-              <div className="rating-summary">
-                <p>Average Rating: {avg} / 5</p>
-                <div className="stars">
-                  {[...Array(5)].map((_, index) => {
-                    const filledStars = Math.floor(avg);
-                    const isHalfStar =
-                      avg - filledStars > 0 && index === filledStars;
-
-                    return (
-                      <FaStar
-                        key={index}
-                        className={`star ${
-                          index < filledStars ? "filled" : ""
-                        } ${isHalfStar ? "half-filled" : ""}`}
-                      />
-                    );
-                  })}
-                </div>
-
-                <p>({count} reviews)</p>
-              </div>
-
-              <div className="reviews-list">
-                {reviews.length > 0 ? (
-                  reviews.map((review) => (
-                    <div key={review.id} className="review-card">
-                      <div className="review-header">
-                        <p className="review-username">
-                          <strong>User Name:</strong>{" "}
-                          {users[review.userId]?.name || "Unknown User"}
-                        </p>
-                        <div className="review-rating">
-                          {[...Array(review.rating)].map((_, index) => (
-                            <FaStar key={index} className="star filled" />
-                          ))}
-                        </div>
-                      </div>
-                      <p className="review-text">
-                        <strong>Review:</strong> {review.reviewText}
-                      </p>
-                    </div>
-                  ))
-                ) : (
-                  <p>No reviews available.</p>
-                )}
-              </div>
-            </div>
           )}
 
           <ToastContainer />
