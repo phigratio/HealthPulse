@@ -1,52 +1,100 @@
-.notifications-page {
-  padding: 20px;
+/* NotificationPanel CSS */
+.notification-panel {
+  background-color: #e0fbfc; /* Navy blue background */
+  color: #293241; /* White text */
+  width: 23%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 56px;
+  right: 0;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%);
+  z-index: 50;
 }
 
-.notifications-list {
-  list-style: none;
-  padding: 0;
-}
-
-.notification-item {
-  position: relative; /* Enable absolute positioning inside the card */
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+.notification-panel.open {
+  transform: translateX(0); /* Slide in when opened */
 }
 
 .notification-header {
+  background-color: #98c1d9; /* Darker navy blue */
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #3d5a80; /* Light border to separate header */
 }
 
-.notification-header h4 {
-  margin: 0;
-  font-size: 18px;
+.notification-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
-.notification-header small {
-  color: gray;
-  font-size: 12px;
-}
-
-/* Delete button styles */
-.delete-button {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+.notification-header button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: #888; /* Lighter color for the trash icon */
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
 }
 
-.delete-button i {
-  font-size: 18px;
+.notification-header button:hover {
+  background-color: #98c1d9; /* Light hover background */
 }
 
-.delete-button:hover {
-  color: #555; /* Darker on hover */
+.notification-content {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.notification-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.notification-list li {
+  padding: 16px;
+  border-bottom: 1px solid #3d5a80; /* Light gray border between items */
+  transition: background-color 0.3s ease;
+}
+
+.notification-list li:hover {
+  background-color: #3d5a80; /* Hover effect for each notification */
+}
+
+.notification-list li h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.notification-list li p {
+  margin-top: 4px;
+  color: #e0fbfc; /* Lighter gray for the text */
+}
+
+.notification-list li small {
+  color: #e0fbfc; /* Even lighter gray for the timestamp */
+}
+
+.notification-list li button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ee6c4d; /* Red for delete button */
+  transition: color 0.3s ease;
+}
+
+.notification-list li button:hover {
+  color: #dc2626; /* Darker red on hover */
+}
+
+.loading-message,
+.error-message,
+.no-notifications-message {
+  padding: 16px;
+  color: #e0fbfc; /* Lighter gray */
 }

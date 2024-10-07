@@ -196,3 +196,38 @@
     font-size: 12px;
   }
 }
+
+/* Add these styles to your existing CSS file */
+
+.cn-user-notification-container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.cn-notification-button {
+  background: none !important;
+  border: none !important;
+  color: #293241 !important;
+  cursor: pointer !important;
+  padding: 5px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.cn-notification-button:hover {
+  background-color: rgba(152, 193, 217, 0.2) !important;
+}
+
+/* Update your existing mobile styles */
+@media (max-width: 768px) {
+  .cn-user-notification-container {
+    margin-left: auto !important;
+    margin-top: 10px !important;
+  }
+}
