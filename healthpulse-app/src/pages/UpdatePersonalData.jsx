@@ -264,10 +264,9 @@ const UpdatePersonalData = () => {
                 onChange={(event) => handleChange(event, "gender")}
               >
                 <option value="">Select your gender</option>
-                <option value="male">Male</option>
+                <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="ThridGender">Thrid Gender</option>
-                <option value="">No option for others</option>
               </Input>
             </div>
 
