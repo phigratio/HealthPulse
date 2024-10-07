@@ -16,6 +16,7 @@ const PetHealthcare = () => {
   const [prompt, setPrompt] = useState(""); // The main prompt state
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [input, setInput] = useState("");
 
   const generateFromGemini = async (text) => {
     try {
@@ -58,6 +59,10 @@ const PetHealthcare = () => {
         break;
     }
     setIsLoading(false);
+  };
+
+  const handleTranscriptUpdate = (transcript) => {
+    setInput(transcript);
   };
 
   const handleImageGeneration = async () => {
@@ -110,7 +115,10 @@ const PetHealthcare = () => {
             />
 
             {/* Speech-to-Text Button integration */}
-            <SpeechToTextApp onTranscriptUpdate={setPrompt} />
+            <SpeechToTextApp
+              onTranscriptUpdate={handleTranscriptUpdate}
+              className="speech-to-text-button"
+            />
           </div>
 
           <div className="pet-button-group">

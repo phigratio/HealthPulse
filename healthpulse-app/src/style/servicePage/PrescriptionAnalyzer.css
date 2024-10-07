@@ -44,6 +44,9 @@
   padding: 30px;
   font-family: "Arial", sans-serif;
   color: #3d5a80;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pres-heading {
@@ -60,6 +63,18 @@
   margin-bottom: 30px;
 }
 
+.pres-button-group-top {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Button group below preview */
+.pres-button-group-bottom {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 .pres-file-input {
   display: none;
 }
@@ -118,18 +133,16 @@
 
 .pres-image-preview {
   margin: 20px;
-  margin-left: 160px;
+  /* margin-left: 160px; */
   text-align: center;
   justify-content: center; /* Centers the image horizontally */
   align-items: center; /* Optional, centers vertically if needed */
 }
 
 .pres-image-preview img {
-  width: 300px; /* Adjust the size as needed */
-  height: 400px; /* Make it a square */
-  object-fit: cover; /* Ensure the image fits well */
-  border: 2px solid #00bfff; /* Add a bluish border */
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border: 2px solid #00bfff;
   border-radius: 10px;
-  justify-content: center; /* Centers the image horizontally */
-  align-items: center; /* Optional, centers vertically if needed */
 }
